@@ -2,7 +2,7 @@ import Link from "next/link";
 
 function Navbar(){
     return(
-        <nav className="bg-black w-full fixed z-0 top-0">
+        <nav className="bg-black w-full sticky z-0 top-0">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto text-white ">
                 <div>   
                     Logo

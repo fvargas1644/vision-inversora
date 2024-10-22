@@ -1,11 +1,12 @@
-import { getParams } from "@/lib/yfinance-js/getData";
+'use client'
+import { useYFinanceContext } from "@/context/yFinance";
 
-export default async function AnalysisPage() {
-
-    const b = await getParams();
-    console.log(b)
+export default function AnalysisPage() {
+  const {YFinanceData, setYFinanceData}= useYFinanceContext();
+   
     return (
       <div>
+        {YFinanceData.cookie}
         en page de analisis
       </div>
     );

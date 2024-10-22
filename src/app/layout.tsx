@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import "./globals.css";
+import { YFinanceProvider } from "@/context/yFinance";
 
 export default function RootLayout({
   children,
@@ -10,7 +11,9 @@ export default function RootLayout({
     <html lang="es">
       <body>
         <Navbar/>
-        {children}
+        <YFinanceProvider>   
+          {children}
+        </YFinanceProvider>
       </body>
     </html>
   );
