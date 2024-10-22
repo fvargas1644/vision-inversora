@@ -1,3 +1,5 @@
+'use server'
+
 const userAgent: string =
   "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36";
 
@@ -32,8 +34,6 @@ export async function getCrumb(cookie : string) {
   }
 }
 
-export const prueba = () => {return "hola"}
-
 export async function getParams(cookie : string){
   if (cookie) {
     try {
@@ -56,7 +56,10 @@ export async function getParams(cookie : string){
       }
 
       const result: string = await response.text();
-      return result;
+      const data = JSON.stringify(result)
+      //console.log(typeof data)
+      
+      return data;
     } catch (error) {
       return error instanceof Error ? error : new Error(String(error));
     }
