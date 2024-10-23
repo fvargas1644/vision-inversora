@@ -27,7 +27,7 @@ export async function getCookie() {
       error: 'Decoding error cookie'
     };
   } catch (error) {
-    console.error("Error fetching cookie:", error);
+    console.error("Error fetching cookie:", String(error));
     return { 
       cookie: null,
       error: 'Falló en fetching de cookie'
@@ -53,17 +53,32 @@ export async function getCrumb(cookie : string) {
       );
 
       if (!response.ok) {
-        throw new Error(`HTTP error status: ${response.status}`);
+        console.error(`HTTP error status: ${response.status}`)
+        return {
+          data: null,
+          error: `HTTP error status: ${response.status}`
+        }
       }
 
-      const result: string = await response.text();
+      const data: string = await response.text();
 
-      return result;
+      return {
+        data,
+        error: null
+      };
     } catch (error) {
-      return error instanceof Error ? error : new Error(String(error));
+      console.error(`Error: ${error}`);
+      return {
+        data: null,
+        error: `Error: ${error}`
+      }
     }
   } else {
     console.error('Cookie error: cookie is null');
+    return {
+      data: null,
+      error: `Cookie error: cookie is null`
+    }
   }
 }
 
@@ -90,18 +105,31 @@ export async function getParams(cookie : string, stock: string = 'AAPL', crumb: 
 
       if (!response.ok) {
         console.error(`HTTP error status: ${response.status}`);
-        throw new Error(`HTTP error status: ${response.status}`);
+        return {
+          data: null,
+          error: `HTTP error status: ${response.status}`
+        }
       }
 
       const result: string = await response.text();
       const data = JSON.parse(result)
-      return data;
+      return {
+        data,
+        error: null
+      };
     } catch (error) {
-      return error instanceof Error ? error : new Error(String(error));
+      console.error(`Error: ${error}`);
+      return {
+        data: null,
+        error: `Error: ${error}`
+      }
     }
   } else {
-    console.error('Cookie error: cookie is null');
-    return { error: 'No'}
+    console.error('Error: cookie or crumb is null');
+    const result = cookie ? 
+      { data: null, error: 'Cookie error: cookie is null'} : 
+      { data: null, error: 'Crumb error: crumb is null'}
+    return result
   }
 }
 

@@ -5,7 +5,7 @@ export default async function AnalysisPage() {
   if(getcookie.cookie){ 
     const crumb = await getCrumb(getcookie.cookie)
     if(crumb){
-      const params = await getParams(getcookie.cookie, "AAPL", getcookie.cookie)
+      const params = await getParams(getcookie.cookie, "AAPL", null)
       console.log(params)
     }
   } 
