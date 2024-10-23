@@ -1,5 +1,7 @@
 'use server'
 
+import { error } from "console";
+
 const userAgent: string =
   "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36";
 
@@ -27,7 +29,7 @@ export async function getCookie() {
       error: 'Decoding error cookie'
     };
   } catch (error) {
-    console.error("Error fetching cookie:", String(error));
+    console.error(`Error fetching cookie: ${String(error)}`);
     return { 
       cookie: null,
       error: 'Falló en fetching de cookie'
@@ -130,6 +132,57 @@ export async function getParams(cookie : string, stock: string = 'AAPL', crumb: 
       { data: null, error: 'Cookie error: cookie is null'} : 
       { data: null, error: 'Crumb error: crumb is null'}
     return result
+  }
+}
+
+export async function getWacc(stock : string = 'AAPL') {
+  try {
+    const response = await fetch(`https://www.gurufocus.com/term/wacc/${stock}`);
+
+    if (!response.ok) {
+      console.error(`HTTP error status: ${response.status}`);
+      return {
+        data: null,
+        error: `HTTP error status: ${response.status}`
+      }
+    }
+
+    const body = await response.text()
+
+    // Crear un elemento temporal para analizar el HTML
+    const titleMatch = body.match(/<h1[^>]*>(.*?)<\/h1>/s);
+    if (titleMatch) {
+      const TitleContenido = titleMatch[1].trim(); // .trim() para eliminar espacios en blanco
+      const waccMatch = TitleContenido.match(/:(\S+)%/);
+      if(waccMatch){
+        const wacc = parseFloat(waccMatch[1]);
+        return {
+          wacc,
+          error: null
+        }
+      } else {
+        console.error('Error WACC: WACC no found');
+        return {
+          wacc: null,
+          error: 'Error WACC: WACC no found'
+        }
+      }   
+    } else {
+      console.error('Error Title WACC: WACC no found');
+      return {
+        wacc: null,
+        error: 'Error Title WACC: WACC no found'
+      }
+    }
+
+    //return response.text()
+    
+  } catch (error) {
+    console.error(`Error: ${String(error)}`)
+    return {
+      wacc: null,
+      error: `Error: ${String(error)}`
+    }
   }
 }
 
