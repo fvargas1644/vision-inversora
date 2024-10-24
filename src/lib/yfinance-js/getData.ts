@@ -57,37 +57,35 @@ export async function getCrumb(cookie : string) {
       if (!response.ok) {
         console.error(`HTTP error status: ${response.status}`)
         return {
-          data: null,
+          crumb: null,
           error: `HTTP error status: ${response.status}`
         }
       }
 
-      const data: string = await response.text();
+      const crumb: string = await response.text();
 
       return {
-        data,
+        crumb,
         error: null
       };
     } catch (error) {
       console.error(`Error: ${error}`);
       return {
-        data: null,
+        crumb: null,
         error: `Error: ${error}`
       }
     }
   } else {
     console.error('Cookie error: cookie is null');
     return {
-      data: null,
+      crumb: null,
       error: `Cookie error: cookie is null`
     }
   }
 }
 
-export async function getParams(cookie : string, stock: string = 'AAPL', crumb: string){
-  const paramsArr = ['annualTotalRevenue', 'annualNetIncome', 'annualFreeCashFlow']
-  const paramsString = paramsArr.map(String).join(',');
-  const url = `https://query2.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/${stock}?symbol=${stock}&type=${paramsString}&period1=1483142400&period2=1729555200&crumb=${crumb}`;
+export async function fetchYFinance(cookie : string, stock: string = 'AAPL', crumb: string, params: string){
+  const url = `https://query2.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/${stock}?symbol=${stock}&type=${params}&period1=1483142400&period2=1729555200&crumb=${crumb}`;
   
   if (cookie && crumb) {
     try {
@@ -174,14 +172,61 @@ export async function getWacc(stock : string = 'AAPL') {
         error: 'Error Title WACC: WACC no found'
       }
     }
-
-    //return response.text()
     
   } catch (error) {
     console.error(`Error: ${String(error)}`)
     return {
       wacc: null,
       error: `Error: ${String(error)}`
+    }
+  }
+}
+
+export async function yFinanceQuery(query : string = ''){
+  let paramsArr : string[] = [];
+
+  const cookie  = await getCookie();
+
+  if (!cookie.cookie){
+    return {
+      data: null,
+      error: cookie.error
+    } 
+  }
+
+  const crumb  = await getCrumb(cookie.cookie);
+
+  if (!crumb.crumb){ 
+    return {
+      data: null,
+      error: crumb.crumb
+    } 
+  }
+
+
+  switch(query){
+    case 'DISCOUNTED_FREE_CASH_FLOW':
+      paramsArr = ['annualTotalRevenue', 'annualNetIncome', 'annualFreeCashFlow'];
+  }
+
+  if(paramsArr.length !== 0){
+    const paramsString = paramsArr.map(String).join(',');
+    const fetch = await fetchYFinance(cookie.cookie, "AAPL", crumb.crumb, paramsString)
+    if (fetch.data !== null){
+      return {
+        data: fetch.data,
+        error: null
+      }
+    } else {
+      return {
+        data: null,
+        error: fetch.error
+      }
+    }
+  } else {
+    return {
+      data: null,
+      error: 'No se ha proporcionado una query valida'
     }
   }
 }
