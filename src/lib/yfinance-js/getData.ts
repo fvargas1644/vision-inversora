@@ -34,7 +34,19 @@ export async function fetchYFinance({ cookie, stock = "AAPL", crumb, params }: F
             }
 
             const result: string = await response.text();
-            const data = JSON.parse(result);
+            let data = JSON.parse(result);
+            data = data.timeseries.result
+
+            const hasTimestamp = data.some(item=> item.hasOwnProperty('timestamp'));
+            
+            if(!hasTimestamp) {
+                console.error('Error: data not found')
+                return {
+                    data: null,
+                    error: `Error: no se han encontrado datos`,
+                };
+            }
+
             return {
                 data,
                 error: null,
