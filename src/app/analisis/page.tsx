@@ -2,7 +2,7 @@ import { yFinanceQuery } from "@/lib/yfinance-js/getData";
 
 
 export default async function AnalysisPage() {
-  const query  = await yFinanceQuery('DISCOUNTED_FREE_CASH_FLOW')
+  const query  = await yFinanceQuery({query: 'DISCOUNTED_FREE_CASH_FLOW', stock: 'V'})
   if(query.data){
     console.log(query.data)
   } else {

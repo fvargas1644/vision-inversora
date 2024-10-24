@@ -8,7 +8,9 @@ interface FetchYFinanceParams {
 }
 export async function fetchYFinance({ cookie, stock = "AAPL", crumb, params }: FetchYFinanceParams) {
 
-    const url = `https://query2.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/${stock}?symbol=${stock}&type=${params}&period1=1483142400&period2=1729555200&crumb=${crumb}`;
+    const period2 = Math.floor(Date.now() / 1000);
+
+    const url = `https://query2.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/${stock}?symbol=${stock}&type=${params}&period1=1483142400&period2=${period2}&crumb=${crumb}`;
 
     if (cookie && crumb) {
         try {
@@ -103,7 +105,12 @@ export async function getWacc(stock: string = "AAPL") {
     }
 }
 
-export async function yFinanceQuery(query: string = "") {
+interface YFinanceQueryParams {
+    query?: string,
+    stock?: string,
+}
+
+export async function yFinanceQuery({query='', stock='APPL'} : YFinanceQueryParams) {
     let paramsArr: string[] = [];
 
     const cookie = await getCookie();
@@ -120,7 +127,7 @@ export async function yFinanceQuery(query: string = "") {
     if (!crumb.crumb) {
         return {
             data: null,
-            error: crumb.crumb,
+            error: crumb.error,
         };
     }
 
@@ -138,7 +145,7 @@ export async function yFinanceQuery(query: string = "") {
 
         const fetch = await fetchYFinance({
             cookie: cookie.cookie,
-            stock: "AAPL",
+            stock,
             crumb: crumb.crumb,
             params: paramsString
         }
