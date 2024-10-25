@@ -56,12 +56,59 @@ function generateYears({dataYFinance=undefined, type} : GenerateYears) {
             return years;
     }
 }
+interface ExtractYFinanceData  {
+    financialData?: (YFinanceDiscountedFreeCashFlow[] | undefined),
+    year: number,
+}
+
+function extractYFinanceData({ financialData = undefined, year } : ExtractYFinanceData) {
+    let extractedData = {
+        year,
+        annualNetIncome: 0, 
+        annualFreeCashFlow: 0,
+        annualTotalRevenue: 0
+    };
+
+    if (financialData !== undefined) {
+        for (const financialRecord of financialData) {
+            if (financialRecord.annualNetIncome) {
+                financialRecord.annualNetIncome.forEach(record => {
+                    const isYear = record.asOfDate.startsWith(String(year));
+
+                    if (isYear) extractedData= {...extractedData, annualNetIncome: record.reportedValue.raw}
+                });
+            }
+
+            if (financialRecord.annualFreeCashFlow) {
+                financialRecord.annualFreeCashFlow.forEach(record => {
+                    const isYear = record.asOfDate.startsWith(String(year));
+                    
+                    if (isYear) extractedData= {...extractedData, annualFreeCashFlow: record.reportedValue.raw}
+                });
+            }
+
+            if (financialRecord.annualTotalRevenue) {
+                financialRecord.annualTotalRevenue.forEach(record => {
+                    const isYear = record.asOfDate.startsWith(String(year));
+                    
+                    if (isYear) extractedData= {...extractedData, annualTotalRevenue: record.reportedValue.raw}
+                });
+            }
+        }
+
+        return extractedData;
+    } else {
+        return extractedData;
+    }
+}
 
 export async function rate() {
     const data : DataDiscountedFreeCashFlow = await getData()
 
     const firstYears = generateYears({dataYFinance:data.dataYFinance, type: 'FIRTS'})
-    console.log(firstYears)
 
+    const extract = extractYFinanceData({financialData: data.dataYFinance, year: 2023})
+
+    console.log(extract)
     
 }
