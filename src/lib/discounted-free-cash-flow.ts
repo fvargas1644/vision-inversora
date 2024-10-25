@@ -24,18 +24,18 @@ async function getData(){
 
 function generateYears(dataYFinance : (YFinanceDiscountedFreeCashFlow[] | undefined)) {
     const  today = new Date();
-    const  years : string[] = [];
+    const  years : number[] = [];
 
     if(dataYFinance !== undefined && dataYFinance[0].timestamp){
         const yearsWithoutParse = dataYFinance[0].timestamp.map(timestamp => new Date(timestamp * 1000))
-        yearsWithoutParse.map(timestamp => years.unshift(String(timestamp.getFullYear())))
+        yearsWithoutParse.map(timestamp => years.unshift(Number(timestamp.getFullYear())))
 
         return years;
     } else {
         for (let i = 1; i < 5; i++) {
             // Calculamos el año correspondiente
             const year = today.getFullYear() - i;
-            years.push(year.toString());
+            years.push(Number(year));
         }
     
         return years;
