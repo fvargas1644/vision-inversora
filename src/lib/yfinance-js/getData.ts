@@ -37,7 +37,7 @@ export async function fetchYFinance({ cookie, stock = "AAPL", crumb, params }: F
             let data = JSON.parse(result);
             data = data.timeseries.result
 
-            const hasTimestamp = data.some(item=> item.hasOwnProperty('timestamp'));
+            const hasTimestamp = data.every(item=> item.hasOwnProperty('timestamp'));
             
             if(!hasTimestamp) {
                 console.error('Error: data not found')

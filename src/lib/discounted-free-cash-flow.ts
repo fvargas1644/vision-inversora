@@ -1,4 +1,4 @@
-import { DataDiscountedFreeCashFlow } from "./definitions";
+import { DataDiscountedFreeCashFlow, YFinanceDiscountedFreeCashFlow } from "./definitions";
 import { getWacc } from "./getWacc";
 import { yFinanceQuery } from "./yfinance-js/getData";
 
@@ -11,7 +11,7 @@ async function getData(){
     };
 
     const wacc = await getWacc()
-    const dataYFinance  = await yFinanceQuery({query: 'DISCOUNTED_FREE_CASH_FLOW', stock: 'aaaaaa'})
+    const dataYFinance  = await yFinanceQuery({query: 'DISCOUNTED_FREE_CASH_FLOW', stock: 'aaaa'})
     
     data = (wacc.wacc) ? { ...data, wacc: wacc.wacc, errors: []} : { ...data, wacc: 0.0, errors: [wacc.error]}
 
@@ -20,4 +20,35 @@ async function getData(){
         {...data, dataYFinance: undefined ,errors: [...data.errors, dataYFinance.error]}
 
     return data
+}
+
+function generateYears(dataYFinance : (YFinanceDiscountedFreeCashFlow[] | undefined)) {
+    const  today = new Date();
+    const  years : string[] = [];
+
+    if(dataYFinance !== undefined && dataYFinance[0].timestamp){
+        const yearsWithoutParse = dataYFinance[0].timestamp.map(timestamp => new Date(timestamp * 1000))
+        yearsWithoutParse.map(timestamp => years.unshift(String(timestamp.getFullYear())))
+
+        return years;
+    } else {
+        for (let i = 1; i < 5; i++) {
+            // Calculamos el año correspondiente
+            const year = today.getFullYear() - i;
+            years.push(year.toString());
+        }
+    
+        return years;
+    }
+    
+}
+
+
+export async function rate() {
+    const data : DataDiscountedFreeCashFlow = await getData()
+
+    const eviewDates = generateYears(data.dataYFinance)
+    console.log(eviewDates)
+
+    
 }
