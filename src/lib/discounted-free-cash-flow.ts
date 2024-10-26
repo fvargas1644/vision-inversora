@@ -62,9 +62,13 @@ interface ExtractYFinanceData  {
 function extractYFinanceData({ financialData = undefined, year } : ExtractYFinanceData) {
     let extractedData = {
         year,
-        annualNetIncome: 0, 
-        annualFreeCashFlow: 0,
-        annualTotalRevenue: 0
+        data: {
+            annualNetIncome: 0, 
+            annualFreeCashFlow: 0,
+            annualTotalRevenue: 0,
+            growthRate: 0
+        }
+        
     };
 
     if (financialData !== undefined) {
@@ -73,7 +77,7 @@ function extractYFinanceData({ financialData = undefined, year } : ExtractYFinan
                 financialRecord.annualNetIncome.forEach(record => {
                     const isYear = record.asOfDate.startsWith(String(year));
 
-                    if (isYear) extractedData= {...extractedData, annualNetIncome: record.reportedValue.raw}
+                    if (isYear) extractedData= {...extractedData,  data : { ...extractedData.data, annualNetIncome: record.reportedValue.raw}}
                 });
             }
 
@@ -81,7 +85,7 @@ function extractYFinanceData({ financialData = undefined, year } : ExtractYFinan
                 financialRecord.annualFreeCashFlow.forEach(record => {
                     const isYear = record.asOfDate.startsWith(String(year));
                     
-                    if (isYear) extractedData= {...extractedData, annualFreeCashFlow: record.reportedValue.raw}
+                    if (isYear) extractedData= {...extractedData,  data : { ...extractedData.data, annualFreeCashFlow: record.reportedValue.raw}}
                 });
             }
 
@@ -89,7 +93,7 @@ function extractYFinanceData({ financialData = undefined, year } : ExtractYFinan
                 financialRecord.annualTotalRevenue.forEach(record => {
                     const isYear = record.asOfDate.startsWith(String(year));
                     
-                    if (isYear) extractedData= {...extractedData, annualTotalRevenue: record.reportedValue.raw}
+                    if (isYear) extractedData= {...extractedData,  data : { ...extractedData.data, annualTotalRevenue: record.reportedValue.raw}}
                 });
             }
         }
@@ -100,22 +104,32 @@ function extractYFinanceData({ financialData = undefined, year } : ExtractYFinan
     }
 }
 
+function calculeGrowthRate(dataPastYear : any[], pastYears : number[]){
+    dataPastYear.map((obj) => {
+        const existsPreviusYear = dataPastYear.filter((previusYear) => previusYear.year === obj.year -1);
+        if(existsPreviusYear[0] !== undefined && existsPreviusYear[0].data.annualTotalRevenue !== 0){
+            const growthRate = ((obj.data.annualTotalRevenue - existsPreviusYear[0].data.annualTotalRevenue)/existsPreviusYear[0].data.annualTotalRevenue)*100
+
+            if(!isNaN(growthRate)) obj.data.growthRate = parseFloat(growthRate.toFixed(2));
+            
+        }
+    })
+
+    console.log(dataPastYear)
+}   
+
 export async function rate() {
     const data : DataDiscountedFreeCashFlow = await getData()
 
-    let dataParse = {}
+    const dataPastYear = []
 
     const pastYears = generateYears({dataYFinance:data.dataYFinance, type: 'PAST_YEARS'})
 
     if(pastYears === undefined) throw new Error('Las fechas no se asignaron correctamente')
 
-    for(const year of pastYears){
-        console.log(year)
-        const extractYFinanceDataPastYear = extractYFinanceData({financialData: data.dataYFinance, year})
-        dataParse = {...extractYFinanceDataPastYear}
-        
-    }
+    
+    pastYears.map(year => dataPastYear.push(extractYFinanceData({financialData: data.dataYFinance, year})))
 
-    console.log(dataParse)
+    calculeGrowthRate(dataPastYear, pastYears)
     
 }
