@@ -18,9 +18,10 @@ export class FinancialFuture extends FinancialPast{
             }
             
         };
+        
     }
 
-    async calculeDataPastYear(){
+    async calculeDataFurureYear(){
         
     }
 }
