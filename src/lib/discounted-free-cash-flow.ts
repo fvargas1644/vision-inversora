@@ -32,27 +32,25 @@ function generateYears({dataYFinance=undefined, type} : GenerateYears) {
     const  years : number[] = [];
 
     switch(type){   
-        case 'FIRTS':
+        case 'PAST_YEARS':
             if(dataYFinance !== undefined && dataYFinance[0].timestamp){
                 const yearsWithoutParse = dataYFinance[0].timestamp.map(timestamp => new Date(timestamp * 1000))
                 yearsWithoutParse.map(timestamp => years.push(Number(timestamp.getFullYear())))
-                return years;
             } else {
                 for (let i = 1; i < 5; i++) {
                     // Calculamos el año correspondiente
                     const year = today.getFullYear() - i;
                     years.unshift(Number(year));
                 }
-            
-                return years;
             }
-        case 'SECOND':
+
+            return years;
+        case 'FUTURE_YEARS':
             for (let i = 0; i < 4; i++) {
                 // Calculamos el año correspondiente
                 const year = today.getFullYear() + i;
                 years.push(Number(year));
             }
-
             return years;
     }
 }
@@ -105,10 +103,19 @@ function extractYFinanceData({ financialData = undefined, year } : ExtractYFinan
 export async function rate() {
     const data : DataDiscountedFreeCashFlow = await getData()
 
-    const firstYears = generateYears({dataYFinance:data.dataYFinance, type: 'FIRTS'})
+    let dataParse = {}
 
-    const extract = extractYFinanceData({financialData: data.dataYFinance, year: 2023})
+    const pastYears = generateYears({dataYFinance:data.dataYFinance, type: 'PAST_YEARS'})
 
-    console.log(extract)
+    if(pastYears === undefined) throw new Error('Las fechas no se asignaron correctamente')
+
+    for(const year of pastYears){
+        console.log(year)
+        const extractYFinanceDataPastYear = extractYFinanceData({financialData: data.dataYFinance, year})
+        dataParse = {...extractYFinanceDataPastYear}
+        
+    }
+
+    console.log(dataParse)
     
 }
