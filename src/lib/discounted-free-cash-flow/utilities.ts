@@ -29,6 +29,7 @@ export function generateYears({dataYFinance=undefined, type} : GenerateYears){
                 const year = today.getFullYear() + i;
                 years.push(Number(year));
             }
+
             return years;
     }
 }

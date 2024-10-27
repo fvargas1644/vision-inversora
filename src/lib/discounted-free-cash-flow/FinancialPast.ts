@@ -11,6 +11,7 @@ export class FinancialPast {
     dataPastYear: any[];
     growthRateAverage: number;
     freeCashFlowDividedNetIncomeAverage: number;
+    marginsAverege: number;
 
     constructor(stock: string) {
         if (!stock) throw new Error('El stock no puede estar vacío');
@@ -21,6 +22,7 @@ export class FinancialPast {
         this.dataPastYear = []
         this.growthRateAverage = 0
         this.freeCashFlowDividedNetIncomeAverage = 0
+        this.marginsAverege = 0;
     }
 
     async getData(){
@@ -89,13 +91,6 @@ export class FinancialPast {
         this.calculateProperty('margins', 'annualTotalRevenue', data => data.annualNetIncome / data.annualTotalRevenue);
         this.calculateProperty('freeCashFlowDividedNetIncome', 'annualNetIncome', data => data.annualFreeCashFlow / data.annualNetIncome);
         this.calculeAverage('freeCashFlowDividedNetIncome', data => this.freeCashFlowDividedNetIncomeAverage = data );
-    }
-
-    getDataPastYears(){
-        return this.dataPastYear;
-    }
-
-    getGrowthRateAverage(){
-        return this.growthRateAverage;
+        this.calculeAverage('margins', data => this.marginsAverege = data );
     }
 } 

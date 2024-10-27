@@ -20,7 +20,7 @@ export async function getWacc(stock: string = "AAPL") {
             const TitleContenido = titleMatch[1].trim(); // .trim() para eliminar espacios en blanco
             const waccMatch = TitleContenido.match(/:(\S+)%/);
             if (waccMatch) {
-                const wacc = parseFloat(waccMatch[1]);
+                const wacc = parseFloat(waccMatch[1])/100;
                 return {
                     wacc,
                     error: null,
