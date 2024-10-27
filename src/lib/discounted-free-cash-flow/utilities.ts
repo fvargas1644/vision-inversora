@@ -24,7 +24,7 @@ export function generateYears({dataYFinance=undefined, type} : GenerateYears){
 
             return years;
         case 'FUTURE_YEARS':
-            for (let i = 0; i < 4; i++) {
+            for (let i = 0; i < 6; i++) {
                 // Calculamos el año correspondiente
                 const year = today.getFullYear() + i;
                 years.push(Number(year));

@@ -82,7 +82,7 @@ export class FinancialFuture extends FinancialPast{
 
     calculeTerminalValueAnnualFreeCashFlow(futureYears : number[]){
         const lastYear = Math.max(...futureYears);
-        this.dataFutureYear.map((obj) => {
+        this.dataFutureYear.forEach((obj) => {
             if(obj.year === lastYear) {
                 this.terminalValue.annualFreeCashFlow = obj.data.annualFreeCashFlow*(1+0.025)/(this.wacc-0.025)
             }
@@ -91,7 +91,7 @@ export class FinancialFuture extends FinancialPast{
 
     calculeTerminalValueAnnualDiscountFactor(futureYears : number[]){
         const lastYear = Math.max(...futureYears);
-        this.dataFutureYear.map((obj) => {
+        this.dataFutureYear.forEach((obj) => {
             if(obj.year === lastYear) {
                 this.terminalValue.discountFactor = obj.data.discountFactor
             }
@@ -99,7 +99,17 @@ export class FinancialFuture extends FinancialPast{
     }
 
     calculeTerminalValuePV(){
-        if(this.terminalValue.discountFactor !=0)this.terminalValue.pv  = this.terminalValue.annualFreeCashFlow/this.terminalValue.discountFactor;
+        if(this.terminalValue.discountFactor !=0) this.terminalValue.pv  = this.terminalValue.annualFreeCashFlow/this.terminalValue.discountFactor;
+    }
+
+    sumAllPv(){
+        let sumPv =0
+        this.dataFutureYear.forEach((obj) =>{
+            sumPv += obj.data.pv
+        });
+
+        const sum = sumPv + this.terminalValue.pv
+        console.log(sum /1670439936)
     }
 
     async calculeDataFutureYear(){
@@ -118,12 +128,7 @@ export class FinancialFuture extends FinancialPast{
         this.calculeTerminalValueAnnualDiscountFactor(futureYears)
         this.calculeTerminalValuePV()
 
-
-
-        console.log(this.dataPastYear)
-        console.log(this.dataFutureYear)
-        console.log(this.terminalValue)
-        console.log(this.wacc)
+        this.sumAllPv()
 
     }
 }
