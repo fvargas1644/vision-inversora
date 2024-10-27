@@ -1,18 +1,22 @@
 import { error } from "console";
 import { userAgent, getCookie, getCrumb } from "./requestHeader";
+import { json } from "stream/consumers";
 
 interface YFinanceQueryParams {
     query?: string,
     stock?: string,
 }
 
-interface FetchQuery {
+type FetchQuery = {
     data: null | any,
     error: null | string;
 }
 
 export async function yFinanceQuery({query='', stock='APPL'} : YFinanceQueryParams) {
     let paramsArr: string[] = [];
+    let paramsString : string;
+    let url :string = '';
+    let type :string = '';
 
     let fetch : FetchQuery ={
         data: null,
@@ -24,6 +28,7 @@ export async function yFinanceQuery({query='', stock='APPL'} : YFinanceQueryPara
     const cookie = await getCookie();
 
     if (!cookie.cookie) {
+        console.error("Error: cookie is null");
         return {
             data: null,
             error: cookie.error,
@@ -33,6 +38,7 @@ export async function yFinanceQuery({query='', stock='APPL'} : YFinanceQueryPara
     const crumb = await getCrumb(cookie.cookie);
 
     if (!crumb.crumb) {
+        console.error("Error: crumb is null");
         return {
             data: null,
             error: crumb.error,
@@ -41,30 +47,35 @@ export async function yFinanceQuery({query='', stock='APPL'} : YFinanceQueryPara
 
     switch (query) {
         case "DISCOUNTED_FREE_CASH_FLOW":
-            paramsArr = [
-                "annualTotalRevenue",
-                "annualNetIncome",
-                "annualFreeCashFlow",
-            ];
-            
-            const paramsString =  paramsArr.map(String).join(",");
+            type = 'DISCOUNTED_FREE_CASH_FLOW'
 
-            fetch = await fetchYFinance({
-                cookie: cookie.cookie,
-                stock,
-                today,
-                crumb: crumb.crumb,
-                params: paramsString
-            });
+            paramsArr = [ "annualTotalRevenue", "annualNetIncome","annualFreeCashFlow",];
+
+            paramsString =  paramsArr.map(String).join(",");
+
+            url = `https://query2.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/${stock}?symbol=${stock}&type=${paramsString}&period1=1483142400&period2=${today}&crumb=${crumb.crumb}`;
+
+
+            break;
 
         case 'INFO_COMPANY':
-            paramsArr = [
-                'financialData',
-                'defaultKeyStatistics',
-                'assetProfile',
-                'summaryDetail'
-            ]
+            type = 'INFO_COMPANY'
+            paramsArr = [ 'financialData', 'defaultKeyStatistics', 'assetProfile','summaryDetail'];
+
+            paramsString =  paramsArr.map(String).join(",");
+
+            url = `https://query2.finance.yahoo.com/v10/finance/quoteSummary/${stock}?modules=${paramsString}&corsDomain=finance.yahoo.com&formatted=false&symbol=${stock}&crumb=${crumb.crumb}`
+            console.log(url)
+            break;
+        
     }
+
+
+    fetch = await fetchYFinance({
+        cookie: cookie.cookie,
+        url,
+        type 
+    });
 
     if (fetch.data !== null) {
         return {
@@ -81,22 +92,34 @@ export async function yFinanceQuery({query='', stock='APPL'} : YFinanceQueryPara
 
 interface FetchYFinanceParams {
     cookie: string,
-    stock?: string,
-    crumb: string,
-    params: string,
-    today: number
+    url: string,
+    type: string
 }
 
-async function fetchYFinanceInfoCompany({ cookie, stock = "AAPL", crumb, params, today } : FetchYFinanceParams) {
-    const url = `https://query2.finance.yahoo.com/v10/finance/quoteSummary/V?modules=&corsDomain=finance.yahoo.com&formatted=false&symbol=V&crumb=${crumb}`
+function validateFetchYFinance(type :string, data : any[]){
+    let state = false;
+    switch (type) {
+        case 'DISCOUNTED_FREE_CASH_FLOW':
+            data = data.timeseries.result 
+            const hasTimestamp = data.every(item=> item.hasOwnProperty('timestamp'));
+            state =  (hasTimestamp) ? true : false;
+            break;
+
+        case 'INFO_COMPANY':
+            data = data.quoteSummary.result 
+            const financialData = data.some(item=> item.hasOwnProperty('financialData'));
+            const defaultKeyStatistics = data.some(item=> item.hasOwnProperty('defaultKeyStatistics'));
+            state =  (financialData && defaultKeyStatistics) ? true : false;
+            break;
+        default:
+            console.error('No type in fetch Yahoo Finance')
+            break;
+    }
+    return {state, data};
 }
 
 
-async function fetchYFinance({ cookie, stock = "AAPL", crumb, params, today }: FetchYFinanceParams) {
-
-    const url = `https://query2.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/${stock}?symbol=${stock}&type=${params}&period1=1483142400&period2=${today}&crumb=${crumb}`;
-
-    if (cookie && crumb) {
+async function fetchYFinance({ cookie, url, type }: FetchYFinanceParams) {
         try {
             const response = await fetch(url, {
                 method: "GET",
@@ -118,12 +141,11 @@ async function fetchYFinance({ cookie, stock = "AAPL", crumb, params, today }: F
             }
 
             const result: string = await response.text();
-            let data = JSON.parse(result);
-            data = data.timeseries.result
+            const dataPreviusValidate = JSON.parse(result);
 
-            const hasTimestamp = data.every(item=> item.hasOwnProperty('timestamp'));
+            const {state : stateValidate, data} = validateFetchYFinance(type, dataPreviusValidate)
             
-            if(!hasTimestamp) {
+            if(!stateValidate) {
                 console.error('Error: data not found')
                 return {
                     data: null,
@@ -142,13 +164,6 @@ async function fetchYFinance({ cookie, stock = "AAPL", crumb, params, today }: F
                 error: `Error: ${error}`,
             };
         }
-    } else {
-        console.error("Error: cookie or crumb is null");
-        const result = cookie
-            ? { data: null, error: "Cookie error: cookie is null" }
-            : { data: null, error: "Crumb error: crumb is null" };
-        return result;
-    }
 }
 
 
