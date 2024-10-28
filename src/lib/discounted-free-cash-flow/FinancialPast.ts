@@ -1,13 +1,13 @@
 import { YFinanceDiscountedFreeCashFlow } from "../definitions";
-import { getWacc } from "../getWacc";
-import { yFinanceQuery } from "../yfinance-js/getData";
+import { fetchWacc } from "../fetchWacc";
+import { yFinanceQuery } from "../yfinance-js/fetchData";
 import { extractYFinanceData, generateYears } from "./utilities";
 
 export class FinancialPast {
     wacc : number;
     stock: string;
-    dataYFinance: undefined | YFinanceDiscountedFreeCashFlow[]; 
-    error: (string|null)[];
+    dataYFinance: YFinanceDiscountedFreeCashFlow[]; 
+    error: string[];
     dataPastYear: any[];
     growthRateAverage: number;
     freeCashFlowDividedNetIncomeAverage: number;
@@ -17,7 +17,7 @@ export class FinancialPast {
         if (!stock) throw new Error('El stock no puede estar vacío');
         this.stock = stock;
         this.wacc = 0.0;
-        this.dataYFinance = undefined;
+        this.dataYFinance = [];
         this.error = []
         this.dataPastYear = []
         this.growthRateAverage = 0
@@ -26,13 +26,17 @@ export class FinancialPast {
     }
 
     async getData(){
-        const { wacc: fetchedWacc, error: waccError } = await getWacc(this.stock);
+        const { wacc: fetchedWacc, error: waccError } = await fetchWacc(this.stock);
         this.wacc = fetchedWacc || 0.0;
         if (waccError) this.error.push(waccError);
 
         const { data: fetchedData, error: dataError } = await yFinanceQuery({ query: 'DISCOUNTED_FREE_CASH_FLOW', stock: this.stock });
-        this.dataYFinance = fetchedData || undefined;
+        
+        if(!fetchedData) throw new Error('No se encontraron los datos de Yahoo Finance')
+        
+            this.dataYFinance = fetchedData;
         if (dataError) this.error.push(dataError);
+        
     }
 
     

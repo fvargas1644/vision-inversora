@@ -16,3 +16,5 @@ export interface DataDiscountedFreeCashFlow {
     dataYFinance: YFinanceDiscountedFreeCashFlow[] | undefined; // Puede ser un arreglo de objetos o undefined
     errors: (string | null)[];
 }
+
+

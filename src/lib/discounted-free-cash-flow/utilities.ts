@@ -1,44 +1,39 @@
 import { YFinanceDiscountedFreeCashFlow } from "../definitions";
 
 interface GenerateYears {
-    dataYFinance?: (YFinanceDiscountedFreeCashFlow[] | undefined),
+    dataYFinance: YFinanceDiscountedFreeCashFlow[],
     type: string,
 }
 
-export function generateYears({dataYFinance=undefined, type} : GenerateYears){ 
+export function generateYears({dataYFinance, type} : GenerateYears){ 
     const  today = new Date();
     const  years : number[] = [];
 
     switch(type){   
         case 'PAST_YEARS':
-            if(dataYFinance !== undefined && dataYFinance[0].timestamp){
+            if(dataYFinance[0].timestamp){
                 const yearsWithoutParse = dataYFinance[0].timestamp.map(timestamp => new Date(timestamp * 1000))
                 yearsWithoutParse.map(timestamp => years.push(Number(timestamp.getFullYear())))
-            } else {
-                for (let i = 1; i < 5; i++) {
-                    // Calculamos el año correspondiente
-                    const year = today.getFullYear() - i;
-                    years.unshift(Number(year));
-                }
-            }
+            } 
 
-            return years;
+            break;
         case 'FUTURE_YEARS':
             for (let i = 0; i < 6; i++) {
                 // Calculamos el año correspondiente
                 const year = today.getFullYear() + i;
                 years.push(Number(year));
             }
-
-            return years;
+            break;
     }
+    return years;
+
 }
 interface ExtractYFinanceData  {
-    dataYFinance?: (YFinanceDiscountedFreeCashFlow[] | undefined),
+    dataYFinance: YFinanceDiscountedFreeCashFlow[] ,
     year: number,
 }
 
-export function extractYFinanceData({ dataYFinance = undefined, year } : ExtractYFinanceData) {
+export function extractYFinanceData({ dataYFinance, year } : ExtractYFinanceData) {
     const extractedData = {
         year,
         data: {
@@ -51,7 +46,6 @@ export function extractYFinanceData({ dataYFinance = undefined, year } : Extract
         } 
     };
 
-    if (dataYFinance !== undefined) {
         for (const financialRecord of dataYFinance) {
             if (financialRecord.annualNetIncome) {
                 financialRecord.annualNetIncome.forEach(record => {
@@ -79,7 +73,4 @@ export function extractYFinanceData({ dataYFinance = undefined, year } : Extract
         }
 
         return extractedData;
-    } else {
-        return extractedData;
-    }
 }

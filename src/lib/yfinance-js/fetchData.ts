@@ -1,6 +1,4 @@
-import { error } from "console";
 import { userAgent, getCookie, getCrumb } from "./requestHeader";
-import { json } from "stream/consumers";
 
 interface YFinanceQueryParams {
     query?: string,
@@ -25,23 +23,23 @@ export async function yFinanceQuery({query='', stock='APPL'} : YFinanceQueryPara
 
     const today = Math.floor(Date.now() / 1000);
 
-    const cookie = await getCookie();
+    const { cookie , error : cookieError }= await getCookie();
 
-    if (!cookie.cookie) {
+    if (!cookie) {
         console.error("Error: cookie is null");
         return {
             data: null,
-            error: cookie.error,
+            error: cookieError,
         };
     }
 
-    const crumb = await getCrumb(cookie.cookie);
+    const { crumb, error: crumbError } = await getCrumb(cookie);
 
-    if (!crumb.crumb) {
+    if (!crumb) {
         console.error("Error: crumb is null");
         return {
             data: null,
-            error: crumb.error,
+            error: crumbError,
         };
     }
 
@@ -53,7 +51,7 @@ export async function yFinanceQuery({query='', stock='APPL'} : YFinanceQueryPara
 
             paramsString =  paramsArr.map(String).join(",");
 
-            url = `https://query2.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/${stock}?symbol=${stock}&type=${paramsString}&period1=1483142400&period2=${today}&crumb=${crumb.crumb}`;
+            url = `https://query2.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/${stock}?symbol=${stock}&type=${paramsString}&period1=1483142400&period2=${today}&crumb=${crumb}`;
 
 
             break;
@@ -64,7 +62,7 @@ export async function yFinanceQuery({query='', stock='APPL'} : YFinanceQueryPara
 
             paramsString =  paramsArr.map(String).join(",");
 
-            url = `https://query2.finance.yahoo.com/v10/finance/quoteSummary/${stock}?modules=${paramsString}&corsDomain=finance.yahoo.com&formatted=false&symbol=${stock}&crumb=${crumb.crumb}`
+            url = `https://query2.finance.yahoo.com/v10/finance/quoteSummary/${stock}?modules=${paramsString}&corsDomain=finance.yahoo.com&formatted=false&symbol=${stock}&crumb=${crumb}`
             console.log(url)
             break;
         
@@ -72,7 +70,7 @@ export async function yFinanceQuery({query='', stock='APPL'} : YFinanceQueryPara
 
 
     fetch = await fetchYFinance({
-        cookie: cookie.cookie,
+        cookie: cookie,
         url,
         type 
     });

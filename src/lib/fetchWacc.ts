@@ -1,4 +1,4 @@
-export async function getWacc(stock: string = "AAPL") {
+export async function fetchWacc(stock: string = "AAPL") {
     try {
         const response = await fetch(
             `https://www.gurufocus.com/term/wacc/${stock}`
