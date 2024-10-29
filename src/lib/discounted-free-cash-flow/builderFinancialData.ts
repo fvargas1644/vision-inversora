@@ -1,38 +1,50 @@
 
 import { YFinanceData, PreviusYearDataType, FutureYearDataType } from "./definitions";
 
+interface BuildFinancialDataInterface {
+    yFinanceData: YFinanceData[],
+    type: string,
+}
+
+export default function buildFinancialData({yFinanceData, type} : BuildFinancialDataInterface) {
+
+    switch(type) {
+        case 'DISCOUNTED_FREE_CASH_FLOW':
+            const previousYearsData : PreviusYearDataType[] = [];
+            const futureYearsData : FutureYearDataType[]= [];
+            const previousYears = generateYears({yFinanceData, type: 'PREVIUS_YEARS'})
+            if(!previousYears) throw new Error('Las fechas no se asignaron correctamente')
+                
+            previousYears.forEach(year => {
+                previousYearsData.push(extractYFinanceDataPreviusYear({ yFinanceData, year }));
+            });
+
+
+            const futureYears = generateYears({ type: 'FUTURE_YEARS'})
+            if(!futureYears) throw new Error('Las fechas no se asignaron correctamente')
+
+            futureYears.forEach(year => {
+                futureYearsData.push(buildFutureYearData(year));
+            });
+
+            if(previousYearsData.length > 0 && futureYearsData.length > 0){
+                return {
+                    previousYearsData,
+                    futureYearsData,
+                }
+            } else {
+                throw new Error('Error en decodificar los datos')
+            }
+        case 'COMPANY_INFO':
+            const {sharesOutstanding, stockPrice} = extractYFinanceCompanyInfo(yFinanceData)
+            return {sharesOutstanding, stockPrice}
+    }      
+} 
+
 interface GenerateYears {
     yFinanceData?: YFinanceData[],
     type: string,
 }
-
-export default function buildFinancialData(yFinanceData : YFinanceData[]){
-    const previousYearsData : PreviusYearDataType[] = [];
-    const futureYearsData : FutureYearDataType[]= [];
-    const previousYears = generateYears({yFinanceData, type: 'PREVIUS_YEARS'})
-    if(!previousYears) throw new Error('Las fechas no se asignaron correctamente')
-        
-    previousYears.forEach(year => {
-        previousYearsData.push(extractYFinanceDataPreviusYear({ yFinanceData, year }));
-    });
-
-
-    const futureYears = generateYears({ type: 'FUTURE_YEARS'})
-    if(!futureYears) throw new Error('Las fechas no se asignaron correctamente')
-
-    futureYears.forEach(year => {
-        futureYearsData.push(buildFutureYearData(year));
-    });
-
-    if(previousYearsData.length > 0 && futureYearsData.length > 0){
-        return {
-            previousYearsData,
-            futureYearsData,
-        }
-    } else {
-        throw new Error('Error en decodificar los datos')
-    }      
-} 
 
 function generateYears({yFinanceData, type} : GenerateYears){ 
     const  today = new Date();
@@ -40,7 +52,7 @@ function generateYears({yFinanceData, type} : GenerateYears){
 
     switch(type){   
         case 'PREVIUS_YEARS':
-            if(yFinanceData != undefined && yFinanceData[0].timestamp){
+            if(yFinanceData !== undefined && yFinanceData[0].timestamp){
                 const yearsWithoutParse = yFinanceData[0].timestamp.map(timestamp => new Date(timestamp * 1000))
                 yearsWithoutParse.map(timestamp => years.push(Number(timestamp.getFullYear())))
             } 
@@ -121,4 +133,20 @@ function buildFutureYearData(year : number){
     };
 
     return futureYearData
+}
+
+function extractYFinanceCompanyInfo(yFinanceData : any[]){
+    let stockPrice = 0;
+    let sharesOutstanding = 15204100096
+    for(const obj of yFinanceData){
+        if(obj.defaultKeyStatistics){
+            sharesOutstanding = obj.defaultKeyStatistics.sharesOutstanding
+        }
+
+        if(obj.financialData){
+            stockPrice = obj.financialData.currentPrice 
+        }
+    }
+
+    return {sharesOutstanding, stockPrice}
 }

@@ -1,3 +1,5 @@
+import { RequestError, ValidateError } from "./error";
+
 export async function fetchWacc(stock: string = "AAPL") {
     try {
         const response = await fetch(
@@ -5,11 +7,7 @@ export async function fetchWacc(stock: string = "AAPL") {
         );
 
         if (!response.ok) {
-            console.error(`HTTP error status: ${response.status}`);
-            return {
-                data: null,
-                error: `HTTP error status: ${response.status}`,
-            };
+            throw new RequestError('Request no ok')
         }
 
         const body = await response.text();
@@ -21,29 +19,14 @@ export async function fetchWacc(stock: string = "AAPL") {
             const waccMatch = TitleContenido.match(/:(\S+)%/);
             if (waccMatch) {
                 const wacc = parseFloat(waccMatch[1])/100;
-                return {
-                    wacc,
-                    error: null,
-                };
+                return wacc
             } else {
-                console.error("Error WACC: WACC no found");
-                return {
-                    wacc: null,
-                    error: "Error WACC: WACC no found",
-                };
+                throw new ValidateError('No found wacc')
             }
         } else {
-            console.error("Error Title WACC: WACC no found");
-            return {
-                wacc: null,
-                error: "Error Title WACC: WACC no found",
-            };
+            throw new ValidateError('No found wacc')
         }
-    } catch (error) {
-        console.error(`Error: ${String(error)}`);
-        return {
-            wacc: null,
-            error: `Error: ${String(error)}`,
-        };
+    } catch (err) {
+        throw new RequestError(String(err))
     }
 }
