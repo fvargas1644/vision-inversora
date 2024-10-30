@@ -1,4 +1,4 @@
-import { RequestError } from "../error";
+import { RequestError } from "../Error";
 import { userAgent, getCookie, getCrumb } from "./requestHeader";
 
 interface YFinanceQueryParams {

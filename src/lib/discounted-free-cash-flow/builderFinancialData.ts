@@ -59,7 +59,7 @@ function generateYears({yFinanceData, type} : GenerateYears){
 
             break;
         case 'FUTURE_YEARS':
-            for (let i = 0; i < 6; i++) {
+            for (let i = 0; i < 11; i++) {
                 // Calculamos el año correspondiente
                 const year = today.getFullYear() + i;
                 years.push(Number(year));
