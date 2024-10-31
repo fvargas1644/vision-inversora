@@ -2,6 +2,7 @@ import { fetchWacc } from "../fetchWacc";
 import { yFinanceQuery } from "../yfinance-js/fetchData";
 import buildFinancialData from "./builderFinancialData";
 import { RequestError } from "../Error";
+import { FinancialCalculatorFutureYears } from "./FinancialCalculatorFutureYears";
 import { FinancialData } from "./FinancialData";
 
 
@@ -18,9 +19,9 @@ export default async function getFinancialData(stock : string){
 
     const financialData = new FinancialData(wacc, stockPrice, sharesOutstanding, previousYearsData, futureYearsData)
 
-    financialData.calculePreviusYearData()
-    financialData.calculeFurureYearData()
-    console.log(financialData.intrinsicPrice)
+    await financialData.calculatePreviusYearsData()
+    await financialData.calculateFurureYearsData()
+    console.log(financialData.getIntrinsicPrice())
 
 }
 

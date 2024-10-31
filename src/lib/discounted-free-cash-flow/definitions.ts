@@ -11,7 +11,7 @@ export interface YFinanceData {
     annualNetIncome?: any[];  
 }
 
-export type PreviusYearDataType = {
+export type PreviousYearsDataType = {
     year : number,
     data: {
         annualNetIncome: number, 

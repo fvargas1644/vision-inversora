@@ -1,5 +1,5 @@
 
-import { YFinanceData, PreviusYearDataType, FutureYearDataType } from "./definitions";
+import { YFinanceData, PreviousYearsDataType, FutureYearDataType } from "./definitions";
 
 interface BuildFinancialDataInterface {
     yFinanceData: YFinanceData[],
@@ -10,7 +10,7 @@ export default function buildFinancialData({yFinanceData, type} : BuildFinancial
 
     switch(type) {
         case 'DISCOUNTED_FREE_CASH_FLOW':
-            const previousYearsData : PreviusYearDataType[] = [];
+            const previousYearsData : PreviousYearsDataType[] = [];
             const futureYearsData : FutureYearDataType[]= [];
             const previousYears = generateYears({yFinanceData, type: 'PREVIUS_YEARS'})
             if(!previousYears) throw new Error('Las fechas no se asignaron correctamente')
@@ -137,7 +137,7 @@ function buildFutureYearData(year : number){
 
 function extractYFinanceCompanyInfo(yFinanceData : any[]){
     let stockPrice = 0;
-    let sharesOutstanding = 15204100096
+    let sharesOutstanding = 0
     for(const obj of yFinanceData){
         if(obj.defaultKeyStatistics){
             sharesOutstanding = obj.defaultKeyStatistics.sharesOutstanding
