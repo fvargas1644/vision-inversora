@@ -1,0 +1,38 @@
+.vi-nav {
+    background-color: black;
+    width: 100%;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+
+.vi-nav-items-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 1200px;
+    align-items: center;
+}
+
+
+.vi-nav-links-container{
+    display: flex;
+}   
+
+.vi-nav-links-container ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.vi-nav-links-container li {
+    padding: 15px 50px;
+    box-shadow: 0px 2px blue;
+    border-bottom: 2px blue solid;
+}
+
+.vi-nav-link {
+    text-decoration: none;
+    color: white;
+}

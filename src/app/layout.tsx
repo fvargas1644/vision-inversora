@@ -11,8 +11,10 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${montserrat.className} antialiased`}>
-        <Navbar/> 
+        <Navbar/>
+        <div className="vi-pages-container">
           {children}
+        </div> 
       </body>
     </html>
   );
