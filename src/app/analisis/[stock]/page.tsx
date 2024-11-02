@@ -9,6 +9,8 @@ export default async function StockAnalysisPage({ params }: { params: { stock: s
         stockPrice
     } = await getFinancialData(params.stock)
 
+    console.log(previousYearsData)
+
     return (
         <Header
             stockName={params.stock}

@@ -1,5 +1,7 @@
 import Navbar from "@/components/Navbar";
 import "./globals.css";
+import { montserrat } from "./fonts";
+ 
 
 export default function RootLayout({
   children,
@@ -8,7 +10,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body>
+      <body className={`${montserrat.className} antialiased`}>
         <Navbar/> 
           {children}
       </body>

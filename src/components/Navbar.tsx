@@ -1,14 +1,15 @@
 import Link from "next/link";
+import styles from '@/styles/header.module.css'
 
 function Navbar(){
     return(
-        <nav className="bg-black w-full sticky z-0 top-0">
-            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto text-white ">
+        <nav className="">
+            <div className="">
                 <div>   
                     Logo
                 </div>
                 <div className="">
-                    <ul className="font-medium flex flex-col md:flex-row p-2">
+                    <ul className="">
                         <li>
                             <Link
                                 href={'/'}
