@@ -1,11 +1,11 @@
-import { PreviousYearsDataType, FutureYearDataType } from "./definitions";
+import { PreviousYearsDataType, FutureYearsDataType } from "./definitions";
 
 export class FinancialCalculatorPreviousYears {
     protected wacc : number;
     protected stockPrice : number;
     protected sharesOutstanding : number;
     protected previousYearsData: PreviousYearsDataType[];
-    protected futureYearsData: FutureYearDataType[];
+    protected futureYearsData: FutureYearsDataType[];
     protected growthRateAverage: number;
     protected freeCashFlowDividedNetIncomeAverage: number;
     protected marginsAverage: number;
@@ -15,7 +15,7 @@ export class FinancialCalculatorPreviousYears {
         stockPrice : number, 
         sharesOutstanding : number, 
         previousYearsData : PreviousYearsDataType[], 
-        futureYearsData: FutureYearDataType[]) {
+        futureYearsData: FutureYearsDataType[]) {
             
         this.wacc = wacc;
         this.stockPrice = stockPrice;

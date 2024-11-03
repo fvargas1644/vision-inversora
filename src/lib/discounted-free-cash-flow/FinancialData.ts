@@ -1,5 +1,5 @@
 import { FinancialCalculatorFutureYears } from "./FinancialCalculatorFutureYears";
-import { PreviousYearsDataType, FutureYearDataType } from "./definitions";
+import { PreviousYearsDataType, FutureYearsDataType } from "./definitions";
 
 export class FinancialData extends FinancialCalculatorFutureYears {
     constructor(
@@ -7,7 +7,7 @@ export class FinancialData extends FinancialCalculatorFutureYears {
         stockPrice : number, 
         sharesOutstanding : number, 
         previousYearsData : PreviousYearsDataType[], 
-        futureYearsData: FutureYearDataType[]
+        futureYearsData: FutureYearsDataType[]
     ){
         super(wacc, stockPrice, sharesOutstanding, previousYearsData, futureYearsData);
     }

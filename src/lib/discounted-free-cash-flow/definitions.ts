@@ -23,7 +23,7 @@ export type PreviousYearsDataType = {
     } 
 };
 
-export type FutureYearDataType = {
+export type FutureYearsDataType = {
     year: number,    
     data: {
         annualNetIncome: number, 
