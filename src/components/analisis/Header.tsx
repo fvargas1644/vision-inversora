@@ -1,3 +1,5 @@
+import styles from '@/styles/analisis/header.module.css'
+
 interface HeadInterface{
     stockName: string,
     stockPrice: number,
@@ -6,8 +8,8 @@ interface HeadInterface{
 
 export function Header({stockName, stockPrice, stockintrinsicPrice} : HeadInterface){
     return (
-        <section>
-            <div>   
+        <header className={styles.vi_header}>
+            <div className="">   
                 <p>Valor intrínseco</p>
                 <h2>{stockintrinsicPrice}</h2>
             </div>
@@ -19,6 +21,6 @@ export function Header({stockName, stockPrice, stockintrinsicPrice} : HeadInterf
                 <p>Valor Actual Acción</p>
                 <h2>{stockPrice}</h2>
             </div>
-        </section>
+        </header>
     )
 }   

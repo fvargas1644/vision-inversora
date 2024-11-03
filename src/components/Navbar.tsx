@@ -1,19 +1,19 @@
 import Link from "next/link";
-import '@/styles/nav.css'
+import styles from '@/styles/nav.module.css'
 
 function Navbar(){
     return(
-        <nav className='vi-nav'>
-            <div className='vi-nav-items-container'>
+        <nav className={styles.vi_nav}>
+            <div className={styles.vi_nav_items_container}>
                 <div>   
                     Logo
                 </div>
-                <div className='vi-nav-links-container'>
+                <div className={styles.vi_nav_links_container}>
                     <ul >
                         <li>
                             <Link
                                 href={'/'}
-                                className='vi-nav-link'
+                                className={styles.vi_nav_link}
                             >
                                 <span>Home</span>
                             </Link>
@@ -21,7 +21,7 @@ function Navbar(){
                         <li>
                             <Link
                                 href={'/top'}
-                                className='vi-nav-link'
+                                className={styles.vi_nav_link}
                             >
                                 <span>Top</span>
                             </Link>
@@ -29,7 +29,7 @@ function Navbar(){
                         <li>
                             <Link
                                 href={'/analisis'}
-                                className='vi-nav-link'
+                                className={styles.vi_nav_link}
                             >
                                 <span>Análisis</span>
                             </Link>
