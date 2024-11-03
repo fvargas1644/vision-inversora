@@ -9,7 +9,7 @@ export default async function StockAnalysisPage({ params }: { params: { stock: s
         stockPrice
     } = await getFinancialData(params.stock)
 
-    console.log(futureYearsData)
+    //console.log(futureYearsData)
 
     return (
         <>

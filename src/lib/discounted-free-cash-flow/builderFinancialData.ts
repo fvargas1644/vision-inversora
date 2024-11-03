@@ -19,8 +19,8 @@ export default function buildFinancialData({yFinanceData, type} : BuildFinancial
                 previousYearsData.push(extractYFinanceDataPreviusYear({ yFinanceData, year }));
             });
 
-
-            const futureYears = generateYears({ type: 'FUTURE_YEARS'})
+            const lastYearPreviousData = Math.max(...previousYears)
+            const futureYears = generateYears({ type: 'FUTURE_YEARS', lastYearPreviousData})
             if(!futureYears) throw new Error('Las fechas no se asignaron correctamente')
 
             futureYears.forEach(year => {
@@ -44,10 +44,10 @@ export default function buildFinancialData({yFinanceData, type} : BuildFinancial
 interface GenerateYears {
     yFinanceData?: YFinanceData[],
     type: string,
+    lastYearPreviousData?: number
 }
 
-function generateYears({yFinanceData, type} : GenerateYears){ 
-    const  today = new Date();
+function generateYears({yFinanceData, type, lastYearPreviousData} : GenerateYears){
     const  years : number[] = [];
 
     switch(type){   
@@ -59,9 +59,9 @@ function generateYears({yFinanceData, type} : GenerateYears){
 
             break;
         case 'FUTURE_YEARS':
-            for (let i = 0; i < 11; i++) {
+            for (let i = 1; i < 11; i++) {
                 // Calculamos el año correspondiente
-                const year = today.getFullYear() + i;
+                const year = lastYearPreviousData + i;
                 years.push(Number(year));
             }
             break;

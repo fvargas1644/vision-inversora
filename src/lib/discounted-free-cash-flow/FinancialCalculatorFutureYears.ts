@@ -22,13 +22,13 @@ export class FinancialCalculatorFutureYears extends FinancialCalculatorPreviousY
     }
 
     private calculateRevenue(){
-        const  today = new Date();
-        const actualYear = today.getFullYear();
+        const futureYears = this.futureYearsData.map(obj => obj.year)
+        const FirstYearFutureYearsData = Math.min(...futureYears)
 
         this.futureYearsData.sort((a, b) => a.year - b.year);
 
         this.futureYearsData.forEach(objForeach =>{
-            if(objForeach.year === actualYear) {
+            if(objForeach.year === FirstYearFutureYearsData) {
                 const annualTotalRevenuePastYear =  this.previousYearsData.filter((objFilter) => objFilter.year === objForeach.year -1)[0]
                 objForeach.data.annualTotalRevenue =annualTotalRevenuePastYear.data.annualTotalRevenue+annualTotalRevenuePastYear.data.annualTotalRevenue*this.growthRateAverage
             } else {
