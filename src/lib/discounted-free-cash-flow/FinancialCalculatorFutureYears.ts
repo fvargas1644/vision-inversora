@@ -52,11 +52,11 @@ export class FinancialCalculatorFutureYears extends FinancialCalculatorPreviousY
     }
 
     private calculateDiscountFactor(){
-        const  today = new Date();
-        const actualYear = today.getFullYear();
+        const futureYears = this.futureYearsData.map(obj => obj.year)
+        const FirstYearFutureYearsData = Math.min(...futureYears)
 
         this.futureYearsData.forEach(obj => {
-            const period = (obj.year - actualYear) +1
+            const period = (obj.year - FirstYearFutureYearsData) +1
             obj.data.discountFactor = (1+this.wacc)**period
         });
     }

@@ -1,8 +1,9 @@
 import { FutureYearsDataType } from "@/lib/discounted-free-cash-flow/definitions"
+import styles from '@/styles/analisis/tableFutureData.module.css'
 
 export default function TableFutureData({ futureYearsData }: { futureYearsData: FutureYearsDataType[] }) {
     return (
-        <table>
+        <table className={styles.vi_table}>
             <thead>
                 <tr>
                     <th></th>
