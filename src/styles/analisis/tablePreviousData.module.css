@@ -1,0 +1,27 @@
+.vi_table {
+    width: 100%;    
+    border-collapse: collapse;
+}
+
+.vi_th_colum {
+    text-align: right;
+    color: black;
+    padding: 8px;
+    background-color: #ddd;
+    border: 1px solid #fff;
+}
+
+.vi_th_row {
+    text-align: left;
+    color: black;
+    padding: 8px;
+    background-color: #ddd;
+    border: 1px solid #fff;
+}
+
+.vi_table td {
+    text-align: right; 
+    padding: 8px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}

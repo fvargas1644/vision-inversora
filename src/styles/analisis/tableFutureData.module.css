@@ -1,7 +1,11 @@
 .vi_table {
+    width: 100%;
 }
 
-.vi_table td {
-    width: 900px;
-    background-color: red;
+.vi_th_colum {
+    text-align: right;
+}
+
+.vi_th_row {
+    text-align: right;
 }

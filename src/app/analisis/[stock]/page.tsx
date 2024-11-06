@@ -22,6 +22,8 @@ export default async function StockAnalysisPage({ params }: { params: { stock: s
             />
 
            <TablePreviousData previousYearsData={previousYearsData}/>
+           <br />
+           <TablePreviousData previousYearsData={previousYearsData}/>
            <TableFutureData futureYearsData={futureYearsData}/>
 
         </>
