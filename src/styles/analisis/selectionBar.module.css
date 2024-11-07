@@ -1,0 +1,26 @@
+.vi_section {
+    justify-content: center;
+    display: flex;
+    margin-top: 20px;
+}
+
+.vi_bar_container {
+    background-color: #ddd;
+    padding: 5px 12px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.vi_bar_container select {
+    background-color: #ddd;
+    font-weight: lighter; 
+}
+
+
+.vi_bar_container input {
+    border-radius: 12px;
+}
+

@@ -36,12 +36,16 @@ body {
 
 .vi-pages-container{
   max-width: 1280px;
-  margin-top: 30px
 }
 
 body {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
+.icon{
+  color: #000;
+  width: 20px;
+  height: 20px;
+  padding: 3px;
+}
