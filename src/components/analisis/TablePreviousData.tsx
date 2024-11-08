@@ -1,5 +1,5 @@
 import { PreviousYearsDataType } from "@/lib/discounted-free-cash-flow/definitions"
-import styles from '@/styles/analisis/tablePreviousData.module.css'
+import styles from '@/styles/analisis/discounted-free-cash-flow/tablePreviousData.module.css'
 
 export default function TablePreviousData({ previousYearsData }: { previousYearsData: PreviousYearsDataType[] }) {
     return (

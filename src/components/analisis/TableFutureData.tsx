@@ -1,5 +1,5 @@
 import { FutureYearsDataType } from "@/lib/discounted-free-cash-flow/definitions"
-import styles from '@/styles/analisis/tableFutureData.module.css'
+import styles from '@/styles/analisis/discounted-free-cash-flow/tableFutureData.module.css'
 
 export default function TableFutureData({ futureYearsData }: { futureYearsData: FutureYearsDataType[] }) {
     return (
