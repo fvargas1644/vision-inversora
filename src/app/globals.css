@@ -43,6 +43,16 @@ body {
   flex-direction: column;
 }
 
+.vi_page_container {
+  width: 1280px;
+  padding: 40px;
+}
+
+.center_content {
+  display:flex;
+  justify-content: center;
+}
+
 
 
 

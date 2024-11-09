@@ -1,12 +1,13 @@
 import styles from '@/styles/analisis/discounted-free-cash-flow/header.module.css'
 
-interface HeadInterface{
+interface HeaderInterface{
     stockName: string,
     stockPrice: number,
-    stockintrinsicPrice: number
+    stockintrinsicPrice: number,
+    children: React.ReactNode
 }
 
-export function Header({stockName, stockPrice, stockintrinsicPrice} : HeadInterface){
+export function Header({children, stockName, stockPrice, stockintrinsicPrice} : HeaderInterface){
     return (
         <div className={styles.vi_container}>
             <header className={styles.vi_header}>
@@ -20,7 +21,7 @@ export function Header({stockName, stockPrice, stockintrinsicPrice} : HeadInterf
                     <p>Valor intrínseco</p>
                 </div>
                 <div>   
-                    <p>Disconted Free <br /> Cash Flow</p>
+                    <p>{children}</p>
                 </div>
             </header>
         </div>
