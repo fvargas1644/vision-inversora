@@ -35,6 +35,11 @@ export default async function StockAnalysisPage({ params }: { params: { stock: s
                     de la tasa de descuento.</p>
                 </Description>
             </section>
+            <br />
+           <TablePreviousData previousYearsData={previousYearsData}/>
+           <br />
+           <TablePreviousData previousYearsData={previousYearsData}/>
+           <TableFutureData futureYearsData={futureYearsData}/>
         </>
     )
 }
