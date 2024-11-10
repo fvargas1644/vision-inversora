@@ -24,7 +24,7 @@ export default async function StockAnalysisPage({ params }: { params: { stock: s
                 </Header>
             </section>
             <section className="center_content" style={{ backgroundColor: '#88D5BA'}}>
-                <Description title="Prueba">
+                <Description title="">
                     <p>El método de flujo de caja descontado (DCF) con flujos de caja libres (FCF) es una técnica de 
                     valoración financiera que estima el valor presente de una empresa o activo basado en los flujos 
                     de caja futuros proyectados, descontados a una tasa que refleja el riesgo y el costo del capital (WACC).
