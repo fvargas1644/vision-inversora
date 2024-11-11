@@ -3,7 +3,8 @@ import styles from '@/styles/analisis/discounted-free-cash-flow/tablePreviousDat
 
 export default function TablePreviousData({ previousYearsData }: { previousYearsData: PreviousYearsDataType[] }) {
     return (
-        <table className={styles.vi_table}>
+        <div className="vi_page_container" style={{ overflowX: 'auto' , position: 'relative'}}>
+            <table className={styles.vi_table}>
             <thead>
                 <tr>
                     <th></th>
@@ -65,5 +66,7 @@ export default function TablePreviousData({ previousYearsData }: { previousYears
                 </tr>
             </tbody>
         </table>
+        </div>
+        
     )
 }

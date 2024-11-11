@@ -3,7 +3,6 @@ import { Header } from "@/components/analisis/Header";
 import TableFutureData from "@/components/analisis/TableFutureData";
 import TablePreviousData from "@/components/analisis/TablePreviousData";
 import getFinancialData from "@/lib/discounted-free-cash-flow/getData";
-import styles from '@/styles/analisis/discounted-free-cash-flow/page.module.css'
 
 export default async function StockAnalysisPage({ params }: { params: { stock: string } }) {
     const  {
@@ -36,10 +35,14 @@ export default async function StockAnalysisPage({ params }: { params: { stock: s
                 </Description>
             </section>
             <br />
-           <TablePreviousData previousYearsData={previousYearsData}/>
-           <br />
-           <TablePreviousData previousYearsData={previousYearsData}/>
-           <TableFutureData futureYearsData={futureYearsData}/>
+            <section className="center_content">
+                <TablePreviousData previousYearsData={previousYearsData}/>
+            </section>
+            <section className="center_content">
+                <TableFutureData futureYearsData={futureYearsData}/>
+            </section>
+            <br />
+            
         </>
     )
 }

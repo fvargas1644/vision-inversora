@@ -1,6 +1,6 @@
 .vi_table {
-    width: 100%;    
     border-collapse: collapse;
+    width: 880px;
 }
 
 .vi_th_colum {
@@ -9,9 +9,13 @@
     padding: 8px;
     background-color: #ddd;
     border: 1px solid #fff;
+    border-radius: 12px;
 }
 
 .vi_th_row {
+    border-radius: 12px;
+    position: sticky;
+    left: 0;
     text-align: left;
     color: black;
     padding: 8px;
