@@ -1,6 +1,6 @@
 .vi_table {
     border-collapse: collapse;
-    width: 880px;
+    width: 800px;
 }
 
 .vi_th_colum {
@@ -16,6 +16,7 @@
     border-radius: 12px;
     position: sticky;
     left: 0;
+    width: 150px;
     text-align: left;
     color: black;
     padding: 8px;
