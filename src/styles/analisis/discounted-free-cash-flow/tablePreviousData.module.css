@@ -1,3 +1,8 @@
+.vi_table_container {
+    overflow-x: auto; 
+    position: relative; 
+}
+
 .vi_table {
     border-collapse: collapse;
     width: 800px;
