@@ -11,6 +11,7 @@
     display: flex;
     align-items: center;
     flex-direction: row;
+    justify-content: space-between;
     gap: 4px;
 }
 
@@ -24,6 +25,7 @@
     font-size: 12px;
     margin: 0px 10px 0px 18px;
     outline: none;
+    width: 100%;
 }
 
 .vi_bar_container select:hover {
@@ -60,10 +62,6 @@
 }
 
 @media (max-width: 600px) {
-    .vi_bar_container{
-        width: 100%;
-    }
-
     .vi_section {
         padding: 0px 10px;
     }
