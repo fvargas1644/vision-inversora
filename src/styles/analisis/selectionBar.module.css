@@ -14,6 +14,11 @@
     gap: 4px;
 }
 
+.vi_bar_container div {
+    display: flex;
+    align-items: center;
+}
+
 .vi_bar_container select {
     background-color: #ddd;
     font-size: 12px;
@@ -29,16 +34,18 @@
     border-radius: 6px;
     padding: 3px 10px;
     outline: none;
+    width: 100%;
 }
 
 .vi_bar_container input:focus {
     box-shadow: 0 0 0 2px #85B8FF;
 }
+
 .vi_search_button{
     margin-right: 5px;
     border-radius: 50%;
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     padding: 3px;
     background-color: transparent;
 }
@@ -48,9 +55,18 @@
     cursor: pointer;
 }
 
-
 .vi_search_icon{
     color: #000;
+}
+
+@media (max-width: 600px) {
+    .vi_bar_container{
+        width: 100%;
+    }
+
+    .vi_section {
+        padding: 0px 10px;
+    }
 }
 
 
