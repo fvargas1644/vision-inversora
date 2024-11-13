@@ -55,3 +55,44 @@
     color: #20791D;
 }
 
+@media (max-width: 1000px) {
+    .vi_header div:nth-of-type(3) p, .vi_header div:nth-of-type(1) h3, .vi_header div:nth-of-type(1) h2 {
+        font-size: 20px;
+    }
+
+    .vi_header h1 {
+        font-size: 46px;
+    }
+}
+
+@media (max-width: 700px) {
+    .vi_header{
+        display: block;
+    }
+
+    .vi_header div:nth-of-type(3) p, .vi_header div:nth-of-type(1) h3, .vi_header div:nth-of-type(1) h2 {
+        font-size: 20px;
+    }
+
+    .vi_header h1 {
+        font-size: 46px;
+    }
+
+    .vi_header div:nth-of-type(2) {
+        border-top: 1px solid #ddd; 
+        border-bottom: 1px solid #ddd;
+        border-right: none; 
+        border-left: none;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .vi_header div:nth-of-type(1) {
+        padding-bottom: 20px;
+    }
+
+    .vi_header div:nth-of-type(3) {
+        padding-top: 20px;
+    }
+}
+
