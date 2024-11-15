@@ -3,7 +3,6 @@
 import Link from "next/link";
 import styles from '@/styles/nav.module.css'
 import { usePathname } from 'next/navigation';
-import { blob } from "stream/consumers";
 
 function Navbar() {
     const path = usePathname()
@@ -11,7 +10,7 @@ function Navbar() {
         <nav className={styles.vi_nav}>
             <div className={styles.vi_nav_items_container} >
                 <a href="/">logo</a>
-                <button style={{display: 'none'}}>a</button>
+                <button className={styles.vi_nav_menuButton}>a</button>
                 <div className={styles.vi_nav_links_container}>
                     <ul >
                         <li className={path === "/" ? styles.isActive : ''}>
