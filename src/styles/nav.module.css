@@ -6,7 +6,6 @@
     justify-content: center;
 }
 
-
 .vi_nav_items_container {
     display: flex;
     flex-direction: row;
@@ -16,6 +15,11 @@
     align-items: center;
 }
 
+.vi_nav_login_container{
+    padding: 15px 50px;
+    display: flex;
+    gap: 5px;
+}
 
 
 .vi_nav_links_container ul {
@@ -31,6 +35,13 @@
 .vi_nav_link {
     text-decoration: none;
     color: white;
+    display: flex;
+    gap: 5px;
+}
+
+.vi_nav_analysis_icon, .vi_nav_home_icon, .vi_nav_login_icon {
+    width: 20px;
+    height: 20px;
 }
 
 .isActive {
@@ -48,11 +59,23 @@
         display: block;
     }
 
+    /*.vi_nav_links_container ul, .vi_nav_login_container{
+        display: none;
+    }*/
+
     .vi_nav_links_container ul{
-        display: block;
-        text-align: center;
+        display: flex;
+        flex-direction: column;
     }
 
-    
+    .vi_nav_links_container a, .vi_nav_login_container{
+        display: flex;
+        justify-content: center;
+    }
+
+    .vi_nav_login_container{
+        padding: 15px 50px;
+    }
+      
 }
 
