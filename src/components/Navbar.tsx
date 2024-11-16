@@ -3,14 +3,22 @@
 import Link from "next/link";
 import styles from '@/styles/nav.module.css'
 import { usePathname } from 'next/navigation';
+import Logo from "./Logo";
 
 function Navbar() {
     const path = usePathname()
     return (
         <nav className={styles.vi_nav}>
             <div className={styles.vi_nav_items_container} >
-                <a href="/">logo</a>
-                <button className={styles.vi_nav_menuButton}>a</button>
+                
+                <a href="/">
+                    <Logo/>
+                </a>
+                <button className={styles.vi_nav_menuButton}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+                </button>
                 <div className={styles.vi_nav_links_container}>
                     <ul >
                         <li className={path === "/" ? styles.isActive : ''}>

@@ -17,6 +17,8 @@
 
 .vi_nav_items_container a{
     margin-left: 10px;
+    text-decoration: none; 
+    color: inherit; 
 }
 
 .vi_nav_login_container{
@@ -28,6 +30,11 @@
 
 .vi_nav_menuButton{
     display: none;
+    width: 38px;
+    height: 38px;
+    padding: 3px;
+    background-color: transparent;
+    color: white;
 }
 
 .vi_nav_links_container ul {
@@ -65,12 +72,15 @@
 
     .vi_nav_menuButton{
         display: inline-flex;
-        margin-right: 10px;
     }
 
     /*.vi_nav_links_container ul, .vi_nav_login_container{
         display: none;
     }*/
+
+    .vi_nav_links_container {
+        display: none;
+    }
 
     .vi_nav_links_container ul{
         display: block;
@@ -89,6 +99,7 @@
         width: 100vw;
         padding: 15px 50px;
         margin-right: 0px;
+        display: none;
     }
       
 }
