@@ -1,5 +1,6 @@
 .vi_nav {
     background-color: black;
+    z-index: 2;
     width: 100%;
     color: white;
     display: flex;
@@ -28,13 +29,24 @@
     margin-right: 10px;
 }
 
-.vi_nav_menuButton{
+.vi_nav_menuButton_container{
     display: none;
-    width: 38px;
-    height: 38px;
-    padding: 3px;
+}
+
+.vi_nav_menuButton{
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    align-items: center;
+    padding: 3px 3px;
     background-color: transparent;
+    border-radius: 4px;
     color: white;
+}
+
+.vi_nav_menuButton:hover {
+    background-color: rgba(128, 128, 128, 0.4);
+    cursor: pointer;
 }
 
 .vi_nav_links_container ul {
@@ -43,8 +55,9 @@
     flex-direction: row;
 }
 
-.vi_nav_links_container li {
-    padding: 15px 50px;
+.vi_nav_links_container li:hover {
+    background-color: rgba(128, 128, 128, 0.4);
+    cursor: pointer;
 }
 
 .vi_nav_link {
@@ -52,6 +65,7 @@
     color: white;
     display: flex;
     gap: 5px;
+    padding: 15px 50px;
 }
 
 .vi_nav_analysis_icon, .vi_nav_home_icon, .vi_nav_login_icon {
@@ -64,13 +78,20 @@
     border-bottom: 2px blue solid;
 }
 
+
+
 @media (max-width: 700px){
+
+    .vi_nav_menuButton_container{
+        display: inline-flex;
+    }
+  
     .isActive {
         box-shadow: none;
         border-bottom: none;
     }
 
-    .vi_nav_menuButton{
+    .vi_nav_menuButton {
         display: inline-flex;
     }
 
@@ -84,9 +105,6 @@
 
     .vi_nav_links_container ul{
         display: block;
-    }
-
-    .vi_nav_links_container ul {
         width: 100vw;
     }
 
@@ -99,7 +117,14 @@
         width: 100vw;
         padding: 15px 50px;
         margin-right: 0px;
-        display: none;
-    }
-      
+        display: flex;
+    }      
+}
+
+.isHiddenLinks{
+    display: block;
+}
+
+.isHiddenLogin{
+    display: flex;
 }

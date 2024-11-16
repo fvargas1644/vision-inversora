@@ -4,22 +4,26 @@ import Link from "next/link";
 import styles from '@/styles/nav.module.css'
 import { usePathname } from 'next/navigation';
 import Logo from "./Logo";
+import { useState } from "react";
 
 function Navbar() {
+    const [buttonMenuState, setbuttonMenuState] = useState(false)
     const path = usePathname()
+
     return (
         <nav className={styles.vi_nav}>
             <div className={styles.vi_nav_items_container} >
-                
                 <a href="/">
                     <Logo/>
                 </a>
-                <button className={styles.vi_nav_menuButton}>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                </svg>
-                </button>
-                <div className={styles.vi_nav_links_container}>
+                <span className={styles.vi_nav_menuButton_container}>
+                    <button className={styles.vi_nav_menuButton} onClick={() => setbuttonMenuState(!buttonMenuState)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                    </button>
+                </span>
+                <div className={`${styles.isHiddenLinks} ${styles.vi_nav_links_container}` }>
                     <ul >
                         <li className={path === "/" ? styles.isActive : ''}>
                             <Link
@@ -57,7 +61,7 @@ function Navbar() {
                         </li>
                     </ul>
                 </div>
-                <div className={styles.vi_nav_login_container}>
+                <div className={`${styles.isHiddenLogin} ${styles.vi_nav_login_container}`}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 ${styles.vi_nav_login_icon}`}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
                     </svg>
