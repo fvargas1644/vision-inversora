@@ -9,6 +9,8 @@ import { useState } from "react";
 function Navbar() {
     const [buttonMenuState, setbuttonMenuState] = useState(false)
     const path = usePathname()
+    const showLogin = buttonMenuState ? styles.isVisible : ''
+    const showLinks = buttonMenuState ? styles.isVisible : ''
 
     return (
         <nav className={styles.vi_nav}>
@@ -23,7 +25,7 @@ function Navbar() {
                     </svg>
                     </button>
                 </span>
-                <div className={`${styles.isHiddenLinks} ${styles.vi_nav_links_container}` }>
+                <div className={`${showLinks} ${styles.vi_nav_links_container}` }>
                     <ul >
                         <li className={path === "/" ? styles.isActive : ''}>
                             <Link
@@ -61,11 +63,13 @@ function Navbar() {
                         </li>
                     </ul>
                 </div>
-                <div className={`${styles.isHiddenLogin} ${styles.vi_nav_login_container}`}>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 ${styles.vi_nav_login_icon}`}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
-                    </svg>
-                    <p>Login</p>
+                <div className={`${showLogin}  ${styles.vi_nav_login_container}`}>
+                    <a href="">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 ${styles.vi_nav_login_icon}`}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
+                        </svg>
+                        <p>Login</p> 
+                    </a>
                 </div>
             </div>
         </nav>

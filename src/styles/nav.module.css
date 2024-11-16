@@ -17,16 +17,14 @@
 }
 
 .vi_nav_items_container a{
-    margin-left: 10px;
     text-decoration: none; 
     color: inherit; 
 }
 
-.vi_nav_login_container{
+.vi_nav_login_container a {
     display: flex;
+    padding: 15px 10px;
     gap: 5px;
-    padding: 0px 20px;
-    margin-right: 10px;
 }
 
 .vi_nav_menuButton_container{
@@ -55,7 +53,7 @@
     flex-direction: row;
 }
 
-.vi_nav_links_container li:hover {
+.vi_nav_links_container li:hover,  .vi_nav_login_container a:hover{
     background-color: rgba(128, 128, 128, 0.4);
     cursor: pointer;
 }
@@ -77,8 +75,6 @@
     box-shadow: 0px 2px blue;
     border-bottom: 2px blue solid;
 }
-
-
 
 @media (max-width: 700px){
 
@@ -108,23 +104,21 @@
         width: 100vw;
     }
 
-    .vi_nav_links_container a, .vi_nav_login_container{
-        display: flex;
+    .vi_nav_links_container a, .vi_nav_login_container a{
         justify-content: center;
     }
 
     .vi_nav_login_container{
         width: 100vw;
+        display: none;
+    }      
+
+    .vi_nav_login_container a{
         padding: 15px 50px;
         margin-right: 0px;
-        display: flex;
-    }      
+    }
 }
 
-.isHiddenLinks{
+.isVisible{
     display: block;
-}
-
-.isHiddenLogin{
-    display: flex;
 }
