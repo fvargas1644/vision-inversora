@@ -9,8 +9,8 @@ import { useState } from "react";
 function Navbar() {
     const [buttonMenuState, setbuttonMenuState] = useState(false)
     const path = usePathname()
-    const showLogin = buttonMenuState ? styles.isVisible : ''
-    const showLinks = buttonMenuState ? styles.isVisible : ''
+    const showLogin = buttonMenuState ? styles.showMenu : ''
+    const showLinks = buttonMenuState ? styles.showMenu : ''
 
     return (
         <nav className={styles.vi_nav}>
