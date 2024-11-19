@@ -125,7 +125,7 @@
     animation: slide-down-menu .5s forwards;
 }
 
-@keyframes slide-down-menu {
+@keyframes slide-down-menu { /*Mostrar menu*/
     to {
         display: block;
         opacity: 1;
