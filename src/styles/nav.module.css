@@ -96,12 +96,13 @@
     }*/
 
     .vi_nav_links_container {
+        flex: 0 1 700px;
         display: none;
     }
 
     .vi_nav_links_container ul{
         display: block;
-        width: 100vw;
+        width: 100%;
     }
 
     .vi_nav_links_container a, .vi_nav_login_container a{
@@ -109,7 +110,7 @@
     }
 
     .vi_nav_login_container{
-        width: 100vw;
+        flex: 0 1 700px;
         display: none;
     }      
 
@@ -123,11 +124,12 @@
     opacity: 0;
     display: block;
     animation: slide-down-menu .5s forwards;
+    transform: translateY(-100px)
 }
 
 @keyframes slide-down-menu { /*Mostrar menu*/
     to {
-        display: block;
         opacity: 1;
+        transform: translateY(0px)
     }
 }
