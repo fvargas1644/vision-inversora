@@ -15,7 +15,7 @@ function Navbar() {
     return (
         <nav className={styles.vi_nav}>
             <div className={styles.vi_nav_items_container} >
-                <a href="/">
+                <a className={styles.vi_nav_logo} href="/">
                     <Logo/>
                 </a>
                 <span className={styles.vi_nav_menuButton_container}>

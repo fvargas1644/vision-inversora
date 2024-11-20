@@ -16,6 +16,10 @@
     flex-wrap: wrap;
 }
 
+.vi_nav_logo {
+    margin-left: 10px;
+}
+
 .vi_nav_items_container a{
     text-decoration: none; 
     color: inherit; 
