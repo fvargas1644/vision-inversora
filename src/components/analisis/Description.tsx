@@ -6,8 +6,10 @@ interface DescriptionInterface{
 export default function Description({children, title} : DescriptionInterface){
     return (
         <div className="vi_page_container">
-            <h2>{title}</h2>
-            {children}
+            <article style={{padding: '30px 20px'}}>
+                <h2>{title}</h2>
+                <p>{children}</p>
+            </article>
         </div>
     )
 }
