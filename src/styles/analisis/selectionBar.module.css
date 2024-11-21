@@ -43,16 +43,18 @@
     box-shadow: 0 0 0 2px #85B8FF;
 }
 
-.vi_search_button{
+.vi_search_link{
     margin-right: 5px;
     border-radius: 50%;
     width: 20px;
     height: 20px;
     padding: 3px;
+    display: flex;
+    align-items: center;
     background-color: transparent;
 }
 
-.vi_search_button:hover{
+.vi_search_link:hover{
     background-color: #b5b0b0;
     cursor: pointer;
 }
