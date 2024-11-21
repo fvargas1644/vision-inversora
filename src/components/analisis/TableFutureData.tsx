@@ -58,7 +58,7 @@ export default function TableFutureData({ futureYearsData }: { futureYearsData: 
                             ))}
                         </tr>
                         <tr>
-                            <th className={styles.vi_th_row}>Free Cash Flow in <br />Net Income</th>
+                            <th className={styles.vi_th_row}>Free Cash Flow in Net Income</th>
                             {futureYearsData.map((item) => (
                                 <td key={item.year}>
                                     <p>{item.data.freeCashFlowDividedNetIncome.toFixed(2)}</p>
