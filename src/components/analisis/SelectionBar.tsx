@@ -22,7 +22,6 @@ export default function SelectionBar() {
                     >
                         <option value="menu_selection_bar">Menu</option>
                         <option value="disconted-free-cash-flow">Discounted Free Cash Flow</option>
-                        <option value="prueba">prueba</option>
                     </select>
                 </div>
                 <div>
