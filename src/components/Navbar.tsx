@@ -38,16 +38,6 @@ function Navbar() {
                                 <span>Home</span>
                             </Link>
                         </li>
-                        {/**
-                         * <li className={path.startsWith("/top") ? styles.isActive : ''}>
-                            <Link
-                                href={'/top'}
-                                className={styles.vi_nav_link}
-                            >
-                                <span>Top</span>
-                            </Link>
-                        </li>
-                         */}
 
                         <li className={path.startsWith("/analisis") ? styles.isActive : ''}>
 
