@@ -18,7 +18,7 @@ export function Header({children, stockName, stockPrice, stockintrinsicPrice} : 
                 </div>
                 <div>   
                     <h1>{stockintrinsicPrice}</h1>
-                    <p>Valor intrínseco</p>
+                    <p>Valor Intrínseco</p>
                 </div>
                 <div>   
                     <p>{children}</p>
