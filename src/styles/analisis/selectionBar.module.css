@@ -5,7 +5,7 @@
 }
 
 .vi_bar_container {
-    background-color: #ddd;
+    background-color: #4B0082;
     padding: 5px 0px;
     border-radius: 12px;
     display: flex;
@@ -21,7 +21,8 @@
 }
 
 .vi_bar_container select {
-    background-color: #ddd;
+    background-color: #4B0082;
+    color: #fff;
     font-size: 12px;
     margin: 0px 10px 0px 18px;
     outline: none;
@@ -60,7 +61,7 @@
 }
 
 .vi_search_icon{
-    color: #000;
+    color: #fff;
 }
 
 @media (max-width: 600px) {
