@@ -3,7 +3,7 @@ import styles from '@/styles/analisis/discounted-free-cash-flow/tableFutureData.
 
 export default function TableFutureData({ futureYearsData }: { futureYearsData: FutureYearsDataType[] }) {
     return (
-        <div className="vi_page_container" >
+        <div className="vi_page_container" style={{padding: '20px'}}>
             <div className={styles.vi_table_container}>
                 <table className={styles.vi_table}>
                     <thead>

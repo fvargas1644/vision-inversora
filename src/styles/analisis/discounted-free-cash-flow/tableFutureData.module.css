@@ -1,6 +1,6 @@
 .vi_table_container {
     overflow-x: auto; 
-    position: relative; 
+    position: relative;
 }
 
 .vi_table {  
@@ -14,11 +14,9 @@
     padding: 8px;
     background-color: #ddd;
     border: 1px solid #fff;
-    border-radius: 12px;
 }
 
 .vi_th_row {
-    border-radius: 12px;
     position: sticky;
     left: 0;
     width: 150PX;
