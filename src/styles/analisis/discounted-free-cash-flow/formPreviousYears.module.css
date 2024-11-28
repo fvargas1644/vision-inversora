@@ -1,0 +1,50 @@
+.previusYears_form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-direction: column;
+    flex: 1 1 400px;
+}
+
+.previusYears_form input {
+    width: 150px;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+
+.previusYears_form input::placeholder {
+    font-size: 16px;
+}
+
+.previusYears_form button{
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 12px;
+    width: 150px;
+}
+
+.previusYears_form button:hover{
+    cursor: pointer;
+}
+
+/* Eliminar las flechas en navegadores como Chrome y Safari */
+.previusYears_form input[type="number"]::-webkit-outer-spin-button,
+.previusYears_form input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Eliminar las flechas en Firefox */
+.previusYears_form input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Eliminar las flechas en Edge */
+.previusYears_form input[type="number"]::-ms-clear {
+  display: none;
+}

@@ -4,6 +4,7 @@ import TableFutureData from "@/components/analisis/TableFutureData";
 import TablePreviousData from "@/components/analisis/TablePreviousData";
 import getFinancialData from "@/lib/discounted-free-cash-flow/getData";
 import styles from '@/styles/analisis/discounted-free-cash-flow/page.module.css'
+import FormPreviousYears from '@/components/analisis/FormPreviousYears'
 
 export default async function StockAnalysisPage({ params }: { params: { stock: string } }) {
     const {
@@ -39,13 +40,7 @@ export default async function StockAnalysisPage({ params }: { params: { stock: s
                 <div className="vi_page_container" style={{ padding: '20px' }}>
                     <div className={styles.previusYears_container}>
                         <TablePreviousData previousYearsData={previousYearsData} />
-                        <form className={styles.previusYears_form}> 
-                            <label htmlFor="wacc">WACC</label>
-                            <input type="number" placeholder="WACC" id="wacc" step="0.001" required/>
-                            <label htmlFor="crecimiento">Crecimiento</label>
-                            <input type="number" placeholder="Crecimiento" id="crecimiento" step="0.001" required/>
-                            <button type="button">Actualizar</button>
-                        </form>
+                        <FormPreviousYears />
                     </div>
                     <TableFutureData futureYearsData={futureYearsData} />
                 </div>
