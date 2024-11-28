@@ -25,7 +25,9 @@ export default async function getFinancialData(stock : string){
         previousYearsData: financialData.getPreviousYearsData(),
         futureYearsData: financialData.getFutureYearsData(),
         intrinsicPrice: financialData.getIntrinsicPrice(),
-        stockPrice
+        stockPrice,
+        wacc,
+        growth: 0.025
     }
 }
 

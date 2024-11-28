@@ -11,7 +11,9 @@ export default async function StockAnalysisPage({ params }: { params: { stock: s
         previousYearsData,
         futureYearsData,
         intrinsicPrice,
-        stockPrice
+        stockPrice,
+        wacc,
+        growth
     } = await getFinancialData(params.stock)
     return (
         <>
@@ -40,7 +42,7 @@ export default async function StockAnalysisPage({ params }: { params: { stock: s
                 <div className="vi_page_container" style={{ padding: '20px' }}>
                     <div className={styles.previusYears_container}>
                         <TablePreviousData previousYearsData={previousYearsData} />
-                        <FormPreviousYears />
+                        <FormPreviousYears wacc={wacc} growth={growth}/>
                     </div>
                     <TableFutureData futureYearsData={futureYearsData} />
                 </div>
