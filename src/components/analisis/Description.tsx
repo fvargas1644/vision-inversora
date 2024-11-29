@@ -8,7 +8,7 @@ export default function Description({children, title} : DescriptionInterface){
         <div className="vi_page_container">
             <article style={{padding: '30px 20px'}}>
                 <h2>{title}</h2>
-                <p>{children}</p>
+                <p style={{fontSize: '14px'}}>{children}</p>
             </article>
         </div>
     )

@@ -1,11 +1,12 @@
 .vi_table_container {
     overflow-x: auto; 
     position: relative;
+    font-size: 14px;
 }
 
 .vi_table {  
     border-collapse: collapse; 
-    width: 2000px;
+    width: 1560px;
 }
 
 .vi_th_colum {
