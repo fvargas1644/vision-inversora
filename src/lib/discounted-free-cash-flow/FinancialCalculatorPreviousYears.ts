@@ -40,8 +40,6 @@ export class FinancialCalculatorPreviousYears {
 
     private calculateAverage(property: string): number {
         const relevantData = this.previousYearsData.map(obj => obj.data[property]).filter(value => value !== 0);
-        console.log(property + ": " +relevantData)
-        console.log(property + ": " +relevantData.reduce((acc, num) => acc + num, 0))
         return relevantData.length > 0 ? relevantData.reduce((acc, num) => acc + num, 0) / relevantData.length : 0;
     }
 
