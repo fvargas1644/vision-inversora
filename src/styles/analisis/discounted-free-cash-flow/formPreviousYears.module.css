@@ -51,3 +51,11 @@
 .previusYears_form input[type="number"]::-ms-clear {
   display: none;
 }
+
+@media (max-width: 900px) {
+  .previusYears_form {
+      display: flex;
+      flex-direction: row;
+      flex: 1 1 100px;
+  }
+}
