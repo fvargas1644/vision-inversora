@@ -56,6 +56,18 @@
   .previusYears_form {
       display: flex;
       flex-direction: row;
-      flex: 1 1 100px;
+      flex: 1 1 auto;
+      padding-top: 10px;
+      padding-bottom: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .previusYears_form {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      padding-top: 10px;
+      padding-bottom: e0px;
   }
 }
