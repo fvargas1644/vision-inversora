@@ -63,7 +63,7 @@ export class FinancialCalculatorPreviousYears {
         
         this.calculateProperty('margins', 'annualTotalRevenue', data => data.annualNetIncome / data.annualTotalRevenue);
         this.calculateProperty('freeCashFlowDividedNetIncome', 'annualNetIncome', data => data.annualFreeCashFlow / data.annualNetIncome);
-        this.freeCashFlowDividedNetIncomeAverage = this.calculateAverage('freeCashFlowDividedNetIncome');
+        this.freeCashFlowDividedNetIncomeAverage = this.calculateAverage('freeCashFlowDividedNetIncome') > 0? this.calculateAverage('freeCashFlowDividedNetIncome') : 1 ;
         this.marginsAverage = this.calculateAverage('margins');
     }
 
