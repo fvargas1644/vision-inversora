@@ -2,11 +2,14 @@
     overflow-x: auto; 
     position: relative; 
     font-size: 14px;
+    display: flex;
+    justify-content: center;
 }
 
 .vi_table {
     border-collapse: collapse;
     width: 800px;
+    flex-shrink: 0;
 }
 
 .vi_th_colum {
