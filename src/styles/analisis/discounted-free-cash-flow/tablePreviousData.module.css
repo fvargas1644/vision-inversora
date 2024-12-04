@@ -2,8 +2,6 @@
     overflow-x: auto; 
     position: relative; 
     font-size: 14px;
-    display: flex;
-    justify-content: center;
 }
 
 .vi_table {
@@ -36,4 +34,11 @@
     padding: 8px;
     background-color: #fff;
     border: 1px solid #ddd;
+}
+
+@media (min-width: 860px) {
+    .vi_table_container {
+        display: flex;
+        justify-content: center;
+    }
 }
