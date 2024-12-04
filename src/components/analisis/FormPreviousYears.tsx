@@ -8,7 +8,7 @@ export default function FormPreviousYears({wacc, growth} : {wacc: number, growth
             <label htmlFor="wacc">WACC</label>
             <input type="number" value={waccState} placeholder="WACC" id="wacc" step="0.001" required/>
             <label htmlFor="crecimiento">Crecimiento</label>
-            <input type="number" value={growthState} placeholder="Crecimiento" id="crecimiento" step="0.001" required/>
+            <input type="number" value={growthState} placeholder="Crecimiento" id="crecimiento"  step="0.001" required/>
             <button type="button">Actualizar</button>
         </form>
     )
