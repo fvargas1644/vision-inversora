@@ -7,7 +7,10 @@ export async function fetchCompanyTickersExchange(){
         }
 
         const result: string = await response.text();
-        const dataPreviusValidate = JSON.parse(result);
+        const resultJson = JSON.parse(result);
+
+        return resultJson;
+
     } catch (err) {
         throw new Error(String(err));
     }
