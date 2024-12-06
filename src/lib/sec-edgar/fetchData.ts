@@ -1,3 +1,5 @@
+'use server'
+
 export async function fetchCompanyTickersExchange(){
     try {
         const response = await fetch('https://www.sec.gov/files/company_tickers_exchange.json');

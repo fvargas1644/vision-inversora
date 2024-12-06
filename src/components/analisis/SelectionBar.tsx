@@ -4,12 +4,18 @@ import usePath from '@/hooks/usePath';
 import styles from '@/styles/analisis/selectionBar.module.css'
 import Link from "next/link";
 import { useState } from 'react';
+import useSearch from "@/hooks/useSearch";
 
 
 export default function SelectionBar() {
     const path = usePath()
     const [selectValue, setSelectValue] = useState(path.type)
     const [inputValue, setInputValue] = useState(path.stock)
+
+    const handleOnChangeInput = async (value : string) => {
+        setInputValue(value)
+        const result = await useSearch(value)
+    }
 
     return (
         <section className={styles.vi_section}>
@@ -28,7 +34,7 @@ export default function SelectionBar() {
                     
                 <input 
                     type="text" value={inputValue} 
-                    onChange={(event) => setInputValue(event.target.value)}
+                    onChange={(event) => handleOnChangeInput(event.target.value)}
                 />
                 </div>
                 <div>
