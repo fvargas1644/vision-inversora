@@ -9,10 +9,12 @@ export default async function useSearch(stock : string){
             resultArr.push(arr)
         }
 
-        if(arr[2].toLowerCase() === stock.toLowerCase()){
+        /*if(arr[2].toLowerCase() === stock.toLowerCase()){
             resultArr = [arr]
             break;
-        }
+        }*/
+
+        if(resultArr.length > 20) break
     }
     return resultArr;
 }

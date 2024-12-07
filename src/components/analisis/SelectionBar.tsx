@@ -9,12 +9,14 @@ import useSearch from "@/hooks/useSearch";
 
 export default function SelectionBar() {
     const path = usePath()
-    const [selectValue, setSelectValue] = useState(path.type)
-    const [inputValue, setInputValue] = useState(path.stock)
+    const [selectValue, setSelectValue] = useState(path.type);
+    const [inputValue, setInputValue] = useState(path.stock);
+    const [searchItem, setSearchItem] = useState([]);
 
     const handleOnChangeInput = async (value : string) => {
-        setInputValue(value)
-        const result = await useSearch(value)
+        setInputValue(value);
+        const result = await useSearch(value);
+        (value !== "" && value !== " ")  ? setSearchItem(result) : setSearchItem([]);
     }
 
     return (
@@ -30,12 +32,21 @@ export default function SelectionBar() {
                         <option value="disconted-free-cash-flow">Discounted Free Cash Flow</option>
                     </select>
                 </div>
-                <div>
+                <div className={styles.input_container}>
+                    <input 
+                        type="text" value={inputValue} 
+                        onChange={(event) => handleOnChangeInput(event.target.value)}
+                    />
                     
-                <input 
-                    type="text" value={inputValue} 
-                    onChange={(event) => handleOnChangeInput(event.target.value)}
-                />
+                    <div className={styles.searchItem_container}>
+                        <div className={styles.searchItem}>
+                            {searchItem.map((item)=>(
+                                <div>
+                                    {item[1]}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
                 <div>
                 <Link
