@@ -5,6 +5,7 @@ import styles from '@/styles/analisis/selectionBar.module.css'
 import Link from "next/link";
 import { useState } from 'react';
 import useSearch from "@/hooks/useSearch";
+import { useDebouncedCallback } from 'use-debounce';
 
 
 export default function SelectionBar() {
@@ -13,10 +14,15 @@ export default function SelectionBar() {
     const [inputValue, setInputValue] = useState(path.stock);
     const [searchItem, setSearchItem] = useState([]);
 
+    const handleSearch = useDebouncedCallback(async (value) => {
+        console.log("Se ejecuta")
+        const result = await useSearch(value);
+        (value !== "" && value !== " ")  ? setSearchItem(result) : setSearchItem([])
+    }, 300);
+
     const handleOnChangeInput = async (value : string) => {
         setInputValue(value);
-        const result = await useSearch(value);
-        (value !== "" && value !== " ")  ? setSearchItem(result) : setSearchItem([]);
+        handleSearch(value)
     }
 
     return (
