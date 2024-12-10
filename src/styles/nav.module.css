@@ -7,15 +7,27 @@
     justify-content: center;
 }
 
-.vi_nav menu {
-    display: flex;
-}
-
-.inputSearh_container {
+.vi_nav_firtsSection {
     width: 100%;
-    flex: 0 1 400px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
 }
 
+.vi_nav_searchInput_container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.vi_nav_searchInput_container input {
+    flex: 0 1 400px;
+    height: 27px;
+    padding: 0px 10px;
+    border-radius: 5px;
+
+}
 
 .vi_nav_items_container {
     display: flex;
@@ -23,7 +35,7 @@
     justify-content: space-between;
     width: 1280px;
     align-items: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .vi_nav_logo {
@@ -61,13 +73,13 @@
     cursor: pointer;
 }
 
-.vi_nav_links_container ul {
+.vi_nav_menu ul {
     list-style-type: none;
     display: flex;
     flex-direction: row;
 }
 
-.vi_nav_links_container li:hover,  .vi_nav_login_container a:hover{
+.vi_nav_menu li:hover,  .vi_nav_login_container a:hover{
     background-color: rgba(128, 128, 128, 0.4);
     cursor: pointer;
 }
@@ -77,10 +89,10 @@
     color: white;
     display: flex;
     gap: 5px;
-    padding: 15px 50px;
+    padding: 15px 15px;
 }
 
-.vi_nav_analysis_icon, .vi_nav_home_icon, .vi_nav_login_icon {
+.vi_nav_analysis_icon, .vi_nav_home_icon {
     width: 20px;
     height: 20px;
 }
@@ -91,6 +103,9 @@
 }
 
 @media (max-width: 700px){
+    .vi_nav_items_container {
+        flex-wrap: wrap;
+    }
 
     .vi_nav_menuButton_container{
         display: inline-flex;
@@ -105,28 +120,19 @@
         display: inline-flex;
     }
 
-    /*.vi_nav_links_container ul, .vi_nav_login_container{
-        display: none;
-    }*/
-
-    .vi_nav_links_container {
+    .vi_nav_menu {
         flex: 0 1 700px;
         display: none;
     }
 
-    .vi_nav_links_container ul{
+    .vi_nav_menu ul{
         display: block;
         width: 100%;
     }
 
-    .vi_nav_links_container a, .vi_nav_login_container a{
+    .vi_nav_menu a, .vi_nav_login_container a{
         justify-content: center;
-    }
-
-    .vi_nav_login_container{
-        flex: 0 1 700px;
-        display: none;
-    }      
+    }   
 
     .vi_nav_login_container a{
         padding: 15px 50px;
