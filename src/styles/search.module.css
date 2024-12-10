@@ -1,0 +1,29 @@
+
+.vi_nav_search_container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.vi_nav_searchInput_container {
+    flex: 0 1 400px;
+    position: relative;
+}
+
+.vi_nav_searchItems_container{
+    position: absolute;
+    background-color: red;
+    width: 100%;
+}
+
+.vi_nav_searchInput_container input {
+    width: 100%;
+    height: 27px;
+    padding: 0px 10px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.vi_nav_searchInput_container input:focus {
+    box-shadow: 0 0 0 2px #85B8FF;
+}

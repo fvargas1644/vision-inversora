@@ -15,19 +15,6 @@
     gap: 10px;
 }
 
-.vi_nav_searchInput_container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.vi_nav_searchInput_container input {
-    flex: 0 1 400px;
-    height: 27px;
-    padding: 0px 10px;
-    border-radius: 5px;
-
-}
 
 .vi_nav_items_container {
     display: flex;
