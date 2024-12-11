@@ -5,5 +5,5 @@ import { revalidatePath } from 'next/cache';
 
 export async function searchItemRedirects(ticker : string) {
     revalidatePath(`/analisis/${ticker}`);
-    redirect(`/analisis/${ticker}`)
+    redirect(`/analisis/${ticker}`);
 }

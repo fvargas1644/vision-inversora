@@ -48,3 +48,7 @@
 .searchItem:first-child {
     border-top: none;
 }
+
+.is_hidden {
+    display: none;
+}

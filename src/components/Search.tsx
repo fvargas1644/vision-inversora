@@ -15,19 +15,18 @@ export default function Search() {
 
     const handleSearch = useDebouncedCallback(async (value) => {
         const result = await useSearch(value);
-        (value !== "" && value !== " ") ? setSearchItem(result) : setSearchItem([])
+        (value !== "" && value !== " ") ? setSearchItem(result) : setSearchItem([]);
     }, 300);
 
     const handleOnChangeInput = async (value: string) => {
         setInputValue(value);
-        handleSearch(value)
+        handleSearch(value);
     }
 
     const handleOnClickSearchItem = (ticker: string) => {
-        setInputValue(ticker)
-        setSearchItem([])
-        searchItemRedirects(ticker)
-        
+        setInputValue(ticker);
+        setSearchItem([]);
+        searchItemRedirects(ticker);
     }
 
     return (
@@ -38,7 +37,7 @@ export default function Search() {
                     value={inputValue}
                     onChange={(event) => handleOnChangeInput(event.target.value)}
                 />
-                <div className={styles.vi_nav_searchItems_container}>
+                <div className={`${styles.vi_nav_searchItems_container} ${searchItem.length === 0 ? styles.is_hidden : ''}`}>
                     {searchItem.map((item) => (
                         <div className={styles.searchItem} onClick={() => handleOnClickSearchItem(item[2])}>
                             <p>{item[1]}</p>
