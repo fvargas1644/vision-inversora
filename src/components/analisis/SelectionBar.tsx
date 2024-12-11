@@ -45,13 +45,11 @@ export default function SelectionBar() {
                     />
                     
                     <div className={styles.searchItem_container}>
-                        <div className={styles.searchItem}>
                             {searchItem.map((item)=>(
-                                <div>
+                                <div className={styles.searchItem}>
                                     {item[1]}
                                 </div>
                             ))}
-                        </div>
                     </div>
                 </div>
                 <div>

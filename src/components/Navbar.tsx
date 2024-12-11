@@ -19,7 +19,7 @@ function Navbar() {
                     <a className={styles.vi_nav_logo} href="/">
                         <Logo />
                     </a>
-                    <Search></Search>
+                    <Search />
                     <span className={styles.vi_nav_menuButton_container}>
                         <button className={styles.vi_nav_menuButton} onClick={() => setbuttonMenuState(!buttonMenuState)}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
