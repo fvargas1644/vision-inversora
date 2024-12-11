@@ -5,11 +5,13 @@ import usePath from '@/hooks/usePath';
 import { useState } from 'react';
 import useSearch from "@/hooks/useSearch";
 import { useDebouncedCallback } from 'use-debounce';
+import { searchItemRedirects } from '@/lib/utils';
 
 export default function Search() {
     const path = usePath()
     const [inputValue, setInputValue] = useState(path.stock);
     const [searchItem, setSearchItem] = useState([]);
+    
 
     const handleSearch = useDebouncedCallback(async (value) => {
         const result = await useSearch(value);
@@ -19,6 +21,13 @@ export default function Search() {
     const handleOnChangeInput = async (value: string) => {
         setInputValue(value);
         handleSearch(value)
+    }
+
+    const handleOnClickSearchItem = (ticker: string) => {
+        setInputValue(ticker)
+        setSearchItem([])
+        searchItemRedirects(ticker)
+        
     }
 
     return (
@@ -31,7 +40,7 @@ export default function Search() {
                 />
                 <div className={styles.vi_nav_searchItems_container}>
                     {searchItem.map((item) => (
-                        <div className={styles.searchItem}>
+                        <div className={styles.searchItem} onClick={() => handleOnClickSearchItem(item[2])}>
                             <p>{item[1]}</p>
                             <p><strong>{item[2]}</strong></p>
                         </div>
