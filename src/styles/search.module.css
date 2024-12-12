@@ -49,6 +49,10 @@
     border-top: none;
 }
 
+.firstSearchItem {
+    background-color: #ddd;
+}
+
 .is_hidden {
     display: none;
 }

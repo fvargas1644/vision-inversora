@@ -13,6 +13,7 @@ export default function Search() {
     const path = usePath()
     const [inputValue, setInputValue] = useState(path.stock);
     const [searchItem, setSearchItem] = useState<CompanyTicker[]>([]);
+    const [isOverItem, setIsOverItem] = useState(false)
 
     const handleSearch = useDebouncedCallback(async (value) => {
         const result : CompanyTicker[]  = await useSearch(value);
@@ -27,6 +28,7 @@ export default function Search() {
     const handleOnClickSearchItem = (ticker: string) => {
         setInputValue(ticker);
         setSearchItem([]);
+        setIsOverItem(false)
         searchItemRedirects(ticker);
     }
 
@@ -39,8 +41,13 @@ export default function Search() {
                     onChange={(event) => handleOnChangeInput(event.target.value)}
                 />
                 <div className={`${styles.vi_nav_searchItems_container} ${searchItem.length === 0 ? styles.is_hidden : ''}`}>
-                    {searchItem.map((item) => (
-                        <div className={styles.searchItem} onClick={() => handleOnClickSearchItem(item[2])}>
+                    {searchItem.map((item, index) => (
+                        <div 
+                            className={`${styles.searchItem} ${index === 0 && !isOverItem ? styles.firstSearchItem : ''}`} 
+                            onClick={() => handleOnClickSearchItem(item[2])}
+                            onMouseOver={() => setIsOverItem(true)}
+                            onMouseOut={() => setIsOverItem(false)}
+                        >
                             <p>{item[1]}</p>
                             <p><strong>{item[2]}</strong></p>
                         </div>
