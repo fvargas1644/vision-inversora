@@ -10,7 +10,7 @@ export default async function useSearch(stock: string): Promise<CompanyTicker[]>
             resultArr.push(arr)
         }
 
-        if (resultArr.length > 20) break
+        if (resultArr.length > 10) break
     }
     return resultArr;
 }

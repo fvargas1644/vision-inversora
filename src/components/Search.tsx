@@ -7,9 +7,10 @@ import useSearch from "@/hooks/useSearch";
 import { useDebouncedCallback } from 'use-debounce';
 import { searchItemRedirects } from '@/lib/utils';
 import { CompanyTicker } from "@/lib/sec-edgar/definitions";
-
+import { useRouter } from 'next/navigation'
 
 export default function Search() {
+    const router = useRouter()
     const path = usePath()
     const [inputValue, setInputValue] = useState(path.stock);
     const [searchItem, setSearchItem] = useState<CompanyTicker[]>([]);
@@ -29,7 +30,7 @@ export default function Search() {
         setInputValue(ticker);
         setSearchItem([]);
         setIsOverItem(false)
-        searchItemRedirects(ticker);
+        router.push(`/analisis/${ticker}`)
     }
 
     return (
