@@ -6,15 +6,16 @@ import { useState } from 'react';
 import useSearch from "@/hooks/useSearch";
 import { useDebouncedCallback } from 'use-debounce';
 import { searchItemRedirects } from '@/lib/utils';
+import { CompanyTicker } from "@/lib/sec-edgar/definitions";
+
 
 export default function Search() {
     const path = usePath()
     const [inputValue, setInputValue] = useState(path.stock);
-    const [searchItem, setSearchItem] = useState([]);
-    
+    const [searchItem, setSearchItem] = useState<CompanyTicker[]>([]);
 
     const handleSearch = useDebouncedCallback(async (value) => {
-        const result = await useSearch(value);
+        const result : CompanyTicker[]  = await useSearch(value);
         (value !== "" && value !== " ") ? setSearchItem(result) : setSearchItem([]);
     }, 300);
 
