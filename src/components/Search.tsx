@@ -41,9 +41,11 @@ export default function Search() {
     }
 
     const HandleSearchRedirection = () => {
-        hideResults();
-        setInputValue(searchItem[0][2]);
-        (searchItem.length > 0)  ? router.push(`/analisis/${searchItem[0][2]}`) : router.push('/analisis'); //Enviar a 404
+        if(inputValue !== "" && inputValue !== " "){ 
+            hideResults();
+            setInputValue(searchItem[0][2]);
+            (searchItem.length > 0)  ? router.push(`/analisis/${searchItem[0][2]}`) : router.push('/analisis'); //Enviar a 404
+        }
     }
 
     return (
