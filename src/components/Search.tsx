@@ -6,23 +6,22 @@ import { useState } from 'react';
 import useSearch from "@/hooks/useSearch";
 import { useDebouncedCallback } from 'use-debounce';
 import { CompanyTicker } from "@/lib/sec-edgar/definitions";
-import { useRouter } from 'next/navigation'
-import Link from "next/link";
+import { useRouter } from 'next/navigation';
 
 export default function Search() {
-    const router = useRouter()
-    const path = usePath()
+    const router = useRouter();
+    const path = usePath();
     const [inputValue, setInputValue] = useState(path.stock);
     const [searchItem, setSearchItem] = useState<CompanyTicker[]>([]);
-    const [isOverItem, setIsOverItem] = useState(false)
+    const [isOverItem, setIsOverItem] = useState(false);
 
     const handleSearch = useDebouncedCallback(async (value) => {
         const result: CompanyTicker[] = await useSearch(value);
         if (value !== "" && value !== " ") { 
-            setSearchItem(result) 
+            setSearchItem(result); 
         } else { 
             setSearchItem([]); 
-            setIsOverItem(false)
+            setIsOverItem(false);
         }
     }, 300);
 
@@ -34,15 +33,13 @@ export default function Search() {
     const handleOnClickSearchItem = (ticker: string) => {
         setInputValue(ticker);
         setSearchItem([]);
-        setIsOverItem(false)
-        router.push(`/analisis/${ticker}`)
+        setIsOverItem(false);
+        router.push(`/analisis/${ticker}`);
     }
 
-    const HandleKeyDownListNameInput = (value : string) => {
-        if (value === 'Enter') {
-            (searchItem.length > 0)  ? router.push(`/analisis/${searchItem[0][2]}`) : router.push('/analisis') //Enviar a 404
-        }
-    };
+    const HandleSearchRedirection = () => {
+        (searchItem.length > 0)  ? router.push(`/analisis/${searchItem[0][2]}`) : router.push('/analisis'); //Enviar a 404
+    }
 
     return (
         <div className={styles.vi_nav_search_container}>
@@ -52,10 +49,12 @@ export default function Search() {
                         type="text"
                         value={inputValue}
                         onChange={(event) => handleOnChangeInput(event.target.value)}
-                        onKeyDown={(event) => HandleKeyDownListNameInput(event.key)}
+                        onKeyDown={(event) => {if (event.key === "Enter") HandleSearchRedirection()}}
                     />
                     <button
-                        className={styles.vi_nav_search_button}>
+                        className={styles.vi_nav_search_button}
+                        onClick={() => HandleSearchRedirection()}
+                    >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={`size-6 ${styles.vi_nav_search_icon}`}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                         </svg>
