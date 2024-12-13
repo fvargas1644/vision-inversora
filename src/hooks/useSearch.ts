@@ -3,14 +3,16 @@ import { CompanyTicker, FetchCompanyTickersExchangeResponse } from "@/lib/sec-ed
 
 export default async function useSearch(stock: string): Promise<CompanyTicker[]> {
     const fetch: FetchCompanyTickersExchangeResponse = await fetchCompanyTickersExchange()
-    let resultArr = []
 
+    let resultArr = [];
     for (let arr of fetch.data) {
         if (arr[2].toLowerCase().includes(stock.toLowerCase()) || arr[1].toLowerCase().includes(stock.toLowerCase())) {
             resultArr.push(arr)
         }
 
-        if (resultArr.length > 10) break
+        if (resultArr.length > 9) break
     }
+    
     return resultArr;
+    
 }
