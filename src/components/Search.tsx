@@ -17,8 +17,13 @@ export default function Search() {
     const [isOverItem, setIsOverItem] = useState(false)
 
     const handleSearch = useDebouncedCallback(async (value) => {
-        const result : CompanyTicker[]  = await useSearch(value);
-        (value !== "" && value !== " ") ? setSearchItem(result) : setSearchItem([]);
+        const result: CompanyTicker[] = await useSearch(value);
+        if (value !== "" && value !== " ") { 
+            setSearchItem(result) 
+        } else { 
+            setSearchItem([]); 
+            setIsOverItem(false)
+        }
     }, 300);
 
     const handleOnChangeInput = async (value: string) => {
@@ -33,6 +38,12 @@ export default function Search() {
         router.push(`/analisis/${ticker}`)
     }
 
+    const HandleKeyDownListNameInput = (value : string) => {
+        if (value === 'Enter') {
+            (searchItem.length > 0)  ? router.push(`/analisis/${searchItem[0][2]}`) : router.push('/analisis') //Enviar a 404
+        }
+    };
+
     return (
         <div className={styles.vi_nav_search_container}>
             <div className={styles.vi_nav_search_items_container}>
@@ -41,9 +52,10 @@ export default function Search() {
                         type="text"
                         value={inputValue}
                         onChange={(event) => handleOnChangeInput(event.target.value)}
+                        onKeyDown={(event) => HandleKeyDownListNameInput(event.key)}
                     />
                     <button
-                        className={styles.vi_nav_search_button}>    
+                        className={styles.vi_nav_search_button}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={`size-6 ${styles.vi_nav_search_icon}`}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                         </svg>
@@ -51,8 +63,8 @@ export default function Search() {
                 </div>
                 <div className={`${styles.vi_nav_search_results_container} ${searchItem.length === 0 ? styles.isHidden : ''}`}>
                     {searchItem.map((item, index) => (
-                        <div 
-                            className={`${styles.vi_nav_search_result_item} ${index === 0 && !isOverItem ? styles.vi_nav_first_search_result_item : ''}`} 
+                        <div
+                            className={`${styles.vi_nav_search_result_item} ${index === 0 && !isOverItem ? styles.vi_nav_first_search_result_item : ''}`}
                             onClick={() => handleOnClickSearchItem(item[2])}
                             onMouseOver={() => setIsOverItem(true)}
                             onMouseOut={() => setIsOverItem(false)}
