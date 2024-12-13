@@ -15,13 +15,17 @@ export default function Search() {
     const [searchItem, setSearchItem] = useState<CompanyTicker[]>([]);
     const [isOverItem, setIsOverItem] = useState(false);
 
+    const hideResults = () => {
+        setSearchItem([]); 
+        setIsOverItem(false);
+    }
+
     const handleSearch = useDebouncedCallback(async (value) => {
         const result: CompanyTicker[] = await useSearch(value);
         if (value !== "" && value !== " ") { 
             setSearchItem(result); 
         } else { 
-            setSearchItem([]); 
-            setIsOverItem(false);
+            hideResults()
         }
     }, 300);
 
@@ -32,12 +36,13 @@ export default function Search() {
 
     const handleOnClickSearchItem = (ticker: string) => {
         setInputValue(ticker);
-        setSearchItem([]);
-        setIsOverItem(false);
+        hideResults()
         router.push(`/analisis/${ticker}`);
     }
 
     const HandleSearchRedirection = () => {
+        hideResults();
+        setInputValue(searchItem[0][2]);
         (searchItem.length > 0)  ? router.push(`/analisis/${searchItem[0][2]}`) : router.push('/analisis'); //Enviar a 404
     }
 
