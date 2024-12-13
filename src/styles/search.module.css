@@ -19,12 +19,18 @@
     border: 2px solid #ddd;
     max-height: 325px;
     overflow: auto;
+    z-index: 5;
+}
+
+.vi_nav_search_input_container{
+    display: flex;
+    position: relative;
 }
 
 .vi_nav_search_input_container input {
     width: 100%;
     height: 30px;
-    padding: 0px 10px;
+    padding: 0px 34px 0px 10px; 
     border-radius: 5px;
     outline: none;
 }
@@ -51,6 +57,33 @@
 
 .vi_nav_first_search_result_item {
     background-color: #ddd;
+}
+
+.vi_nav_search_button{
+    position: absolute;
+    right: 3px;
+    border-radius: 50%;
+    width: 27px;
+    background-color: transparent;
+    height: 27px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    align-self: center;
+}
+
+.vi_nav_search_button:hover{
+    background-color: #b5b0b0;
+    cursor: pointer;
+    color: #fff;
+}
+
+.vi_nav_search_icon{
+    color: #000;
+}
+
+.vi_nav_search_button:hover .vi_nav_search_icon{
+    color: #fff;
 }
 
 .isHidden {
