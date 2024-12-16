@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 
 
-export default function SelectionBar() {
+export default function SelectionBar({stock} : {stock : string}) {
     const path = usePath()
     const [selectValue, setSelectValue] = useState(path.type);
     const router = useRouter();
@@ -22,7 +22,6 @@ export default function SelectionBar() {
             pagePath = `${pathname}/discounted-free-cash-flow`;
             if (pathname !== pagePath) router.push(pagePath);
         }
-
     }
 
     
