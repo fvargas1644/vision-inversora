@@ -3,19 +3,26 @@
 import usePath from '@/hooks/usePath';
 import styles from '@/styles/analisis/selectionBar.module.css'
 import { useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 
 
 export default function SelectionBar() {
     const path = usePath()
     const [selectValue, setSelectValue] = useState(path.type);
+    const router = useRouter();
+    const pathname = usePathname()
 
     const redirectBySelectValue = (value : string) =>{
+        
+        let pagePath : string;
         setSelectValue(value)
         if(value === "menu_selection_bar") {
-            // Redireccionar 
+            //router.back()
         } else if (value === "disconted_free_cash_flow") {
-            // Redireccionar
+            pagePath = `${pathname}/discounted-free-cash-flow`;
+            if (pathname !== pagePath) router.push(pagePath);
         }
+
     }
 
     

@@ -37,6 +37,7 @@ export default function Search() {
                     </button>
                 </div>
                 <div className={`${styles.vi_nav_search_results_container} ${searchResults.length === 0 ? styles.isHidden : ''}`}>
+                    {/**DAR KEYS */}
                     {searchResults.map((item, index) => (
                         <div
                             className={`${styles.vi_nav_search_result_item} ${index === 0 && !isOverItem ? styles.vi_nav_first_search_result_item : ''}`}
