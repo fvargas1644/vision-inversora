@@ -13,14 +13,15 @@ export default function SelectionBar({stock} : {stock : string}) {
     const pathname = usePathname()
 
     const redirectBySelectValue = (value : string) =>{
+        let pathPage : string;
         
-        let pagePath : string;
         setSelectValue(value)
         if(value === "menu_selection_bar") {
-            //router.back()
+            let pathPage = `/analisis/${stock}`
+            if (pathname !== pathPage) router.push(pathPage)
         } else if (value === "disconted_free_cash_flow") {
-            pagePath = `${pathname}/discounted-free-cash-flow`;
-            if (pathname !== pagePath) router.push(pagePath);
+            let pathPage = `/analisis/${stock}/discounted-free-cash-flow`
+            if (pathname !== pathPage) router.push(pathPage);
         }
     }
 
