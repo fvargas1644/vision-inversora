@@ -36,8 +36,8 @@ export default function useSearch(){
     const setIsOverItemToFalse  = () => setIsOverItem(false)
 
     const performSearchWithDebounce = useDebouncedCallback(async (value) => {
-        const results: CompanyTicker[] = await fetchCompanyExchangeResults(value);
         if (value !== "" && value !== " ") { 
+            const results: CompanyTicker[] = await fetchCompanyExchangeResults(value);
             setSearchResults(results); 
         } else { 
             clearSearchResults()
