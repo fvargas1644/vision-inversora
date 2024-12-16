@@ -2,6 +2,7 @@
 
 import styles from '@/styles/search.module.css'
 import useSearch from "@/hooks/useSearch";
+import React from 'react';
 
 
 export default function Search() {
@@ -37,9 +38,9 @@ export default function Search() {
                     </button>
                 </div>
                 <div className={`${styles.vi_nav_search_results_container} ${searchResults.length === 0 ? styles.isHidden : ''}`}>
-                    {/**DAR KEYS */}
                     {searchResults.map((item, index) => (
-                        <div
+                        <React.Fragment key={index}>
+                            <div
                             className={`${styles.vi_nav_search_result_item} ${index === 0 && !isOverItem ? styles.vi_nav_first_search_result_item : ''}`}
                             onClick={() => selectSearchResultAndNavigate(item[2])}
                             onMouseOver={setIsOverItemToTrue}
@@ -48,6 +49,7 @@ export default function Search() {
                             <p>{item[1]}</p>
                             <p><strong>{item[2]}</strong></p>
                         </div>
+                        </React.Fragment>
                     ))}
                 </div>
             </div>
