@@ -10,7 +10,6 @@ export default function useFormPreviousYears ({wacc, growth} : {wacc: number, gr
 
     const updateWaccInputValue = (value : string) => {
         const valida = validateWacc(Number(value))
-        console.log(valida.errorDes)
         setFormData({...formData, wacc: Number(value)})
     }
 
