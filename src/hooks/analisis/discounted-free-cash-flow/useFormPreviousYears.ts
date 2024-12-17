@@ -1,3 +1,4 @@
+import { validateWacc } from "@/lib/validation/discounted-free-cash-flow/validations"
 import { useState } from "react"
 
 function returnFormattedValueToPercent (value : number) {
@@ -8,6 +9,7 @@ export default function useFormPreviousYears ({wacc, growth} : {wacc: number, gr
     const [formData, setFormData] = useState({wacc: returnFormattedValueToPercent(wacc), growth : returnFormattedValueToPercent(growth)})
 
     const updateWaccInputValue = (value : string) => {
+        const validate = validateWacc(Number(value))
         setFormData({...formData, wacc: Number(value)})
     }
 
