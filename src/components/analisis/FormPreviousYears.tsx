@@ -8,12 +8,12 @@ export default function FormPreviousYears({wacc, growth} : {wacc: number, growth
     const {
         updateWaccInputValue, 
         updateGrowthInputValue, 
-        formData, 
-        returnFormattedValueToPercent
+        formData,
+        sendData
     } = useFormPreviousYears({wacc, growth})
 
     return (
-        <form className={styles.previusYears_form} > 
+        <form className={styles.previusYears_form} action={sendData}> 
             <label htmlFor="wacc">WACC</label>
             <input 
                 type="number" 
@@ -21,8 +21,6 @@ export default function FormPreviousYears({wacc, growth} : {wacc: number, growth
                 onChange={(event) => updateWaccInputValue(event.target.value)} 
                 placeholder="WACC" 
                 id="wacc" 
-                step="0.001" 
-                required
             />
             <label htmlFor="crecimiento">Crecimiento</label>
             <input 
@@ -30,9 +28,7 @@ export default function FormPreviousYears({wacc, growth} : {wacc: number, growth
                 value={formData.growth} 
                 onChange={(event) => updateGrowthInputValue(event.target.value)} 
                 placeholder="Crecimiento" 
-                id="crecimiento"  
-                step="0.001" 
-                required
+                id="crecimiento" 
             />
             <button type="submit">Actualizar</button>
         </form>

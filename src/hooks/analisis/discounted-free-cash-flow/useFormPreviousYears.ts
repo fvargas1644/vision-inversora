@@ -15,11 +15,15 @@ export default function useFormPreviousYears ({wacc, growth} : {wacc: number, gr
         setFormData({...formData, growth: Number(value)})
     }
 
+    const sendData = () => {
+        //
+    }
+
     return {
         updateWaccInputValue,
         updateGrowthInputValue,
         formData,
-        returnFormattedValueToPercent
+        sendData
     }
 
 }
