@@ -9,7 +9,8 @@ export default function useFormPreviousYears ({wacc, growth} : {wacc: number, gr
     const [formData, setFormData] = useState({wacc: returnFormattedValueToPercent(wacc), growth : returnFormattedValueToPercent(growth)})
 
     const updateWaccInputValue = (value : string) => {
-        const validate = validateWacc(Number(value))
+        const valida = validateWacc(Number(value))
+        console.log(valida.errorDes)
         setFormData({...formData, wacc: Number(value)})
     }
 
