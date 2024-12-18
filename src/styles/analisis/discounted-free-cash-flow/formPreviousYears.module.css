@@ -71,3 +71,7 @@
       padding-bottom: e0px;
   }
 }
+
+.hasWarning {
+  outline-color: red;
+}
