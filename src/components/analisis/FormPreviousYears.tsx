@@ -27,7 +27,7 @@ export default function FormPreviousYears({wacc, growth} : {wacc: number, growth
             <input 
                 type="number" 
                 value={formData.growth} 
-                className={`${formData.waccError && styles.hasWarning}`}
+                className={`${formData.growthError && styles.hasWarning}`}
                 onChange={(event) => updateGrowthInputValue(event.target.value)} 
                 placeholder="Crecimiento" 
                 id="crecimiento" 
