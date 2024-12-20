@@ -24,19 +24,27 @@ export default function FormPreviousYears({wacc, growth} : {wacc: number, growth
                         placeholder="WACC" 
                         id="wacc" 
                     />
-                    
+                    <p className={styles.vi_previusyears_form_warning}>
+                        {formData.waccError}
+                    </p>
                 </div>
                 <label htmlFor="crecimiento">Crecimiento</label>
                 <div className={styles.vi_previusyears_form_input_container}>
-                    <input 
-                        type="number" 
-                        value={formData.growth} 
-                        className={`${styles.vi_previusyears_form_input} ${formData.growthError && styles.hasWarning}`}
-                        onChange={(event) => updateGrowthInputValue(event.target.value)} 
-                        placeholder="Crecimiento" 
-                        id="crecimiento" 
-                    />
+                <input 
+                    type="number" 
+                    value={formData.growth} 
+                    className={`${styles.vi_previusyears_form_input} ${formData.growthError && styles.hasWarning}`}
+                    onChange={(event) => updateGrowthInputValue(event.target.value)} 
+                    placeholder="Crecimiento" 
+                    id="crecimiento" 
+                />
+                <p className={styles.vi_previusyears_form_warning}>
+                        {formData.growthError}
+                    </p>
                 </div>
+                
+                
+                <button type="submit">Actualizar</button>
         </form>
     )
 }

@@ -21,6 +21,15 @@
 
 .vi_previusyears_form_input_container {
   position: relative;
+  text-align: center;
+}
+
+
+.vi_previusyears_form_warning {
+  font-size: 11px;
+  margin-top: 5px;
+  color: red;
+  width: 100%;
 }
 
 .vi_previusyears_form_input::placeholder {
@@ -61,8 +70,12 @@
       display: flex;
       flex-direction: row;
       flex: 1 1 auto;
-      padding-top: 10px;
-      padding-bottom: 30px;
+      padding-top: 40px;
+      margin-bottom: 60px;
+  }
+
+  .vi_previusyears_form_warning {
+    position: absolute;
   }
 }
 
@@ -74,13 +87,18 @@
       padding-top: 10px;
       padding-bottom: e0px;
   }
+
+  .vi_previusyears_form_warning {
+    position: relative;
+  }
+
 }
 
 .hasWarning {
+  border: 1px solid red;
+}
+
+.hasWarning:focus {
   outline-color: red;
 }
 
-/*.vi_previusyears_form_tooltip {
-  position: absolute;
-  background-color: red;
-}*/
