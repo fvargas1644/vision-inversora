@@ -2,34 +2,52 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 20px;
     flex-direction: column;
     margin-left: 20px;
     flex: 1 1 300px;
 }
 
+.vi_previusyears_form_label {
+  position: absolute;
+  font-size: 11px;
+  background-color: white;
+  padding: 0px 3px;
+  left: 10px;
+  color: green;
+  top: -6px;
+}
 
 .vi_previusyears_form_input {
     width: 100%;
     max-width: 200px;
     padding: 10px;
     text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 12px;
+    border: 1px solid green;
+    border-radius: 7px;
     font-size: 16px;
+    outline: none;
+}
+
+.vi_previusyears_form_input:focus{
+  box-shadow: 0 0 4px green;
+  border: 1px solid rgba(0, 128, 0, 0.5);
 }
 
 .vi_previusyears_form_input_container {
   position: relative;
-  text-align: center;
 }
 
 
 .vi_previusyears_form_warning {
-  font-size: 11px;
+  font-size: 12px;
   margin-top: 5px;
   color: red;
   width: 100%;
+  max-width: 200px;
+  white-space: pre-wrap;
+  font-weight: 500;
+  text-align: center;
 }
 
 .vi_previusyears_form_input::placeholder {
@@ -70,7 +88,7 @@
       display: flex;
       flex-direction: row;
       flex: 1 1 auto;
-      padding-top: 40px;
+      margin-top: 40px;
       margin-bottom: 60px;
   }
 
@@ -84,21 +102,23 @@
       display: flex;
       flex-direction: column;
       flex: 1 1 auto;
-      padding-top: 10px;
       padding-bottom: e0px;
   }
 
   .vi_previusyears_form_warning {
     position: relative;
   }
-
 }
 
-.hasWarning {
-  border: 1px solid red;
+.hasWarningLabel{
+  color: red;
 }
 
-.hasWarning:focus {
-  outline-color: red;
+.vi_previusyears_form_input.hasWarningInput {
+  border: 1px solid rgba(255, 0, 0, 0.5);
+}
+
+.vi_previusyears_form_input.hasWarningInput:focus{
+  box-shadow: 0 0 4px rgba(255, 0, 0, 0.5);
 }
 
