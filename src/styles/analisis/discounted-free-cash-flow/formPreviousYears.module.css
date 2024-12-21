@@ -60,10 +60,14 @@
     border-radius: 12px;
     width: 100%;
     max-width: 200px;
+    background-color: rgb(143, 143, 207);
+    color: white;
 }
 
 .vi_previusyears_form button:hover{
     cursor: pointer;
+    background-color: rgb(105, 105, 179);
+    box-shadow: 0 0 4px rgba(105, 105, 179, 0.5);
 }
 
 /* Eliminar las flechas en navegadores como Chrome y Safari */
