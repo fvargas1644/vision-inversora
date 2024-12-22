@@ -36,7 +36,7 @@ async function getWacc(stock : string) {
         const wacc = await fetchWacc(stock);
         return wacc
     } catch(err){
-        return 0.0
+        return 10
     }
 }
 
