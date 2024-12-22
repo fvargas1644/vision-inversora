@@ -38,7 +38,9 @@ export default function useFormPreviousYears ({wacc, growth} : {wacc: number, gr
     }
 
     const sendData = () => {
-        //
+        if(!formData.waccError && !formData.growthError) {
+            // Enviar
+        }
     }
 
     return {

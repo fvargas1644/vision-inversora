@@ -54,7 +54,7 @@
     font-size: 16px;
 }
 
-.vi_previusyears_form button{
+.vi_previusyears_form_submitbutton{
     padding: 10px;
     font-size: 16px;
     border-radius: 12px;
@@ -64,7 +64,7 @@
     color: white;
 }
 
-.vi_previusyears_form button:hover{
+.vi_previusyears_form_submitbutton:hover{
     cursor: pointer;
     background-color: rgb(105, 105, 179);
     box-shadow: 0 0 4px rgba(105, 105, 179, 0.5);
@@ -114,15 +114,24 @@
   }
 }
 
-.hasWarningLabel{
+.vi_previusyears_form_label.hasWarning{
   color: red;
 }
 
-.vi_previusyears_form_input.hasWarningInput {
+.vi_previusyears_form_input.hasWarning {
   border: 1px solid rgba(255, 0, 0, 0.5);
 }
 
-.vi_previusyears_form_input.hasWarningInput:focus{
+.vi_previusyears_form_input.hasWarning:focus{
   box-shadow: 0 0 4px rgba(255, 0, 0, 0.5);
+}
+
+.vi_previusyears_form_submitbutton.hasWarning{
+  background-color: #ddd;
+}
+
+.vi_previusyears_form_submitbutton.hasWarning:hover{
+  cursor:default;
+  box-shadow: none;  
 }
 
