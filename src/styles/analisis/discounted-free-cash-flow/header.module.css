@@ -55,6 +55,10 @@
     color: #20791D;
 }
 
+.vi_header h1.isLower {
+    color: red;
+}
+
 @media (max-width: 1000px) {
     .vi_header div:nth-of-type(3) p, .vi_header div:nth-of-type(1) h3, .vi_header div:nth-of-type(1) h2 {
         font-size: 20px;

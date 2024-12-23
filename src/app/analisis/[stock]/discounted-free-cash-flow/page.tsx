@@ -14,7 +14,8 @@ export default async function StockAnalysisPage({ params }: { params: { stock: s
         stockPrice,
         wacc,
         growth
-    } = await getFinancialData(params.stock)
+    } = await getFinancialData(params.stock);
+
     return (
         <>
             <section className="center_content">

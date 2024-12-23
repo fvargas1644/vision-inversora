@@ -5,7 +5,8 @@
     gap: 20px;
     flex-direction: column;
     margin-left: 20px;
-    flex: 1 1 300px;
+    flex-grow: 1;
+    flex-shrink: 1;
 }
 
 .vi_previusyears_form_label {

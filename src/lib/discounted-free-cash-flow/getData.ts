@@ -1,3 +1,5 @@
+'use server'
+
 import { fetchWacc } from "../fetchWacc";
 import { yFinanceQuery } from "../yfinance-js/fetchData";
 import buildFinancialData from "./builderFinancialData";
@@ -7,19 +9,19 @@ import { FinancialData } from "./FinancialData";
 
 export default async function getFinancialData(stock : string){
     
-    const wacc = await getWacc(stock)
+    const wacc = await getWacc(stock);
 
-    const yFinaceDataDiscountedFreeCashFlow = await getYFinanceData({ query: 'DISCOUNTED_FREE_CASH_FLOW', stock })
+    const yFinaceDataDiscountedFreeCashFlow = await getYFinanceData({ query: 'DISCOUNTED_FREE_CASH_FLOW', stock });
     
     const yFinanceDataCompanyInfo = await  getYFinanceData({ query: 'COMPANY_INFO', stock });
     
-    const {previousYearsData, futureYearsData} = buildFinancialData({yFinanceData: yFinaceDataDiscountedFreeCashFlow, type: 'DISCOUNTED_FREE_CASH_FLOW'})
-    const {stockPrice, sharesOutstanding} =  buildFinancialData({yFinanceData: yFinanceDataCompanyInfo, type: 'COMPANY_INFO'})
+    const {previousYearsData, futureYearsData} = buildFinancialData({yFinanceData: yFinaceDataDiscountedFreeCashFlow, type: 'DISCOUNTED_FREE_CASH_FLOW'});
+    const {stockPrice, sharesOutstanding} =  buildFinancialData({yFinanceData: yFinanceDataCompanyInfo, type: 'COMPANY_INFO'});
 
-    const financialData = new FinancialData(wacc, stockPrice, sharesOutstanding, previousYearsData, futureYearsData)
+    const financialData = new FinancialData(wacc, stockPrice, sharesOutstanding, previousYearsData, futureYearsData);
 
-    financialData.calculatePreviusYearsData()
-    financialData.calculateFurureYearsData()
+    financialData.calculatePreviusYearsData();
+    financialData.calculateFurureYearsData();
 
     return {
         previousYearsData: financialData.getPreviousYearsData(),
@@ -34,7 +36,7 @@ export default async function getFinancialData(stock : string){
 async function getWacc(stock : string) {
     try{
         const wacc = await fetchWacc(stock);
-        return wacc
+        return wacc;
     } catch(err){
         return 10
     }
@@ -48,8 +50,8 @@ interface GetYFinanceDataInterface {
 async function getYFinanceData({query , stock } :GetYFinanceDataInterface) {
     try{
         const yFinanceData = await yFinanceQuery({ query, stock });
-        return yFinanceData
+        return yFinanceData;
     } catch(err){
-        throw new RequestError(String(err))
+        throw new RequestError(String(err));
     }
 }
