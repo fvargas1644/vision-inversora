@@ -5,24 +5,18 @@ import TablePreviousData from "@/components/analisis/TablePreviousData";
 import getFinancialData from "@/lib/discounted-free-cash-flow/getData";
 import styles from '@/styles/analisis/discounted-free-cash-flow/page.module.css'
 import FormPreviousYears from '@/components/analisis/FormPreviousYears'
+import DiscontedFreeCashFlowProvider from "@/context/DiscountedFreeCashFlowContext";
 
 export default async function StockAnalysisPage({ params }: { params: { stock: string } }) {
-    const {
-        previousYearsData,
-        futureYearsData,
-        intrinsicPrice,
-        stockPrice,
-        wacc,
-        growth
-    } = await getFinancialData(params.stock);
+    const data = await getFinancialData(params.stock);
 
     return (
-        <>
+        <DiscontedFreeCashFlowProvider initialData={data}>
             <section className="center_content">
                 <Header
                     stockName={params.stock}
-                    stockPrice={stockPrice}
-                    stockintrinsicPrice={Math.floor(intrinsicPrice * 100) / 100}
+                    stockPrice={data.stockPrice}
+                    stockintrinsicPrice={Math.floor(data.intrinsicPrice * 100) / 100}
                 >
                     Disconted Free<br />Cash Flow
                 </Header>
@@ -42,12 +36,12 @@ export default async function StockAnalysisPage({ params }: { params: { stock: s
             <section className="center_content">
                 <div className="vi_page_container" style={{ padding: '20px' }}>
                     <div className={styles.previusYears_container}>
-                        <TablePreviousData previousYearsData={previousYearsData} />
-                        <FormPreviousYears wacc={wacc} growth={growth}/>
+                        <TablePreviousData previousYearsData={data.previousYearsData} />
+                        <FormPreviousYears wacc={data.wacc} growth={data.growth} />
                     </div>
-                    <TableFutureData futureYearsData={futureYearsData} />
+                    <TableFutureData futureYearsData={data.futureYearsData} />
                 </div>
             </section>
-        </>
+        </DiscontedFreeCashFlowProvider>
     )
 }
