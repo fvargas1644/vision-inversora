@@ -1,10 +1,10 @@
 import Description from "@/components/analisis/Description";
-import { Header } from "@/components/analisis/Header";
-import TableFutureData from "@/components/analisis/TableFutureData";
-import TablePreviousData from "@/components/analisis/TablePreviousData";
+import { Header } from "@/components/analisis/disconted-free-cash-flow/Header";
+import TableFutureData from "@/components/analisis/disconted-free-cash-flow/TableFutureData";
+import TablePreviousData from "@/components/analisis/disconted-free-cash-flow/TablePreviousData";
 import getFinancialData from "@/lib/discounted-free-cash-flow/getData";
 import styles from '@/styles/analisis/discounted-free-cash-flow/page.module.css'
-import FormPreviousYears from '@/components/analisis/FormPreviousYears'
+import FormPreviousYears from '@/components/analisis/disconted-free-cash-flow/FormPreviousYears'
 import DiscontedFreeCashFlowProvider from "@/context/DiscountedFreeCashFlowContext";
 
 export default async function StockAnalysisPage({ params }: { params: { stock: string } }) {
