@@ -15,7 +15,7 @@ interface FinancialData {
 
 interface CashFlowContextInterface {
     financialData: FinancialData;
-    setFinancialData: React.Dispatch<React.SetStateAction<FinancialData>>;
+    updateFinancialData: (updates: FinancialData) => void;
 }
 
 // Contexto con un nombre más claro
@@ -28,8 +28,12 @@ export default function DiscontedFreeCashFlowProvider({ children, initialData }:
 }) {
     const [financialDataState, setFinancialDataState] = useState(initialData);
 
+    function updateFinancialData(updates : FinancialData){
+        setFinancialDataState(previousData => ({...previousData, ...updates}))
+    }
+
     return (
-        <DiscontedFreeCashFlowProviderContext.Provider value={{ financialData: { ...financialDataState }, setFinancialData: setFinancialDataState }}>
+        <DiscontedFreeCashFlowProviderContext.Provider value={{ financialData: { ...financialDataState }, updateFinancialData }}>
             {children}
         </DiscontedFreeCashFlowProviderContext.Provider>
     );
