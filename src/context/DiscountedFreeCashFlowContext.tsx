@@ -14,12 +14,12 @@ interface FinancialData {
 }
 
 interface CashFlowContextInterface {
-    financialData: FinancialData;
-    updateFinancialData: (updates: FinancialData) => void;
+    financialData: FinancialData | null;
+    updateFinancialData: ((updates: FinancialData) => void) | null;
 }
 
 // Contexto con un nombre más claro
-export const DiscontedFreeCashFlowProviderContext = React.createContext<CashFlowContextInterface | null>(null);
+export const DiscontedFreeCashFlowProviderContext = React.createContext<CashFlowContextInterface>({financialData: null, updateFinancialData: null});
 
 // Componente con nombres mejorados
 export default function DiscontedFreeCashFlowProvider({ children, initialData }: { 
