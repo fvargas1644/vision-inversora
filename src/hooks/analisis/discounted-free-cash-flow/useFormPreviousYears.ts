@@ -1,5 +1,8 @@
+'use client'
+
+import { DiscontedFreeCashFlowProviderContext } from "@/context/DiscountedFreeCashFlowContext"
 import { validateGrowth, validateWacc } from "@/lib/validation/discounted-free-cash-flow/validations"
-import { useState } from "react"
+import { useContext, useState } from "react"
 
 function returnFormattedValueToPercent (value : number) {
     return Number((value*100).toFixed(2))
@@ -14,6 +17,9 @@ export interface FormData {
   
 
 export default function useFormPreviousYears ({wacc, growth} : {wacc: number, growth:number}) {
+
+    const {updateFinancialData} = useContext(DiscontedFreeCashFlowProviderContext)
+
     const [formData, setFormData] = useState<FormData>({
         wacc: returnFormattedValueToPercent(wacc), 
         growth: returnFormattedValueToPercent(growth),
@@ -39,7 +45,10 @@ export default function useFormPreviousYears ({wacc, growth} : {wacc: number, gr
 
     const sendData = () => {
         if(!formData.waccError && !formData.growthError) {
-            // Enviar
+            if(updateFinancialData){
+                updateFinancialData({wacc: formData.wacc, growth: formData.growth})
+            }
+            
         }
     }
 
