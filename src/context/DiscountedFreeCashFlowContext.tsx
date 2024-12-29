@@ -13,9 +13,14 @@ interface FinancialData {
     growth: number; 
 }
 
+interface UpdateFinancialData {
+    wacc: number, 
+    growth: number
+}
+
 interface CashFlowContextInterface {
     financialData: FinancialData | null;
-    updateFinancialData: ((updates: FinancialData) => void) | null;
+    updateFinancialData: (({wacc, growth} : UpdateFinancialData) => void) | null;
 }
 
 // Contexto con un nombre más claro
@@ -28,8 +33,8 @@ export default function DiscontedFreeCashFlowProvider({ children, initialData }:
 }) {
     const [financialDataState, setFinancialDataState] = useState(initialData);
 
-    function updateFinancialData(updates : FinancialData){
-        setFinancialDataState(previousData => ({...previousData, ...updates}))
+    function updateFinancialData({wacc, growth} : UpdateFinancialData){
+        setFinancialDataState(previousData => ({...previousData, wacc, growth}))
     }
 
     return (
