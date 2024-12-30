@@ -1,0 +1,20 @@
+import { PreviousYearsDataType, FutureYearsDataType } from "@/lib/discounted-free-cash-flow/definitions";
+
+export interface FinancialData {
+    previousYearsData: PreviousYearsDataType[];
+    futureYearsData: FutureYearsDataType[];
+    intrinsicPrice: number;
+    stockPrice: number;
+    wacc: number; 
+    growth: number; 
+}
+
+export interface UpdateFinancialData {
+    wacc: number, 
+    growth: number
+}
+
+export interface CashFlowContextInterface {
+    financialData: FinancialData | null;
+    updateFinancialData: (({wacc, growth} : UpdateFinancialData) => void) | null;
+}

@@ -1,27 +1,7 @@
 'use client'
 
-import { PreviousYearsDataType, FutureYearsDataType } from "@/lib/discounted-free-cash-flow/definitions";
 import React, { useState } from "react";
-
-
-interface FinancialData {
-    previousYearsData: PreviousYearsDataType[];
-    futureYearsData: FutureYearsDataType[];
-    intrinsicPrice: number;
-    stockPrice: number;
-    wacc: number; 
-    growth: number; 
-}
-
-interface UpdateFinancialData {
-    wacc: number, 
-    growth: number
-}
-
-interface CashFlowContextInterface {
-    financialData: FinancialData | null;
-    updateFinancialData: (({wacc, growth} : UpdateFinancialData) => void) | null;
-}
+import { FinancialData, CashFlowContextInterface, UpdateFinancialData } from "@/context/definitions";
 
 // Contexto con un nombre más claro
 export const DiscontedFreeCashFlowProviderContext = React.createContext<CashFlowContextInterface>({financialData: null, updateFinancialData: null});
