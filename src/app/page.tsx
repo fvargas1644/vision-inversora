@@ -1,7 +1,7 @@
 export default async function HomePage() {
   return (
     <div>
-      en Page
+      <h1>Feliz año</h1>
     </div>
   );
 }
