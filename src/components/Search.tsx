@@ -3,9 +3,10 @@
 import styles from '@/styles/search.module.css'
 import useSearch from "@/hooks/useSearch";
 import React from 'react';
+import { FetchCompanyTickersExchangeResponse } from '@/lib/sec-edgar/definitions';
 
 
-export default function Search() {
+export default function Search({dataCompany} : {dataCompany: FetchCompanyTickersExchangeResponse}) {
     const {
         inputValue, 
         updateInputValueAndSearch, 
@@ -15,7 +16,7 @@ export default function Search() {
         selectSearchResultAndNavigate,
         setIsOverItemToTrue,
         setIsOverItemToFalse
-    } = useSearch();
+    } = useSearch(dataCompany);
     
 
     return (

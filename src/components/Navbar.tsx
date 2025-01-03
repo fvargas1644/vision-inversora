@@ -6,8 +6,9 @@ import { usePathname } from 'next/navigation';
 import Logo from "./Logo";
 import { useState } from "react";
 import Search from '@/components/Search';
+import { FetchCompanyTickersExchangeResponse } from "@/lib/sec-edgar/definitions";
 
-function Navbar() {
+function Navbar({dataCompany} : {dataCompany : FetchCompanyTickersExchangeResponse}) {
     const [buttonMenuState, setbuttonMenuState] = useState(false)
     const path = usePathname()
     const showLinks = buttonMenuState ? styles.showMenu : ''
@@ -19,7 +20,7 @@ function Navbar() {
                     <a className={styles.vi_nav_logo} href="/">
                         <Logo />
                     </a>
-                    <Search />
+                    <Search dataCompany={dataCompany}/>
                     <span className={styles.vi_nav_menuButton_container}>
                         <button className={styles.vi_nav_menuButton} onClick={() => setbuttonMenuState(!buttonMenuState)}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">

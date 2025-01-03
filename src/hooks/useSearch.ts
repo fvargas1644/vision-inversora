@@ -1,12 +1,11 @@
 'use client'
-import { fetchCompanyTickersExchange } from "@/lib/sec-edgar/fetchData";
+
 import { CompanyTicker, FetchCompanyTickersExchangeResponse } from "@/lib/sec-edgar/definitions";
 import { useState } from "react";
-import { useDebouncedCallback } from 'use-debounce';
 import { useRouter } from 'next/navigation';
 import usePath from '@/hooks/usePath';
 
-export default function useSearch(){
+export default function useSearch(dataCompany : FetchCompanyTickersExchangeResponse){
 
     const router = useRouter();
     const path = usePath();
@@ -14,11 +13,10 @@ export default function useSearch(){
     const [searchResults, setSearchResults] = useState<CompanyTicker[]>([]);
     const [isOverItem, setIsOverItem] = useState(false);
 
-    const fetchCompanyExchangeResults = async (stock : string) => {
+    const fetchCompanyExchangeResults = (stock : string) => {
         const searchResults : CompanyTicker[]= [];
-        const fetchCompany: FetchCompanyTickersExchangeResponse = await fetchCompanyTickersExchange()
 
-        for (let item of fetchCompany.data) {
+        for (let item of dataCompany.data) {
             if (item[2].toLowerCase().includes(stock.toLowerCase()) || item[1].toLowerCase().includes(stock.toLowerCase())) {
                 searchResults.push(item)
             }
@@ -35,18 +33,14 @@ export default function useSearch(){
     const setIsOverItemToTrue  = () => setIsOverItem(true)
     const setIsOverItemToFalse  = () => setIsOverItem(false)
 
-    const performSearchWithDebounce = useDebouncedCallback(async (value) => {
-        if (value !== "" && value !== " ") { 
-            const results: CompanyTicker[] = await fetchCompanyExchangeResults(value);
-            setSearchResults(results); 
-        } else { 
-            clearSearchResults()
-        }
-    }, 300);
-
     const updateInputValueAndSearch = async (value: string) => {
         setInputValue(value);
-        performSearchWithDebounce(value);
+        if (value !== "" && value !== " ") { 
+            const results: CompanyTicker[] = fetchCompanyExchangeResults(value);
+            setSearchResults(results); 
+        } else { 
+            clearSearchResults();
+        }
     }
 
     const selectSearchResultAndNavigate = (ticker: string) => {
