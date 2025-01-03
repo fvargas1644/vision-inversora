@@ -6,13 +6,18 @@ import buildFinancialData from "./builderFinancialData";
 import { RequestError } from "../Error";
 import { FinancialData } from "./FinancialData";
 
+interface GetFinancialData {
+    stock: string,
+    initialWacc?: number,
+    initialGrowth?: number
+}
 
-export default async function getFinancialData(stock : string){
+export default async function getFinancialData({stock, initialWacc, initialGrowth} : GetFinancialData){
     
-    const wacc = await getWacc(stock);
-
+    const wacc = (initialWacc) ? initialWacc : await getWacc(stock);
+    const growth =(initialGrowth) ? initialGrowth : await getWacc(stock);
+    
     const yFinaceDataDiscountedFreeCashFlow = await getYFinanceData({ query: 'DISCOUNTED_FREE_CASH_FLOW', stock });
-    
     const yFinanceDataCompanyInfo = await  getYFinanceData({ query: 'COMPANY_INFO', stock });
     
     const {previousYearsData, futureYearsData} = buildFinancialData({yFinanceData: yFinaceDataDiscountedFreeCashFlow, type: 'DISCOUNTED_FREE_CASH_FLOW'});
@@ -29,7 +34,7 @@ export default async function getFinancialData(stock : string){
         intrinsicPrice: financialData.getIntrinsicPrice(),
         stockPrice,
         wacc,
-        growth: 0.025
+        growth,
     }
 }
 

@@ -4,7 +4,7 @@ import DiscontedFreeCashFlowProvider from "@/context/DiscountedFreeCashFlowConte
 import PageContent from "@/components/analisis/disconted-free-cash-flow/PageContent";
 
 export default async function StockAnalysisPage({ params }: { params: { stock: string } }) {
-    const data = await getFinancialData(params.stock);
+    const data = await getFinancialData({stock: params.stock});
 
     return (
         <DiscontedFreeCashFlowProvider initialData={data}>
