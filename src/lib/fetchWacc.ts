@@ -24,8 +24,6 @@ export async function fetchWacc(stock: string = "AAPL") {
                 throw new ValidateError('No found wacc')
             }
         } else {
-            
-                console.log("No found wacc")
             throw new ValidateError('No found wacc')
         }
     } catch (err) {

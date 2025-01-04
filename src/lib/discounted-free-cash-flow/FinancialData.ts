@@ -7,9 +7,10 @@ export class FinancialData extends FinancialCalculatorFutureYears {
         stockPrice : number, 
         sharesOutstanding : number, 
         previousYearsData : PreviousYearsDataType[], 
-        futureYearsData: FutureYearsDataType[]
+        futureYearsData: FutureYearsDataType[],
+        growth: number
     ){
-        super(wacc, stockPrice, sharesOutstanding, previousYearsData, futureYearsData);
+        super(wacc, stockPrice, sharesOutstanding, previousYearsData, futureYearsData, growth);
     }
 
     getIntrinsicPrice(){

@@ -15,7 +15,7 @@ interface GetFinancialData {
 export default async function getFinancialData({stock, initialWacc, initialGrowth} : GetFinancialData){
     
     const wacc = (initialWacc) ? initialWacc : await getWacc(stock);
-    const growth =(initialGrowth) ? initialGrowth : await getWacc(stock);
+    const growth =(initialGrowth) ? initialGrowth : 0.025;
     
     const yFinaceDataDiscountedFreeCashFlow = await getYFinanceData({ query: 'DISCOUNTED_FREE_CASH_FLOW', stock });
     const yFinanceDataCompanyInfo = await  getYFinanceData({ query: 'COMPANY_INFO', stock });
@@ -23,7 +23,7 @@ export default async function getFinancialData({stock, initialWacc, initialGrowt
     const {previousYearsData, futureYearsData} = buildFinancialData({yFinanceData: yFinaceDataDiscountedFreeCashFlow, type: 'DISCOUNTED_FREE_CASH_FLOW'});
     const {stockPrice, sharesOutstanding} =  buildFinancialData({yFinanceData: yFinanceDataCompanyInfo, type: 'COMPANY_INFO'});
 
-    const financialData = new FinancialData(wacc, stockPrice, sharesOutstanding, previousYearsData, futureYearsData);
+    const financialData = new FinancialData(wacc, stockPrice, sharesOutstanding, previousYearsData, futureYearsData, growth);
 
     financialData.calculatePreviusYearsData();
     financialData.calculateFurureYearsData();
@@ -34,7 +34,7 @@ export default async function getFinancialData({stock, initialWacc, initialGrowt
         intrinsicPrice: financialData.getIntrinsicPrice(),
         stockPrice,
         wacc,
-        growth,
+        growth
     }
 }
 

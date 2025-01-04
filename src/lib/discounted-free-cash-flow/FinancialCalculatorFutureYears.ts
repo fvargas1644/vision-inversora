@@ -4,13 +4,15 @@ import { FinancialCalculatorPreviousYears } from "./FinancialCalculatorPreviousY
 export class FinancialCalculatorFutureYears extends FinancialCalculatorPreviousYears {
     protected terminalValue;
     protected intrinsicPrice: number;
+    protected growth: number;
 
     constructor(
         wacc : number, 
         stockPrice : number, 
         sharesOutstanding : number, 
         previousYearsData : PreviousYearsDataType[], 
-        futureYearsData: FutureYearsDataType[]
+        futureYearsData: FutureYearsDataType[],
+        growth: number,
     ){
         super(wacc, stockPrice, sharesOutstanding, previousYearsData, futureYearsData)
         this.intrinsicPrice = 0;
@@ -19,6 +21,7 @@ export class FinancialCalculatorFutureYears extends FinancialCalculatorPreviousY
             discountFactor: 0,
             pv: 0
         }
+        this.growth = growth;
     }
 
     private calculateRevenue(){
@@ -73,7 +76,7 @@ export class FinancialCalculatorFutureYears extends FinancialCalculatorPreviousY
         const lastYear = Math.max(...this.futureYearsData.map(obj => obj.year));
         this.futureYearsData.forEach((obj) => {
             if(obj.year === lastYear) {
-                this.terminalValue.annualFreeCashFlow = obj.data.annualFreeCashFlow*(1+0.025)/(this.wacc-0.025)
+                this.terminalValue.annualFreeCashFlow = obj.data.annualFreeCashFlow*(1+this.growth)/(this.wacc-this.growth)
             }
         })
     }
