@@ -17,6 +17,7 @@ export default async function getFinancialData({stock, initialWacc, initialGrowt
     const wacc = (initialWacc) ? initialWacc : await getWacc(stock);
     const growth =(initialGrowth) ? initialGrowth : 0.025;
     
+    
     const yFinaceDataDiscountedFreeCashFlow = await getYFinanceData({ query: 'DISCOUNTED_FREE_CASH_FLOW', stock });
     const yFinanceDataCompanyInfo = await  getYFinanceData({ query: 'COMPANY_INFO', stock });
     

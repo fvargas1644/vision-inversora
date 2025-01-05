@@ -48,6 +48,7 @@ export default function useFormPreviousYears ({wacc, growth} : {wacc: number, gr
             if(updateFinancialData){
                 updateFinancialData({wacc: formData.wacc, growth: formData.growth})
             }
+            
         }
     }
 
