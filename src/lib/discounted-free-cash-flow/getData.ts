@@ -14,15 +14,25 @@ interface GetFinancialData {
 
 export default async function getFinancialData({stock, initialWacc, initialGrowth} : GetFinancialData){
     
-    const wacc = (initialWacc) ? initialWacc : await getWacc(stock);
-    const growth =(initialGrowth) ? initialGrowth : 0.025;
+    const wacc = initialWacc ?? await getWacc(stock);
+    const growth = initialGrowth ?? 0.025;
     
     
-    const yFinaceDataDiscountedFreeCashFlow = await getYFinanceData({ query: 'DISCOUNTED_FREE_CASH_FLOW', stock });
-    const yFinanceDataCompanyInfo = await  getYFinanceData({ query: 'COMPANY_INFO', stock });
+    const [yFinaceDataDiscountedFreeCashFlow, yFinanceDataCompanyInfo] = await Promise.all([
+        getYFinanceData({ query: 'DISCOUNTED_FREE_CASH_FLOW', stock }),
+        getYFinanceData({ query: 'COMPANY_INFO', stock })
+    ]);
     
-    const {previousYearsData, futureYearsData} = buildFinancialData({yFinanceData: yFinaceDataDiscountedFreeCashFlow, type: 'DISCOUNTED_FREE_CASH_FLOW'});
-    const {stockPrice, sharesOutstanding} =  buildFinancialData({yFinanceData: yFinanceDataCompanyInfo, type: 'COMPANY_INFO'});
+    // Construir datos financieros
+    const { previousYearsData, futureYearsData } = buildFinancialData({
+        yFinanceData: yFinaceDataDiscountedFreeCashFlow,
+        type: 'DISCOUNTED_FREE_CASH_FLOW'
+    });
+
+    const { stockPrice, sharesOutstanding } = buildFinancialData({
+        yFinanceData: yFinanceDataCompanyInfo,
+        type: 'COMPANY_INFO'
+    });
 
     const financialData = new FinancialData(wacc, stockPrice, sharesOutstanding, previousYearsData, futureYearsData, growth);
 
