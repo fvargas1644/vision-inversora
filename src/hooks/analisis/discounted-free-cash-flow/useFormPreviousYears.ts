@@ -1,7 +1,7 @@
 'use client'
 
 import { DiscontedFreeCashFlowProviderContext } from "@/context/DiscountedFreeCashFlowContext"
-import { validateGrowth, validateWacc } from "@/lib/validation/discounted-free-cash-flow/validations"
+import { validateGrowth, validateWacc } from "@/lib/validation/frontend/discounted-free-cash-flow/validations"
 import { useContext, useState } from "react"
 
 function returnFormattedValueToPercent (value : number) {
