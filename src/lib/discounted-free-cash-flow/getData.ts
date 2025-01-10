@@ -5,6 +5,7 @@ import { yFinanceQuery } from "../yfinance-js/fetchData";
 import buildFinancialData from "./builderFinancialData";
 import { RequestError } from "../Error";
 import { FinancialData } from "./FinancialData";
+import { validate } from "../validation/backend/discounted-free-cash-flow/validations";
 
 interface GetFinancialData {
     stock: string,
@@ -16,6 +17,10 @@ export default async function getFinancialData({stock, initialWacc, initialGrowt
     
     const wacc = initialWacc ?? await getWacc(stock);
     const growth = initialGrowth ?? 0.025;
+
+    // Validación de datos
+    await validate(wacc);
+    await validate(growth);
     
     
     const [yFinaceDataDiscountedFreeCashFlow, yFinanceDataCompanyInfo] = await Promise.all([
