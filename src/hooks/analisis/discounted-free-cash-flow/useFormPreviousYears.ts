@@ -12,7 +12,8 @@ export interface FormData {
     waccError: null | string,
     growthError: null | string,
     wacc: number,
-    growth: number
+    growth: number,
+    updateStatus: boolean,
 }
   
 
@@ -24,7 +25,8 @@ export default function useFormPreviousYears ({wacc, growth} : {wacc: number, gr
         wacc: returnFormattedValueToPercent(wacc), 
         growth: returnFormattedValueToPercent(growth),
         waccError: null,
-        growthError: null
+        growthError: null,
+        updateStatus: false,
     })
 
     const updateWaccInputValue = (value : string) => {
@@ -43,10 +45,11 @@ export default function useFormPreviousYears ({wacc, growth} : {wacc: number, gr
         })
     }
 
-    const sendData = () => {
+    const sendData = async () => {
         if(!formData.waccError && !formData.growthError) {
             if(updateFinancialData){
-                updateFinancialData({wacc: formData.wacc, growth: formData.growth})
+                const responseUpdateFinancialData = await updateFinancialData({wacc: formData.wacc, growth: formData.growth})
+                //setFormData({...formData, updateStatus: responseUpdateFinancialData})
             }
             
         }

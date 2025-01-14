@@ -16,5 +16,5 @@ export interface UpdateFinancialData {
 
 export interface CashFlowContextInterface {
     financialData: FinancialData | null;
-    updateFinancialData: (({wacc, growth} : UpdateFinancialData) => void) | null;
+    updateFinancialData: (({wacc, growth} : UpdateFinancialData) => Promise<string>) | null;
 }
