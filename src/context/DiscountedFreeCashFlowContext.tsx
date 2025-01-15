@@ -19,10 +19,10 @@ export default function DiscontedFreeCashFlowProvider({ children, initialData, s
 }) {
     const [financialDataState, setFinancialDataState] = useState(initialData);
 
-    async function updateFinancialData({wacc, growth} : UpdateFinancialData){
+    async function updateFinancialData({wacc, growth} : UpdateFinancialData) : Promise<'wait' | 'success' | 'fail'>{
         const data = await getFinancialData({stock, initialWacc: inversePercentage(wacc), initialGrowth: inversePercentage(growth) })
         setFinancialDataState(previousData => ({...previousData, ...data}))
-        return "Completado"
+        return "success"
     }
 
     return (

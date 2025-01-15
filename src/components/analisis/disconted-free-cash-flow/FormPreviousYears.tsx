@@ -3,6 +3,12 @@
 import useFormPreviousYears from '@/hooks/analisis/discounted-free-cash-flow/useFormPreviousYears';
 import styles from '@/styles/analisis/discounted-free-cash-flow/formPreviousYears.module.css'
 
+const UPDATE_STATUS_OPTIONS : { [key in 'wait' | 'success' | 'fail']: string } = {
+    wait: '',
+    success: 'Operación exitosa',
+    fail: 'Error en los datos'
+}
+  
 export default function FormPreviousYears({ wacc, growth }: { wacc: number, growth: number }) {
 
     const {
@@ -11,6 +17,10 @@ export default function FormPreviousYears({ wacc, growth }: { wacc: number, grow
         formData,
         sendData
     } = useFormPreviousYears({ wacc, growth })
+
+    const a = formData.updateStatus
+
+    const prueba = UPDATE_STATUS_OPTIONS[formData.updateStatus] 
 
     return (
         <form className={styles.vi_previusyears_form} action={sendData}>
@@ -47,7 +57,7 @@ export default function FormPreviousYears({ wacc, growth }: { wacc: number, grow
                 </p>
             </div>
 
-
+            {prueba}
             <button 
                 type="submit" 
                 className={`${styles.vi_previusyears_form_submitbutton} ${(formData.growthError || formData.waccError) && styles.hasWarning}`}
