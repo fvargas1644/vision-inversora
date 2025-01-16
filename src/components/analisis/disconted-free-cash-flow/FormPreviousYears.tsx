@@ -1,12 +1,14 @@
 'use client'
 
+import { UpdateStatusOptions } from '@/context/definitions';
 import useFormPreviousYears from '@/hooks/analisis/discounted-free-cash-flow/useFormPreviousYears';
 import styles from '@/styles/analisis/discounted-free-cash-flow/formPreviousYears.module.css'
 
-const UPDATE_STATUS_OPTIONS : { [key in 'wait' | 'success' | 'fail']: string } = {
-    wait: '',
+const UPDATE_STATUS_OPTIONS : { [key in UpdateStatusOptions]: string } = {
+    unstarted: '',
+    processing: 'Procesando datos',
     success: 'Operación exitosa',
-    fail: 'Error en los datos'
+    error: 'Error en los datos'
 }
   
 export default function FormPreviousYears({ wacc, growth }: { wacc: number, growth: number }) {

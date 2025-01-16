@@ -9,6 +9,8 @@ export interface FinancialData {
     growth: number; 
 }
 
+export type UpdateStatusOptions = 'unstarted' | 'processing' | 'success' | 'error';
+
 export interface UpdateFinancialData {
     wacc: number, 
     growth: number
@@ -16,5 +18,5 @@ export interface UpdateFinancialData {
 
 export interface CashFlowContextInterface {
     financialData: FinancialData | null;
-    updateFinancialData: (({wacc, growth} : UpdateFinancialData) => Promise<'wait' | 'success' | 'fail'>) | null;
+    updateFinancialData: (({wacc, growth} : UpdateFinancialData) => Promise<UpdateStatusOptions>) | null;
 }

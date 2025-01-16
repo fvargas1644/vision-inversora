@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from "react";
-import { FinancialData, CashFlowContextInterface, UpdateFinancialData } from "@/context/definitions";
+import { FinancialData, CashFlowContextInterface, UpdateFinancialData, UpdateStatusOptions } from "@/context/definitions";
 import getFinancialData from "@/lib/discounted-free-cash-flow/getData";
 
 // Contexto con un nombre más claro
@@ -19,7 +19,7 @@ export default function DiscontedFreeCashFlowProvider({ children, initialData, s
 }) {
     const [financialDataState, setFinancialDataState] = useState(initialData);
 
-    async function updateFinancialData({wacc, growth} : UpdateFinancialData) : Promise<'wait' | 'success' | 'fail'>{
+    async function updateFinancialData({wacc, growth} : UpdateFinancialData) : Promise<UpdateStatusOptions>{
         const data = await getFinancialData({stock, initialWacc: inversePercentage(wacc), initialGrowth: inversePercentage(growth) })
         setFinancialDataState(previousData => ({...previousData, ...data}))
         return "success"

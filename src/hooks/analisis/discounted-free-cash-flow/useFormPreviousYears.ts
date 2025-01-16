@@ -1,5 +1,6 @@
 'use client'
 
+import { UpdateStatusOptions } from "@/context/definitions"
 import { DiscontedFreeCashFlowProviderContext } from "@/context/DiscountedFreeCashFlowContext"
 import { validateGrowth, validateWacc } from "@/lib/validation/frontend/discounted-free-cash-flow/validations"
 import { useContext, useState } from "react"
@@ -13,7 +14,7 @@ export interface FormData {
     growthError: null | string,
     wacc: number,
     growth: number,
-    updateStatus: 'wait' | 'success' | 'fail',
+    updateStatus: UpdateStatusOptions,
 }
 
 export default function useFormPreviousYears ({wacc, growth} : {wacc: number, growth:number}) {
@@ -25,7 +26,7 @@ export default function useFormPreviousYears ({wacc, growth} : {wacc: number, gr
         growth: returnFormattedValueToPercent(growth),
         waccError: null,
         growthError: null,
-        updateStatus: 'wait',
+        updateStatus: 'unstarted',
     })
 
     const updateWaccInputValue = (value : string) => {
