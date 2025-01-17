@@ -6,9 +6,9 @@ import styles from '@/styles/analisis/discounted-free-cash-flow/formPreviousYear
 
 const UPDATE_STATUS_OPTIONS : { [key in UpdateStatusOptions]: string } = {
     unstarted: '',
-    processing: 'Procesando datos',
-    success: 'Operación exitosa',
-    error: 'Error en los datos'
+    processing: 'Procesando datos...',
+    success: 'Datos actualizados correctamente.',
+    error: 'Ocurrió un error.'
 }
   
 export default function FormPreviousYears({ wacc, growth }: { wacc: number, growth: number }) {
