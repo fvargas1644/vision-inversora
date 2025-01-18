@@ -3,7 +3,7 @@
 import { UpdateStatusOptions } from "@/context/definitions"
 import { DiscontedFreeCashFlowProviderContext } from "@/context/DiscountedFreeCashFlowContext"
 import { validateGrowth, validateWacc } from "@/lib/validation/frontend/discounted-free-cash-flow/validations"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 
 function returnFormattedValueToPercent (value : number) {
     return Number((value*100).toFixed(2))
@@ -19,6 +19,8 @@ export interface FormData {
 
 export default function useFormPreviousYears ({wacc, growth} : {wacc: number, growth:number}) {
 
+    
+
     const {updateFinancialData} = useContext(DiscontedFreeCashFlowProviderContext)
 
     const [formData, setFormData] = useState<FormData>({
@@ -27,7 +29,17 @@ export default function useFormPreviousYears ({wacc, growth} : {wacc: number, gr
         waccError: null,
         growthError: null,
         updateStatus: 'unstarted',
-    })
+    });
+
+    useEffect(() => {
+        const ejec = async () => {
+            if(updateFinancialData && formData.updateStatus=== "processing"){
+                const responseUpdateFinancialData = await updateFinancialData({wacc: formData.wacc, growth: formData.growth});
+                setFormData({...formData, updateStatus: responseUpdateFinancialData});
+            }
+        }
+        ejec()
+    }, [formData.updateStatus]);
 
     const updateWaccInputValue = (value : string) => {
         setFormData({
@@ -48,10 +60,6 @@ export default function useFormPreviousYears ({wacc, growth} : {wacc: number, gr
     const sendData = async () => {
         if(!formData.waccError && !formData.growthError) {
             setFormData({...formData, updateStatus: "processing"});
-            if(updateFinancialData){
-                const responseUpdateFinancialData = await updateFinancialData({wacc: formData.wacc, growth: formData.growth});
-                setFormData({...formData, updateStatus: responseUpdateFinancialData});
-            }
             
         }
     }
