@@ -20,9 +20,8 @@ export default function FormPreviousYears({ wacc, growth }: { wacc: number, grow
         sendData
     } = useFormPreviousYears({ wacc, growth })
 
-    const a = formData.updateStatus
 
-    const prueba = UPDATE_STATUS_OPTIONS[formData.updateStatus] 
+    const updateStatusOptionsResponse = UPDATE_STATUS_OPTIONS[formData.updateStatus] 
 
     return (
         <form className={styles.vi_previusyears_form} action={sendData}>
@@ -58,8 +57,9 @@ export default function FormPreviousYears({ wacc, growth }: { wacc: number, grow
                     {formData.growthError}
                 </p>
             </div>
-
-            {prueba}
+            <div className={`${styles.alert} ${styles.success}`}>
+                <p>{updateStatusOptionsResponse}</p>
+            </div>
             <button 
                 type="submit" 
                 className={`${styles.vi_previusyears_form_submitbutton} ${(formData.growthError || formData.waccError) && styles.hasWarning}`}

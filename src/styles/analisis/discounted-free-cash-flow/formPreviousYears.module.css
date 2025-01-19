@@ -71,6 +71,19 @@
     box-shadow: 0 0 4px rgba(105, 105, 179, 0.5);
 }
 
+.alert {
+  width: 100%;
+  max-width: 200px;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 12px;
+}
+
+.alert.success {
+  background-color: rgb(240, 253, 244, 1);
+  color: green;
+}
+
 /* Eliminar las flechas en navegadores como Chrome y Safari */
 .vi_previusyears_form_input::-webkit-outer-spin-button,
 .vi_previusyears_form_input::-webkit-inner-spin-button {
