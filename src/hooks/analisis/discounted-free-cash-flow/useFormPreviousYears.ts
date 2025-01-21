@@ -15,11 +15,12 @@ export interface FormData {
     wacc: number,
     growth: number,
     updateStatus: UpdateStatusOptions,
+    updateMessage: string
 }
 
-export default function useFormPreviousYears ({wacc, growth} : {wacc: number, growth:number}) {
 
-    
+
+export default function useFormPreviousYears ({wacc, growth} : {wacc: number, growth:number}) {
 
     const {updateFinancialData} = useContext(DiscontedFreeCashFlowProviderContext)
 
@@ -29,13 +30,27 @@ export default function useFormPreviousYears ({wacc, growth} : {wacc: number, gr
         waccError: null,
         growthError: null,
         updateStatus: 'unstarted',
+        updateMessage: ''
     });
 
+    const UPDATE_STATUS_OPTIONS  = {
+        unstarted: () =>{},
+        processing: () =>{},
+        success: () =>{ 
+            setFormData({...formData, updateMessage: 'Actualizados'});
+        },
+        error: () =>{ 
+            setFormData({...formData, updateMessage: 'Actualizados'});
+        },
+    }
+    
     useEffect(() => {
         const ejec = async () => {
             if(updateFinancialData && formData.updateStatus=== "processing"){
+                setFormData({...formData, updateMessage: 'Procesando datos...'});
                 const responseUpdateFinancialData = await updateFinancialData({wacc: formData.wacc, growth: formData.growth});
                 setFormData({...formData, updateStatus: responseUpdateFinancialData});
+                UPDATE_STATUS_OPTIONS[responseUpdateFinancialData]()
             }
         }
         ejec()
@@ -59,8 +74,7 @@ export default function useFormPreviousYears ({wacc, growth} : {wacc: number, gr
 
     const sendData = async () => {
         if(!formData.waccError && !formData.growthError) {
-            setFormData({...formData, updateStatus: "processing"});
-            
+            setFormData({...formData, updateStatus: "processing", updateMessage: 'Procesando datos...'});
         }
     }
 

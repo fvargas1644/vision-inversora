@@ -4,12 +4,7 @@ import { UpdateStatusOptions } from '@/context/definitions';
 import useFormPreviousYears from '@/hooks/analisis/discounted-free-cash-flow/useFormPreviousYears';
 import styles from '@/styles/analisis/discounted-free-cash-flow/formPreviousYears.module.css'
 
-const UPDATE_STATUS_OPTIONS : { [key in UpdateStatusOptions]: string } = {
-    unstarted: '',
-    processing: 'Procesando datos...',
-    success: 'Datos actualizados correctamente.',
-    error: 'Ocurrió un error.'
-}
+
   
 export default function FormPreviousYears({ wacc, growth }: { wacc: number, growth: number }) {
 
@@ -19,9 +14,6 @@ export default function FormPreviousYears({ wacc, growth }: { wacc: number, grow
         formData,
         sendData
     } = useFormPreviousYears({ wacc, growth })
-
-
-    const updateStatusOptionsResponse = UPDATE_STATUS_OPTIONS[formData.updateStatus] 
 
     return (
         <form className={styles.vi_previusyears_form} action={sendData}>
@@ -58,7 +50,7 @@ export default function FormPreviousYears({ wacc, growth }: { wacc: number, grow
                 </p>
             </div>
             <div className={`${styles.alert} ${styles.success}`}>
-                <p>{updateStatusOptionsResponse}</p>
+                <p>{formData.updateMessage}</p>
             </div>
             <button 
                 type="submit" 
