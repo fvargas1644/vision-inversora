@@ -49,9 +49,13 @@ export default function FormPreviousYears({ wacc, growth }: { wacc: number, grow
                     {formData.growthError}
                 </p>
             </div>
-            <div className={`${styles.alert} ${styles.success}`}>
-                <p>{formData.updateMessage}</p>
-            </div>
+            {(formData.updateStatus === "success" || formData.updateStatus === "error") &&(
+                    <div className={`${styles.alert} ${styles.success}`}>
+                        <p>{formData.updateMessage}</p>
+                    </div>
+                )
+            }
+            
             <button 
                 type="submit" 
                 className={`${styles.vi_previusyears_form_submitbutton} ${(formData.growthError || formData.waccError) && styles.hasWarning}`}
