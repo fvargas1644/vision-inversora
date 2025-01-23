@@ -18,7 +18,7 @@ export default async function RootLayout({
     <html lang="es">
       <body className={`${montserrat.className} antialiased`}>
         
-      <Header />
+      <Header dataCompany={fechCompany}/>
         <Navbar dataCompany={fechCompany}/>
         {children}
       </body>
