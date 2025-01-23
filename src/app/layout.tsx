@@ -3,6 +3,7 @@ import "./globals.css";
 import { montserrat } from "./fonts";
 import { FetchCompanyTickersExchangeResponse } from "@/lib/sec-edgar/definitions";
 import { fetchCompanyTickersExchange } from "@/lib/sec-edgar/fetchData";
+import Header from "@/components/Header";
  
 
 export default async function RootLayout({
@@ -16,6 +17,8 @@ export default async function RootLayout({
   return (
     <html lang="es">
       <body className={`${montserrat.className} antialiased`}>
+        
+      <Header />
         <Navbar dataCompany={fechCompany}/>
         {children}
       </body>
