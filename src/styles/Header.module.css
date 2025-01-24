@@ -6,7 +6,7 @@
 .searchContainer {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 16px;
 }
 
 .searchWrapper {
@@ -17,10 +17,10 @@
 
 .searchInput {
   width: 100%;
-  padding: 0.5rem 1rem;
+  padding: 8px 16px;
   border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
-  font-size: 1rem;
+  border-radius: 6px;
+  font-size: 16px;
   transition: border-color 0.2s ease-in-out;
 }
 
@@ -31,12 +31,12 @@
 }
 
 .searchButton {
-  margin-left: 0.5rem;
-  padding: 0.5rem 1rem;
+  margin-left: 8px;
+  padding: 8px 16px;
   background-color: #2563eb;
   color: #ffffff;
-  border-radius: 0.375rem;
-  font-size: 1rem;
+  border-radius: 6px;
+  font-size: 16px;
   font-weight: 500;
 }
 
@@ -45,8 +45,8 @@
 }
 
 .searchIcon {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 20px;
+  height: 20px;
 }
 
 .dropdown {
@@ -54,16 +54,16 @@
   top: 100%;
   left: 0;
   width: 100%;
-  margin-top: 0.25rem;
+  margin-top: 4px;
   background-color: #ffffff;
   border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
+  border-radius: 6px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   z-index: 10;
 }
 
 .dropdownItem {
-  padding: 0.5rem 1rem;
+  padding: 8px 16px;
   cursor: pointer;
 }
 
@@ -76,7 +76,7 @@
 }
 
 .stockName {
-  font-size: 0.875rem;
+  font-size: 14px;
   color: #6b7280;
 }
 
