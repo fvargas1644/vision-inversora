@@ -18,6 +18,19 @@ export default function PageContent({stock} : {stock : string}) {
     if(financialData) {
         return (
             <>
+                <main className={styles.main}>
+                    <div className={styles.content}>
+                    <div className={styles.sidebar}>
+                        <div><h1>Sidebar</h1></div>
+                    </div>
+                    <div className={styles.newsSection}>
+                    <div><h1>New SECTION</h1></div>
+                    </div>
+                    <div className={styles.marketOverview}>
+                    <div><h1>Market</h1></div>
+                    </div>
+                    </div>
+                </main>
                 <section className="center_content">
                     <Header
                         stockName={stock}

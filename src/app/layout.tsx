@@ -16,8 +16,10 @@ export default async function RootLayout({
   return (
     <html lang="es">
       <body className={`${montserrat.className} antialiased`}>
-      <Header dataCompany={fechCompany}/>
-        {children}
+        <div className="vi_content_pages">
+          <Header dataCompany={fechCompany}/>
+          {children}
+        </div>
       </body>
     </html>
   );
