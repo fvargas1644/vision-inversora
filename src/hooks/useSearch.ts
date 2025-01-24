@@ -11,7 +11,6 @@ export default function useSearch(dataCompany : FetchCompanyTickersExchangeRespo
     const path = usePath();
     const [inputValue, setInputValue] = useState(path.stock);
     const [searchResults, setSearchResults] = useState<CompanyTicker[]>([]);
-    const [isOverItem, setIsOverItem] = useState(false);
 
     const fetchCompanyExchangeResults = (stock : string) => {
         const searchResults : CompanyTicker[]= [];
@@ -26,12 +25,9 @@ export default function useSearch(dataCompany : FetchCompanyTickersExchangeRespo
     }
 
     const clearSearchResults = () => {
-        setSearchResults([]); 
-        setIsOverItem(false);
+        setSearchResults([]);
     }
 
-    const setIsOverItemToTrue  = () => setIsOverItem(true)
-    const setIsOverItemToFalse  = () => setIsOverItem(false)
 
     const updateInputValueAndSearch = async (value: string) => {
         setInputValue(value);
@@ -62,10 +58,7 @@ export default function useSearch(dataCompany : FetchCompanyTickersExchangeRespo
         updateInputValueAndSearch, 
         redirectToAnalysisPageBasedOnInputOrResult, 
         searchResults, 
-        isOverItem,
         selectSearchResultAndNavigate,
-        setIsOverItemToTrue,
-        setIsOverItemToFalse
     };
     
 }

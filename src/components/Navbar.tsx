@@ -1,65 +1,53 @@
-'use client'
-
-import Link from "next/link";
-import styles from '@/styles/nav.module.css'
+import Link from "next/link"
+import { useState } from "react"
+import styles from "@/styles/Navbar.module.css"
+import { Menu, X } from "lucide-react"
 import { usePathname } from 'next/navigation';
-import Logo from "./Logo";
-import { useState } from "react";
-import Search from '@/components/Search';
-import { FetchCompanyTickersExchangeResponse } from "@/lib/sec-edgar/definitions";
 
-function Navbar({dataCompany} : {dataCompany : FetchCompanyTickersExchangeResponse}) {
-    const [buttonMenuState, setbuttonMenuState] = useState(false)
-    const path = usePathname()
-    const showLinks = buttonMenuState ? styles.showMenu : ''
+export default function Navbar() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const path = usePathname()
 
-    return (
-        <nav className={styles.vi_nav}>
-            <div className={styles.vi_nav_items_container} >
-                <div className={styles.vi_nav_firtsSection}>
-                    <a className={styles.vi_nav_logo} href="/">
-                        <Logo />
-                    </a>
-                    <Search dataCompany={dataCompany}/>
-                    <span className={styles.vi_nav_menuButton_container}>
-                        <button className={styles.vi_nav_menuButton} onClick={() => setbuttonMenuState(!buttonMenuState)}>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                            </svg>
-                        </button>
-                    </span>
-                </div>
-                <menu className={`${showLinks} ${styles.vi_nav_menu}`}>
-                    <ul >
-                        <li className={path === "/" ? styles.isActive : ''}>
-                            <Link
-                                href={'/'}
-                                className={styles.vi_nav_link}
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 ${styles.vi_nav_home_icon}`}>
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                                </svg>
-                                <span>Home</span>
-                            </Link>
-                        </li>
-
-                        <li className={path.startsWith("/analisis") ? styles.isActive : ''}>
-
-                            <Link
-                                href={'/analisis'}
-                                className={styles.vi_nav_link}
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 ${styles.vi_nav_analysis_icon}`}>
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
-                                </svg>
-                                <span>Análisis</span>
-                            </Link>
-                        </li>
-                    </ul>
-                </menu>
-            </div>
-        </nav>
-    );
+  return (
+    <nav className={styles.nav}>
+      <div className={styles.container}>
+        <div className={styles.navContent}>
+          <div className={styles.logoContainer}>
+            <Link href="/" className={styles.logo}>
+              VisiónInversora
+            </Link>
+          </div>
+          <div className={styles.desktopMenu}>
+            <Link href="/" className={`${styles.menuItem} ${path === "/" ? styles.isActive : ''}`}>
+              Home
+            </Link>
+            <Link href="/analisis" className={`${styles.menuItem} ${path.startsWith("/analisis") ? styles.isActive : ''}`}>
+              Análisis
+            </Link>
+          </div>
+          <div className={styles.mobileMenuButton}>
+            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={styles.menuToggle}>
+              <span className={styles.srOnly}>Open main menu</span>
+              {isMobileMenuOpen ? (
+                <X className={styles.menuIcon} aria-hidden="true" />
+              ) : (
+                <Menu className={styles.menuIcon} aria-hidden="true" />
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+      {isMobileMenuOpen && (
+        <div className={styles.mobileMenu}>
+          <Link href="/" className={styles.mobileMenuItem}>
+            Home
+          </Link>
+          <Link href="/analisis" className={styles.mobileMenuItem}>
+            Análisis
+          </Link>
+        </div>
+      )}
+    </nav>
+  )
 }
 
-export default Navbar;

@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import "./globals.css";
 import { montserrat } from "./fonts";
 import { FetchCompanyTickersExchangeResponse } from "@/lib/sec-edgar/definitions";
@@ -17,9 +16,7 @@ export default async function RootLayout({
   return (
     <html lang="es">
       <body className={`${montserrat.className} antialiased`}>
-        
       <Header dataCompany={fechCompany}/>
-        <Navbar dataCompany={fechCompany}/>
         {children}
       </body>
     </html>
