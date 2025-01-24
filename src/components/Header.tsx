@@ -44,7 +44,7 @@ export default function Header({dataCompany} : {dataCompany: FetchCompanyTickers
                   onMouseOver={setIsOverItemToTrue}
                   onMouseOut={setIsOverItemToFalse}
                 >
-                  <div className={styles.stockSymbol}>{item[1]}</div>
+                  <div className={styles.stockSymbol}>{item[2]}</div>
                   <div className={styles.stockName}>{item[1]}</div>
                 </div>
                 </React.Fragment>
