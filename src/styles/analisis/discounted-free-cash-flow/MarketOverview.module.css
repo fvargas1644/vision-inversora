@@ -1,0 +1,92 @@
+.container {
+    background-color: white;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  
+  .content {
+    padding: 1.25rem 1rem;
+  }
+  
+  @media (min-width: 640px) {
+    .content {
+      padding: 1.5rem;
+    }
+  }
+  
+  .title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 1rem;
+  }
+  
+  .itemList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    background-color: #f9fafb;
+    border-radius: 0.375rem;
+  }
+  
+  .itemInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  
+  .iconBlue {
+    color: #3b82f6;
+  }
+  
+  .iconGreen {
+    color: #10b981;
+  }
+  
+  .iconPurple {
+    color: #8b5cf6;
+  }
+  
+  .itemName {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #111827;
+  }
+  
+  .itemValues {
+    text-align: right;
+  }
+  
+  .itemValue {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+  }
+  
+  .itemChange {
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  
+  .changePositive {
+    color: #10b981;
+  }
+  
+  .changeNegative {
+    color: #ef4444;
+  }
+  
+  

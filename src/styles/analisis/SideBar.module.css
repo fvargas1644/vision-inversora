@@ -1,0 +1,49 @@
+.sidebar {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+  }
+  
+  .nav {
+    padding: 16px;
+  }
+  
+  .menuList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menuItem {
+    margin-bottom: 8px;
+  }
+  
+  .menuLink {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    color: #4b5563;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .menuLink:hover {
+    background-color: #f3f4f6;
+    color: #1f2937;
+  }
+  
+  .menuIcon {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    color: #6b7280;
+  }
+  
+  .menuText {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  

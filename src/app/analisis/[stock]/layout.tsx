@@ -9,8 +9,8 @@ export default function Layout({
 }>){
     return (
         <>
-            <SelectionBar stock={params.stock} />
             {children}
+            <SelectionBar stock={params.stock} />
         </>
     )
 }
