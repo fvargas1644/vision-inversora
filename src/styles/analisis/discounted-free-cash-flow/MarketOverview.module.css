@@ -1,92 +1,90 @@
 .container {
     background-color: white;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-    border-radius: 0.5rem;
+    border-radius: 8px;
     overflow: hidden;
-  }
-  
-  .content {
-    padding: 1.25rem 1rem;
-  }
-  
-  @media (min-width: 640px) {
+}
+
+.content {
+    padding: 20px 16px;
+}
+
+@media (min-width: 640px) {
     .content {
-      padding: 1.5rem;
+        padding: 24px;
     }
-  }
-  
-  .title {
-    font-size: 1.125rem;
+}
+
+.title {
+    font-size: 18px;
     font-weight: 600;
     color: #111827;
-    margin-bottom: 1rem;
-  }
-  
-  .itemList {
+    margin-bottom: 16px;
+}
+
+.itemList {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .item {
+    gap: 16px;
+}
+
+.item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.75rem;
+    padding: 12px;
     background-color: #f9fafb;
-    border-radius: 0.375rem;
-  }
-  
-  .itemInfo {
+    border-radius: 6px;
+}
+
+.itemInfo {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-  }
-  
-  .icon {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-  
-  .iconBlue {
+    gap: 12px;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+}
+
+.iconBlue {
     color: #3b82f6;
-  }
-  
-  .iconGreen {
+}
+
+.iconGreen {
     color: #10b981;
-  }
-  
-  .iconPurple {
+}
+
+.iconPurple {
     color: #8b5cf6;
-  }
-  
-  .itemName {
-    font-size: 0.875rem;
+}
+
+.itemName {
+    font-size: 14px;
     font-weight: 500;
     color: #111827;
-  }
-  
-  .itemValues {
+}
+
+.itemValues {
     text-align: right;
-  }
-  
-  .itemValue {
-    font-size: 1rem;
+}
+
+.itemValue {
+    font-size: 16px;
     font-weight: 600;
     color: #111827;
-  }
-  
-  .itemChange {
-    font-size: 0.875rem;
+}
+
+.itemChange {
+    font-size: 14px;
     font-weight: 500;
-  }
-  
-  .changePositive {
+}
+
+.changePositive {
     color: #10b981;
-  }
-  
-  .changeNegative {
+}
+
+.changeNegative {
     color: #ef4444;
-  }
-  
-  
+}

@@ -1,138 +1,19 @@
-.container {
-    display: grid;
-    grid-template-columns: 1fr 300px;
-    gap: 32px; /* 2rem */
-    padding: 32px; /* 2rem */
-    max-width: 1600px;
-    margin: 0 auto;
-}
-
-@media (max-width: 1024px) {
-    .container {
-        grid-template-columns: 1fr;
-    }
-}
-
-.mainContent {
-    display: flex;
-    flex-direction: column;
-    gap: 32px; /* 2rem */
-}
-
-.companyName {
-    font-size: 24px; /* 1.5rem */
-    font-weight: 600;
-    color: #111;
-    margin: 0;
-}
-
-.metricsGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px; /* 1.5rem */
-}
-
-.card {
-    background: white;
-    border-radius: 12px; /* 0.75rem */
-    padding: 24px; /* 1.5rem */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.cardHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px; /* 1rem */
-}
-
-.cardHeader h2 {
-    font-size: 16px; /* 1rem */
-    font-weight: 500;
-    color: #666;
-    margin: 0;
-}
-
-.icon {
-    width: 20px; /* 1.25rem */
-    height: 20px; /* 1.25rem */
-    color: #666;
-}
-
-.priceContainer {
-    display: flex;
-    align-items: baseline;
-    gap: 12px; /* 0.75rem */
-}
-
-.price {
-    font-size: 32px; /* 2rem */
-    font-weight: 600;
-    color: #111;
-}
-
-.change {
-    color: #22c55e;
-    font-size: 16px; /* 1rem */
-}
-
-.calculator {
-    display: flex;
-    flex-direction: column;
-    gap: 16px; /* 1rem */
-}
-
-.inputs {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px; /* 1rem */
-}
-
-.inputGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 8px; /* 0.5rem */
-}
-
-.inputGroup label {
-    font-size: 14px; /* 0.875rem */
-    color: #666;
-}
-
-.inputGroup input {
-    padding: 8px; /* 0.5rem */
-    border: 1px solid #e5e7eb;
-    border-radius: 6px; /* 0.375rem */
-    font-size: 14px; /* 0.875rem */
-}
-
-.calculateButton {
-    background: #111;
-    color: white;
-    border: none;
-    border-radius: 6px; /* 0.375rem */
-    padding: 12px; /* 0.75rem */
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.calculateButton:hover {
-    background: #333;
-}
-
 .financialData {
     background: white;
-    border-radius: 12px; /* 0.75rem */
-    padding: 24px; /* 1.5rem */
+    border-radius: 12px;
+    /* 0.75rem */
+    padding: 24px;
+    /* 1.5rem */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .financialData h2 {
-    font-size: 20px; /* 1.25rem */
+    font-size: 20px;
+    /* 1.25rem */
     font-weight: 600;
     color: #111;
-    margin: 0 0 24px 0; /* 1.5rem */
+    margin: 0 0 24px 0;
+    /* 1.5rem */
 }
 
 .tableWrapper {
@@ -143,19 +24,22 @@
     width: 100%;
     border-collapse: collapse;
     text-align: left;
-    font-size: 14px; /* 0.875rem */
+    font-size: 14px;
+    /* 0.875rem */
 }
 
 .table th {
     background: #f9fafb;
-    padding: 12px; /* 0.75rem */
+    padding: 12px;
+    /* 0.75rem */
     color: #666;
     font-weight: 500;
     white-space: nowrap;
 }
 
 .table td {
-    padding: 12px; /* 0.75rem */
+    padding: 12px;
+    /* 0.75rem */
     border-top: 1px solid #e5e7eb;
     white-space: nowrap;
 }
@@ -168,54 +52,11 @@
     color: #ef4444;
 }
 
-.marketOverview {
-    background: white;
-    border-radius: 12px; /* 0.75rem */
-    padding: 24px; /* 1.5rem */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    height: fit-content;
-}
-
-.marketOverview h2 {
-    font-size: 20px; /* 1.25rem */
-    font-weight: 600;
-    color: #111;
-    margin: 0 0 24px 0; /* 1.5rem */
-}
-
-.marketData {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* 1.25rem */
-}
-
-.marketItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14px; /* 0.875rem */
-}
-
-.marketValues {
-    display: flex;
-    align-items: center;
-    gap: 12px; /* 0.75rem */
-}
-
 @media (max-width: 768px) {
-    .container {
-        padding: 16px; /* 1rem */
-    }
-
-    .metricsGrid {
-        grid-template-columns: 1fr;
-    }
 
     .table {
-        font-size: 12px; /* 0.75rem */
+        font-size: 12px;
+        /* 0.75rem */
     }
 
-    .price {
-        font-size: 24px; /* 1.5rem */
-    }
 }
