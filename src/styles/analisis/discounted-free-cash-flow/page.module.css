@@ -4,12 +4,19 @@
     padding: 32px 16px;
   }
   
+  
   .content {
     display: grid;
     grid-template-columns: 1fr;
     gap: 32px;
     margin-top: 32px;
   }
+
+  .mainContent {
+    display: flex;
+    flex-direction: column;
+    gap: 32px; 
+}
   
   @media (min-width: 1024px) {
     .content {
@@ -28,3 +35,5 @@
   .marketOverview {
     grid-column: span 1;
   }
+
+  

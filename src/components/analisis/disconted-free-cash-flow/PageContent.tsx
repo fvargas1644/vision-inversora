@@ -24,11 +24,11 @@ export default function PageContent({ stock }: { stock: string }) {
                             <Sidebar />
                         </div>
                         <div className={styles.newsSection}>
-                            <div>
+                            <main className={styles.mainContent}>
                                 <Title />
                                 <Metrics/>
                                 <FinancialData previousYearsData={financialData.previousYearsData}/>
-                            </div>
+                            </main>
                         </div>
                         <div className={styles.marketOverview}>
                             <div>
