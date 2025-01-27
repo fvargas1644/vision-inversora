@@ -1,7 +1,12 @@
 .metricsGrid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 24px; 
+}
+
+
+.metricsGrid div:empty {
+    display: none;
 }
 
 .card {
@@ -89,13 +94,62 @@
     background: #333;
 }
 
-@media (max-width: 768px) {
+@media (0px < width < 768px) {
 
     .metricsGrid {
         grid-template-columns: 1fr;
     }
 
     .price {
-        font-size: 24px; /* 1.5rem */
+        font-size: 24px;
+    }
+}
+
+@media (768px < width < 848px) {
+
+    .metricsGrid div:nth-child(1) {
+        grid-row: 1/2;
+    }
+    
+    .metricsGrid div:nth-child(3) {
+        grid-row: 1/3;
+        grid-column: 2/3;
+    }
+}
+
+@media (848px < width < 1000px ) {
+
+    .metricsGrid div {
+        grid-row: 1/3;
+    }
+}
+
+@media (1000px < width < 1081px) {
+
+    .metricsGrid div:nth-child(1) {
+        grid-row: 1/2;
+    }
+    
+    .metricsGrid div:nth-child(3) {
+        grid-row: 1/3;
+        grid-column: 2/3;
+    }
+}
+
+@media (1080px < width < 1270px) {
+    
+    .metricsGrid:empty {
+        display: none;
+    }
+
+    .metricsGrid div {
+        grid-row: 1/3;
+    }
+}
+
+@media (1270px < width < 1362px) {
+    .metricsGrid div:nth-child(3) {
+        grid-row: 1/3;
+        grid-column: 2/3;
     }
 }
