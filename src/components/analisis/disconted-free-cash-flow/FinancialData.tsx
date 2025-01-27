@@ -38,7 +38,7 @@ export default function FinancialData({ previousYearsData }: { previousYearsData
                         <td>${formatPrice(item.data.annualTotalRevenue)}</td>
                         <td className={item.data.growthRate > 0 ? styles.positive : styles.negative}>{(item.data.growthRate * 100).toFixed(2)}%</td>
                         <td>${formatPrice(item.data.annualNetIncome)}</td>
-                        <td className={item.data.growthRate > 0 ? styles.positive : styles.negative}>{(item.data.margins * 100).toFixed(2)}%</td>
+                        <td className={item.data.margins > 0 ? styles.positive : styles.negative}>{(item.data.margins * 100).toFixed(2)}%</td>
                         <td>${formatPrice(item.data.annualFreeCashFlow)}</td>
                         <td>{item.data.freeCashFlowDividedNetIncome.toFixed(2)}</td>
                     </tr>
