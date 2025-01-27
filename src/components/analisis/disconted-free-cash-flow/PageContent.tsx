@@ -1,4 +1,3 @@
-
 'use client'
 
 import styles from '@/styles/analisis/discounted-free-cash-flow/PageContent.module.css'
@@ -25,7 +24,7 @@ export default function PageContent({ stock }: { stock: string }) {
                     <div className={styles.newsSection}>
                         <main className={styles.mainContent}>
                             <Title />
-                            <Metrics />
+                            <Metrics currentPrice={financialData.stockPrice} intrinsicValue={financialData.intrinsicPrice} />
                             <FinancialData previousYearsData={financialData.previousYearsData} />
                         </main>
                     </div>

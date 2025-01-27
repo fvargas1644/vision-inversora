@@ -2,7 +2,8 @@ import styles from '@/styles/analisis/discounted-free-cash-flow/Metrics.module.c
 import { ArrowUpRight } from "lucide-react"
 
 
-export default function Metrics() {
+export default function Metrics({currentPrice, intrinsicValue} : {currentPrice: number, intrinsicValue: number}) {
+
     return (
         <div className={styles.metricsGrid}>
           <div className={styles.card}>
@@ -11,7 +12,7 @@ export default function Metrics() {
               <ArrowUpRight className={styles.icon} />
             </div>
             <div className={styles.priceContainer}>
-              <span className={styles.price}>$122.28</span>
+              <span className={styles.price}>${currentPrice.toFixed(2)}</span>
               <span className={styles.change}>↗ +2.5%</span>
             </div>
           </div>
@@ -22,7 +23,7 @@ export default function Metrics() {
               <ArrowUpRight className={styles.icon} />
             </div>
             <div className={styles.priceContainer}>
-              <span className={styles.price}>$341.71</span>
+              <span className={styles.price}>${intrinsicValue.toFixed(2)}</span>
             </div>
           </div>
 
