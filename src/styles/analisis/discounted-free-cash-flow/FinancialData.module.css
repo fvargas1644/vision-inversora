@@ -1,19 +1,15 @@
 .financialData {
     background: white;
     border-radius: 12px;
-    /* 0.75rem */
     padding: 24px;
-    /* 1.5rem */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .financialData h2 {
     font-size: 20px;
-    /* 1.25rem */
     font-weight: 600;
     color: #111;
     margin: 0 0 24px 0;
-    /* 1.5rem */
 }
 
 .tableWrapper {
@@ -25,13 +21,11 @@
     border-collapse: collapse;
     text-align: left;
     font-size: 14px;
-    /* 0.875rem */
 }
 
 .table th {
     background: #f9fafb;
     padding: 12px;
-    /* 0.75rem */
     color: #666;
     font-weight: 500;
     white-space: nowrap;
@@ -39,7 +33,6 @@
 
 .table td {
     padding: 12px;
-    /* 0.75rem */
     border-top: 1px solid #e5e7eb;
     white-space: nowrap;
 }
@@ -56,7 +49,6 @@
 
     .table {
         font-size: 12px;
-        /* 0.75rem */
     }
 
 }

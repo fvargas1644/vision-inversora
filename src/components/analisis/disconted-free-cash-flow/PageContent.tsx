@@ -8,6 +8,7 @@ import Title from './Title';
 import Metrics from './Metrics';
 import FinancialData from './FinancialData';
 import MarcketOverView from './MarcketOverView';
+import TablePreviousData from './TablePreviousData';
 
 
 export default function PageContent({ stock }: { stock: string }) {

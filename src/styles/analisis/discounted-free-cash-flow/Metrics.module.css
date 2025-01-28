@@ -1,6 +1,6 @@
 .metricsGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 24px; 
 }
 
@@ -94,22 +94,20 @@
     background: #333;
 }
 
-@media (0px < width < 768px) {
-
-    .metricsGrid {
-        grid-template-columns: 1fr;
-    }
-
+@media (max-width: 768px){
     .price {
         font-size: 24px;
     }
 }
 
-@media (768px < width < 848px) {
+@media (0px < width <= 600px) {
 
-    .metricsGrid div:nth-child(1) {
-        grid-row: 1/2;
+    .metricsGrid {
+        grid-template-columns: 1fr;
     }
+}
+
+@media (600px < width <= 848px) {
     
     .metricsGrid div:nth-child(3) {
         grid-row: 1/3;
@@ -117,37 +115,16 @@
     }
 }
 
-@media (848px < width < 1000px ) {
 
-    .metricsGrid div {
-        grid-row: 1/3;
-    }
-}
-
-@media (1000px < width < 1081px) {
-
-    .metricsGrid div:nth-child(1) {
-        grid-row: 1/2;
-    }
-    
+@media (1000px < width <= 1079px) {    
     .metricsGrid div:nth-child(3) {
         grid-row: 1/3;
         grid-column: 2/3;
     }
 }
 
-@media (1080px < width < 1270px) {
-    
-    .metricsGrid:empty {
-        display: none;
-    }
 
-    .metricsGrid div {
-        grid-row: 1/3;
-    }
-}
-
-@media (1270px < width < 1362px) {
+@media (1270px < width <= 1361px) {
     .metricsGrid div:nth-child(3) {
         grid-row: 1/3;
         grid-column: 2/3;
