@@ -12,7 +12,15 @@
     background: white;
     border-radius: 12px;
     padding: 24px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.card.undervalued {
+    background-color: #ECFDF5;
+}
+
+.card.overvalued {
+    background-color: #FFF1F1;
 }
 
 .cardHeader {
@@ -100,14 +108,6 @@
 
 .calculateButton:hover {
     background: #333;
-}
-
-.undervalued {
-    background-color: #ECFDF5;
-}
-
-.overvalued {
-    background-color: #FFF1F1;
 }
 
 .undervalued {
