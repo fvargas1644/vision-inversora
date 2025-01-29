@@ -8,11 +8,13 @@ import Title from './Title';
 import Metrics from './Metrics';
 import FinancialData from './FinancialData';
 import MarcketOverView from './MarcketOverView';
+import { AnalysisContext } from '@/context/AnalysisContext';
 
 
-export default function PageContent({ stock }: { stock: string }) {
+export default function PageContent() {
 
     const { financialData } = useContext(DiscontedFreeCashFlowProviderContext);
+    const {stock, company} = useContext(AnalysisContext);
 
     if (financialData) {
         return (
@@ -23,7 +25,7 @@ export default function PageContent({ stock }: { stock: string }) {
                     </div>
                     <div className={styles.newsSection}>
                         <main className={styles.mainContent}>
-                            <Title />
+                            <Title stock={stock} company={company}/>
                             <Metrics currentPrice={financialData.stockPrice} intrinsicValue={financialData.intrinsicPrice} />
                             <FinancialData previousYearsData={financialData.previousYearsData} futureYearsData={financialData.futureYearsData}/>
                         </main>

@@ -20,3 +20,10 @@ export interface CashFlowContextInterface {
     financialData: FinancialData | null;
     updateFinancialData: (({wacc, growth} : UpdateFinancialData) => Promise<UpdateStatusOptions>) | null;
 }
+
+/** Analysis */
+
+export interface AnalysisInterface {
+    stock: string, 
+    company: string
+}

@@ -1,5 +1,5 @@
 import styles from '@/styles/analisis/discounted-free-cash-flow/Metrics.module.css'
-import { ArrowUpRight, LineChart, ArrowUp, ArrowDown } from "lucide-react"
+import { LineChart, ArrowUp, ArrowDown } from "lucide-react"
 
 
 export default function Metrics({ currentPrice, intrinsicValue }: { currentPrice: number, intrinsicValue: number }) {

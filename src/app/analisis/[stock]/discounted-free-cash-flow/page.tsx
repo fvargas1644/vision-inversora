@@ -8,7 +8,7 @@ export default async function StockAnalysisPage({ params }: { params: { stock: s
 
     return (
         <DiscontedFreeCashFlowProvider initialData={data} stock={params.stock}>
-            <PageContent stock={params.stock}/>
+            <PageContent/>
         </DiscontedFreeCashFlowProvider>
     )
 }
