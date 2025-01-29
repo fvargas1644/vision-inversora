@@ -25,7 +25,7 @@ export default function PageContent({ stock }: { stock: string }) {
                         <main className={styles.mainContent}>
                             <Title />
                             <Metrics currentPrice={financialData.stockPrice} intrinsicValue={financialData.intrinsicPrice} />
-                            <FinancialData previousYearsData={financialData.previousYearsData} />
+                            <FinancialData previousYearsData={financialData.previousYearsData} futureYearsData={financialData.futureYearsData}/>
                         </main>
                     </div>
                     <div className={styles.marketOverview}>

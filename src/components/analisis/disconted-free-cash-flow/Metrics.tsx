@@ -10,7 +10,7 @@ export default function Metrics({ currentPrice, intrinsicValue }: { currentPrice
     <div className={styles.metricsGrid}>
       <div className={styles.card}>
         <div className={styles.cardHeader}>
-          <h2>Current Price</h2>
+          <h2>Precio Actual</h2>
           <LineChart className={styles.icon} />
         </div>
         <div className={styles.priceContainer}>
@@ -21,7 +21,7 @@ export default function Metrics({ currentPrice, intrinsicValue }: { currentPrice
 
       <div className={`${styles.card} ${isUndervalued ? styles.undervalued : styles.overvalued}`}>
         <div className={styles.cardHeader}>
-          <div className={styles.cardTitle}>Intrinsic Value</div>
+          <div className={styles.cardTitle}>Valor Estimado</div>
           {isUndervalued ? (
             <ArrowUp className={` ${styles.undervalued}`} />
           ) : (
