@@ -1,9 +1,8 @@
 .metricsGrid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 24px; 
+    gap: 24px;
 }
-
 
 .metricsGrid div:empty {
     display: none;
@@ -11,8 +10,8 @@
 
 .card {
     background: white;
-    border-radius: 12px; 
-    padding: 24px; 
+    border-radius: 12px;
+    padding: 24px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -20,62 +19,71 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px; /* 1rem */
+    margin-bottom: 16px;
+    gap: 10px;
 }
 
 .cardHeader h2 {
-    font-size: 16px; /* 1rem */
+    font-size: 16px;
     font-weight: 500;
     color: #666;
     margin: 0;
 }
 
 .icon {
-    width: 20px; /* 1.25rem */
-    height: 20px; /* 1.25rem */
+    width: 20px;
+    height: 20px;
     color: #666;
 }
 
 .priceContainer {
     display: flex;
     align-items: baseline;
-    gap: 12px; /* 0.75rem */
+    gap: 12px;
 }
 
 .price {
-    font-size: 32px; /* 2rem */
+    font-size: 32px;
     font-weight: 600;
     color: #111;
+}
+
+.price.undervalued {
+    color: #047857;
+}
+
+.price.overvalued {
+    color: #B91C1C;
 }
 
 .calculator {
     display: flex;
     flex-direction: column;
-    gap: 16px; /* 1rem */
+    gap: 16px;
 }
 
 .inputs {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px; /* 1rem */
+    gap: 16px;
 }
 
 .inputGroup {
     display: flex;
     flex-direction: column;
-    gap: 8px; /* 0.5rem */
+    gap: 8px;
 }
 
 .inputGroup label {
-    font-size: 14px; /* 0.875rem */
+    font-size: 14px;
     color: #666;
 }
 
 .inputGroup input {
-    padding: 8px; /* 0.5rem */
+    padding: 8px;
     border: 1px solid #e5e7eb;
-    border-radius: 6px; /* 0.375rem */
-    font-size: 14px; /* 0.875rem */
+    border-radius: 6px;
+    font-size: 14px;
     width: 100%;
 }
 
@@ -83,8 +91,8 @@
     background: #111;
     color: white;
     border: none;
-    border-radius: 6px; /* 0.375rem */
-    padding: 12px; /* 0.75rem */
+    border-radius: 6px;
+    padding: 12px;
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.2s;
@@ -94,39 +102,63 @@
     background: #333;
 }
 
-@media (max-width: 768px){
+.undervalued {
+    background-color: #ECFDF5;
+}
+
+.overvalued {
+    background-color: #FFF1F1;
+}
+
+.undervalued {
+    color: #047857;
+}
+
+.overvalued {
+    color: #B91C1C;
+}
+
+.valueContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.priceDifference {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
+.priceDifference.undervalued {
+    color: #059669;
+}
+
+.priceDifference.overvalued {
+    color: #DC2626;
+}
+
+@media (max-width: 768px) {
     .price {
         font-size: 24px;
     }
 }
 
 @media (0px < width <= 600px) {
-
     .metricsGrid {
         grid-template-columns: 1fr;
     }
 }
 
-@media (600px < width <= 848px) {
-    
+@media (600px < width <= 847px),
+       (1000px < width <= 1079px),
+       (1270px < width <= 1361px) {
     .metricsGrid div:nth-child(3) {
         grid-row: 1/3;
         grid-column: 2/3;
     }
-}
 
-
-@media (1000px < width <= 1079px) {    
-    .metricsGrid div:nth-child(3) {
-        grid-row: 1/3;
-        grid-column: 2/3;
-    }
-}
-
-
-@media (1270px < width <= 1361px) {
-    .metricsGrid div:nth-child(3) {
-        grid-row: 1/3;
-        grid-column: 2/3;
+    .inputs {
+        grid-template-columns: 1fr;
     }
 }
