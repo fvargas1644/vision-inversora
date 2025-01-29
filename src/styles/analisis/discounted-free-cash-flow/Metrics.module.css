@@ -16,11 +16,11 @@
 }
 
 .card.undervalued {
-    background-color: #ECFDF5;
+    background-color: #e1fbee;
 }
 
 .card.overvalued {
-    background-color: #FFF1F1;
+    background-color: #f9dfdf;
 }
 
 .cardHeader {
