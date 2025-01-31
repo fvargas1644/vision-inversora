@@ -152,7 +152,7 @@
 
 @media (600px < width <= 847px),
        (1000px < width <= 1079px),
-       (1270px <= width <= 1364px) {
+       (1270px <= width <= 1361px) {
     .metricsGrid div:nth-child(3) {
         grid-row: 1/3;
         grid-column: 2/3;
