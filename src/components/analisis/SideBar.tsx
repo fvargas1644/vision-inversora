@@ -12,21 +12,20 @@ export default function Sidebar() {
         <aside className={styles.sidebar}>
             <nav className={styles.nav}>
                 <ul className={styles.menuList}>
-                    
-                <li className={styles.menuItem}>
-                    <Link href='./' className={styles.menuLink}>
-                            <CircleChevronLeft className={styles.menuIcon} />
+
+                    <li className={styles.menuItem}>
+                        <Link href='./' className={styles.menuLink}>
+                            <CircleChevronLeft className={styles.menuIcon} ></CircleChevronLeft>
                             <span className={styles.menuText}>Menu</span>
-                    </Link>
-                    
-                </li>
-                <li className={styles.menuItem}>
-                    <Link href='./discounted-free-cash-flow' className={styles.menuLink}>
-                        
+                        </Link>
+
+                    </li>
+                    <li className={styles.menuItem}>
+                        <Link href='./discounted-free-cash-flow' className={styles.menuLink}>
+
                             <BarChart2 className={styles.menuIcon} />
-                            <span className={styles.menuText}>DFCF</span>
-                    </Link>
-                
+                            <span className={styles.menuText}>Disconted Free Cash Flow</span>
+                        </Link>
                     </li>
                 </ul>
             </nav>

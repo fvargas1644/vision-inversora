@@ -21,7 +21,7 @@ export default function FormMetrics() {
         <div className={styles.card}>      
             <form action={sendData}>
                 <div className={styles.cardHeader}>
-                    <h2>Discounted Free Cash Flow</h2>
+                    <h2>Modificar Valores</h2>
                     <LineChart className={styles.icon} />
                 </div>
                 <div className={styles.calculator}>
@@ -35,7 +35,7 @@ export default function FormMetrics() {
                             />
                         </div>
                         <div className={styles.inputGroup}>
-                            <label>Growth</label>
+                            <label>Crecimiento</label>
                             <input
                                 type="number"
                                 value={formData.growth}
