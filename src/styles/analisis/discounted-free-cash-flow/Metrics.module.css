@@ -162,3 +162,20 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Eliminar las flechas en navegadores como Chrome y Safari */
+.inputGroup input::-webkit-outer-spin-button,
+.inputGroup input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Eliminar las flechas en Firefox */
+.inputGroup input {
+  -moz-appearance: textfield;
+}
+
+/* Eliminar las flechas en Edge */
+.inputGroup input::-ms-clear {
+  display: none;
+}

@@ -1,5 +1,6 @@
 import styles from '@/styles/analisis/discounted-free-cash-flow/Metrics.module.css'
 import { LineChart, ArrowUp, ArrowDown } from "lucide-react"
+import FormMetrics from './FormMetrics'
 
 
 export default function Metrics({ currentPrice, intrinsicValue }: { currentPrice: number, intrinsicValue: number }) {
@@ -38,26 +39,7 @@ export default function Metrics({ currentPrice, intrinsicValue }: { currentPrice
           </div>
         </div>
       </div>
-
-      <div className={styles.card}>
-        <div className={styles.cardHeader}>
-          <h2>Discounted Free Cash Flow</h2>
-          <LineChart className={styles.icon} />
-        </div>
-        <div className={styles.calculator}>
-          <div className={styles.inputs}>
-            <div className={styles.inputGroup}>
-              <label>WACC</label>
-              <input type="text" value="10,3" />
-            </div>
-            <div className={styles.inputGroup}>
-              <label>Growth</label>
-              <input type="text" value="2,5" />
-            </div>
-          </div>
-          <button className={styles.calculateButton}>Calculate</button>
-        </div>
-      </div>
+      <FormMetrics />
     </div>
   )
 }
