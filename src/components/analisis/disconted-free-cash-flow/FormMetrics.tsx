@@ -21,7 +21,7 @@ export default function FormMetrics() {
         <div className={styles.card}>      
             <form action={sendData}>
                 <div className={styles.cardHeader}>
-                    <h2>Modificar Valores</h2>
+                    <h2>Modificar Valores </h2>
                     <LineChart className={styles.icon} />
                 </div>
                 <div className={styles.calculator}>
