@@ -57,19 +57,23 @@ export default function useFormPreviousYears ({wacc, growth} : {wacc: number, gr
     }, [formData.updateStatus]);
 
     const updateWaccInputValue = (value : string) => {
-        setFormData({
-            ...formData, 
-            wacc: Number(value),
-            waccError: validateWacc(Number(value))
-        })
+
+        if(!validateWacc(Number(value))){
+            setFormData({
+                ...formData, 
+                wacc: Number(value)
+            });
+        }
     }
 
     const updateGrowthInputValue = (value: string) => {
-        setFormData({
-            ...formData, 
-            growth: Number(value),
-            growthError: validateGrowth(Number(value))
-        })
+        
+        if(!validateGrowth(Number(value))){
+            setFormData({
+                ...formData, 
+                growth: Number(value)
+            });
+        }
     } 
 
     const sendData = async () => {
