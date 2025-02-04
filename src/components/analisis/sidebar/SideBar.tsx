@@ -1,12 +1,11 @@
+'use client'
+
 import Link from "next/link"
 import { BarChart2, CircleChevronLeft } from "lucide-react"
-import styles from '@/styles/analisis/SideBar.module.css'
-import { usePathname, useRouter } from 'next/navigation';
+import styles from '@/styles/analisis/sidebar/SideBar.module.css'
 
 export default function Sidebar() {
 
-    const router = useRouter();
-    const pathname = usePathname()
 
     return (
         <aside className={styles.sidebar}>
