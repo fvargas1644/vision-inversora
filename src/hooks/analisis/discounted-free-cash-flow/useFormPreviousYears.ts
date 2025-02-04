@@ -37,10 +37,10 @@ export default function useFormPreviousYears ({wacc, growth} : {wacc: number, gr
         unstarted: () =>{},
         processing: () =>{},
         success: () =>{ 
-            setFormData({...formData, updateMessage: 'Actualizados', updateStatus: "success"});
+            setFormData({...formData, updateMessage: 'Datos actualizados.', updateStatus: "success"});
         },
         error: () =>{ 
-            setFormData({...formData, updateMessage: 'Actualizados'});
+            setFormData({...formData, updateMessage: 'Error al actualizar los datos.', updateStatus: "error"});
         },
     }
     

@@ -95,6 +95,25 @@
     width: 100%;
 }
 
+.alert {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  
+  .alert.success {
+    background-color: rgb(215, 242, 224);
+    color: #047857;
+  }
+
+  .alert.error {
+    background-color: rgb(245, 219, 227);
+    color: #B91C1C;
+  }
+
 .calculateButton {
     background: #111;
     color: white;
@@ -125,9 +144,9 @@
 }
 
 .priceDifference {
-    font-size: 0.875rem;
+    font-size: 14px;
     font-weight: 500;
-    margin-top: 0.5rem;
+    margin-top: 8px;
 }
 
 .priceDifference.undervalued {

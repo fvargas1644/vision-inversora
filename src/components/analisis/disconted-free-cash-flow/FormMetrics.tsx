@@ -44,7 +44,7 @@ export default function FormMetrics() {
                         </div>
                     </div>
                     {(formData.updateStatus === "success" || formData.updateStatus === "error") && (
-                        <div className={`${styles.alert} ${styles.success}`}>
+                        <div className={`${styles.alert} ${formData.updateStatus === "success" ? styles.success : styles.error}`}>
                             <p>{formData.updateMessage}</p>
                         </div>
                     )
