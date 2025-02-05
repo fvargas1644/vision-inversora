@@ -2,7 +2,7 @@
 
 import { DiscontedFreeCashFlowProviderContext } from '@/context/DiscountedFreeCashFlowContext'
 import useFormPreviousYears from '@/hooks/analisis/discounted-free-cash-flow/useFormPreviousYears'
-import styles from '@/styles/analisis/discounted-free-cash-flow/Metrics.module.css'
+import styles from '@/styles/analisis/discounted-free-cash-flow/FormMetrics.module.css'
 import { LineChart, Loader2 } from "lucide-react"
 import { useContext } from 'react'
 
@@ -43,7 +43,13 @@ export default function FormMetrics() {
                             />
                         </div>
                     </div>
-                    <Loader2 className={styles.gift} />Calculando
+                    {formData.updateStatus === "processing" && (
+                        <span className={styles.load}>
+                            <Loader2 className={styles.gift}/>
+                            <p>Actualizando...</p>
+                        </span> 
+                    )}
+                    
                     {(formData.updateStatus === "success" || formData.updateStatus === "error") && (
                         <div className={`${styles.alert} ${formData.updateStatus === "success" ? styles.success : styles.error}`}>
                             <p>{formData.updateMessage}</p>

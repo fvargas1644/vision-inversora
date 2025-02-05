@@ -1,0 +1,118 @@
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    gap: 10px;
+}
+
+.cardHeader h2 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #666;
+    margin: 0;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    color: #666;
+}
+
+.inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.inputGroup label {
+    font-size: 14px;
+    color: #666;
+}
+
+.inputGroup input {
+    padding: 8px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.calculator {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.load {
+    font-size: 14px;
+    align-items: center;
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+}
+
+.gift {  
+    height: 15px;          
+    width: 15px;           
+    animation: spin 1s linear infinite;  
+    align-self: center;
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+
+.alert {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .alert.success {
+    background-color: rgb(215, 242, 224);
+    color: #047857;
+  }
+
+  .alert.error {
+    background-color: rgb(245, 219, 227);
+    color: #B91C1C;
+  }
+
+.calculateButton {
+    background: #111;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.calculateButton:hover {
+    background: #333;
+}
