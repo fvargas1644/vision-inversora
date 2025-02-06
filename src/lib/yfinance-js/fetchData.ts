@@ -2,53 +2,49 @@ import { RequestError } from "../Error";
 import { userAgent, getCookie, getCrumb } from "./requestHeader";
 
 interface YFinanceQueryParams {
-    query?: string,
-    stock?: string,
+    query: 'DISCOUNTED_FREE_CASH_FLOW' | 'COMPANY_INFO',
+    stock: string,
 }
 
-export async function yFinanceQuery({query='', stock='APPL'} : YFinanceQueryParams) {
-    let paramsArr: string[] = [];
-    let paramsString : string;
-    let url :string = '';
-    let type :string = '';
+interface YFinanceQueryOptionsParams {
+    stock: string,
+    crumb: string
+}
 
-    const today = Math.floor(Date.now() / 1000);
+const YFINANCE_QUERY_OPTIONS = {
+    DISCOUNTED_FREE_CASH_FLOW : ({stock, crumb } : YFinanceQueryOptionsParams) => {
+        const today = Math.floor(Date.now() / 1000);
+
+        const params = [ "annualTotalRevenue", "annualNetIncome","annualFreeCashFlow"].map(String).join(",");
+        const url = `https://query2.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/${stock}?symbol=${stock}&type=${params}&period1=1483142400&period2=${today}&crumb=${crumb}`;
+        
+        return url
+    },
+    COMPANY_INFO: ({stock, crumb } : YFinanceQueryOptionsParams) => {
+        const params = [ 'financialData', 'defaultKeyStatistics', 'assetProfile','summaryDetail'].map(String).join(",");
+        const url = `https://query2.finance.yahoo.com/v10/finance/quoteSummary/${stock}?modules=${params}&corsDomain=finance.yahoo.com&formatted=false&symbol=${stock}&crumb=${crumb}`
+        
+        return url
+    }
+}
+
+export async function yFinanceQuery({query, stock='APPL'} : YFinanceQueryParams) {
 
     const cookie = await getCookie();
     const crumb = await getCrumb(cookie);
 
-    switch (query) {
-        case "DISCOUNTED_FREE_CASH_FLOW":
-            type = 'DISCOUNTED_FREE_CASH_FLOW'
-            paramsArr = [ "annualTotalRevenue", "annualNetIncome","annualFreeCashFlow",];
-            paramsString =  paramsArr.map(String).join(",");
-            url = `https://query2.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/${stock}?symbol=${stock}&type=${paramsString}&period1=1483142400&period2=${today}&crumb=${crumb}`;
-            break;
-
-        case 'COMPANY_INFO':
-            type = 'COMPANY_INFO'
-            paramsArr = [ 'financialData', 'defaultKeyStatistics', 'assetProfile','summaryDetail'];
-            paramsString =  paramsArr.map(String).join(",");
-            url = `https://query2.finance.yahoo.com/v10/finance/quoteSummary/${stock}?modules=${paramsString}&corsDomain=finance.yahoo.com&formatted=false&symbol=${stock}&crumb=${crumb}`
-            break;
-        
-    }
-
-
+    const url : string= YFINANCE_QUERY_OPTIONS[query]({stock, crumb});
+    
     const fetch = await fetchYFinance({
         cookie: cookie,
         url,
-        type 
+        type: query 
     });
 
     return fetch
 }
 
-interface FetchYFinanceParams {
-    cookie: string,
-    url: string,
-    type: string
-}
+
 
 function validateFetchYFinance(type :string, data : any[]){
     let state = false;
@@ -69,6 +65,11 @@ function validateFetchYFinance(type :string, data : any[]){
     return {state, data};
 }
 
+interface FetchYFinanceParams {
+    cookie: string,
+    url: string,
+    type: string
+}
 
 async function fetchYFinance({ cookie, url, type }: FetchYFinanceParams) {
         try {

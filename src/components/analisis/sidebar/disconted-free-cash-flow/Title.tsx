@@ -1,5 +1,5 @@
 import { AnalysisInterface } from '@/context/definitions'
-import styles from '@/styles/analisis/discounted-free-cash-flow/Title.module.css'
+import styles from '@/styles/analisis/sidebar/discounted-free-cash-flow/Title.module.css'
 
 export default function Title({stock, company} : AnalysisInterface){
     return(
