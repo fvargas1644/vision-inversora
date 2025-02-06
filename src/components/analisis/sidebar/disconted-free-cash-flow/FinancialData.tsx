@@ -1,4 +1,4 @@
-import styles from '@/styles/analisis/discounted-free-cash-flow/FinancialData.module.css'
+import styles from '@/styles/analisis/sidebar/discounted-free-cash-flow/FinancialData.module.css'
 import { FutureYearsDataType, PreviousYearsDataType } from "@/lib/discounted-free-cash-flow/definitions"
 
 function formatPrice(price: number): string {

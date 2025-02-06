@@ -2,7 +2,7 @@
 
 import { DiscontedFreeCashFlowProviderContext } from '@/context/DiscountedFreeCashFlowContext'
 import useFormPreviousYears from '@/hooks/analisis/discounted-free-cash-flow/useFormPreviousYears'
-import styles from '@/styles/analisis/discounted-free-cash-flow/FormMetrics.module.css'
+import styles from '@/styles/analisis/sidebar/discounted-free-cash-flow/FormMetrics.module.css'
 import { LineChart, Loader2 } from "lucide-react"
 import { useContext } from 'react'
 
