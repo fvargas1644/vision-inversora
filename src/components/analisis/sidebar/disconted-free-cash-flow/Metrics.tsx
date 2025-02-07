@@ -1,6 +1,7 @@
 import styles from '@/styles/analisis/sidebar/discounted-free-cash-flow/Metrics.module.css'
 import { LineChart, ArrowUp, ArrowDown } from "lucide-react"
 import FormMetrics from './FormMetrics'
+import { formatPrice } from '@/lib/Utils'
 
 
 export default function Metrics({ currentPrice, intrinsicValue }: { currentPrice: number, intrinsicValue: number }) {
@@ -15,7 +16,7 @@ export default function Metrics({ currentPrice, intrinsicValue }: { currentPrice
           <LineChart className={styles.icon} />
         </div>
         <div className={styles.priceContainer}>
-          <span className={styles.price}>${currentPrice.toFixed(2)}</span>
+          <span className={styles.price}>${formatPrice(currentPrice)}</span>
           <span className={styles.change}>↗ +2.5%</span>
         </div>
       </div>
@@ -31,10 +32,12 @@ export default function Metrics({ currentPrice, intrinsicValue }: { currentPrice
         </div>
         <div>
           <div className={styles.valueContent}>
-            <div className={`${styles.price} ${isUndervalued ? styles.undervalued : styles.overvalued}`}>${intrinsicValue.toFixed(2)}</div>
+            <div className={`${styles.price} ${isUndervalued ? styles.undervalued : styles.overvalued}`}>
+              ${formatPrice(intrinsicValue)}
+            </div>
             <div className={`${styles.priceDifference} ${isUndervalued ? styles.undervalued : styles.overvalued}`}>
-              {isUndervalued ? "+" : "-"}${Math.abs(intrinsicValue - currentPrice).toFixed(2)} (
-              {((Math.abs(intrinsicValue - currentPrice) / currentPrice) * 100).toFixed(2)}%)
+              {isUndervalued ? "+" : "-"}${formatPrice((intrinsicValue - currentPrice))} (
+              {formatPrice((Math.abs(intrinsicValue - currentPrice) / currentPrice) * 100)}%)
             </div>
           </div>
         </div>

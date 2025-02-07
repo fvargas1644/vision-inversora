@@ -1,34 +1,10 @@
 import styles from '@/styles/analisis/sidebar/discounted-free-cash-flow/FinancialData.module.css'
 import { FutureYearsDataType, PreviousYearsDataType } from "@/lib/discounted-free-cash-flow/definitions"
-
-function formatPrice(price: number): string {
-  const sign = price < 0 ? '-' : ''; // Determina el signo del número
-  const absolutePrice = Math.abs(price); // Obtiene el valor absoluto del número
-
-  // Moneda en dolares $
-  if (absolutePrice >= 1_000_000_000_000_000_000) { // Quintillón (Qi)
-      return sign + (absolutePrice / 1_000_000_000_000_000_000).toFixed(3) + 'Qi';
-  } else if (absolutePrice >= 1_000_000_000_000_000) { // Cuatrillón (Qa)
-      return sign + (absolutePrice / 1_000_000_000_000_000).toFixed(3) + 'Qa';
-  } else if (absolutePrice >= 1_000_000_000_000) { // Trillón (T)
-      return sign + (absolutePrice / 1_000_000_000_000).toFixed(3) + 'T';
-  } else if (absolutePrice >= 1_000_000_000) { // Billón (B)
-      return sign + (absolutePrice / 1_000_000_000).toFixed(3) + 'B';
-  } else if (absolutePrice >= 1_000_000) { // Millón (M)
-      return sign + (absolutePrice / 1_000_000).toFixed(3) + 'M';
-  } else if (absolutePrice >= 1_000) { // Mil (K)
-      return sign + (absolutePrice / 1_000).toFixed(3) + 'K';
-  } else {
-      return sign + absolutePrice.toString();
-  }
-}
-
-
+import { formatPrice } from '@/lib/Utils'
 
 export default function FinancialData({ previousYearsData, futureYearsData }: { previousYearsData: PreviousYearsDataType[], futureYearsData: FutureYearsDataType[]}) {
     return (
-      <>
-      
+      <>   
       <section className={styles.financialData}>
           <h2>Datos Financieros</h2>
           <div className={styles.tableWrapper}>
@@ -93,7 +69,6 @@ export default function FinancialData({ previousYearsData, futureYearsData }: { 
           </div>
         </section>
       </>
-        
     )
     
 }
