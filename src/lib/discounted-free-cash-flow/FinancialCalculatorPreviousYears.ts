@@ -1,4 +1,4 @@
-import { PreviousYearsDataType, FutureYearsDataType } from "./definitions";
+import { PreviousYearsDataType, FutureYearsDataType } from "@/lib/definitions";
 
 export class FinancialCalculatorPreviousYears {
     protected wacc : number;

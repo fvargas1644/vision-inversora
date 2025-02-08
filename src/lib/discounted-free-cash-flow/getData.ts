@@ -2,7 +2,7 @@
 
 import { fetchWacc } from "../fetchWacc";
 import { yFinanceQuery } from "../yfinance-js/fetchData";
-import buildFinancialData from "./builderFinancialData";
+import { BUILD_FINANCIAL_DATA } from "./builderFinancialData";
 import { RequestError } from "../Error";
 import { FinancialData } from "./FinancialData";
 import { validate } from "../validation/backend/discounted-free-cash-flow/validations";
@@ -19,25 +19,22 @@ export default async function getFinancialData({stock, initialWacc, initialGrowt
     const growth = initialGrowth ?? 0.025;
 
     // Validación de datos
-    await validate(wacc);
-    await validate(growth);
+    await Promise.all([
+        validate(wacc),
+        validate(growth)
+    ]);
     
     
-    const [yFinaceDataDiscountedFreeCashFlow, yFinanceDataCompanyInfo] = await Promise.all([
+    
+    const [yFinanceDataDiscountedFreeCashFlow, yFinanceDataCompanyInfo] = await Promise.all([
         getYFinanceData({ query: 'DISCOUNTED_FREE_CASH_FLOW', stock }),
         getYFinanceData({ query: 'COMPANY_INFO', stock })
     ]);
     
-    // Construir datos financieros
-    const { previousYearsData, futureYearsData } = buildFinancialData({
-        yFinanceData: yFinaceDataDiscountedFreeCashFlow,
-        type: 'DISCOUNTED_FREE_CASH_FLOW'
-    });
+    const {previousYearsData, futureYearsData} = BUILD_FINANCIAL_DATA['DISCOUNTED_FREE_CASH_FLOW'](yFinanceDataDiscountedFreeCashFlow);
 
-    const { stockPrice, sharesOutstanding } = buildFinancialData({
-        yFinanceData: yFinanceDataCompanyInfo,
-        type: 'COMPANY_INFO'
-    });
+    const {stockPrice, sharesOutstanding} = BUILD_FINANCIAL_DATA['COMPANY_INFO'](yFinanceDataCompanyInfo);
+
 
     const financialData = new FinancialData(wacc, stockPrice, sharesOutstanding, previousYearsData, futureYearsData, growth);
 
@@ -64,7 +61,7 @@ async function getWacc(stock : string) {
 }
 
 interface GetYFinanceDataInterface {
-    query: string,
+    query: 'DISCOUNTED_FREE_CASH_FLOW' | 'COMPANY_INFO',
     stock: string
 }
 

@@ -1,5 +1,5 @@
 import { FinancialCalculatorFutureYears } from "./FinancialCalculatorFutureYears";
-import { PreviousYearsDataType, FutureYearsDataType } from "./definitions";
+import { PreviousYearsDataType, FutureYearsDataType } from "@/lib/definitions";
 
 export class FinancialData extends FinancialCalculatorFutureYears {
     constructor(

@@ -1,6 +1,6 @@
 'use server'
 
-import { FetchCompanyTickersExchangeResponse } from "./definitions";
+import { FetchCompanyTickersExchangeResponse } from "@/lib/definitions";
 
 export async function fetchCompanyTickersExchange(): Promise<FetchCompanyTickersExchangeResponse> {
     try {
