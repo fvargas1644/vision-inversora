@@ -44,31 +44,32 @@ export async function yFinanceQuery({query, stock='APPL'} : YFinanceQueryParams)
     return fetch
 }
 
+const VALIDATE_FETCH_YFINANCE = {
+    DISCOUNTED_FREE_CASH_FLOW: (data : any[]) => {
+        const hasTimestamp = data.timeseries.result.every(item=> item.hasOwnProperty('timestamp'));
+        const state =  (hasTimestamp) ? true : false;
+        return {
+            state,
+            data: data.timeseries.result
+        }
+    },
 
+    COMPANY_INFO: (data : any[]) => {
+        const financialData = data.quoteSummary.result.some(item=> item.hasOwnProperty('financialData'));
+        const defaultKeyStatistics = data.quoteSummary.result.some(item=> item.hasOwnProperty('defaultKeyStatistics'));
+        const state =  (financialData && defaultKeyStatistics) ? true : false;
 
-function validateFetchYFinance(type :string, data : any[]){
-    let state = false;
-    switch (type) {
-        case 'DISCOUNTED_FREE_CASH_FLOW':
-            data = data.timeseries.result 
-            const hasTimestamp = data.every(item=> item.hasOwnProperty('timestamp'));
-            state =  (hasTimestamp) ? true : false;
-            break;
-
-        case 'COMPANY_INFO':
-            data = data.quoteSummary.result 
-            const financialData = data.some(item=> item.hasOwnProperty('financialData'));
-            const defaultKeyStatistics = data.some(item=> item.hasOwnProperty('defaultKeyStatistics'));
-            state =  (financialData && defaultKeyStatistics) ? true : false;
-            break;
+        return {
+            state,
+            data: data.quoteSummary.result
+        }
     }
-    return {state, data};
 }
 
 interface FetchYFinanceParams {
     cookie: string,
     url: string,
-    type: string
+    type: 'DISCOUNTED_FREE_CASH_FLOW' | 'COMPANY_INFO',
 }
 
 async function fetchYFinance({ cookie, url, type }: FetchYFinanceParams) {
@@ -91,7 +92,7 @@ async function fetchYFinance({ cookie, url, type }: FetchYFinanceParams) {
             const result: string = await response.text();
             const dataPreviusValidate = JSON.parse(result);
 
-            const {state : stateValidate, data} = validateFetchYFinance(type, dataPreviusValidate)
+            const {state : stateValidate, data} = VALIDATE_FETCH_YFINANCE[type](dataPreviusValidate)
             
             if(!stateValidate) {
                 throw new RequestError('No data found')
