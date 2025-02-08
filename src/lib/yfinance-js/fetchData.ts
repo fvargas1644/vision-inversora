@@ -1,18 +1,10 @@
 import { RequestError } from "../Error";
+import { QuoteSummaryData, TimeSeriesData, YFinanceQueryOptions, YFinanceQuery, FetchYFinance } from "./definitions";
 import { userAgent, getCookie, getCrumb } from "./requestHeader";
 
-interface YFinanceQueryParams {
-    query: 'DISCOUNTED_FREE_CASH_FLOW' | 'COMPANY_INFO',
-    stock: string,
-}
-
-interface YFinanceQueryOptionsParams {
-    stock: string,
-    crumb: string
-}
 
 const YFINANCE_QUERY_OPTIONS = {
-    DISCOUNTED_FREE_CASH_FLOW : ({stock, crumb } : YFinanceQueryOptionsParams) => {
+    DISCOUNTED_FREE_CASH_FLOW : ({stock, crumb } : YFinanceQueryOptions) => {
         const today = Math.floor(Date.now() / 1000);
 
         const params = [ "annualTotalRevenue", "annualNetIncome","annualFreeCashFlow"].map(String).join(",");
@@ -20,7 +12,7 @@ const YFINANCE_QUERY_OPTIONS = {
         
         return url
     },
-    COMPANY_INFO: ({stock, crumb } : YFinanceQueryOptionsParams) => {
+    COMPANY_INFO: ({stock, crumb } : YFinanceQueryOptions) => {
         const params = [ 'financialData', 'defaultKeyStatistics', 'assetProfile','summaryDetail'].map(String).join(",");
         const url = `https://query2.finance.yahoo.com/v10/finance/quoteSummary/${stock}?modules=${params}&corsDomain=finance.yahoo.com&formatted=false&symbol=${stock}&crumb=${crumb}`
         
@@ -28,7 +20,7 @@ const YFINANCE_QUERY_OPTIONS = {
     }
 }
 
-export async function yFinanceQuery({query, stock='APPL'} : YFinanceQueryParams) {
+export async function yFinanceQuery({query, stock='APPL'} : YFinanceQuery) {
 
     const cookie = await getCookie();
     const crumb = await getCrumb(cookie);
@@ -45,7 +37,7 @@ export async function yFinanceQuery({query, stock='APPL'} : YFinanceQueryParams)
 }
 
 const VALIDATE_FETCH_YFINANCE = {
-    DISCOUNTED_FREE_CASH_FLOW: (data : any[]) => {
+    DISCOUNTED_FREE_CASH_FLOW: (data : TimeSeriesData) => {
         const hasTimestamp = data.timeseries.result.every(item=> item.hasOwnProperty('timestamp'));
         const state =  (hasTimestamp) ? true : false;
         return {
@@ -54,7 +46,7 @@ const VALIDATE_FETCH_YFINANCE = {
         }
     },
 
-    COMPANY_INFO: (data : any[]) => {
+    COMPANY_INFO: (data : QuoteSummaryData) => {
         const financialData = data.quoteSummary.result.some(item=> item.hasOwnProperty('financialData'));
         const defaultKeyStatistics = data.quoteSummary.result.some(item=> item.hasOwnProperty('defaultKeyStatistics'));
         const state =  (financialData && defaultKeyStatistics) ? true : false;
@@ -66,13 +58,7 @@ const VALIDATE_FETCH_YFINANCE = {
     }
 }
 
-interface FetchYFinanceParams {
-    cookie: string,
-    url: string,
-    type: 'DISCOUNTED_FREE_CASH_FLOW' | 'COMPANY_INFO',
-}
-
-async function fetchYFinance({ cookie, url, type }: FetchYFinanceParams) {
+async function fetchYFinance({ cookie, url, type }: FetchYFinance) {
         try {
             const response = await fetch(url, {
                 method: "GET",
