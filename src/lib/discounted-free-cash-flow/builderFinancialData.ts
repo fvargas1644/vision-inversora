@@ -1,10 +1,10 @@
 
-import { FinancialEntry, AssetProfileResult, PreviousYearsDataType, FutureYearsDataType } from "@/lib/definitions";
+import { FinancialEntry, AssetProfileResult, FinancialData, PredictionsData } from "@/lib/definitions";
 
 export const BUILD_FINANCIAL_DATA = {
     DISCOUNTED_FREE_CASH_FLOW: (yFinanceData: FinancialEntry[]) => {
-        const financialData: PreviousYearsDataType[] = [];
-        const predictionsData: FutureYearsDataType[] = [];
+        const financialData: FinancialData[] = [];
+        const predictionsData: PredictionsData[] = [];
         const financialDataYears = GENERATE_YEARS['FINANCIAL_DATA'](yFinanceData);
 
         if (!financialDataYears) throw new Error('Las fechas no se asignaron correctamente');

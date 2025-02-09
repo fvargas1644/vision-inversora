@@ -1,8 +1,8 @@
-import { PreviousYearsDataType, FutureYearsDataType } from "@/lib/discounted-free-cash-flow/definitions";
+import { FinancialData, PredictionsData } from "@/lib/definitions";
 
-export interface FinancialData {
-    financialData: PreviousYearsDataType[];
-    predictionsData: FutureYearsDataType[];
+export interface FinancialModel {
+    financialData: FinancialData[];
+    predictionsData: PredictionsData[];
     intrinsicPrice: number;
     stockPrice: number;
     wacc: number; 
@@ -11,19 +11,19 @@ export interface FinancialData {
 
 export type UpdateStatusOptions = 'unstarted' | 'processing' | 'success' | 'error';
 
-export interface UpdateFinancialData {
+export interface updateFinancialModel {
     wacc: number, 
     growth: number
 }
 
-export interface CashFlowContextInterface {
-    financialData: FinancialData | null;
-    updateFinancialData: (({wacc, growth} : UpdateFinancialData) => Promise<UpdateStatusOptions>) | null;
+export interface CashFlowContext {
+    financialModel: FinancialModel | null;
+    updateFinancialModel: (({wacc, growth} : updateFinancialModel) => Promise<UpdateStatusOptions>) | null;
 }
 
 /** Analysis */
 
-export interface AnalysisInterface {
+export interface AnalysisContextInterface {
     stock: string, 
     company: string
 }

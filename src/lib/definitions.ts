@@ -39,7 +39,7 @@ interface MetaData {
     type: string[];
 }
 
-type FinancialData = {
+type FinancialEntryData = {
     dataId: number;
     asOfDate: string; // Puedes tiparlo como Date si lo conviertes antes de usarlo
     periodType: string;
@@ -53,9 +53,9 @@ type FinancialData = {
 export interface FinancialEntry {
     meta: MetaData;
     timestamp: number[];
-    annualFreeCashFlow?: FinancialData[];
-    annualNetIncome?: FinancialData[];
-    annualTotalRevenue?: FinancialData[];
+    annualFreeCashFlow?: FinancialEntryData[];
+    annualNetIncome?: FinancialEntryData[];
+    annualTotalRevenue?: FinancialEntryData[];
 }
 
 export type TimeSeriesData = {
@@ -223,7 +223,7 @@ export type AssetProfileResult = {
     };
 };
 
-export type PreviousYearsDataType = {
+export type FinancialData = {
     year: number,
     data: {
         annualNetIncome: number,
@@ -235,7 +235,7 @@ export type PreviousYearsDataType = {
     }
 };
 
-export type FutureYearsDataType = {
+export type PredictionsData = {
     year: number,
     data: {
         annualNetIncome: number,

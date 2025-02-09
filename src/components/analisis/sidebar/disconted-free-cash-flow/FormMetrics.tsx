@@ -8,14 +8,14 @@ import { useContext } from 'react'
 
 export default function FormMetrics() {
 
-    const { financialData } = useContext(DiscontedFreeCashFlowContext);
+    const { financialModel } = useContext(DiscontedFreeCashFlowContext);
 
     const {
         updateWaccInputValue,
         updateGrowthInputValue,
         formData,
         sendData
-    } = useFormPreviousYears({ wacc: financialData.wacc, growth: financialData.growth })
+    } = useFormPreviousYears({ wacc: financialModel.wacc, growth: financialModel.growth })
 
     return (
         <div className={styles.card}>      

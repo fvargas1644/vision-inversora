@@ -1,4 +1,4 @@
-import { PreviousYearsDataType, FutureYearsDataType } from "@/lib/definitions";
+import { PredictionsData, FinancialData } from "@/lib/definitions";
 import { FinancialDataCalculator } from "./FinancialDataCalculator";
 
 export class FinancialPredictionsCalculator extends FinancialDataCalculator {
@@ -10,8 +10,8 @@ export class FinancialPredictionsCalculator extends FinancialDataCalculator {
         wacc : number, 
         stockPrice : number, 
         sharesOutstanding : number, 
-        financialData : PreviousYearsDataType[], 
-        predictionsData: FutureYearsDataType[],
+        financialData : FinancialData[], 
+        predictionsData: PredictionsData[],
         growth: number,
     ){
         super(wacc, stockPrice, sharesOutstanding, financialData, predictionsData)

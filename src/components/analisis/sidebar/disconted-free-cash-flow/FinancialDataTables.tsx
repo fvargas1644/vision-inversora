@@ -1,8 +1,8 @@
 import styles from '@/styles/analisis/sidebar/discounted-free-cash-flow/FinancialData.module.css'
-import { FutureYearsDataType, PreviousYearsDataType } from "@/lib/definitions"
+import { PredictionsData, FinancialData } from "@/lib/definitions"
 import { formatPrice } from '@/lib/Utils'
 
-export default function FinancialData({ previousYearsData, futureYearsData }: { previousYearsData: PreviousYearsDataType[], futureYearsData: FutureYearsDataType[]}) {
+export default function FinancialDataTables({ financialData, predictionsData }: { financialData: FinancialData[], predictionsData: PredictionsData[]}) {
     return (
       <>   
       <section className={styles.financialData}>
@@ -21,7 +21,7 @@ export default function FinancialData({ previousYearsData, futureYearsData }: { 
                 </tr>
               </thead>
               <tbody>
-                {previousYearsData.map((item) => (
+                {financialData.map((item) => (
                     <tr key={item.year}>
                         <td>{item.year}</td>
                         <td>${formatPrice(item.data.annualTotalRevenue)}</td>
@@ -53,7 +53,7 @@ export default function FinancialData({ previousYearsData, futureYearsData }: { 
                 </tr>
               </thead>
               <tbody>
-                {futureYearsData.map((item) => (
+                {predictionsData.map((item) => (
                     <tr key={item.year}>
                         <td>{item.year}</td>
                         <td>${formatPrice(item.data.annualTotalRevenue)}</td>

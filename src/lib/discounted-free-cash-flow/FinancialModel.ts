@@ -1,13 +1,13 @@
 import { FinancialPredictionsCalculator } from "./FinancialPredictionsCalculator";
-import { PreviousYearsDataType, FutureYearsDataType } from "@/lib/definitions";
+import { FinancialData, PredictionsData } from "@/lib/definitions";
 
 export class FinancialModel extends FinancialPredictionsCalculator {
     constructor(
         wacc : number, 
         stockPrice : number, 
         sharesOutstanding : number, 
-        financialData : PreviousYearsDataType[], 
-        predictionsData: FutureYearsDataType[],
+        financialData : FinancialData[], 
+        predictionsData: PredictionsData[],
         growth: number
     ){
         super(wacc, stockPrice, sharesOutstanding, financialData, predictionsData, growth);

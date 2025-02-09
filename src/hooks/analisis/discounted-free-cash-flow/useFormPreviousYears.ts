@@ -22,7 +22,7 @@ export interface FormData {
 
 export default function useFormPreviousYears ({wacc, growth} : {wacc: number, growth:number}) {
 
-    const {updateFinancialData} = useContext(DiscontedFreeCashFlowContext)
+    const {updateFinancialModel} = useContext(DiscontedFreeCashFlowContext)
 
     const [formData, setFormData] = useState<FormData>({
         wacc: returnFormattedValueToPercent(wacc), 
@@ -46,9 +46,9 @@ export default function useFormPreviousYears ({wacc, growth} : {wacc: number, gr
     
     useEffect(() => {
         const ejec = async () => {
-            if(updateFinancialData && formData.updateStatus=== "processing"){
+            if(updateFinancialModel && formData.updateStatus=== "processing"){
                 setFormData({...formData, updateMessage: 'Procesando datos...'});
-                const responseUpdateFinancialData = await updateFinancialData({wacc: formData.wacc, growth: formData.growth});
+                const responseUpdateFinancialData = await updateFinancialModel({wacc: formData.wacc, growth: formData.growth});
                 setFormData({...formData, updateStatus: responseUpdateFinancialData});
                 UPDATE_STATUS_OPTIONS[responseUpdateFinancialData]()
             }
