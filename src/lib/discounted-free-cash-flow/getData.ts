@@ -4,7 +4,7 @@ import { fetchWacc } from "../fetchWacc";
 import { yFinanceQuery } from "../yfinance-js/fetchData";
 import { BUILD_FINANCIAL_DATA } from "./builderFinancialData";
 import { RequestError } from "../Error";
-import { FinancialData } from "./FinancialData";
+import { FinancialModel } from "./FinancialModel";
 import { validate } from "../validation/backend/discounted-free-cash-flow/validations";
 
 interface GetFinancialData {
@@ -31,20 +31,20 @@ export default async function getFinancialData({stock, initialWacc, initialGrowt
         getYFinanceData({ query: 'COMPANY_INFO', stock })
     ]);
     
-    const {previousYearsData, futureYearsData} = BUILD_FINANCIAL_DATA['DISCOUNTED_FREE_CASH_FLOW'](yFinanceDataDiscountedFreeCashFlow);
+    const {financialData, predictionsData} = BUILD_FINANCIAL_DATA['DISCOUNTED_FREE_CASH_FLOW'](yFinanceDataDiscountedFreeCashFlow);
 
     const {stockPrice, sharesOutstanding} = BUILD_FINANCIAL_DATA['COMPANY_INFO'](yFinanceDataCompanyInfo);
 
 
-    const financialData = new FinancialData(wacc, stockPrice, sharesOutstanding, previousYearsData, futureYearsData, growth);
+    const financialModel = new FinancialModel(wacc, stockPrice, sharesOutstanding, financialData, predictionsData, growth);
 
-    financialData.calculatePreviusYearsData();
-    financialData.calculateFurureYearsData();
+    financialModel.calculateFinancialData();
+    financialModel.calculatePredictionsData();
 
     return {
-        previousYearsData: financialData.getPreviousYearsData(),
-        futureYearsData: financialData.getFutureYearsData(),
-        intrinsicPrice: financialData.getIntrinsicPrice(),
+        financialData: financialModel.getFinancialData(),
+        predictionsData: financialModel.getPredictionsData(),
+        intrinsicPrice: financialModel.getIntrinsicPrice(),
         stockPrice,
         wacc,
         growth

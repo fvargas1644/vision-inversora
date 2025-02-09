@@ -1,5 +1,5 @@
 import styles from '@/styles/analisis/sidebar/discounted-free-cash-flow/FinancialData.module.css'
-import { FutureYearsDataType, PreviousYearsDataType } from "@/lib/discounted-free-cash-flow/definitions"
+import { FutureYearsDataType, PreviousYearsDataType } from "@/lib/definitions"
 import { formatPrice } from '@/lib/Utils'
 
 export default function FinancialData({ previousYearsData, futureYearsData }: { previousYearsData: PreviousYearsDataType[], futureYearsData: FutureYearsDataType[]}) {

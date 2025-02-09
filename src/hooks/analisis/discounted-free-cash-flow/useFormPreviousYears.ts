@@ -1,7 +1,7 @@
 'use client'
 
 import { UpdateStatusOptions } from "@/context/definitions"
-import { DiscontedFreeCashFlowProviderContext } from "@/context/DiscountedFreeCashFlowContext"
+import { DiscontedFreeCashFlowContext } from "@/context/DiscountedFreeCashFlowContext"
 import { validateGrowth, validateWacc } from "@/lib/validation/frontend/discounted-free-cash-flow/validations"
 import { useContext, useEffect, useState } from "react"
 
@@ -22,7 +22,7 @@ export interface FormData {
 
 export default function useFormPreviousYears ({wacc, growth} : {wacc: number, growth:number}) {
 
-    const {updateFinancialData} = useContext(DiscontedFreeCashFlowProviderContext)
+    const {updateFinancialData} = useContext(DiscontedFreeCashFlowContext)
 
     const [formData, setFormData] = useState<FormData>({
         wacc: returnFormattedValueToPercent(wacc), 

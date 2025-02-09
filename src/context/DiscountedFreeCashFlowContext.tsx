@@ -5,7 +5,7 @@ import { FinancialData, CashFlowContextInterface, UpdateFinancialData, UpdateSta
 import getFinancialData from "@/lib/discounted-free-cash-flow/getData";
 
 // Contexto con un nombre más claro
-export const DiscontedFreeCashFlowProviderContext = React.createContext<CashFlowContextInterface>({financialData: null, updateFinancialData: null});
+export const DiscontedFreeCashFlowContext = React.createContext<CashFlowContextInterface>({financialData: null, updateFinancialData: null});
 
 const inversePercentage = (value : number) => {
     return value/100;
@@ -31,8 +31,8 @@ export default function DiscontedFreeCashFlowProvider({ children, initialData, s
     }
 
     return (
-        <DiscontedFreeCashFlowProviderContext.Provider value={{ financialData: { ...financialDataState }, updateFinancialData }}>
+        <DiscontedFreeCashFlowContext.Provider value={{ financialData: { ...financialDataState }, updateFinancialData }}>
             {children}
-        </DiscontedFreeCashFlowProviderContext.Provider>
+        </DiscontedFreeCashFlowContext.Provider>
     );
 }

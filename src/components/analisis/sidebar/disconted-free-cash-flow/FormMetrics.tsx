@@ -1,6 +1,6 @@
 'use client'
 
-import { DiscontedFreeCashFlowProviderContext } from '@/context/DiscountedFreeCashFlowContext'
+import { DiscontedFreeCashFlowContext } from '@/context/DiscountedFreeCashFlowContext'
 import useFormPreviousYears from '@/hooks/analisis/discounted-free-cash-flow/useFormPreviousYears'
 import styles from '@/styles/analisis/sidebar/discounted-free-cash-flow/FormMetrics.module.css'
 import { LineChart, Loader2 } from "lucide-react"
@@ -8,7 +8,7 @@ import { useContext } from 'react'
 
 export default function FormMetrics() {
 
-    const { financialData } = useContext(DiscontedFreeCashFlowProviderContext);
+    const { financialData } = useContext(DiscontedFreeCashFlowContext);
 
     const {
         updateWaccInputValue,

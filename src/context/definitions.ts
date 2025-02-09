@@ -1,8 +1,8 @@
 import { PreviousYearsDataType, FutureYearsDataType } from "@/lib/discounted-free-cash-flow/definitions";
 
 export interface FinancialData {
-    previousYearsData: PreviousYearsDataType[];
-    futureYearsData: FutureYearsDataType[];
+    financialData: PreviousYearsDataType[];
+    predictionsData: FutureYearsDataType[];
     intrinsicPrice: number;
     stockPrice: number;
     wacc: number; 

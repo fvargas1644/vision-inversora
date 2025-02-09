@@ -1,7 +1,7 @@
 import { PreviousYearsDataType, FutureYearsDataType } from "@/lib/definitions";
-import { FinancialCalculatorPreviousYears } from "./FinancialCalculatorPreviousYears";
+import { FinancialDataCalculator } from "./FinancialDataCalculator";
 
-export class FinancialCalculatorFutureYears extends FinancialCalculatorPreviousYears {
+export class FinancialPredictionsCalculator extends FinancialDataCalculator {
     protected terminalValue;
     protected intrinsicPrice: number;
     protected growth: number;
@@ -10,11 +10,11 @@ export class FinancialCalculatorFutureYears extends FinancialCalculatorPreviousY
         wacc : number, 
         stockPrice : number, 
         sharesOutstanding : number, 
-        previousYearsData : PreviousYearsDataType[], 
-        futureYearsData: FutureYearsDataType[],
+        financialData : PreviousYearsDataType[], 
+        predictionsData: FutureYearsDataType[],
         growth: number,
     ){
-        super(wacc, stockPrice, sharesOutstanding, previousYearsData, futureYearsData)
+        super(wacc, stockPrice, sharesOutstanding, financialData, predictionsData)
         this.intrinsicPrice = 0;
         this.terminalValue = {
             annualFreeCashFlow: 0,
@@ -25,17 +25,17 @@ export class FinancialCalculatorFutureYears extends FinancialCalculatorPreviousY
     }
 
     private calculateRevenue(){
-        const futureYears = this.futureYearsData.map(obj => obj.year)
-        const FirstYearFutureYearsData = Math.min(...futureYears)
+        const predictionsDataYears = this.predictionsData.map(obj => obj.year)
+        const firstYearPredictionsData = Math.min(...predictionsDataYears)
 
-        this.futureYearsData.sort((a, b) => a.year - b.year);
+        this.predictionsData.sort((a, b) => a.year - b.year);
 
-        this.futureYearsData.forEach(objForeach =>{
-            if(objForeach.year === FirstYearFutureYearsData) {
-                const annualTotalRevenuePastYear =  this.previousYearsData.filter((objFilter) => objFilter.year === objForeach.year -1)[0]
+        this.predictionsData.forEach(objForeach =>{
+            if(objForeach.year === firstYearPredictionsData) {
+                const annualTotalRevenuePastYear =  this.financialData.filter((objFilter) => objFilter.year === objForeach.year -1)[0]
                 objForeach.data.annualTotalRevenue =annualTotalRevenuePastYear.data.annualTotalRevenue+annualTotalRevenuePastYear.data.annualTotalRevenue*this.growthRateAverage
             } else {
-                const annualTotalRevenuePastYear = this.futureYearsData.filter((objFilter) => objFilter.year === objForeach.year-1 )[0]
+                const annualTotalRevenuePastYear = this.predictionsData.filter((objFilter) => objFilter.year === objForeach.year-1 )[0]
                 objForeach.data.annualTotalRevenue =annualTotalRevenuePastYear.data.annualTotalRevenue+annualTotalRevenuePastYear.data.annualTotalRevenue*this.growthRateAverage
             }
         })
@@ -43,29 +43,29 @@ export class FinancialCalculatorFutureYears extends FinancialCalculatorPreviousY
     }
 
     private calculateNetIncome(){
-        this.futureYearsData.forEach(obj => {
+        this.predictionsData.forEach(obj => {
             obj.data.annualNetIncome = obj.data.annualTotalRevenue * obj.data.margins
         });
     }
 
     private calculateFreCashFlow(){
-        this.futureYearsData.forEach(obj => {
+        this.predictionsData.forEach(obj => {
             obj.data.annualFreeCashFlow = obj.data.annualNetIncome * obj.data.freeCashFlowDividedNetIncome
         });
     }
 
     private calculateDiscountFactor(){
-        const futureYears = this.futureYearsData.map(obj => obj.year)
-        const FirstYearFutureYearsData = Math.min(...futureYears)
+        const predictionsDataYears = this.predictionsData.map(obj => obj.year)
+        const firstYearPredictionsData = Math.min(...predictionsDataYears)
 
-        this.futureYearsData.forEach(obj => {
-            const period = (obj.year - FirstYearFutureYearsData) +1
+        this.predictionsData.forEach(obj => {
+            const period = (obj.year - firstYearPredictionsData) +1
             obj.data.discountFactor = (1+this.wacc)**period
         });
     }
 
     private calculatePV(){
-        this.futureYearsData.forEach(obj => {
+        this.predictionsData.forEach(obj => {
             if (obj.data.discountFactor !== 0) {
                 obj.data.pv = obj.data.annualFreeCashFlow/obj.data.discountFactor;
             }
@@ -73,8 +73,8 @@ export class FinancialCalculatorFutureYears extends FinancialCalculatorPreviousY
     }
 
     private calculateTerminalValueAnnualFreeCashFlow(){
-        const lastYear = Math.max(...this.futureYearsData.map(obj => obj.year));
-        this.futureYearsData.forEach((obj) => {
+        const lastYear = Math.max(...this.predictionsData.map(obj => obj.year));
+        this.predictionsData.forEach((obj) => {
             if(obj.year === lastYear) {
                 this.terminalValue.annualFreeCashFlow = obj.data.annualFreeCashFlow*(1+this.growth)/(this.wacc-this.growth)
             }
@@ -82,9 +82,9 @@ export class FinancialCalculatorFutureYears extends FinancialCalculatorPreviousY
     }
 
     private calculateTerminalValueAnnualDiscountFactor(){
-        const lastYear = Math.max(...this.futureYearsData.map(obj => obj.year));
-        this.futureYearsData.forEach((obj) => {
-            if(obj.year === lastYear) {
+        const lastYearPredictionsData = Math.max(...this.predictionsData.map(obj => obj.year));
+        this.predictionsData.forEach((obj) => {
+            if(obj.year === lastYearPredictionsData) {
                 this.terminalValue.discountFactor = obj.data.discountFactor
             }
         })
@@ -96,7 +96,7 @@ export class FinancialCalculatorFutureYears extends FinancialCalculatorPreviousY
 
     private calculateIntrinsicPrice(){
         let sumPv =0
-        this.futureYearsData.forEach((obj) =>{
+        this.predictionsData.forEach((obj) =>{
             sumPv += obj.data.pv
         });
 
@@ -104,9 +104,9 @@ export class FinancialCalculatorFutureYears extends FinancialCalculatorPreviousY
         this.intrinsicPrice =sum /this.sharesOutstanding
     }
 
-    calculateFurureYearsData(){
+    calculatePredictionsData(){
 
-        this.futureYearsData.forEach(obj => {
+        this.predictionsData.forEach(obj => {
             obj.data.growthRate = this.growthRateAverage;
             obj.data.margins = this.marginsAverage;
             obj.data.freeCashFlowDividedNetIncome = this.freeCashFlowDividedNetIncomeAverage;

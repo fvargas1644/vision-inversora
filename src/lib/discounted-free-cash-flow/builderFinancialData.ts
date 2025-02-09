@@ -3,28 +3,28 @@ import { FinancialEntry, AssetProfileResult, PreviousYearsDataType, FutureYearsD
 
 export const BUILD_FINANCIAL_DATA = {
     DISCOUNTED_FREE_CASH_FLOW: (yFinanceData: FinancialEntry[]) => {
-        const previousYearsData: PreviousYearsDataType[] = [];
-        const futureYearsData: FutureYearsDataType[] = [];
-        const previousYears = GENERATE_DATA_CONTAINER['PREVIUS_YEARS'](yFinanceData);
+        const financialData: PreviousYearsDataType[] = [];
+        const predictionsData: FutureYearsDataType[] = [];
+        const financialDataYears = GENERATE_YEARS['FINANCIAL_DATA'](yFinanceData);
 
-        if (!previousYears) throw new Error('Las fechas no se asignaron correctamente');
+        if (!financialDataYears) throw new Error('Las fechas no se asignaron correctamente');
 
-        previousYears.forEach(year => {
-            previousYearsData.push(extractYFinanceFinancialData({ yFinanceData, year }));
+        financialDataYears.forEach(year => {
+            financialData.push(extractYFinanceFinancialData({ yFinanceData, year }));
         });
 
-        const lastYearPreviousData : number = Math.max(...previousYears);
-        const futureYears = GENERATE_DATA_CONTAINER['FUTURE_YEARS'](lastYearPreviousData);
-        if (!futureYears) throw new Error('Las fechas no se asignaron correctamente');
+        const lastYearFinancialData : number = Math.max(...financialDataYears);
+        const predictionsYears = GENERATE_YEARS['PREDICTIONS'](lastYearFinancialData);
+        if (!predictionsYears) throw new Error('Las fechas no se asignaron correctamente');
 
-        futureYears.forEach(year => {
-            futureYearsData.push(buildFutureYearData(year));
+        predictionsYears.forEach(year => {
+            predictionsData.push(buildPredictionContainer(year));
         });
 
-        if (previousYearsData.length > 0 && futureYearsData.length > 0) {
+        if (financialData.length > 0 && predictionsData.length > 0) {
             return {
-                previousYearsData,
-                futureYearsData,
+                financialData,
+                predictionsData,
             }
         } else {
             throw new Error('Error en decodificar los datos')
@@ -37,8 +37,8 @@ export const BUILD_FINANCIAL_DATA = {
     }
 }
 
-const GENERATE_DATA_CONTAINER = {
-    PREVIUS_YEARS: (yFinanceData: FinancialEntry[]) => {
+const GENERATE_YEARS = {
+    FINANCIAL_DATA: (yFinanceData: FinancialEntry[]) => {
         const years: number[] = []
         if (yFinanceData !== undefined && yFinanceData[0].timestamp) {
             const yearsWithoutParse = yFinanceData[0].timestamp.map(timestamp => new Date(timestamp * 1000))
@@ -47,14 +47,13 @@ const GENERATE_DATA_CONTAINER = {
         return years;
     },
 
-    FUTURE_YEARS: (lastYearPreviousData : number) => {
+    PREDICTIONS: (lastYearFinancialData : number) => {
         const years = [];
         for (let i = 1; i < 11; i++) {
-            // Calculamos el año correspondiente
-            const year = lastYearPreviousData + i;
+            // Calcular el año correspondiente
+            const year = lastYearFinancialData + i;
             years.push(Number(year));
         }
-
         return years;
     }
 }
@@ -66,7 +65,7 @@ interface ExtractYFinanceData {
 }
 
 function extractYFinanceFinancialData({ yFinanceData, year }: ExtractYFinanceData) {
-    const previusYearData = {
+    const financialData = {
         year,
         data: {
             annualNetIncome: 0,
@@ -83,16 +82,15 @@ function extractYFinanceFinancialData({ yFinanceData, year }: ExtractYFinanceDat
             financialRecord.annualNetIncome.forEach(record => {
                 const isYear = record.asOfDate.startsWith(String(year));
 
-                if (isYear) previusYearData.data.annualNetIncome = record.reportedValue.raw
+                if (isYear) financialData.data.annualNetIncome = record.reportedValue.raw
             });
         }
 
         if (financialRecord.annualFreeCashFlow) {
-            console.log(financialRecord.annualFreeCashFlow)
             financialRecord.annualFreeCashFlow.forEach(record => {
                 const isYear = record.asOfDate.startsWith(String(year));
 
-                if (isYear) previusYearData.data.annualFreeCashFlow = record.reportedValue.raw
+                if (isYear) financialData.data.annualFreeCashFlow = record.reportedValue.raw
             });
         }
 
@@ -100,17 +98,17 @@ function extractYFinanceFinancialData({ yFinanceData, year }: ExtractYFinanceDat
             financialRecord.annualTotalRevenue.forEach(record => {
                 const isYear = record.asOfDate.startsWith(String(year));
 
-                if (isYear) previusYearData.data.annualTotalRevenue = record.reportedValue.raw
+                if (isYear) financialData.data.annualTotalRevenue = record.reportedValue.raw
             });
         }
     }
 
-    return previusYearData;
+    return financialData;
 }
 
-function buildFutureYearData(year: number) {
+function buildPredictionContainer(year: number) {
 
-    const futureYearData = {
+    const predictionsData = {
         year,
         data: {
             annualNetIncome: 0,
@@ -124,7 +122,7 @@ function buildFutureYearData(year: number) {
         }
     };
 
-    return futureYearData
+    return predictionsData;
 }
 
 function extractYFinanceCompanyInfo(yFinanceData: any[]) {
