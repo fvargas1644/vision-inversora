@@ -38,12 +38,20 @@ export class FinancialDataCalculator {
         });
     }
 
-    private calculateAverage(property: string): number {
+    private calculateAverage(
+        property: 'growthRate' | 'freeCashFlowDividedNetIncome' | 'margins'
+    ) {
         const relevantData = this.financialData.map(obj => obj.data[property]).filter(value => value !== 0);
         return relevantData.length > 0 ? relevantData.reduce((acc, num) => acc + num, 0) / relevantData.length : 0;
     }
 
-    private calculateProperty(property: string, div: string,calcFunction: (data: any) => number) {
+    
+
+    private calculateProperty(
+        property: 'margins' | 'freeCashFlowDividedNetIncome',
+        div: 'annualTotalRevenue' | 'annualNetIncome',
+        calcFunction: (data: any) => number
+    )  {
         this.financialData.forEach(obj => {
             if (obj.data[div] !== 0) {
                 obj.data[property] = calcFunction(obj.data);
