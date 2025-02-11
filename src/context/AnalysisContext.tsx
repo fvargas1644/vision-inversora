@@ -3,12 +3,12 @@
 import React from "react";
 import { AnalysisContextInterface } from "./definitions";
 
-export const AnalysisContext = React.createContext<AnalysisContextInterface>({stock: '', company: ''});
+export const AnalysisContext = React.createContext<AnalysisContextInterface>({ticker: '', company: ''});
 
-export default function AnalysisProvider({children, stock, company} : {children: React.ReactNode, stock: string, company: string}){
+export default function AnalysisProvider({children, ticker, company} : {children: React.ReactNode, ticker: string, company: string}){
 
     return (
-        <AnalysisContext.Provider value={{stock, company}}>
+        <AnalysisContext.Provider value={{ticker, company}}>
             {children}
         </AnalysisContext.Provider>
     )

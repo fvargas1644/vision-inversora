@@ -1,31 +1,31 @@
 import SelectionBar from "@/components/analisis/SelectionBar";
 import AnalysisProvider from "@/context/AnalysisContext";
-import { FetchCompanyTickersExchangeResponse } from "@/lib/sec-edgar/definitions";
+import { FetchCompanyTickersExchangeResponse } from "@/lib/definitions";
 import { fetchCompanyTickersExchange } from "@/lib/sec-edgar/fetchData";
 
 
-async function findCompany(stock: string) {
+async function findCompany(ticker: string) {
     const fechCompany: FetchCompanyTickersExchangeResponse = await fetchCompanyTickersExchange();
     for (let item of fechCompany.data) {
-        if (item[2] === stock) {
+        if (item[2] === ticker) {
             return {
-                stock,
+                ticker,
                 company: item[1]
             }
         }
     }
-    return { stock: null, company: null }
+    return { ticker: null, company: null }
 }
 
-export default async function Layout({ children, params }: Readonly<{ children: React.ReactNode; params: { stock: string } }>) {
+export default async function Layout({ children, params }: Readonly<{ children: React.ReactNode; params: { ticker: string } }>) {
 
-    const { stock, company } = await findCompany(params.stock);
+    const { ticker, company } = await findCompany(params.ticker);
 
-    if (stock) {
+    if (ticker) {
         return (
-            <AnalysisProvider stock={stock} company={company}>
+            <AnalysisProvider ticker={ticker} company={company}>
                 {children}
-                <SelectionBar stock={stock} />
+                <SelectionBar ticker={ticker} />
             </AnalysisProvider>
         )
     } else {

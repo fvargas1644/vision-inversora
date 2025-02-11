@@ -1,6 +1,6 @@
 'use client'
 
-import { CompanyTicker, FetchCompanyTickersExchangeResponse } from "@/lib/sec-edgar/definitions";
+import { CompanyTicker, FetchCompanyTickersExchangeResponse } from "@/lib/definitions";
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import usePath from '@/hooks/usePath';
@@ -9,14 +9,14 @@ export default function useSearch(dataCompany : FetchCompanyTickersExchangeRespo
 
     const router = useRouter();
     const path = usePath();
-    const [inputValue, setInputValue] = useState(path.stock);
+    const [inputValue, setInputValue] = useState(path.ticker);
     const [searchResults, setSearchResults] = useState<CompanyTicker[]>([]);
 
-    const fetchCompanyExchangeResults = (stock : string) => {
+    const fetchCompanyExchangeResults = (ticker : string) => {
         const searchResults : CompanyTicker[]= [];
 
         for (let item of dataCompany.data) {
-            if (item[2].toLowerCase().includes(stock.toLowerCase()) || item[1].toLowerCase().includes(stock.toLowerCase())) {
+            if (item[2].toLowerCase().includes(ticker.toLowerCase()) || item[1].toLowerCase().includes(ticker.toLowerCase())) {
                 searchResults.push(item)
             }
             if (searchResults.length > 9) break

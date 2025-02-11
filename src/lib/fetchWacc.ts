@@ -1,9 +1,9 @@
 import { RequestError, ValidateError } from "./Error";
 
-export async function fetchWacc(stock: string = "AAPL") {
+export async function fetchWacc(ticker: string = "AAPL") {
     try {
         const response = await fetch(
-            `https://valueinvesting.io/${stock}/valuation/wacc`
+            `https://valueinvesting.io/${ticker}/valuation/wacc`
         );
 
         if (!response.ok) {

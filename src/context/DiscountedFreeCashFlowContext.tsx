@@ -12,16 +12,16 @@ const inversePercentage = (value : number) => {
 }
 
 // Componente con nombres mejorados
-export default function DiscontedFreeCashFlowProvider({ children, initialData, stock }: { 
+export default function DiscontedFreeCashFlowProvider({ children, initialData, ticker }: { 
     children: React.ReactNode; 
     initialData: FinancialModel; 
-    stock: string
+    ticker: string
 }) {
     const [financialDataState, setFinancialDataState] = useState(initialData);
 
     async function updateFinancialModel({wacc, growth} : updateFinancialModel) : Promise<UpdateStatusOptions>{
         try {
-            const data = await getFinancialData({stock, initialWacc: inversePercentage(wacc), initialGrowth: inversePercentage(growth) });
+            const data = await getFinancialData({ticker, initialWacc: inversePercentage(wacc), initialGrowth: inversePercentage(growth) });
             setFinancialDataState(previousData => ({...previousData, ...data}));
             return "success"
         } catch (error) {

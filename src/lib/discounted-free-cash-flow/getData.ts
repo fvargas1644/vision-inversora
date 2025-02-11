@@ -8,14 +8,14 @@ import { FinancialModel } from "./FinancialModel";
 import { validate } from "../validation/backend/discounted-free-cash-flow/validations";
 
 interface GetFinancialData {
-    stock: string,
+    ticker: string,
     initialWacc?: number,
     initialGrowth?: number
 }
 
-export default async function getFinancialData({stock, initialWacc, initialGrowth} : GetFinancialData){
+export default async function getFinancialData({ticker, initialWacc, initialGrowth} : GetFinancialData){
     
-    const wacc = initialWacc ?? await getWacc(stock);
+    const wacc = initialWacc ?? await getWacc(ticker);
     const growth = initialGrowth ?? 0.025;
 
     // Validación de datos
@@ -27,8 +27,8 @@ export default async function getFinancialData({stock, initialWacc, initialGrowt
     
     
     const [yFinanceDataDiscountedFreeCashFlow, yFinanceDataCompanyInfo] = await Promise.all([
-        getYFinanceData({ query: 'DISCOUNTED_FREE_CASH_FLOW', stock }),
-        getYFinanceData({ query: 'COMPANY_INFO', stock })
+        getYFinanceData({ query: 'DISCOUNTED_FREE_CASH_FLOW', ticker }),
+        getYFinanceData({ query: 'COMPANY_INFO', ticker })
     ]);
     
     const {financialData, predictionsData} = BUILD_FINANCIAL_DATA['DISCOUNTED_FREE_CASH_FLOW'](yFinanceDataDiscountedFreeCashFlow);
@@ -51,9 +51,9 @@ export default async function getFinancialData({stock, initialWacc, initialGrowt
     }
 }
 
-async function getWacc(stock : string) {
+async function getWacc(ticker : string) {
     try{
-        const wacc = await fetchWacc(stock);
+        const wacc = await fetchWacc(ticker);
         return wacc;
     } catch(err){
         return 0.10
@@ -62,12 +62,12 @@ async function getWacc(stock : string) {
 
 interface GetYFinanceDataInterface {
     query: 'DISCOUNTED_FREE_CASH_FLOW' | 'COMPANY_INFO',
-    stock: string
+    ticker: string
 }
 
-async function getYFinanceData({query , stock } :GetYFinanceDataInterface) {
+async function getYFinanceData({query , ticker } :GetYFinanceDataInterface) {
     try{
-        const yFinanceData = await yFinanceQuery({ query, stock });
+        const yFinanceData = await yFinanceQuery({ query, ticker });
         return yFinanceData;
     } catch(err){
         throw new RequestError(String(err));

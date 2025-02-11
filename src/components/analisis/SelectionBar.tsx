@@ -6,21 +6,20 @@ import { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 
 
-export default function SelectionBar({stock} : {stock : string}) {
+export default function SelectionBar({ticker} : {ticker : string}) {
     const path = usePath()
     const [selectValue, setSelectValue] = useState(path.type);
     const router = useRouter();
     const pathname = usePathname()
 
     const redirectBySelectValue = (value : string) =>{
-        let pathPage : string;
         
         setSelectValue(value)
         if(value === "menu_selection_bar") {
-            let pathPage = `/analisis/${stock}`
+            let pathPage = `/analisis/${ticker}`
             if (pathname !== pathPage) router.push(pathPage)
         } else if (value === "disconted_free_cash_flow") {
-            let pathPage = `/analisis/${stock}/discounted-free-cash-flow`
+            let pathPage = `/analisis/${ticker}/discounted-free-cash-flow`
             if (pathname !== pathPage) router.push(pathPage);
         }
     }

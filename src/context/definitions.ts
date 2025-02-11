@@ -24,6 +24,6 @@ export interface CashFlowContext {
 /** Analysis */
 
 export interface AnalysisContextInterface {
-    stock: string, 
+    ticker: string, 
     company: string
 }

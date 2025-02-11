@@ -19,11 +19,11 @@ export interface DataDiscountedFreeCashFlow {
 
 export interface YFinanceQuery {
     query: 'DISCOUNTED_FREE_CASH_FLOW' | 'COMPANY_INFO',
-    stock: string,
+    ticker: string,
 }
 
 export interface YFinanceQueryOptions {
-    stock: string,
+    ticker: string,
     crumb: string
 }
 

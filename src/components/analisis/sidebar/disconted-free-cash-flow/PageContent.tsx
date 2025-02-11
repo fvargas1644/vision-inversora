@@ -11,12 +11,12 @@ import { AnalysisContext } from '@/context/AnalysisContext';
 export default function PageContent() {
 
     const { financialModel } = useContext(DiscontedFreeCashFlowContext);
-    const { stock, company } = useContext(AnalysisContext);
+    const { ticker, company } = useContext(AnalysisContext);
 
     if (financialModel) {
         return (
             <>
-                <Title stock={stock} company={company} />
+                <Title ticker={ticker} company={company} />
                 <Metrics currentPrice={financialModel.stockPrice} intrinsicValue={financialModel.intrinsicPrice} />
                 <FinancialDataTables financialData={financialModel.financialData} predictionsData={financialModel.predictionsData} />
             </>
