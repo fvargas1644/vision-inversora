@@ -9,7 +9,7 @@ export async function fetchWacc(ticker: string = "AAPL") {
         if (!response.ok) {
             throw new RequestError('Request no ok');
         }
-
+        
         const body = await response.text();
 
         // Crear un elemento temporal para analizar el HTML
