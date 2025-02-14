@@ -3,7 +3,6 @@ import AnalysisProvider from "@/context/AnalysisContext";
 import { FetchCompanyTickersExchangeResponse } from "@/lib/definitions";
 import { fetchCompanyTickersExchange } from "@/lib/sec-edgar/fetchData";
 
-
 async function findCompany(ticker: string) {
     const fechCompany: FetchCompanyTickersExchangeResponse = await fetchCompanyTickersExchange();
     for (let item of fechCompany.data) {
