@@ -26,6 +26,13 @@ export default function Sidebar() {
                             <span className={styles.menuText}>Disconted Free Cash Flow</span>
                         </Link>
                     </li>
+                    <li className={styles.menuItem}>
+                        <Link href='./valuation-per-ratio' className={styles.menuLink}>
+
+                            <BarChart2 className={styles.menuIcon} />
+                            <span className={styles.menuText}>Valoración Ratio PER</span>
+                        </Link>
+                    </li>
                 </ul>
             </nav>
         </aside>
