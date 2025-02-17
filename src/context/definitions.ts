@@ -25,5 +25,6 @@ export interface CashFlowContext {
 
 export interface AnalysisContextInterface {
     ticker: string, 
-    company: string
+    company: string,
+    cik: number | null
 }

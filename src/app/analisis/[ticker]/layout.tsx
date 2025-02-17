@@ -8,6 +8,7 @@ async function findCompany(ticker: string) {
     for (let item of fechCompany.data) {
         if (item[2] === ticker) {
             return {
+                cik: item[0],
                 ticker,
                 company: item[1]
             }
@@ -18,11 +19,11 @@ async function findCompany(ticker: string) {
 
 export default async function Layout({ children, params }: Readonly<{ children: React.ReactNode; params: { ticker: string } }>) {
 
-    const { ticker, company } = await findCompany(params.ticker);
+    const { ticker, company, cik } = await findCompany(params.ticker);
 
     if (ticker) {
         return (
-            <AnalysisProvider ticker={ticker} company={company}>
+            <AnalysisProvider ticker={ticker} company={company} cik={cik}>
                 {children}
                 <SelectionBar ticker={ticker} />
             </AnalysisProvider>
