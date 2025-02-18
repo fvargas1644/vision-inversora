@@ -11,7 +11,7 @@ import { AnalysisContext } from '@/context/AnalysisContext';
 export default function PageContent() {
 
     const { financialModel } = useContext(DiscontedFreeCashFlowContext);
-    const { ticker, company,cik } = useContext(AnalysisContext);
+    const { ticker, company } = useContext(AnalysisContext);
 
     if (financialModel) {
         return (

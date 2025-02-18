@@ -1,6 +1,6 @@
 import "./globals.css";
 import { montserrat } from "./fonts";
-import { FetchCompanyTickersExchangeResponse } from "@/lib/sec-edgar/definitions";
+import { FetchCompanyTickersExchangeResponse } from "@/lib/definitions";
 import { fetchCompanyTickersExchange } from "@/lib/sec-edgar/fetchData";
 import Header from "@/components/Header";
  
@@ -11,7 +11,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const fechCompany : FetchCompanyTickersExchangeResponse = await fetchCompanyTickersExchange(); 
+  const fechCompany : FetchCompanyTickersExchangeResponse = await fetchCompanyTickersExchange();
  
   return (
     <html lang="es">
