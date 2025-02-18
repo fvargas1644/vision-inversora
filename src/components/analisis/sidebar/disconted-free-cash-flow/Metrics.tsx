@@ -1,7 +1,7 @@
 import styles from '@/styles/analisis/sidebar/discounted-free-cash-flow/Metrics.module.css'
 import { LineChart, ArrowUp, ArrowDown } from "lucide-react"
 import FormMetrics from './FormMetrics'
-import { formatPrice } from '@/lib/Utils'
+import { formatPrice } from '@/lib/utils'
 
 
 export default function Metrics({ currentPrice, intrinsicValue }: { currentPrice: number, intrinsicValue: number }) {

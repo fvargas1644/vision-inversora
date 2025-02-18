@@ -1,6 +1,8 @@
+
 export function formatPrice(price: number): string {
     const sign = price < 0 ? '-' : ''; // Determina el signo del número
     const absolutePrice = Math.abs(price); // Obtiene el valor absoluto del número
+    console.log("hola")
   
     // Moneda en dolares $
     if (absolutePrice >= 1_000_000_000_000_000_000) { // Quintillón (Qi)
@@ -19,3 +21,4 @@ export function formatPrice(price: number): string {
       return sign + absolutePrice.toLocaleString("us-US", {maximumFractionDigits: 2})
     }
 }
+

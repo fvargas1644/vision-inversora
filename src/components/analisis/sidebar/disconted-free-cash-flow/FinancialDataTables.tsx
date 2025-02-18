@@ -1,6 +1,6 @@
 import styles from '@/styles/analisis/sidebar/discounted-free-cash-flow/FinancialData.module.css'
 import { PredictionsData, FinancialData } from "@/lib/definitions"
-import { formatPrice } from '@/lib/Utils'
+import { formatPrice } from '@/lib/utils'
 
 export default function FinancialDataTables({ financialData, predictionsData }: { financialData: FinancialData[], predictionsData: PredictionsData[]}) {
     return (

@@ -25,8 +25,9 @@ export async function fetchCompanyTickersExchange(): Promise<FetchCompanyTickers
     return fetchJson<FetchCompanyTickersExchangeResponse>('https://www.sec.gov/files/company_tickers_exchange.json');
 }
 
-export async function fetchCompanyConcepts(): Promise<any> { // TODO: Definir el tipo de respuesta correcto
-    return fetchJson<any>('https://data.sec.gov/api/xbrl/companyfacts/CIK0001633917.json');
+export async function fetchCompanyConcepts(cik : number): Promise<any> { // TODO: Definir el tipo de respuesta correcto
+    const url = `https://data.sec.gov/api/xbrl/companyfacts/CIK${cik.toString().padStart(10, '0')}.json`
+    return fetchJson<any>(url);
 }
 
 

@@ -1,9 +1,15 @@
 import { fetchCompanyConcepts } from "@/lib/sec-edgar/fetchData";
-
+import { findCompany } from "@/lib/utilsServer";
 
 export default async function Page({ params }: { params: { ticker: string } }) {
-    const data = await fetchCompanyConcepts();
-    return (
-       <h1>Per</h1>
-    )
+
+    const {cik} = await findCompany(params.ticker);
+
+    if(cik) {
+        const companyConcepts = await fetchCompanyConcepts(cik);
+        return (
+            <h1>Per</h1>
+        )
+    } 
+    
 }
