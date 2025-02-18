@@ -1,7 +1,7 @@
 import SelectionBar from "@/components/analisis/SelectionBar";
 import AnalysisProvider from "@/context/AnalysisContext";
 import { FetchCompanyTickersExchangeResponse } from "@/lib/definitions";
-import { FETCH, fetchCompanyConcepts, fetchCompanyTickersExchange } from "@/lib/sec-edgar/fetchData";
+import { fetchCompanyTickersExchange } from "@/lib/sec-edgar/fetchData";
 
 async function findCompany(ticker: string) {
     const fechCompany: FetchCompanyTickersExchangeResponse = await fetchCompanyTickersExchange();

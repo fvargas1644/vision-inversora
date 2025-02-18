@@ -71,10 +71,9 @@ async function fetchYFinance({ cookie, url, type }: FetchYFinance) {
                 throw new RequestError('Request no ok')
             }
 
-            const result: string = await response.text();
-            const dataPreviusValidate = JSON.parse(result);
+            const result = await response.json();
 
-            const {state : stateValidate, data} = VALIDATE_FETCH_YFINANCE[type](dataPreviusValidate)
+            const {state : stateValidate, data} = VALIDATE_FETCH_YFINANCE[type](result)
             
             if(!stateValidate) {
                 throw new RequestError('No data found')
