@@ -24,11 +24,9 @@ export default async function getFinancialData({ticker, initialWacc, initialGrow
         validate(growth)
     ]);
     
-    
-    
     const [yFinanceDataDiscountedFreeCashFlow, yFinanceDataCompanyInfo] = await Promise.all([
-        getYFinanceData({ query: 'DISCOUNTED_FREE_CASH_FLOW', ticker }),
-        getYFinanceData({ query: 'COMPANY_INFO', ticker })
+        yFinanceQuery({ query: 'DISCOUNTED_FREE_CASH_FLOW', ticker }),
+        yFinanceQuery({ query: 'COMPANY_INFO', ticker })
     ]);
     
     const {financialData, predictionsData} = BUILD_FINANCIAL_DATA['DISCOUNTED_FREE_CASH_FLOW'](yFinanceDataDiscountedFreeCashFlow);
@@ -60,16 +58,3 @@ async function getWacc(ticker : string) {
     }
 }
 
-interface GetYFinanceDataInterface {
-    query: 'DISCOUNTED_FREE_CASH_FLOW' | 'COMPANY_INFO',
-    ticker: string
-}
-
-async function getYFinanceData({query , ticker } :GetYFinanceDataInterface) {
-    try{
-        const yFinanceData = await yFinanceQuery({ query, ticker });
-        return yFinanceData;
-    } catch(err){
-        throw new RequestError(String(err));
-    }
-}
