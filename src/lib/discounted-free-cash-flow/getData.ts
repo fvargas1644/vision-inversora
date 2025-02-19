@@ -2,10 +2,10 @@
 
 import { fetchWacc } from "../fetchWacc";
 import { yFinanceQuery } from "../yfinance-js/fetchData";
-import { BUILD_FINANCIAL_DATA } from "./builderFinancialData";
-import { RequestError } from "../Error";
+import { buildFinancialDta } from "./builderFinancialData";
 import { FinancialModel } from "./FinancialModel";
 import { validate } from "../validation/backend/discounted-free-cash-flow/validations";
+import { extractYFinanceCompanyInfo } from "../utils";
 
 interface GetFinancialData {
     ticker: string,
@@ -29,9 +29,9 @@ export default async function getFinancialData({ticker, initialWacc, initialGrow
         yFinanceQuery({ query: 'COMPANY_INFO', ticker })
     ]);
     
-    const {financialData, predictionsData} = BUILD_FINANCIAL_DATA['DISCOUNTED_FREE_CASH_FLOW'](yFinanceDataDiscountedFreeCashFlow);
+    const {financialData, predictionsData} = buildFinancialDta(yFinanceDataDiscountedFreeCashFlow);
 
-    const {stockPrice, sharesOutstanding} = BUILD_FINANCIAL_DATA['COMPANY_INFO'](yFinanceDataCompanyInfo);
+    const {stockPrice, sharesOutstanding} = extractYFinanceCompanyInfo(yFinanceDataCompanyInfo);
 
 
     const financialModel = new FinancialModel(wacc, stockPrice, sharesOutstanding, financialData, predictionsData, growth);

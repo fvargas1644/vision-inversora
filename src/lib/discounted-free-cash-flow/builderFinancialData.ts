@@ -1,11 +1,11 @@
 
-import { FinancialEntry, AssetProfileResult, FinancialData, PredictionsData } from "@/lib/definitions";
+import { FinancialEntry, FinancialData, PredictionsData } from "@/lib/definitions";
+import { GENERATE_YEARS_YFINANCE_DATA } from "../utils";
 
-export const BUILD_FINANCIAL_DATA = {
-    DISCOUNTED_FREE_CASH_FLOW: (yFinanceData: FinancialEntry[]) => {
+export function buildFinancialDta(yFinanceData: FinancialEntry[]) {
         const financialData: FinancialData[] = [];
         const predictionsData: PredictionsData[] = [];
-        const financialDataYears = GENERATE_YEARS['FINANCIAL_DATA'](yFinanceData);
+        const financialDataYears = GENERATE_YEARS_YFINANCE_DATA['FINANCIAL_DATA'](yFinanceData);
 
         if (!financialDataYears) throw new Error('Las fechas no se asignaron correctamente');
 
@@ -14,7 +14,7 @@ export const BUILD_FINANCIAL_DATA = {
         });
 
         const lastYearFinancialData : number = Math.max(...financialDataYears);
-        const predictionsYears = GENERATE_YEARS['PREDICTIONS'](lastYearFinancialData);
+        const predictionsYears = GENERATE_YEARS_YFINANCE_DATA['PREDICTIONS'](lastYearFinancialData);
         if (!predictionsYears) throw new Error('Las fechas no se asignaron correctamente');
 
         predictionsYears.forEach(year => {
@@ -29,33 +29,6 @@ export const BUILD_FINANCIAL_DATA = {
         } else {
             throw new Error('Error en decodificar los datos')
         }
-    },
-
-    COMPANY_INFO: (yFinanceData: AssetProfileResult[]) => {
-        const { sharesOutstanding, stockPrice } = extractYFinanceCompanyInfo(yFinanceData)
-        return { sharesOutstanding, stockPrice }
-    }
-}
-
-const GENERATE_YEARS = {
-    FINANCIAL_DATA: (yFinanceData: FinancialEntry[]) => {
-        const years: number[] = []
-        if (yFinanceData !== undefined && yFinanceData[0].timestamp) {
-            const yearsWithoutParse = yFinanceData[0].timestamp.map(timestamp => new Date(timestamp * 1000))
-            yearsWithoutParse.map(timestamp => years.push(Number(timestamp.getFullYear())))
-        }
-        return years;
-    },
-
-    PREDICTIONS: (lastYearFinancialData : number) => {
-        const years = [];
-        for (let i = 1; i < 11; i++) {
-            // Calcular el año correspondiente
-            const year = lastYearFinancialData + i;
-            years.push(Number(year));
-        }
-        return years;
-    }
 }
 
 
@@ -125,18 +98,3 @@ function buildPredictionContainer(year: number) {
     return predictionsData;
 }
 
-function extractYFinanceCompanyInfo(yFinanceData: any[]) {
-    let stockPrice = 0;
-    let sharesOutstanding = 0
-    for (const obj of yFinanceData) {
-        if (obj.defaultKeyStatistics) {
-            sharesOutstanding = obj.defaultKeyStatistics.sharesOutstanding
-        }
-
-        if (obj.financialData) {
-            stockPrice = obj.financialData.currentPrice
-        }
-    }
-
-    return { sharesOutstanding, stockPrice }
-}
