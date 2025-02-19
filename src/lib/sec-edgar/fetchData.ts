@@ -27,7 +27,7 @@ export async function fetchCompanyTickersExchange(): Promise<FetchCompanyTickers
 
 export async function fetchCompanyConcepts(cik : number): Promise<any> { // TODO: Definir el tipo de respuesta correcto
     const url = `https://data.sec.gov/api/xbrl/companyfacts/CIK${cik.toString().padStart(10, '0')}.json`
-    return fetchJson<any>(url);
+    return await fetchJson<any>(url);
 }
 
 
