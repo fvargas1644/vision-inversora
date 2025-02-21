@@ -8,7 +8,7 @@ export default async function Page({ params }: { params: { ticker: string } }) {
     if(cik) {
         const companyConcepts = await fetchCompanyConcepts(cik);
         return (
-            <h1>Pruebas</h1>
+            <h1>Pruebas2</h1>
         )
     } 
     
