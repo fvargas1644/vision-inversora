@@ -8,14 +8,15 @@ async function fetchJson<R>(url: string): Promise<R> {
         const response = await fetch(url, {
             headers: {
                 'User-Agent': 'vision-inversora/1.0', // SEC recomienda incluir un User-Agent personalizado
-            }
+            },
+            cache: "no-store"
         });
 
         if (!response.ok) {
             throw new Error(`Error ${response.status}: ${response.statusText}`);
         }
 
-        return await response.json(); // Más eficiente que response.text() + JSON.parse()
+        return await response.json(); 
     } catch (err) {
         throw new Error(`Fetch error in ${url}: ${err instanceof Error ? err.message : String(err)}`);
     }

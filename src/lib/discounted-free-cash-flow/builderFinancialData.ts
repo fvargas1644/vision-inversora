@@ -2,7 +2,7 @@
 import { FinancialEntry, FinancialData, PredictionsData } from "@/lib/definitions";
 import { GENERATE_YEARS_YFINANCE_DATA } from "../utils";
 
-export function buildFinancialDta(yFinanceData: FinancialEntry[]) {
+export function buildFinancialData(yFinanceData: FinancialEntry[]) {
         const financialData: FinancialData[] = [];
         const predictionsData: PredictionsData[] = [];
         const financialDataYears = GENERATE_YEARS_YFINANCE_DATA['FINANCIAL_DATA'](yFinanceData);
