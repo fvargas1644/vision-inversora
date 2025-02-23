@@ -1,4 +1,5 @@
 import { fetchCompanyConcepts } from "../sec-edgar/fetchData";
+import { extractYFinanceCompanyInfo } from "../utils";
 import { yFinanceQuery } from "../yfinance-js/fetchData";
 import buildFinancialData from "./builderFinancialData";
 
@@ -11,5 +12,7 @@ export default async function getFinancialData({ticker, cik} :{ticker : string, 
         yFinanceQuery({ query: 'COMPANY_INFO', ticker })
     ]);
 
-    buildFinancialData({yFinanceDataDiscountedFreeCashFlow, companyConcepts})
+    buildFinancialData({yFinanceDataDiscountedFreeCashFlow, companyConcepts});
+
+    const {stockPrice, sharesOutstanding} = extractYFinanceCompanyInfo(yFinanceDataCompanyInfo);
 }

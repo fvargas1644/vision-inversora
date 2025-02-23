@@ -1,5 +1,5 @@
 export default function  buildFinancialData({yFinanceDataDiscountedFreeCashFlow, companyConcepts} : any) {
-    extractCompanyConceptsData(companyConcepts)
+    extractCompanyConceptsData(companyConcepts.facts.dei.EntityCommonStockSharesOutstanding.units.shares)
 }
 
 function extractCompanyConceptsData(companyConcepts: any) {
