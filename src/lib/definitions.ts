@@ -17,9 +17,14 @@ export interface DataDiscountedFreeCashFlow {
     errors: (string | null)[];
 }
 
+export type TypeQueryYFinance = 'DISCOUNTED_FREE_CASH_FLOW' | 'COMPANY_INFO' | "HISTORY"
+
 export interface YFinanceQuery {
-    query: 'DISCOUNTED_FREE_CASH_FLOW' | 'COMPANY_INFO',
+    query: TypeQueryYFinance,
     ticker: string,
+    start ?: number,
+    end ?: number,
+    interval?: string
 }
 
 export interface YFinanceQueryOptions {
@@ -30,7 +35,7 @@ export interface YFinanceQueryOptions {
 export interface FetchYFinance {
     cookie: string,
     url: string,
-    type: 'DISCOUNTED_FREE_CASH_FLOW' | 'COMPANY_INFO',
+    type: TypeQueryYFinance,
 }
 
 

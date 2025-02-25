@@ -1,5 +1,5 @@
 import { RequestError } from "../Error";
-import { QuoteSummaryData, TimeSeriesData, YFinanceQueryOptions, YFinanceQuery, FetchYFinance } from "@/lib/definitions";
+import { QuoteSummaryData, TimeSeriesData, YFinanceQueryOptions, YFinanceQuery, FetchYFinance, TypeQueryYFinance } from "@/lib/definitions";
 import { userAgent, getCookie, getCrumb } from "./requestHeader";
 
 
@@ -13,19 +13,28 @@ const YFINANCE_QUERY_OPTIONS = {
     COMPANY_INFO: ({ticker, crumb } : YFinanceQueryOptions) => {
         const params = [ 'financialData', 'defaultKeyStatistics', 'assetProfile','summaryDetail'].map(String).join(",");
         return `https://query2.finance.yahoo.com/v10/finance/quoteSummary/${ticker}?modules=${params}&corsDomain=finance.yahoo.com&formatted=false&symbol=${ticker}&crumb=${crumb}` 
+    },
+    HISTORY : ({ticker, crumb, start, end ,interval} : any) => {
+        return `https://query2.finance.yahoo.com/v8/finance/chart/${ticker}?period1=${start}&period2=${end}&interval=${interval}&includePrePost=False&events=div%2Csplits%2CcapitalGains&crumb=${crumb}`
     }
 }
 
-export async function yFinanceQuery({query, ticker='APPL'} : YFinanceQuery) {
+export async function yFinanceQuery({query, ticker='APPL', start, end, interval} : YFinanceQuery) {
 
     const cookie = await getCookie();
     const crumb = await getCrumb(cookie);
 
-    const url : string= YFINANCE_QUERY_OPTIONS[query]({ticker, crumb});
+    const url = () : string => { 
+        if(query === "HISTORY") {
+            return YFINANCE_QUERY_OPTIONS["HISTORY"]({ticker, crumb, start, end, interval});
+        } else {
+            return YFINANCE_QUERY_OPTIONS[query]({ticker, crumb});
+        }
+    };
     
     const fetch = await fetchYFinance({
         cookie: cookie,
-        url,
+        url: url(),
         type: query 
     });
 
@@ -50,6 +59,15 @@ const VALIDATE_FETCH_YFINANCE = {
         return {
             state,
             data: data.quoteSummary.result
+        }
+    },
+    
+    HISTORY: (data : any) => {
+        const financialData = data.chart.result.some(item => item.indicators.adjclose.length > 0);
+        const state =  (financialData ) ? true : false;
+        return {
+            state,
+            data: data.chart.result
         }
     }
 }
