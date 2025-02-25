@@ -9,11 +9,12 @@ export default function  buildFinancialData({yFinanceData, companyConcepts, shar
     const predictionsYears = GENERATE_YEARS_YFINANCE_DATA['PREDICTIONS'](lastYearFinancialData);
     if (!predictionsYears) throw new Error('Las fechas no se asignaron correctamente');
 
-    extractFinancialData({yFinanceData, companyConcepts, sharesOutstanding, year: 2024})
+    extractFinancialData({yFinanceData, companyConcepts, sharesOutstanding, year: 2025})
 
 }
 
 function extractFinancialData({yFinanceData,companyConcepts, sharesOutstanding, year }: any) {
+    const sharesVal =  extractcompanyConcepts({year, companyConcepts, sharesOutstanding});
     const financialData = {
         year,
         data: {
@@ -23,7 +24,7 @@ function extractFinancialData({yFinanceData,companyConcepts, sharesOutstanding, 
             margin: 0,
             annualNetIncome: 0,
             per: 0,
-            shares: 0,
+            shares: sharesVal ? sharesVal: sharesOutstanding,
             stockPrice: 0
         }
     };
@@ -33,7 +34,6 @@ function extractFinancialData({yFinanceData,companyConcepts, sharesOutstanding, 
             
             financialRecord.annualNetIncome.forEach(record => {
                 const isYear = record.asOfDate.startsWith(String(year));
-
                 if (isYear) financialData.data.annualNetIncome = record.reportedValue.raw
             });
         }
@@ -46,6 +46,13 @@ function extractFinancialData({yFinanceData,companyConcepts, sharesOutstanding, 
             });
         }
     }
+}
 
-    console.log(financialData)
+function extractcompanyConcepts({year, companyConcepts, sharesOutstanding} : any) {
+    for  (let i = companyConcepts.length - 1; i >= 0; i--) {
+        if(companyConcepts[i].end.startsWith(String(year))){
+            return companyConcepts[i].val
+        }
+    }
+    return undefined;
 }
