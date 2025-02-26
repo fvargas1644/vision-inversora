@@ -14,7 +14,7 @@ export default async function getFinancialData({ticker, cik} :{ticker : string, 
 
     const {stockPrice, sharesOutstanding} = extractYFinanceCompanyInfo(yFinanceDataCompanyInfo);
 
-    buildFinancialData({yFinanceData, companyConcepts, sharesOutstanding, ticker});
+    buildFinancialData({yFinanceData, companyConcepts, ticker});
 
 }
 

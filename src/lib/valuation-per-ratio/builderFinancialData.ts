@@ -1,7 +1,10 @@
 import { GENERATE_YEARS_YFINANCE_DATA } from "../utils";
 import { yFinanceQuery } from "../yfinance-js/fetchData";
 
-export default async function  buildFinancialData({yFinanceData, companyConcepts, sharesOutstanding,ticker} : any) {
+export default async function  buildFinancialData({yFinanceData, companyConcepts,ticker} : any) {
+
+    const financialData= [];
+
     const financialDataYears = GENERATE_YEARS_YFINANCE_DATA['FINANCIAL_DATA'](yFinanceData);
 
     if (!financialDataYears) throw new Error('Las fechas no se asignaron correctamente');
@@ -15,17 +18,23 @@ export default async function  buildFinancialData({yFinanceData, companyConcepts
     const stockHistory = await yFinanceQuery({
         query: "HISTORY", 
         ticker, 
-        start: getDateSeconds(firstYearFinancialData), 
+        start: getDateSeconds(firstYearFinancialData -1), 
         end: getDateSeconds(lastYearFinancialData), 
         interval: "1mo" 
     });
 
-    extractFinancialData({yFinanceData, companyConcepts, sharesOutstanding, year: 2025});
+    financialDataYears.forEach(year => {
+        financialData.push(extractFinancialData({yFinanceData, companyConcepts, year, stockHistory}));
+    });
+    
 
 }
 
-function extractFinancialData({yFinanceData,companyConcepts, sharesOutstanding, year }: any) {
+function extractFinancialData({yFinanceData,companyConcepts, year , stockHistory}: any) {
+
+    // extraer shares
     const sharesVal =  extractcompanyConcepts({year, companyConcepts});
+
     const financialData = {
         year,
         data: {
@@ -35,11 +44,12 @@ function extractFinancialData({yFinanceData,companyConcepts, sharesOutstanding, 
             margin: 0,
             annualNetIncome: 0,
             per: 0,
-            shares: sharesVal ? sharesVal: sharesOutstanding,
+            shares: sharesVal ? sharesVal: 0,
             stockPrice: 0
         }
     };
 
+    // Extraer annualTotalRevenue y annualNetIncome
     for (const financialRecord of yFinanceData) {
         if (financialRecord.annualNetIncome) {
             
@@ -58,7 +68,22 @@ function extractFinancialData({yFinanceData,companyConcepts, sharesOutstanding, 
         }
     };
 
+    // Extraer stockPrice
+    for (let i = stockHistory[0].timestamp.length - 1; i >= 0; i--) {
+        const historyYear = dateSecondsToDate(stockHistory[0].timestamp[i])
+        if (historyYear === year) {
+            financialData.data.stockPrice = stockHistory[0].indicators.adjclose[0].adjclose[i];
+            break
+        }
+    };
+
     return financialData;
+
+}
+
+function dateSecondsToDate(dateSeconds : number) {
+    const date = new Date(dateSeconds * 1000);
+    return date.getFullYear();
 }
 
 function extractcompanyConcepts({year, companyConcepts} : any) {
