@@ -1,18 +1,26 @@
 import { GENERATE_YEARS_YFINANCE_DATA } from "../utils";
 import { yFinanceQuery } from "../yfinance-js/fetchData";
 
-export default async function  buildFinancialData({yFinanceData, companyConcepts, sharesOutstanding} : any) {
+export default async function  buildFinancialData({yFinanceData, companyConcepts, sharesOutstanding,ticker} : any) {
     const financialDataYears = GENERATE_YEARS_YFINANCE_DATA['FINANCIAL_DATA'](yFinanceData);
 
     if (!financialDataYears) throw new Error('Las fechas no se asignaron correctamente');
 
     const lastYearFinancialData : number = Math.max(...financialDataYears);
+    const firstYearFinancialData : number = Math.min(...financialDataYears);
+
     const predictionsYears = GENERATE_YEARS_YFINANCE_DATA['PREDICTIONS'](lastYearFinancialData);
     if (!predictionsYears) throw new Error('Las fechas no se asignaron correctamente');
 
-    extractFinancialData({yFinanceData, companyConcepts, sharesOutstanding, year: 2023});
+    const stockHistory = await yFinanceQuery({
+        query: "HISTORY", 
+        ticker, 
+        start: getDateSeconds(firstYearFinancialData), 
+        end: getDateSeconds(lastYearFinancialData), 
+        interval: "1mo" 
+    });
 
-    const stocHistory = await yFinanceQuery({query: "HISTORY", ticker: "AAPL", start: 1704085200, end: 1704085200, interval: "3mo" });
+    extractFinancialData({yFinanceData, companyConcepts, sharesOutstanding, year: 2025});
 
 }
 
@@ -49,6 +57,8 @@ function extractFinancialData({yFinanceData,companyConcepts, sharesOutstanding, 
             });
         }
     };
+
+    return financialData;
 }
 
 function extractcompanyConcepts({year, companyConcepts} : any) {
@@ -58,4 +68,12 @@ function extractcompanyConcepts({year, companyConcepts} : any) {
         }
     }
     return undefined;
+}
+
+function getDateSeconds(year : number) {
+    const lastDayYear = new Date(year, 11, 31)
+    const millisecondsDate = lastDayYear.getTime();
+    const secondsDate = Math.floor(millisecondsDate / 1000);
+
+    return secondsDate;
 }
