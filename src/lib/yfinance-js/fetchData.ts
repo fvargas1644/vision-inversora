@@ -1,5 +1,5 @@
 import { RequestError } from "../Error";
-import { QuoteSummaryData, TimeSeriesData, YFinanceQueryOptions, YFinanceQuery, FetchYFinance } from "@/lib/definitions";
+import { YFinanceQuoteSummaryData, YFinanceTimeSeriesData, YFinanceQueryOptions, YFinanceQuery, YFinanceFetch } from "@/lib/types/yfinance";
 import { userAgent, getCookie, getCrumb } from "./requestHeader";
 
 
@@ -32,7 +32,7 @@ export async function yFinanceQuery({query, ticker='APPL', start, end, interval}
         }
     };
     
-    const fetch = await fetchYFinance({
+    const fetch = await yFinanceFetch({
         cookie: cookie,
         url: url(),
         type: query 
@@ -42,7 +42,7 @@ export async function yFinanceQuery({query, ticker='APPL', start, end, interval}
 }
 
 const VALIDATE_FETCH_YFINANCE = {
-    FINANCIAL_DATA: (data : TimeSeriesData) => {
+    FINANCIAL_DATA: (data : YFinanceTimeSeriesData) => {
         const hasTimestamp = data.timeseries.result.every(item=> item.hasOwnProperty('timestamp'));
         const state =  (hasTimestamp) ? true : false;
         return {
@@ -51,7 +51,7 @@ const VALIDATE_FETCH_YFINANCE = {
         }
     },
 
-    COMPANY_INFO: (data : QuoteSummaryData) => {
+    COMPANY_INFO: (data : YFinanceQuoteSummaryData) => {
         const financialData = data.quoteSummary.result.some(item=> item.hasOwnProperty('financialData'));
         const defaultKeyStatistics = data.quoteSummary.result.some(item=> item.hasOwnProperty('defaultKeyStatistics'));
         const state =  (financialData && defaultKeyStatistics) ? true : false;
@@ -72,7 +72,7 @@ const VALIDATE_FETCH_YFINANCE = {
     }
 }
 
-async function fetchYFinance({ cookie, url, type }: FetchYFinance) {
+async function yFinanceFetch({ cookie, url, type }: YFinanceFetch) {
         try {
             const response = await fetch(url, {
                 method: "GET",

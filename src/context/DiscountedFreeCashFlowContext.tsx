@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { FinancialModel, CashFlowContext, updateFinancialModel, UpdateStatusOptions } from "@/context/definitions";
-import getFinancialData from "@/lib/discounted-free-cash-flow/getData";
+import getDataDiscontedFreeCashFlow from "@/lib/discounted-free-cash-flow/getData";
 
 export const DiscontedFreeCashFlowContext = React.createContext<CashFlowContext>({financialModel: null, updateFinancialModel: null});
 
@@ -19,7 +19,7 @@ export default function DiscontedFreeCashFlowProvider({ children, initialData, t
 
     async function updateFinancialModel({wacc, growth} : updateFinancialModel) : Promise<UpdateStatusOptions>{
         try {
-            const data = await getFinancialData({ticker, initialWacc: inversePercentage(wacc), initialGrowth: inversePercentage(growth) });
+            const data = await getDataDiscontedFreeCashFlow({ticker, initialWacc: inversePercentage(wacc), initialGrowth: inversePercentage(growth) });
             setFinancialDataState(previousData => ({...previousData, ...data}));
             return "success"
         } catch (error) {

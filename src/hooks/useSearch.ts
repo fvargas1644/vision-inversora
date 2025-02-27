@@ -1,19 +1,19 @@
 'use client'
 
-import { CompanyTicker, FetchCompanyTickersExchangeResponse } from "@/lib/definitions";
+import { SecEdgarCompanyTicker, SecEdgarFetchCompanyTickersExchangeResponse } from "@/lib/types/secEdgar";
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import usePath from '@/hooks/usePath';
 
-export default function useSearch(dataCompany : FetchCompanyTickersExchangeResponse){
+export default function useSearch(dataCompany : SecEdgarFetchCompanyTickersExchangeResponse){
 
     const router = useRouter();
     const path = usePath();
     const [inputValue, setInputValue] = useState(path.ticker);
-    const [searchResults, setSearchResults] = useState<CompanyTicker[]>([]);
+    const [searchResults, setSearchResults] = useState<SecEdgarCompanyTicker[]>([]);
 
     const fetchCompanyExchangeResults = (ticker : string) => {
-        const searchResults : CompanyTicker[]= [];
+        const searchResults : SecEdgarCompanyTicker[]= [];
 
         for (let item of dataCompany.data) {
             if (item[2].toLowerCase().includes(ticker.toLowerCase()) || item[1].toLowerCase().includes(ticker.toLowerCase())) {
@@ -32,7 +32,7 @@ export default function useSearch(dataCompany : FetchCompanyTickersExchangeRespo
     const updateInputValueAndSearch = async (value: string) => {
         setInputValue(value);
         if (value !== "" && value !== " ") { 
-            const results: CompanyTicker[] = fetchCompanyExchangeResults(value);
+            const results: SecEdgarCompanyTicker[] = fetchCompanyExchangeResults(value);
             setSearchResults(results); 
         } else { 
             clearSearchResults();

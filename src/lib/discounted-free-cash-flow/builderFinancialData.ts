@@ -1,10 +1,11 @@
 
-import { FinancialEntry, FinancialData, PredictionsData } from "@/lib/definitions";
+import { DiscontedFreeCashFlowFinancialData, DiscontedFreeCashFlowPredictionsData } from "@/lib/types/discountedFreeCashFlow";
+import { YFinanceFinancialData } from "@/lib/types/yfinance"
 import { GENERATE_YEARS_YFINANCE_DATA } from "../utils";
 
-export function buildFinancialData(yFinanceFinancialData: FinancialEntry[]) {
-        const financialData: FinancialData[] = [];
-        const predictionsData: PredictionsData[] = [];
+export function buildFinancialDataDiscountedFreeCashFlow(yFinanceFinancialData: YFinanceFinancialData[]) {
+        const financialData: DiscontedFreeCashFlowFinancialData[] = [];
+        const predictionsData: DiscontedFreeCashFlowPredictionsData[] = [];
         const financialDataYears = GENERATE_YEARS_YFINANCE_DATA['FINANCIAL_DATA'](yFinanceFinancialData);
 
         if (!financialDataYears) throw new Error('Las fechas no se asignaron correctamente');
@@ -33,7 +34,7 @@ export function buildFinancialData(yFinanceFinancialData: FinancialEntry[]) {
 
 
 interface ExtractYFinanceData {
-    yFinanceFinancialData: FinancialEntry[],
+    yFinanceFinancialData: YFinanceFinancialData[],
     year: number,
 }
 

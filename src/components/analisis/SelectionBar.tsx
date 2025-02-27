@@ -18,7 +18,7 @@ export default function SelectionBar({ticker} : {ticker : string}) {
         if(value === "menu_selection_bar") {
             let pathPage = `/analisis/${ticker}`
             if (pathname !== pathPage) router.push(pathPage)
-        } else if (value === "disconted_free_cash_flow") {
+        } else if (value === "discounted_free_cash_flow") {
             let pathPage = `/analisis/${ticker}/discounted-free-cash-flow`
             if (pathname !== pathPage) router.push(pathPage);
         }
@@ -35,7 +35,7 @@ export default function SelectionBar({ticker} : {ticker : string}) {
                         onChange={(event) => redirectBySelectValue(event.target.value)}
                     >
                         <option value="menu_selection_bar">Menu</option>
-                        <option value="disconted_free_cash_flow">Discounted Free Cash Flow</option>
+                        <option value="discounted_free_cash_flow">Discounted Free Cash Flow</option>
                     </select>
                 </div>
             </div>

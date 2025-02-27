@@ -1,11 +1,11 @@
-import { FinancialData, PredictionsData } from "@/lib/definitions";
+import { DiscontedFreeCashFlowFinancialData, DiscontedFreeCashFlowPredictionsData } from "@/lib/types/discountedFreeCashFlow";
 
 export class FinancialDataCalculator {
     protected wacc : number;
     protected stockPrice : number;
     protected sharesOutstanding : number;
-    protected financialData: FinancialData[];
-    protected predictionsData: PredictionsData[];
+    protected financialData: DiscontedFreeCashFlowFinancialData[];
+    protected predictionsData: DiscontedFreeCashFlowPredictionsData[];
     protected growthRateAverage: number;
     protected freeCashFlowDividedNetIncomeAverage: number;
     protected marginsAverage: number;
@@ -14,8 +14,8 @@ export class FinancialDataCalculator {
         wacc : number, 
         stockPrice : number, 
         sharesOutstanding : number, 
-        financialData : FinancialData[], 
-        predictionsData: PredictionsData[]) {
+        financialData : DiscontedFreeCashFlowFinancialData[], 
+        predictionsData: DiscontedFreeCashFlowPredictionsData[]) {
             
         this.wacc = wacc;
         this.stockPrice = stockPrice;

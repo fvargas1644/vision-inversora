@@ -3,11 +3,11 @@
 import React, { useRef } from "react"
 import styles from "@/styles/Header.module.css"
 import useSearch from "@/hooks/useSearch";
-import { FetchCompanyTickersExchangeResponse } from '@/lib/sec-edgar/definitions';
+import { SecEdgarFetchCompanyTickersExchangeResponse } from '@/lib/types/secEdgar';
 import Navbar from "@/components/Navbar";
 import { Search } from "lucide-react"
 
-export default function Header({dataCompany} : {dataCompany: FetchCompanyTickersExchangeResponse}) {
+export default function Header({dataCompany} : {dataCompany: SecEdgarFetchCompanyTickersExchangeResponse}) {
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   const {

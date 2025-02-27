@@ -1,7 +1,7 @@
 import { GENERATE_YEARS_YFINANCE_DATA } from "../utils";
 import { yFinanceQuery } from "../yfinance-js/fetchData";
 
-export default async function  buildFinancialData({yFinanceFinancialData, companyConcepts,ticker} : any) {
+export default async function  buildFinancialDataValuationPerRatio({yFinanceFinancialData, companyConcepts,ticker} : any) {
 
     const financialData= [];
     const predictionsData = [];

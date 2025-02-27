@@ -23,7 +23,7 @@ export default function Sidebar() {
                         <Link href='./discounted-free-cash-flow' className={styles.menuLink}>
 
                             <BarChart2 className={styles.menuIcon} />
-                            <span className={styles.menuText}>Disconted Free Cash Flow</span>
+                            <span className={styles.menuText}>Discounted Free Cash Flow</span>
                         </Link>
                     </li>
                     <li className={styles.menuItem}>

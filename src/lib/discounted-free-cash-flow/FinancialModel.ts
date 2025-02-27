@@ -1,13 +1,13 @@
 import { FinancialPredictionsCalculator } from "./FinancialPredictionsCalculator";
-import { FinancialData, PredictionsData } from "@/lib/definitions";
+import { DiscontedFreeCashFlowFinancialData, DiscontedFreeCashFlowPredictionsData } from "@/lib/types/discountedFreeCashFlow";
 
 export class FinancialModel extends FinancialPredictionsCalculator {
     constructor(
         wacc : number, 
         stockPrice : number, 
         sharesOutstanding : number, 
-        financialData : FinancialData[], 
-        predictionsData: PredictionsData[],
+        financialData : DiscontedFreeCashFlowFinancialData[], 
+        predictionsData: DiscontedFreeCashFlowPredictionsData[],
         growth: number
     ){
         super(wacc, stockPrice, sharesOutstanding, financialData, predictionsData, growth);

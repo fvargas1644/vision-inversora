@@ -2,7 +2,7 @@
 
 import { fetchWacc } from "../fetchWacc";
 import { yFinanceQuery } from "../yfinance-js/fetchData";
-import { buildFinancialData } from "./builderFinancialData";
+import { buildFinancialDataDiscountedFreeCashFlow } from "./builderFinancialData";
 import { FinancialModel } from "./FinancialModel";
 import { validate } from "../validation/backend/discounted-free-cash-flow/validations";
 import { extractYFinanceCompanyInfo } from "../utils";
@@ -13,7 +13,7 @@ interface GetFinancialData {
     initialGrowth?: number
 }
 
-export default async function getFinancialData({ticker, initialWacc, initialGrowth} : GetFinancialData){
+export default async function getDataDiscontedFreeCashFlow({ticker, initialWacc, initialGrowth} : GetFinancialData){
     
     const wacc = initialWacc ?? await getWacc(ticker);
     const growth = initialGrowth ?? 0.025;
@@ -29,20 +29,20 @@ export default async function getFinancialData({ticker, initialWacc, initialGrow
         yFinanceQuery({ query: 'COMPANY_INFO', ticker })
     ]);
     
-    const {financialData, predictionsData} = buildFinancialData(yFinanceFinancialData);
+    const {financialData, predictionsData} = buildFinancialDataDiscountedFreeCashFlow(yFinanceFinancialData);
 
     const {stockPrice, sharesOutstanding} = extractYFinanceCompanyInfo(yFinanceDataCompanyInfo);
 
 
-    const financialModel = new FinancialModel(wacc, stockPrice, sharesOutstanding, financialData, predictionsData, growth);
+    const financialModelDiscontedFreeCashFlow = new FinancialModel(wacc, stockPrice, sharesOutstanding, financialData, predictionsData, growth);
 
-    financialModel.calculateFinancialData();
-    financialModel.calculatePredictionsData();
+    financialModelDiscontedFreeCashFlow.calculateFinancialData();
+    financialModelDiscontedFreeCashFlow.calculatePredictionsData();
 
     return {
-        financialData: financialModel.getFinancialData(),
-        predictionsData: financialModel.getPredictionsData(),
-        intrinsicPrice: financialModel.getIntrinsicPrice(),
+        financialData: financialModelDiscontedFreeCashFlow.getFinancialData(),
+        predictionsData: financialModelDiscontedFreeCashFlow.getPredictionsData(),
+        intrinsicPrice: financialModelDiscontedFreeCashFlow.getIntrinsicPrice(),
         stockPrice,
         wacc,
         growth

@@ -1,10 +1,10 @@
 'use server'
 
-import { FetchCompanyTickersExchangeResponse } from "@/lib/definitions";
+import { SecEdgarFetchCompanyTickersExchangeResponse } from "@/lib/types/secEdgar";
 import { fetchCompanyTickersExchange } from "@/lib/sec-edgar/fetchData";
 
 export async function findCompany(ticker: string) {
-    const fechCompany: FetchCompanyTickersExchangeResponse = await fetchCompanyTickersExchange();
+    const fechCompany: SecEdgarFetchCompanyTickersExchangeResponse = await fetchCompanyTickersExchange();
     for (let item of fechCompany.data) {
         if (item[2] === ticker) {
             return {
