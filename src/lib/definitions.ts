@@ -11,11 +11,6 @@ export interface YFinanceDiscountedFreeCashFlow {
     annualNetIncome?: any[];
 }
 
-export interface DataDiscountedFreeCashFlow {
-    wacc: number;
-    dataYFinance: YFinanceDiscountedFreeCashFlow[] | undefined; // Puede ser un arreglo de objetos o undefined
-    errors: (string | null)[];
-}
 
 export type TypeQueryYFinance = 'FINANCIAL_DATA' | 'COMPANY_INFO' | "HISTORY"
 

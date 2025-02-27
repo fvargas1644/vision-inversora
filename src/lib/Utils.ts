@@ -23,10 +23,10 @@ export function formatPrice(price: number): string {
     }
 }
 
-export function extractYFinanceCompanyInfo(yFinanceData: any[]) {
+export function extractYFinanceCompanyInfo(yFinanceFinancialData: any[]) {
     let stockPrice = 0;
     let sharesOutstanding = 0
-    for (const obj of yFinanceData) {
+    for (const obj of yFinanceFinancialData) {
         if (obj.defaultKeyStatistics) {
             sharesOutstanding = obj.defaultKeyStatistics.sharesOutstanding
         }
@@ -40,10 +40,10 @@ export function extractYFinanceCompanyInfo(yFinanceData: any[]) {
 }
 
 export const GENERATE_YEARS_YFINANCE_DATA = {
-    FINANCIAL_DATA: (yFinanceData: FinancialEntry[]) => {
+    FINANCIAL_DATA: (yFinanceFinancialData: FinancialEntry[]) => {
         const years: number[] = []
-        if (yFinanceData !== undefined && yFinanceData[0].timestamp) {
-            const yearsWithoutParse = yFinanceData[0].timestamp.map(timestamp => new Date(timestamp * 1000))
+        if (yFinanceFinancialData !== undefined && yFinanceFinancialData[0].timestamp) {
+            const yearsWithoutParse = yFinanceFinancialData[0].timestamp.map(timestamp => new Date(timestamp * 1000))
             yearsWithoutParse.map(timestamp => years.push(Number(timestamp.getFullYear())))
         }
         return years;
