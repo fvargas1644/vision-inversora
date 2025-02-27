@@ -1,6 +1,6 @@
 'use server';
 
-import { secEdgarCompanyTickers } from "@/lib/types/secEdgar";
+import { secEdgarCompanyTickers,SecEdgarFinancialData } from "@/lib/types/secEdgar";
 import { RequestError } from "../Error";
 
 
@@ -49,7 +49,7 @@ const VALIDATE_FETCH_SECEDGAR = {
         }
     },
 
-    COMPANY_CONCEPTS: (companyConcepts : any) => {
+    COMPANY_CONCEPTS: (companyConcepts : SecEdgarFinancialData) => {
         const hasVal = companyConcepts.facts.dei.EntityCommonStockSharesOutstanding.units.shares.some(item=> item.hasOwnProperty('val'));
         const state =  (hasVal) ? true : false;
 

@@ -207,4 +207,93 @@ type YFinanceAssetProfileResult = {
     };
 };
 
+/** HISTORY */
+
+export interface YFinanceTradingDataHistory {
+    chart: {
+      result: YFinanceChartResultHistory[];
+      error: null | string;
+    };
+  }
+  
+export interface YFinanceChartResultHistory {
+    meta: MetaDataHistory;
+    timestamp: number[];
+    events: {
+        dividends: Record<number, Dividend>;
+        splits: Record<number, Split>;
+    };
+    indicators: Indicators;
+  }
+  
+  interface MetaDataHistory {
+    currency: string;
+    symbol: string;
+    exchangeName: string;
+    fullExchangeName: string;
+    instrumentType: string;
+    firstTradeDate: number;
+    regularMarketTime: number;
+    hasPrePostMarketData: boolean;
+    gmtoffset: number;
+    timezone: string;
+    exchangeTimezoneName: string;
+    regularMarketPrice: number;
+    fiftyTwoWeekHigh: number;
+    fiftyTwoWeekLow: number;
+    regularMarketDayHigh: number;
+    regularMarketDayLow: number;
+    regularMarketVolume: number;
+    longName: string;
+    shortName: string;
+    chartPreviousClose: number;
+    priceHint: number;
+    currentTradingPeriod: {
+        pre: TimePeriodHistory;
+        regular: TimePeriodHistory;
+        post: TimePeriodHistory;
+      };
+    dataGranularity: string;
+    range: string;
+    validRanges: string[];
+  }
+  
+  interface TimePeriodHistory {
+    timezone: string;
+    start: number;
+    end: number;
+    gmtoffset: number;
+  }
+  
+
+  
+  interface Dividend {
+    amount: number;
+    date: number;
+  }
+  
+  interface Split {
+    date: number;
+    numerator: number;
+    denominator: number;
+    splitRatio: string;
+  }
+  
+  interface Indicators {
+    quote: Quote[];
+    adjclose: AdjustedClose[];
+  }
+  
+  interface Quote {
+    high: number[];
+    low: number[];
+    close: number[];
+    open: number[];
+    volume: number[];
+  }
+  
+  interface AdjustedClose {
+    adjclose: number[];
+  }
+
 

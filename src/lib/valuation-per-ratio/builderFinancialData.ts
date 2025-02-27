@@ -1,10 +1,13 @@
+
+import { ValuationPerRatioFinancialData, ValuatioPerRatioExtractFinancialData } from "../types/valuationPerRatio";
+
 import { GENERATE_YEARS_YFINANCE_DATA } from "../utils";
 import { queryYFinance  } from "../yfinance-js/fetchData";
 
 export default async function  buildFinancialDataValuationPerRatio({yFinanceFinancialData, companyConcepts,ticker} : any) {
 
-    const financialData= [];
-    const predictionsData = [];
+    const financialData : ValuationPerRatioFinancialData[]= [];
+    const predictionsData : ValuationPerRatioFinancialData[] = [];
 
     const financialDataYears = GENERATE_YEARS_YFINANCE_DATA['FINANCIAL_DATA'](yFinanceFinancialData);
     
@@ -25,6 +28,7 @@ export default async function  buildFinancialDataValuationPerRatio({yFinanceFina
         interval: "1mo" 
     });
 
+
     financialDataYears.forEach(year => {
         financialData.push(extractFinancialData({yFinanceFinancialData, companyConcepts, year, stockHistory}));
     });
@@ -44,7 +48,7 @@ export default async function  buildFinancialDataValuationPerRatio({yFinanceFina
 
 }
 
-function extractFinancialData({yFinanceFinancialData,companyConcepts, year , stockHistory}: any) {
+function extractFinancialData({yFinanceFinancialData,companyConcepts, year , stockHistory}: ValuatioPerRatioExtractFinancialData) {
 
     // extraer shares
     const sharesVal =  extractcompanyConcepts({year, companyConcepts});

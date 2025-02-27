@@ -1,5 +1,5 @@
 import { RequestError } from "../Error";
-import { YFinanceQuoteSummaryData, YFinanceTimeSeriesData, YFinanceQueryOptions, YFinanceQuery, YFinanceFetch } from "@/lib/types/yfinance";
+import { YFinanceQuoteSummaryData, YFinanceTimeSeriesData, YFinanceQueryOptions, YFinanceQuery, YFinanceFetch, YFinanceTradingDataHistory } from "@/lib/types/yfinance";
 import { userAgent, getCookie, getCrumb } from "./requestHeader";
 
 
@@ -62,7 +62,7 @@ const VALIDATE_FETCH_YFINANCE = {
         }
     },
     
-    HISTORY: (data : any) => {
+    HISTORY: (data : YFinanceTradingDataHistory) => {
         const financialData = data.chart.result.some(item => item.indicators.adjclose.length > 0);
         const state =  (financialData ) ? true : false;
         return {
