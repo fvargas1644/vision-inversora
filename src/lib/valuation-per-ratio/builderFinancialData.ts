@@ -4,8 +4,10 @@ import { yFinanceQuery } from "../yfinance-js/fetchData";
 export default async function  buildFinancialData({yFinanceData, companyConcepts,ticker} : any) {
 
     const financialData= [];
+    const predictionsData = [];
 
     const financialDataYears = GENERATE_YEARS_YFINANCE_DATA['FINANCIAL_DATA'](yFinanceData);
+    
 
     if (!financialDataYears) throw new Error('Las fechas no se asignaron correctamente');
 
@@ -27,6 +29,18 @@ export default async function  buildFinancialData({yFinanceData, companyConcepts
         financialData.push(extractFinancialData({yFinanceData, companyConcepts, year, stockHistory}));
     });
     
+    predictionsYears.forEach(year => {
+        predictionsData.push(buildFinancialDataContainer(year));
+    });
+
+    if (financialData.length > 0 && predictionsData.length > 0) {
+        return {
+            financialData,
+            predictionsData,
+        }
+    } else {
+        throw new Error('Error en decodificar los datos')
+    }
 
 }
 
@@ -35,19 +49,7 @@ function extractFinancialData({yFinanceData,companyConcepts, year , stockHistory
     // extraer shares
     const sharesVal =  extractcompanyConcepts({year, companyConcepts});
 
-    const financialData = {
-        year,
-        data: {
-            marketCap: 0,
-            annualTotalRevenue: 0,
-            growthRate: 0,
-            margin: 0,
-            annualNetIncome: 0,
-            per: 0,
-            shares: sharesVal ? sharesVal: 0,
-            stockPrice: 0
-        }
-    };
+    const financialData = buildFinancialDataContainer(year);
 
     // Extraer annualTotalRevenue y annualNetIncome
     for (const financialRecord of yFinanceData) {
@@ -101,4 +103,23 @@ function getDateSeconds(year : number) {
     const secondsDate = Math.floor(millisecondsDate / 1000);
 
     return secondsDate;
+}
+
+function buildFinancialDataContainer(year: number) {
+
+    const financialData = {
+        year,
+        data: {
+            annualNetIncome: 0,
+            annualFreeCashFlow: 0,
+            annualTotalRevenue: 0,
+            discountFactor: 0,
+            pv: 0,
+            growthRate: 0,
+            margins: 0,
+            freeCashFlowDividedNetIncome: 0
+        }
+    };
+
+    return financialData;
 }
