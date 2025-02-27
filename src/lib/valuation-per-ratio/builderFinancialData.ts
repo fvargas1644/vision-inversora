@@ -50,6 +50,7 @@ function extractFinancialData({yFinanceData,companyConcepts, year , stockHistory
     const sharesVal =  extractcompanyConcepts({year, companyConcepts});
 
     const financialData = buildFinancialDataContainer(year);
+    financialData.data.shares = sharesVal ? sharesVal: 0;
 
     // Extraer annualTotalRevenue y annualNetIncome
     for (const financialRecord of yFinanceData) {
@@ -110,14 +111,14 @@ function buildFinancialDataContainer(year: number) {
     const financialData = {
         year,
         data: {
-            annualNetIncome: 0,
-            annualFreeCashFlow: 0,
+            marketCap: 0,
             annualTotalRevenue: 0,
-            discountFactor: 0,
-            pv: 0,
-            growthRate: 0,
-            margins: 0,
-            freeCashFlowDividedNetIncome: 0
+            revenueGrowth: 0,
+            margin: 0,
+            annualNetIncome: 0,
+            per: 0,
+            shares: 0,
+            stockPrice: 0
         }
     };
 
