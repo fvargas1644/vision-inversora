@@ -1,10 +1,10 @@
 import { RequestError } from "../Error";
-import { QuoteSummaryData, TimeSeriesData, YFinanceQueryOptions, YFinanceQuery, FetchYFinance, TypeQueryYFinance } from "@/lib/definitions";
+import { QuoteSummaryData, TimeSeriesData, YFinanceQueryOptions, YFinanceQuery, FetchYFinance } from "@/lib/definitions";
 import { userAgent, getCookie, getCrumb } from "./requestHeader";
 
 
 const YFINANCE_QUERY_OPTIONS = {
-    DISCOUNTED_FREE_CASH_FLOW : ({ticker, crumb } : YFinanceQueryOptions) => {
+    FINANCIAL_DATA : ({ticker, crumb } : YFinanceQueryOptions) => {
         const today = Math.floor(Date.now() / 1000);
         const params = [ "annualTotalRevenue", "annualNetIncome","annualFreeCashFlow"].map(String).join(",");
         return `https://query2.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries/${ticker}?symbol=${ticker}&type=${params}&period1=1483142400&period2=${today}&crumb=${crumb}`;
@@ -42,7 +42,7 @@ export async function yFinanceQuery({query, ticker='APPL', start, end, interval}
 }
 
 const VALIDATE_FETCH_YFINANCE = {
-    DISCOUNTED_FREE_CASH_FLOW: (data : TimeSeriesData) => {
+    FINANCIAL_DATA: (data : TimeSeriesData) => {
         const hasTimestamp = data.timeseries.result.every(item=> item.hasOwnProperty('timestamp'));
         const state =  (hasTimestamp) ? true : false;
         return {

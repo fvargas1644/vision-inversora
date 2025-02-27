@@ -1,12 +1,12 @@
 import { GENERATE_YEARS_YFINANCE_DATA } from "../utils";
 import { yFinanceQuery } from "../yfinance-js/fetchData";
 
-export default async function  buildFinancialData({yFinanceData, companyConcepts,ticker} : any) {
+export default async function  buildFinancialData({yFinanceFinancialData, companyConcepts,ticker} : any) {
 
     const financialData= [];
     const predictionsData = [];
 
-    const financialDataYears = GENERATE_YEARS_YFINANCE_DATA['FINANCIAL_DATA'](yFinanceData);
+    const financialDataYears = GENERATE_YEARS_YFINANCE_DATA['FINANCIAL_DATA'](yFinanceFinancialData);
     
 
     if (!financialDataYears) throw new Error('Las fechas no se asignaron correctamente');
@@ -26,7 +26,7 @@ export default async function  buildFinancialData({yFinanceData, companyConcepts
     });
 
     financialDataYears.forEach(year => {
-        financialData.push(extractFinancialData({yFinanceData, companyConcepts, year, stockHistory}));
+        financialData.push(extractFinancialData({yFinanceFinancialData, companyConcepts, year, stockHistory}));
     });
     
     predictionsYears.forEach(year => {
@@ -44,7 +44,7 @@ export default async function  buildFinancialData({yFinanceData, companyConcepts
 
 }
 
-function extractFinancialData({yFinanceData,companyConcepts, year , stockHistory}: any) {
+function extractFinancialData({yFinanceFinancialData,companyConcepts, year , stockHistory}: any) {
 
     // extraer shares
     const sharesVal =  extractcompanyConcepts({year, companyConcepts});
@@ -53,7 +53,7 @@ function extractFinancialData({yFinanceData,companyConcepts, year , stockHistory
     financialData.data.shares = sharesVal ? sharesVal: 0;
 
     // Extraer annualTotalRevenue y annualNetIncome
-    for (const financialRecord of yFinanceData) {
+    for (const financialRecord of yFinanceFinancialData) {
         if (financialRecord.annualNetIncome) {
             
             financialRecord.annualNetIncome.forEach(record => {

@@ -24,12 +24,12 @@ export default async function getFinancialData({ticker, initialWacc, initialGrow
         validate(growth)
     ]);
     
-    const [yFinanceDataDiscountedFreeCashFlow, yFinanceDataCompanyInfo] = await Promise.all([
-        yFinanceQuery({ query: 'DISCOUNTED_FREE_CASH_FLOW', ticker }),
+    const [yFinanceFinancialData, yFinanceDataCompanyInfo] = await Promise.all([
+        yFinanceQuery({ query: 'FINANCIAL_DATA', ticker }),
         yFinanceQuery({ query: 'COMPANY_INFO', ticker })
     ]);
     
-    const {financialData, predictionsData} = buildFinancialData(yFinanceDataDiscountedFreeCashFlow);
+    const {financialData, predictionsData} = buildFinancialData(yFinanceFinancialData);
 
     const {stockPrice, sharesOutstanding} = extractYFinanceCompanyInfo(yFinanceDataCompanyInfo);
 

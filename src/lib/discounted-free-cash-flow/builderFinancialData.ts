@@ -2,15 +2,15 @@
 import { FinancialEntry, FinancialData, PredictionsData } from "@/lib/definitions";
 import { GENERATE_YEARS_YFINANCE_DATA } from "../utils";
 
-export function buildFinancialData(yFinanceData: FinancialEntry[]) {
+export function buildFinancialData(yFinanceFinancialData: FinancialEntry[]) {
         const financialData: FinancialData[] = [];
         const predictionsData: PredictionsData[] = [];
-        const financialDataYears = GENERATE_YEARS_YFINANCE_DATA['FINANCIAL_DATA'](yFinanceData);
+        const financialDataYears = GENERATE_YEARS_YFINANCE_DATA['FINANCIAL_DATA'](yFinanceFinancialData);
 
         if (!financialDataYears) throw new Error('Las fechas no se asignaron correctamente');
 
         financialDataYears.forEach(year => {
-            financialData.push(extractYFinanceFinancialData({ yFinanceData, year }));
+            financialData.push(extractYFinanceFinancialData({ yFinanceFinancialData, year }));
         });
 
         const lastYearFinancialData : number = Math.max(...financialDataYears);
@@ -33,11 +33,11 @@ export function buildFinancialData(yFinanceData: FinancialEntry[]) {
 
 
 interface ExtractYFinanceData {
-    yFinanceData: FinancialEntry[],
+    yFinanceFinancialData: FinancialEntry[],
     year: number,
 }
 
-function extractYFinanceFinancialData({ yFinanceData, year }: ExtractYFinanceData) {
+function extractYFinanceFinancialData({ yFinanceFinancialData, year }: ExtractYFinanceData) {
     const financialData = {
         year,
         data: {
@@ -49,7 +49,7 @@ function extractYFinanceFinancialData({ yFinanceData, year }: ExtractYFinanceDat
             freeCashFlowDividedNetIncome: 0
         }
     };
-    for (const financialRecord of yFinanceData) {
+    for (const financialRecord of yFinanceFinancialData) {
         if (financialRecord.annualNetIncome) {
             
             financialRecord.annualNetIncome.forEach(record => {

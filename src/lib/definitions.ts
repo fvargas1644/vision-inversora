@@ -17,7 +17,7 @@ export interface DataDiscountedFreeCashFlow {
     errors: (string | null)[];
 }
 
-export type TypeQueryYFinance = 'DISCOUNTED_FREE_CASH_FLOW' | 'COMPANY_INFO' | "HISTORY"
+export type TypeQueryYFinance = 'FINANCIAL_DATA' | 'COMPANY_INFO' | "HISTORY"
 
 export interface YFinanceQuery {
     query: TypeQueryYFinance,
@@ -46,7 +46,7 @@ interface MetaData {
 
 type FinancialEntryData = {
     dataId: number;
-    asOfDate: string; // Puedes tiparlo como Date si lo conviertes antes de usarlo
+    asOfDate: string; 
     periodType: string;
     currencyCode: string;
     reportedValue: {

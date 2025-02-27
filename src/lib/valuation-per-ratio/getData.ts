@@ -7,14 +7,14 @@ export default async function getFinancialData({ticker, cik} :{ticker : string, 
 
     const companyConcepts = await getCompanyConcepts(cik);
 
-    const [yFinanceData, yFinanceDataCompanyInfo] = await Promise.all([
-        yFinanceQuery({ query: 'DISCOUNTED_FREE_CASH_FLOW', ticker }),
+    const [yFinanceFinancialData, yFinanceDataCompanyInfo] = await Promise.all([
+        yFinanceQuery({ query: 'FINANCIAL_DATA', ticker }),
         yFinanceQuery({ query: 'COMPANY_INFO', ticker })
     ]);
 
     const {stockPrice, sharesOutstanding} = extractYFinanceCompanyInfo(yFinanceDataCompanyInfo);
 
-    buildFinancialData({yFinanceData, companyConcepts, ticker});
+    buildFinancialData({yFinanceFinancialData, companyConcepts, ticker});
 
 }
 
