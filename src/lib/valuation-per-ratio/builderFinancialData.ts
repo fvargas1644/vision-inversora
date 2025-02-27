@@ -1,5 +1,5 @@
 import { GENERATE_YEARS_YFINANCE_DATA } from "../utils";
-import { yFinanceQuery } from "../yfinance-js/fetchData";
+import { queryYFinance  } from "../yfinance-js/fetchData";
 
 export default async function  buildFinancialDataValuationPerRatio({yFinanceFinancialData, companyConcepts,ticker} : any) {
 
@@ -17,7 +17,7 @@ export default async function  buildFinancialDataValuationPerRatio({yFinanceFina
     const predictionsYears = GENERATE_YEARS_YFINANCE_DATA['PREDICTIONS'](lastYearFinancialData);
     if (!predictionsYears) throw new Error('Las fechas no se asignaron correctamente');
 
-    const stockHistory = await yFinanceQuery({
+    const stockHistory = await queryYFinance({
         query: "HISTORY", 
         ticker, 
         start: getDateSeconds(firstYearFinancialData -1), 

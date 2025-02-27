@@ -1,7 +1,7 @@
-export type TypeQueryYFinance = 'FINANCIAL_DATA' | 'COMPANY_INFO' | "HISTORY"
+type YFinanceTypeQuery = 'FINANCIAL_DATA' | 'COMPANY_INFO' | "HISTORY"
 
 export interface YFinanceQuery {
-    query: TypeQueryYFinance,
+    query: YFinanceTypeQuery,
     ticker: string,
     start ?: number,
     end ?: number,
@@ -16,7 +16,7 @@ export interface YFinanceQueryOptions {
 export interface YFinanceFetch {
     cookie: string,
     url: string,
-    type: TypeQueryYFinance,
+    type: YFinanceTypeQuery,
 }
 
 

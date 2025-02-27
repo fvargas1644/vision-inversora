@@ -19,7 +19,7 @@ const YFINANCE_QUERY_OPTIONS = {
     }
 }
 
-export async function yFinanceQuery({query, ticker='APPL', start, end, interval} : YFinanceQuery) {
+export async function queryYFinance({query, ticker='APPL', start, end, interval} : YFinanceQuery) {
 
     const cookie = await getCookie();
     const crumb = await getCrumb(cookie);
@@ -32,7 +32,7 @@ export async function yFinanceQuery({query, ticker='APPL', start, end, interval}
         }
     };
     
-    const fetch = await yFinanceFetch({
+    const fetch = await fetchYFinance({
         cookie: cookie,
         url: url(),
         type: query 
@@ -72,7 +72,7 @@ const VALIDATE_FETCH_YFINANCE = {
     }
 }
 
-async function yFinanceFetch({ cookie, url, type }: YFinanceFetch) {
+async function fetchYFinance({ cookie, url, type }: YFinanceFetch) {
         try {
             const response = await fetch(url, {
                 method: "GET",

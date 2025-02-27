@@ -1,7 +1,7 @@
 'use server'
 
 import { fetchWacc } from "../fetchWacc";
-import { yFinanceQuery } from "../yfinance-js/fetchData";
+import { queryYFinance  } from "../yfinance-js/fetchData";
 import { buildFinancialDataDiscountedFreeCashFlow } from "./builderFinancialData";
 import { FinancialModel } from "./FinancialModel";
 import { validate } from "../validation/backend/discounted-free-cash-flow/validations";
@@ -25,8 +25,8 @@ export default async function getDataDiscontedFreeCashFlow({ticker, initialWacc,
     ]);
     
     const [yFinanceFinancialData, yFinanceDataCompanyInfo] = await Promise.all([
-        yFinanceQuery({ query: 'FINANCIAL_DATA', ticker }),
-        yFinanceQuery({ query: 'COMPANY_INFO', ticker })
+        queryYFinance ({ query: 'FINANCIAL_DATA', ticker }),
+        queryYFinance ({ query: 'COMPANY_INFO', ticker })
     ]);
     
     const {financialData, predictionsData} = buildFinancialDataDiscountedFreeCashFlow(yFinanceFinancialData);

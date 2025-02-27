@@ -1,4 +1,3 @@
-import { fetchCompanyConcepts } from "@/lib/sec-edgar/fetchData";
 import { findCompany } from "@/lib/utilsServer";
 import getDataValuationPerRatio from "@/lib/valuation-per-ratio/getData";
 

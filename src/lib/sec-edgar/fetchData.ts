@@ -1,6 +1,6 @@
 'use server';
 
-import { SecEdgarFetchCompanyTickersExchangeResponse } from "@/lib/types/secEdgar";
+import { secEdgarCompanyTickers } from "@/lib/types/secEdgar";
 import { RequestError } from "../Error";
 
 
@@ -31,11 +31,11 @@ async function fetchJson<R>({url, type} : {url: string, type: 'TICKERS_EXCHAGE' 
     }
 }
 
-export async function fetchCompanyTickersExchange(): Promise<SecEdgarFetchCompanyTickersExchangeResponse> {
-    return fetchJson<SecEdgarFetchCompanyTickersExchangeResponse>({url : 'https://www.sec.gov/files/company_tickers_exchange.json', type: 'TICKERS_EXCHAGE'});
+export async function fetchSecEdgarCompanyTickers(): Promise<secEdgarCompanyTickers > {
+    return fetchJson<secEdgarCompanyTickers>({url : 'https://www.sec.gov/files/company_tickers_exchange.json', type: 'TICKERS_EXCHAGE'});
 }
 
-export async function fetchCompanyConcepts(cik : number): Promise<any> { // TODO: Definir el tipo de respuesta correcto
+export async function fetchSecEdgarCompanyConcepts(cik : number): Promise<any> { // TODO: Definir el tipo de respuesta correcto
     const url = `https://data.sec.gov/api/xbrl/companyfacts/CIK${cik.toString().padStart(10, '0')}.json`;
     return await fetchJson<any>({url, type: 'COMPANY_CONCEPTS'});
 }

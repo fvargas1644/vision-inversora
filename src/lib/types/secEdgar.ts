@@ -1,13 +1,13 @@
-export type SecEdgarCompanyTicker = [
+export type SecEdgarTicker  = [
     number,
     string,
     string,
     string,
 ]
 
-export interface SecEdgarFetchCompanyTickersExchangeResponse {
+export interface secEdgarCompanyTickers   {
     fields: string[];
-    data: SecEdgarCompanyTicker[];
+    data: SecEdgarTicker [];
 }
 
 
