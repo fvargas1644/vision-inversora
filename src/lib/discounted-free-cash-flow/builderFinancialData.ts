@@ -3,7 +3,7 @@ import { DiscontedFreeCashFlowFinancialData, DiscontedFreeCashFlowPredictionsDat
 import { YFinanceFinancialData } from "@/lib/types/yfinance"
 import { GENERATE_YEARS_YFINANCE_DATA } from "../utils";
 
-export function buildFinancialDataDiscountedFreeCashFlow(yFinanceFinancialData: YFinanceFinancialData[]) {
+export function buildFinancialDataDiscountedFreeCashFlow(yFinanceFinancialData: YFinanceFinancialData[] | any) {
         const financialData: DiscontedFreeCashFlowFinancialData[] = [];
         const predictionsData: DiscontedFreeCashFlowPredictionsData[] = [];
         const financialDataYears = GENERATE_YEARS_YFINANCE_DATA['FINANCIAL_DATA'](yFinanceFinancialData);

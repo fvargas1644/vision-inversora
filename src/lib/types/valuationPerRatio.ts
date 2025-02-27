@@ -21,5 +21,5 @@ export interface ValuatioPerRatioExtractFinancialData {
     yFinanceFinancialData : YFinanceFinancialData[],
     companyConcepts: secEdgarCompanyTickers,
     year: number,
-    stockHistory: YFinanceChartResultHistory
+    stockHistory: YFinanceChartResultHistory[] | any
 }
