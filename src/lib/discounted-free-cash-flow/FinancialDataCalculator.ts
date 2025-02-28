@@ -36,6 +36,14 @@ export class FinancialDataCalculator {
                 obj.data.growthRate = (obj.data.annualTotalRevenue - previousRevenue) / previousRevenue;
             }
         });
+
+        this.growthRateAverage = this.calculateAverage('growthRate');
+        
+        this.financialData.map((obj) => {
+            if(obj.data.growthRate===0) {
+                obj.data.growthRate = this.growthRateAverage;
+            }
+        });
     }
 
     private calculateAverage(
@@ -44,8 +52,6 @@ export class FinancialDataCalculator {
         const relevantData = this.financialData.map(obj => obj.data[property]).filter(value => value !== 0);
         return relevantData.length > 0 ? relevantData.reduce((acc, num) => acc + num, 0) / relevantData.length : 0;
     }
-
-    
 
     private calculateProperty(
         property: 'margins' | 'freeCashFlowDividedNetIncome',
@@ -60,14 +66,8 @@ export class FinancialDataCalculator {
     }
 
     calculateFinancialData(){
+
         this.calculateGrowthRate()
-        this.growthRateAverage = this.calculateAverage('growthRate');
-        
-        this.financialData.map((obj) => {
-            if(obj.data.growthRate===0) {
-                obj.data.growthRate = this.growthRateAverage;
-            }
-        })
         
         this.calculateProperty('margins', 'annualTotalRevenue', data => data.annualNetIncome / data.annualTotalRevenue);
         this.calculateProperty('freeCashFlowDividedNetIncome', 'annualNetIncome', data => data.annualFreeCashFlow / data.annualNetIncome);

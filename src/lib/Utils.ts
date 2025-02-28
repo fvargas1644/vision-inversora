@@ -1,5 +1,5 @@
 
-import { FinancialEntry } from "@/lib/definitions";
+import { YFinanceFinancialData } from "@/lib/types/yfinance";
 
 export function formatPrice(price: number): string {
     const sign = price < 0 ? '-' : ''; // Determina el signo del número
@@ -40,7 +40,7 @@ export function extractYFinanceCompanyInfo(yFinanceFinancialData: any[]) {
 }
 
 export const GENERATE_YEARS_YFINANCE_DATA = {
-    FINANCIAL_DATA: (yFinanceFinancialData: FinancialEntry[]) => {
+    FINANCIAL_DATA: (yFinanceFinancialData: YFinanceFinancialData[]) => {
         const years: number[] = []
         if (yFinanceFinancialData !== undefined && yFinanceFinancialData[0].timestamp) {
             const yearsWithoutParse = yFinanceFinancialData[0].timestamp.map(timestamp => new Date(timestamp * 1000))

@@ -25,9 +25,10 @@ export class FinancialPredictionsCalculator extends FinancialDataCalculator {
     }
 
     private calculateRevenue(){
-        const predictionsDataYears = this.predictionsData.map(obj => obj.year)
-        const firstYearPredictionsData = Math.min(...predictionsDataYears)
+        const predictionsDataYears = this.predictionsData.map(obj => obj.year);
+        const firstYearPredictionsData = Math.min(...predictionsDataYears);
 
+        // Reordenar de menor a mayor
         this.predictionsData.sort((a, b) => a.year - b.year);
 
         this.predictionsData.forEach(objForeach =>{
