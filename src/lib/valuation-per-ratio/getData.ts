@@ -2,7 +2,7 @@ import { fetchSecEdgarCompanyConcepts } from "../sec-edgar/fetchData";
 import { extractYFinanceCompanyInfo } from "../utils";
 import { queryYFinance } from "../yfinance-js/fetchData";
 import buildFinancialDataValuationPerRatio from "./builderFinancialData";
-import { FinancialDataCalculator } from "./FinancialDataCalculator";
+import { FinancialPredictionsCalculator } from "./FinancialPredictionsCalculator";
 
 export default async function getDataValuationPerRatio({ticker, cik} :{ticker : string, cik : number}){
 
@@ -13,13 +13,14 @@ export default async function getDataValuationPerRatio({ticker, cik} :{ticker : 
         queryYFinance({ query: 'COMPANY_INFO', ticker })
     ]);
 
-    const {stockPrice, sharesOutstanding} = extractYFinanceCompanyInfo(yFinanceDataCompanyInfo);
+    const {stockPrice, sharesOutstanding, per} = extractYFinanceCompanyInfo(yFinanceDataCompanyInfo);
 
     const {financialData, predictionsData} = await buildFinancialDataValuationPerRatio({yFinanceFinancialData, companyConcepts, ticker});
 
-    const financialModelValuationPerRatio = new FinancialDataCalculator( stockPrice, sharesOutstanding, financialData, predictionsData);
+    const financialModelValuationPerRatio = new FinancialPredictionsCalculator( stockPrice, sharesOutstanding, financialData, predictionsData, per);
 
     financialModelValuationPerRatio.calculateFinancialData();
+    financialModelValuationPerRatio.calculatePredictionsData();
 
 }
 

@@ -1,5 +1,5 @@
 
-import { YFinanceFinancialData } from "@/lib/types/yfinance";
+import { YFinanceAssetProfileResult, YFinanceFinancialData, YFinanceQuoteSummaryData } from "@/lib/types/yfinance";
 
 export function formatPrice(price: number): string {
     const sign = price < 0 ? '-' : ''; // Determina el signo del número
@@ -23,20 +23,22 @@ export function formatPrice(price: number): string {
     }
 }
 
-export function extractYFinanceCompanyInfo(yFinanceFinancialData: any[]) {
+export function extractYFinanceCompanyInfo(yFinanceFinancialData: YFinanceAssetProfileResult[]) {
     let stockPrice = 0;
-    let sharesOutstanding = 0
+    let sharesOutstanding = 0;
+    let per = 0;
     for (const obj of yFinanceFinancialData) {
-        if (obj.defaultKeyStatistics) {
-            sharesOutstanding = obj.defaultKeyStatistics.sharesOutstanding
-        }
+        if (obj.defaultKeyStatistics) sharesOutstanding = obj.defaultKeyStatistics.sharesOutstanding;
+        
 
-        if (obj.financialData) {
-            stockPrice = obj.financialData.currentPrice
-        }
+        if (obj.financialData) stockPrice = obj.financialData.currentPrice;
+            
+        
+
+        if(obj.summaryDetail) per = obj.summaryDetail.trailingPE;
     }
 
-    return { sharesOutstanding, stockPrice }
+    return { sharesOutstanding, stockPrice, per }
 }
 
 export const GENERATE_YEARS_YFINANCE_DATA = {

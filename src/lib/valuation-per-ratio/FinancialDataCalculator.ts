@@ -6,18 +6,25 @@ export class FinancialDataCalculator {
     protected financialData: ValuationPerRatioFinancialData[];
     protected predictionsData: ValuationPerRatioFinancialData[];
     protected growthRateAverage : number; 
+    protected marginsAverage : number;
+    protected per : number;
+    protected sharesAverage : number;
 
     constructor(
         stockPrice : number, 
         sharesOutstanding : number, 
         financialData : ValuationPerRatioFinancialData[], 
-        predictionsData: ValuationPerRatioFinancialData[]) {
+        predictionsData: ValuationPerRatioFinancialData[],
+        per: number) {
             
         this.stockPrice = stockPrice;
         this.sharesOutstanding = sharesOutstanding;
         this.financialData =financialData;
         this.predictionsData = predictionsData;
         this.growthRateAverage = 0;
+        this.marginsAverage = 0;
+        this.per = per;
+        this.sharesAverage = 0;
     }
 
     private calculateProperty(
@@ -33,7 +40,7 @@ export class FinancialDataCalculator {
     }
 
     private calculateAverage(
-        property:  'revenueGrowth'
+        property:  'revenueGrowth' | 'margin' | 'per' | 'shares'
     ) {
         const relevantData = this.financialData.map(obj => obj.data[property]).filter(value => value !== 0);
         return relevantData.length > 0 ? relevantData.reduce((acc, num) => acc + num, 0) / relevantData.length : 0;
@@ -63,16 +70,16 @@ export class FinancialDataCalculator {
     }
 
     private calculateGrowthRate(){
-        const financialDataYears = new Map(this.financialData.map(obj => [obj.year, obj.data.annualTotalRevenue]));
+        const years = new Map(this.financialData.map(obj => [obj.year, obj.data.annualTotalRevenue]));
     
         this.financialData.forEach(obj => {
-            const previousRevenue = financialDataYears.get(obj.year - 1);
+            const previousRevenue = years.get(obj.year - 1);
             if (previousRevenue && previousRevenue !== 0) {
                 obj.data.revenueGrowth = (obj.data.annualTotalRevenue - previousRevenue) / previousRevenue;
             }
         });
 
-        
+        // Calcular promedio de revenueGrowth
         this.growthRateAverage = this.calculateAverage('revenueGrowth');
 
         this.financialData.map((obj) => {
@@ -90,9 +97,16 @@ export class FinancialDataCalculator {
 
         this.financialData.forEach(obj => {
             obj.data.marketCap = obj.data.stockPrice * obj.data.shares;
-            if (obj.data.shares !== 0) obj.data.per = obj.data.annualNetIncome/ obj.data.shares;
+            obj.data.per = this.per;
+
+            if (obj.data.shares !== 0) obj.data.per = obj.data.annualTotalRevenue/ obj.data.shares;
+            
         });
 
         this.calculateGrowthRate();
+
+        // calcular promedios
+        this.marginsAverage = this.calculateAverage('margin');
+        this.sharesAverage = this.calculateAverage('shares');
     }
 }
