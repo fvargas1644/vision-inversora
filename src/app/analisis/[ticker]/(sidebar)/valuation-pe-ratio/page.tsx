@@ -1,5 +1,5 @@
 import { findCompany } from "@/lib/utilsServer";
-import getDataValuationPerRatio from "@/lib/valuation-per-ratio/getData";
+import getDataValuationPerRatio from "@/lib/valuation-pe-ratio/getData";
 
 export default async function Page({ params }: { params: { ticker: string } }) {
 

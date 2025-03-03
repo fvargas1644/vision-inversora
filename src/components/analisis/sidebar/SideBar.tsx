@@ -27,10 +27,10 @@ export default function Sidebar() {
                         </Link>
                     </li>
                     <li className={styles.menuItem}>
-                        <Link href='./valuation-per-ratio' className={styles.menuLink}>
+                        <Link href='./valuation-pe-ratio' className={styles.menuLink}>
 
                             <BarChart2 className={styles.menuIcon} />
-                            <span className={styles.menuText}>Valoración Ratio PER</span>
+                            <span className={styles.menuText}>Valoración Ratio PE</span>
                         </Link>
                     </li>
                 </ul>
