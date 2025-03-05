@@ -1,3 +1,4 @@
+import PageContent from "@/components/analisis/sidebar/valuation-per/PageContent";
 import ValuationPerProvider from "@/context/ValuationPerContext";
 import { findCompany } from "@/lib/utilsServer";
 import getDataValuationPerRatio from "@/lib/valuation-pe-ratio/getData";
@@ -10,7 +11,7 @@ export default async function Page({ params }: { params: { ticker: string } }) {
         const data = await getDataValuationPerRatio({ticker: params.ticker, cik});
         return (
         <ValuationPerProvider initialData={data}>
-            <h1>Pruebas2</h1>
+            <PageContent />
         </ValuationPerProvider>
         )
     } else {

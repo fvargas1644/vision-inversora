@@ -2,7 +2,7 @@ import styles from '@/styles/analisis/sidebar/discounted-free-cash-flow/Title.mo
 
 export default function Title({ticker, company} : {ticker: string, company: string}){
     return(
-        <div>
+    <div>
         <h1 className={styles.companyName}>{company} ({ticker})</h1>
     </div>
     )

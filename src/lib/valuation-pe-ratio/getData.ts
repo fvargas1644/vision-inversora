@@ -2,8 +2,7 @@ import { fetchSecEdgarCompanyConcepts } from "../sec-edgar/fetchData";
 import { extractYFinanceCompanyInfo } from "../utils";
 import { queryYFinance } from "../yfinance-js/fetchData";
 import buildFinancialDataValuationPerRatio from "./builderFinancialData";
-import { FinancialModel } from "./FinancialModel copy";
-import { FinancialPredictionsCalculator } from "./FinancialPredictionsCalculator";
+import { FinancialModel } from "./FinancialModel";
 
 export default async function getDataValuationPerRatio({ticker, cik} :{ticker : string, cik : number}){
 
@@ -22,6 +21,12 @@ export default async function getDataValuationPerRatio({ticker, cik} :{ticker : 
 
     financialModelValuationPerRatio.calculateFinancialData();
     financialModelValuationPerRatio.calculatePredictionsData();
+
+    return {
+        financialData: financialModelValuationPerRatio.getFinancialData(),
+        predictionsData: financialModelValuationPerRatio.getPredictionsData(),
+        stockPrice,
+    }
 
 }
 
