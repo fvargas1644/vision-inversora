@@ -1,8 +1,11 @@
-import { FinancialData, PredictionsData } from "@/lib/definitions";
+import { DiscontedFreeCashFlowFinancialData, DiscontedFreeCashFlowPredictionsData } from "@/lib/types/discountedFreeCashFlow";
+
+
+/** Discounted Free Cash Flow */
 
 export interface FinancialModel {
-    financialData: FinancialData[];
-    predictionsData: PredictionsData[];
+    financialData: DiscontedFreeCashFlowFinancialData[];
+    predictionsData: DiscontedFreeCashFlowPredictionsData[];
     intrinsicPrice: number;
     stockPrice: number;
     wacc: number; 

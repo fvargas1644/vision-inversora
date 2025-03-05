@@ -58,7 +58,7 @@ export type YFinanceQuoteSummaryData = {
     };
 };
 
-type YFinanceAssetProfileResult = {
+export type YFinanceAssetProfileResult = {
     assetProfile: {
         address1: string;
         city: string;
