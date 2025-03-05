@@ -98,8 +98,6 @@ export class FinancialDataCalculator {
         this.financialData.forEach(obj => {
             obj.data.marketCap = obj.data.stockPrice * obj.data.shares;
             obj.data.per = this.per;
-
-            if (obj.data.shares !== 0) obj.data.per = obj.data.annualTotalRevenue/ obj.data.shares;
             
         });
 
