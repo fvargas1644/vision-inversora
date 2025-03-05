@@ -1,8 +1,8 @@
 import styles from '@/styles/analisis/sidebar/discounted-free-cash-flow/FinancialData.module.css'
-import { PredictionsData, FinancialData } from "@/lib/definitions"
+import { DiscontedFreeCashFlowFinancialData,DiscontedFreeCashFlowPredictionsData } from "@/lib/types/discountedFreeCashFlow"
 import { formatPrice } from '@/lib/utils'
 
-export default function FinancialDataTables({ financialData, predictionsData }: { financialData: FinancialData[], predictionsData: PredictionsData[]}) {
+export default function FinancialDataTables({ financialData, predictionsData }: { financialData: DiscontedFreeCashFlowFinancialData[], predictionsData: DiscontedFreeCashFlowPredictionsData[]}) {
     return (
       <>   
       <section className={styles.financialData}>
