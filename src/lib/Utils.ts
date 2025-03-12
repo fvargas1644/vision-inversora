@@ -28,14 +28,13 @@ export function extractYFinanceCompanyInfo(yFinanceFinancialData: YFinanceAssetP
     let sharesOutstanding = 0;
     let per = 0;
     for (const obj of yFinanceFinancialData) {
-        if (obj.defaultKeyStatistics) sharesOutstanding = obj.defaultKeyStatistics.sharesOutstanding;
+        if (obj.defaultKeyStatistics.sharesOutstanding) sharesOutstanding = obj.defaultKeyStatistics.sharesOutstanding;
         
 
-        if (obj.financialData) stockPrice = obj.financialData.currentPrice;
+        if (obj.financialData.currentPrice) stockPrice = obj.financialData.currentPrice;
             
         
-
-        if(obj.summaryDetail) per = obj.summaryDetail.trailingPE;
+        if(obj.summaryDetail.trailingPE) per = obj.summaryDetail.trailingPE;
     }
 
     return { sharesOutstanding, stockPrice, per }
