@@ -33,7 +33,7 @@ export function extractYFinanceCompanyInfo(yFinanceFinancialData: YFinanceAssetP
 
         if (obj.financialData.currentPrice) stockPrice = obj.financialData.currentPrice;
             
-        
+    
         if(obj.summaryDetail.trailingPE) per = obj.summaryDetail.trailingPE;
     }
 
