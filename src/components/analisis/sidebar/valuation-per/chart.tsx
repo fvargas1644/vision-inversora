@@ -1,8 +1,9 @@
 import React from "react";
 import ReactECharts from "echarts-for-react";
+import { EChartsOption } from "echarts";
 
-const LineChart = () => {
-  const option = {
+const LineChart: React.FC = () => {
+  const options: EChartsOption = {
     title: {
       text: "Line Chart",
       subtext: "Subtitle here",
@@ -14,11 +15,11 @@ const LineChart = () => {
       data: ["Group 1", "Group 2", "Group 3"],
     },
     xAxis: {
-      type: "category",
+      type: "category", 
       data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     },
     yAxis: {
-      type: "value",
+      type: "value", 
     },
     series: [
       {
@@ -57,7 +58,8 @@ const LineChart = () => {
     ],
   };
 
-  return <ReactECharts option={option} style={{ height: "400px" }} />;
+  return <ReactECharts option={options} style={{ height: 400, width: "100%" }} />;
 };
 
 export default LineChart;
+
