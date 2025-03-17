@@ -1,8 +1,7 @@
-import React from "react";
 import ReactECharts from "echarts-for-react";
 import { EChartsOption } from "echarts";
 
-const PriceChart: React.FC = () => {
+export default function  PriceChart ({prices, years} : {prices : number[], years : string[]}){
   const options: EChartsOption = {
     title: {
       text: "Proyección de precios",
@@ -12,7 +11,7 @@ const PriceChart: React.FC = () => {
     },
     xAxis: {
       type: "category", 
-      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      data: years,
     },
     yAxis: {
       type: "value", 
@@ -21,7 +20,7 @@ const PriceChart: React.FC = () => {
       {
         name: "Proyección",
         type: "line",
-        data: [620, 732, 601, 934, 720, 717, 620],
+        data: prices,
         symbol: "circle",
         symbolSize: 10,
         label: {
@@ -36,8 +35,10 @@ const PriceChart: React.FC = () => {
     ],
   };
 
-  return <ReactECharts option={options} style={{ height: 400, width: "100%" }} />;
+  return (
+    <div className="card">
+      <ReactECharts option={options} style={{ height: 400, width: "100%" }} />
+    </div>
+  );
 };
-
-export default PriceChart;
 

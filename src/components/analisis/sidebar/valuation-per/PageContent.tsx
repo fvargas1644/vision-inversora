@@ -13,10 +13,12 @@ export default function PageContent() {
     const { ticker, company } = useContext(AnalysisContext);
 
     if (financialModel) {
+        const prices =  financialModel.predictionsData.map( obj => obj.data.stockPrice.toFixed(1))
+        const years =  financialModel.predictionsData.map( obj => String(obj.year))
         return (
             <>
-                <PriceChart />
                 <Header ticker={ticker} company={company} stockPrice={financialModel.stockPrice}/>
+                <PriceChart prices={prices} years={years}/>
                 <FinancialDataTables financialData={financialModel.financialData} predictionsData={financialModel.predictionsData}/>
             </>
         )
