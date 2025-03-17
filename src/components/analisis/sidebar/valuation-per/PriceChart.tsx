@@ -2,17 +2,13 @@ import React from "react";
 import ReactECharts from "echarts-for-react";
 import { EChartsOption } from "echarts";
 
-const LineChart: React.FC = () => {
+const PriceChart: React.FC = () => {
   const options: EChartsOption = {
     title: {
-      text: "Line Chart",
-      subtext: "Subtitle here",
+      text: "Proyección de precios",
     },
     tooltip: {
       trigger: "axis",
-    },
-    legend: {
-      data: ["Group 1", "Group 2", "Group 3"],
     },
     xAxis: {
       type: "category", 
@@ -23,7 +19,7 @@ const LineChart: React.FC = () => {
     },
     series: [
       {
-        name: "Group 1",
+        name: "Proyección",
         type: "line",
         data: [620, 732, 601, 934, 720, 717, 620],
         symbol: "circle",
@@ -31,25 +27,7 @@ const LineChart: React.FC = () => {
         label: {
           show: true,
           position: "top",
-        },
-      },
-      {
-        name: "Group 2",
-        type: "line",
-        data: [500, 410, 560, 580, 470, 459, 480],
-        symbol: "circle",
-        symbolSize: 10,
-      },
-      {
-        name: "Group 3",
-        type: "line",
-        data: [330, 200, 180, 290, 210, 218, 260],
-        symbol: "circle",
-        symbolSize: 10,
-        label: {
-          show: true,
-          position: "top",
-          backgroundColor: "#FFD700",
+          backgroundColor: "#5470c6",
           borderRadius: 10,
           padding: 5,
           color: "#fff",
@@ -61,5 +39,5 @@ const LineChart: React.FC = () => {
   return <ReactECharts option={options} style={{ height: 400, width: "100%" }} />;
 };
 
-export default LineChart;
+export default PriceChart;
 

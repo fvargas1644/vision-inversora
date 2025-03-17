@@ -5,7 +5,7 @@ import { ValuationPerContext } from "@/context/ValuationPerContext";
 import { useContext } from "react";
 import Header from "@/components/analisis/sidebar/valuation-per/Header";
 import FinancialDataTables from "./FinancialDataTables";
-import LineChart from "./chart";
+import PriceChart from "./PriceChart";
 
 export default function PageContent() {
 
@@ -15,7 +15,7 @@ export default function PageContent() {
     if (financialModel) {
         return (
             <>
-                <LineChart />
+                <PriceChart />
                 <Header ticker={ticker} company={company} stockPrice={financialModel.stockPrice}/>
                 <FinancialDataTables financialData={financialModel.financialData} predictionsData={financialModel.predictionsData}/>
             </>
