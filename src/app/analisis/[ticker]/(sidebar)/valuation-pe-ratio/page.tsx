@@ -5,19 +5,11 @@ import getDataValuationPerRatio from "@/lib/valuation-pe-ratio/getData";
 
 export default async function Page({ params }: { params: { ticker: string } }) {
 
-    const {cik} = await findCompany(params.ticker);
-
-    if(cik) {
-        const data = await getDataValuationPerRatio({ticker: params.ticker, cik});
-        return (
+    const data = await getDataValuationPerRatio({ticker: params.ticker});
+    return (
         <ValuationPerProvider initialData={data}>
             <PageContent />
         </ValuationPerProvider>
-        )
-    } else {
-        return (
-            <h1>No se encontraron datos de la compañia</h1>
-        )
-    }
-    
+    )
+     
 }

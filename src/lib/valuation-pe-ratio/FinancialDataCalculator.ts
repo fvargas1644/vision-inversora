@@ -8,7 +8,6 @@ export class FinancialDataCalculator {
     protected growthRateAverage : number; 
     protected marginsAverage : number;
     protected per : number;
-    protected sharesAverage : number;
 
     constructor(
         stockPrice : number, 
@@ -24,7 +23,6 @@ export class FinancialDataCalculator {
         this.growthRateAverage = 0;
         this.marginsAverage = 0;
         this.per = per;
-        this.sharesAverage = 0;
     }
 
     private calculateProperty(
@@ -40,14 +38,14 @@ export class FinancialDataCalculator {
     }
 
     private calculateAverage(
-        property:  'revenueGrowth' | 'margin' | 'per' | 'shares'
+        property:  'revenueGrowth' | 'margin' | 'per' 
     ) {
         const relevantData = this.financialData.map(obj => obj.data[property]).filter(value => value !== 0);
         return relevantData.length > 0 ? relevantData.reduce((acc, num) => acc + num, 0) / relevantData.length : 0;
     }
 
 
-    private addDefaultValue(property: 'shares' | 'stockPrice', defaultValue: number) {
+    private addDefaultValue(property: 'stockPrice', defaultValue: number) {
         const lastYear = Math.max(...this.financialData.map(obj => obj.year));
 
         // Agregar valor por defecto al ultimo año de financial data si no es 0
@@ -92,11 +90,9 @@ export class FinancialDataCalculator {
     calculateFinancialData(){
 
         this.calculateProperty('margin', 'annualTotalRevenue', data => data.annualNetIncome / data.annualTotalRevenue);
-        this.addDefaultValue('shares', this.sharesOutstanding);
         this.addDefaultValue('stockPrice', this.stockPrice);
 
         this.financialData.forEach(obj => {
-            obj.data.marketCap = obj.data.stockPrice * obj.data.shares;
             obj.data.per = this.per;
             
         });
@@ -105,6 +101,5 @@ export class FinancialDataCalculator {
 
         // calcular promedios
         this.marginsAverage = this.calculateAverage('margin');
-        this.sharesAverage = this.calculateAverage('shares');
     }
 }

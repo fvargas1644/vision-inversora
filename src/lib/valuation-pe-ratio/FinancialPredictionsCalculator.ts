@@ -39,20 +39,15 @@ export class FinancialPredictionsCalculator extends FinancialDataCalculator {
             obj.data.revenueGrowth = this.growthRateAverage;
             obj.data.margin = this.marginsAverage;
             obj.data.per = this.per; 
-            obj.data.shares = this.sharesAverage;
         });
 
         this.calculateRevenue();
 
         this.predictionsData.forEach(obj => {
             obj.data.annualNetIncome = obj.data.annualTotalRevenue * obj.data.margin;
-            if(obj.data.shares !== 0){
-                obj.data.stockPrice = obj.data.per * obj.data.annualNetIncome/obj.data.shares;
+            if(this.sharesOutstanding !== 0){
+                obj.data.stockPrice = obj.data.per * obj.data.annualNetIncome/this.sharesOutstanding;
             }
-        });
-
-        this.predictionsData.forEach(obj => {
-            obj.data.marketCap = obj.data.stockPrice * obj.data.shares;
         });
     }
 }    

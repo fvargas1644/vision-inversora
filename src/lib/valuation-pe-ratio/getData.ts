@@ -4,9 +4,7 @@ import { queryYFinance } from "../yfinance-js/fetchData";
 import buildFinancialDataValuationPerRatio from "./builderFinancialData";
 import { FinancialModel } from "./FinancialModel";
 
-export default async function getDataValuationPerRatio({ticker, cik} :{ticker : string, cik : number}){
-
-    const companyConcepts = await getCompanyConcepts(cik);
+export default async function getDataValuationPerRatio({ticker} :{ticker : string}){
 
     const [yFinanceFinancialData, yFinanceDataCompanyInfo] = await Promise.all([
         queryYFinance({ query: 'FINANCIAL_DATA', ticker }),
@@ -15,7 +13,7 @@ export default async function getDataValuationPerRatio({ticker, cik} :{ticker : 
 
     const {stockPrice, sharesOutstanding, per} = extractYFinanceCompanyInfo(yFinanceDataCompanyInfo);
 
-    const {financialData, predictionsData} = await buildFinancialDataValuationPerRatio({yFinanceFinancialData, companyConcepts, ticker});
+    const {financialData, predictionsData} = await buildFinancialDataValuationPerRatio({yFinanceFinancialData, ticker});
 
     const financialModelValuationPerRatio = new FinancialModel( stockPrice, sharesOutstanding, financialData, predictionsData, per);
 
@@ -28,13 +26,4 @@ export default async function getDataValuationPerRatio({ticker, cik} :{ticker : 
         stockPrice,
     }
 
-}
-
-async function getCompanyConcepts(cik : number) {
-    try{
-        const companyConcepts = await fetchSecEdgarCompanyConcepts(cik);
-        return companyConcepts;
-    } catch(err){
-        return []
-    }
 }

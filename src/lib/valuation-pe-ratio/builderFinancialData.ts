@@ -4,7 +4,7 @@ import { ValuationPerRatioFinancialData, ValuatioPerRatioExtractFinancialData } 
 import { GENERATE_YEARS_YFINANCE_DATA } from "../utils";
 import { queryYFinance  } from "../yfinance-js/fetchData";
 
-export default async function  buildFinancialDataValuationPerRatio({yFinanceFinancialData, companyConcepts,ticker} : any) {
+export default async function  buildFinancialDataValuationPerRatio({yFinanceFinancialData,ticker} : any) {
 
     const financialData : ValuationPerRatioFinancialData[]= [];
     const predictionsData : ValuationPerRatioFinancialData[] = [];
@@ -30,7 +30,7 @@ export default async function  buildFinancialDataValuationPerRatio({yFinanceFina
 
 
     financialDataYears.forEach(year => {
-        financialData.push(extractFinancialData({yFinanceFinancialData, companyConcepts, year, stockHistory}));
+        financialData.push(extractFinancialData({yFinanceFinancialData, year, stockHistory}));
     });
     
     predictionsYears.forEach(year => {
@@ -48,13 +48,11 @@ export default async function  buildFinancialDataValuationPerRatio({yFinanceFina
 
 }
 
-function extractFinancialData({yFinanceFinancialData,companyConcepts, year , stockHistory}: ValuatioPerRatioExtractFinancialData) {
+function extractFinancialData({yFinanceFinancialData, year , stockHistory}: ValuatioPerRatioExtractFinancialData) {
 
-    // extraer shares
-    const sharesVal =  extractcompanyConcepts({year, companyConcepts});
+
 
     const financialData = buildFinancialDataContainer(year);
-    financialData.data.shares = sharesVal ? sharesVal: 0;
 
     // Extraer annualTotalRevenue y annualNetIncome
     for (const financialRecord of yFinanceFinancialData) {
@@ -93,14 +91,6 @@ function dateSecondsToDate(dateSeconds : number) {
     return date.getFullYear();
 }
 
-function extractcompanyConcepts({year, companyConcepts} : any) {
-    for  (let i = companyConcepts.length - 1; i >= 0; i--) {
-        if(companyConcepts[i].end.startsWith(String(year))){
-            return companyConcepts[i].val
-        }
-    }
-    return undefined;
-}
 
 function getDateSeconds(year : number) {
     const lastDayYear = new Date(year, 11, 31)
@@ -115,13 +105,11 @@ function buildFinancialDataContainer(year: number) {
     const financialData = {
         year,
         data: {
-            marketCap: 0,
             annualTotalRevenue: 0,
             revenueGrowth: 0,
             margin: 0,
             annualNetIncome: 0,
             per: 0,
-            shares: 0,
             stockPrice: 0
         }
     };
