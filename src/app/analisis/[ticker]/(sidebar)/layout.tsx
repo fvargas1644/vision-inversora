@@ -1,5 +1,5 @@
 import MarcketOverView from '@/components/analisis/ticker/MarcketOverView';
-import styles from '@/styles/analisis/ticker/sidebar/page.module.css'
+import styles from '@/styles/analisis/ticker/sidebar/Page.module.css'
 import Sidebar from '@/components/analisis/ticker/sidebar/SideBar';
 
 export default async function RootLayout({

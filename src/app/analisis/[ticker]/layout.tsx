@@ -1,4 +1,3 @@
-import SelectionBar from "@/components/analisis/ticker/SelectionBar";
 import AnalysisProvider from "@/context/AnalysisContext";
 import { findCompany } from "@/lib/utilsServer";
 
@@ -12,7 +11,6 @@ export default async function Layout({ children, params }: Readonly<{ children: 
         return (
             <AnalysisProvider ticker={ticker} company={company} cik={cik}>
                 {children}
-                <SelectionBar ticker={ticker} />
             </AnalysisProvider>
         )
     } else {
