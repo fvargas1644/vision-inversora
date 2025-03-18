@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { DiscontedFreeCashFlowContext } from '@/context/DiscountedFreeCashFlowContext';
 import Title from './Title';
 import Metrics from './Metrics';
-import FinancialDataTables from './FinancialDataTables';
+import FinancialDataTables from '@/components/analisis/ticker/sidebar/discounted-free-cash-flow/FinancialDataTables';
 import { AnalysisContext } from '@/context/AnalysisContext';
 
 

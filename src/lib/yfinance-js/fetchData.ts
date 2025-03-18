@@ -16,6 +16,10 @@ const YFINANCE_QUERY_OPTIONS = {
     },
     HISTORY_BY_DATE : ({ticker, crumb, start, end ,interval} : any) => {
         return `https://query2.finance.yahoo.com/v8/finance/chart/${ticker}?period1=${start}&period2=${end}&interval=${interval}&includePrePost=False&events=div%2Csplits%2CcapitalGains&crumb=${crumb}`
+    },
+
+    HISTORY_BY_INTERVAL : ({ticker, crumb, interval} : any) => {
+        return `https://query2.finance.yahoo.com/v8/finance/chart/${ticker}?range=${interval}&interval=${interval}&includePrePost=False&events=div%2Csplits%2CcapitalGains&crumb=${crumb}`
     }
 }
 
@@ -27,6 +31,8 @@ export async function queryYFinance({query, ticker='APPL', start, end, interval}
     const url = () : string => { 
         if(query === "HISTORY_BY_DATE") {
             return YFINANCE_QUERY_OPTIONS["HISTORY_BY_DATE"]({ticker, crumb, start, end, interval});
+        } else if (query === "HISTORY_BY_INTERVAL") {
+            return YFINANCE_QUERY_OPTIONS["HISTORY_BY_INTERVAL"]({ticker, crumb, interval});
         } else {
             return YFINANCE_QUERY_OPTIONS[query]({ticker, crumb});
         }
@@ -39,6 +45,15 @@ export async function queryYFinance({query, ticker='APPL', start, end, interval}
     });
 
     return fetch
+}
+
+const validateHistory = (data : YFinanceTradingDataHistory) => {
+    const financialData = data.chart.result.some(item => item.indicators.adjclose.length > 0);
+    const state =  (financialData ) ? true : false;
+    return {
+        state,
+        data: data.chart.result
+    }
 }
 
 const VALIDATE_FETCH_YFINANCE = {
@@ -62,14 +77,9 @@ const VALIDATE_FETCH_YFINANCE = {
         }
     },
     
-    HISTORY_BY_DATE: (data : YFinanceTradingDataHistory) => {
-        const financialData = data.chart.result.some(item => item.indicators.adjclose.length > 0);
-        const state =  (financialData ) ? true : false;
-        return {
-            state,
-            data: data.chart.result
-        }
-    }
+    HISTORY_BY_DATE: validateHistory,
+
+    HISTORY_BY_INTERVAL: validateHistory,
 }
 
 async function fetchYFinance({ cookie, url, type }: YFinanceFetch) {
