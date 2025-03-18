@@ -1,4 +1,4 @@
-type YFinanceTypeQuery = 'FINANCIAL_DATA' | 'COMPANY_INFO' | "HISTORY"
+type YFinanceTypeQuery = 'FINANCIAL_DATA' | 'COMPANY_INFO' | "HISTORY_BY_DATE"
 
 export interface YFinanceQuery {
     query: YFinanceTypeQuery,

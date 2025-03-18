@@ -14,7 +14,7 @@ const YFINANCE_QUERY_OPTIONS = {
         const params = [ 'financialData', 'defaultKeyStatistics', 'assetProfile','summaryDetail'].map(String).join(",");
         return `https://query2.finance.yahoo.com/v10/finance/quoteSummary/${ticker}?modules=${params}&corsDomain=finance.yahoo.com&formatted=false&symbol=${ticker}&crumb=${crumb}` 
     },
-    HISTORY : ({ticker, crumb, start, end ,interval} : any) => {
+    HISTORY_BY_DATE : ({ticker, crumb, start, end ,interval} : any) => {
         return `https://query2.finance.yahoo.com/v8/finance/chart/${ticker}?period1=${start}&period2=${end}&interval=${interval}&includePrePost=False&events=div%2Csplits%2CcapitalGains&crumb=${crumb}`
     }
 }
@@ -25,8 +25,8 @@ export async function queryYFinance({query, ticker='APPL', start, end, interval}
     const crumb = await getCrumb(cookie);
 
     const url = () : string => { 
-        if(query === "HISTORY") {
-            return YFINANCE_QUERY_OPTIONS["HISTORY"]({ticker, crumb, start, end, interval});
+        if(query === "HISTORY_BY_DATE") {
+            return YFINANCE_QUERY_OPTIONS["HISTORY_BY_DATE"]({ticker, crumb, start, end, interval});
         } else {
             return YFINANCE_QUERY_OPTIONS[query]({ticker, crumb});
         }
@@ -62,7 +62,7 @@ const VALIDATE_FETCH_YFINANCE = {
         }
     },
     
-    HISTORY: (data : YFinanceTradingDataHistory) => {
+    HISTORY_BY_DATE: (data : YFinanceTradingDataHistory) => {
         const financialData = data.chart.result.some(item => item.indicators.adjclose.length > 0);
         const state =  (financialData ) ? true : false;
         return {

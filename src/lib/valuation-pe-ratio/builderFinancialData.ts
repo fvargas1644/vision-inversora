@@ -21,7 +21,7 @@ export default async function  buildFinancialDataValuationPerRatio({yFinanceFina
     if (!predictionsYears) throw new Error('Las fechas no se asignaron correctamente');
 
     const stockHistory = await queryYFinance({
-        query: "HISTORY", 
+        query: "HISTORY_BY_DATE", 
         ticker, 
         start: getDateSeconds(firstYearFinancialData -1), 
         end: getDateSeconds(lastYearFinancialData), 
