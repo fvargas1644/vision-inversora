@@ -17,7 +17,7 @@ export function formatPrice(price: number): string {
     } else if (absolutePrice >= 1_000_000) { // Millón (M)
         return sign + (absolutePrice / 1_000_000).toFixed(3) + 'M';
     } else if (absolutePrice >= 1_000){
-      return sign  + absolutePrice.toLocaleString("us-US", {maximumFractionDigits: 0})
+      return sign  + absolutePrice.toLocaleString("us-US", {maximumFractionDigits: 2})
     } else {
       return sign + absolutePrice.toLocaleString("us-US", {maximumFractionDigits: 2})
     }
