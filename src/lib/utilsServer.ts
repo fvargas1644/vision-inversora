@@ -24,7 +24,7 @@ const calculeMarketShare = async (ticker : string) => {
     const query :YFinanceChartResultHistory[] = await queryYFinance({ticker , query: "HISTORY_BY_INTERVAL", interval: "1d"})
     const values = query[0].indicators.quote[0]
 
-    let change : string | number = ((values.close[0]-values.open[0])/values.open[0])*100
+    let change : string | number = ((values.close[0]-values.open[0])/values.close[0])*100
     change = (change > 0) ?  `+${formatPrice(change)}%` : `${formatPrice(change)}%`
     
     return {value: formatPrice(values.close[0]), change}
@@ -32,13 +32,16 @@ const calculeMarketShare = async (ticker : string) => {
 
 export async function marketData() {
 
-  return [
-    { name: "S&P 500", ...await  calculeMarketShare("^GSPC")},
-    { name: "Dow Jones", ...await  calculeMarketShare("^DJI")},
-    { name: "Nasdaq", ...await  calculeMarketShare("^IXIC") },
-    { name: "Russell 2000",...await  calculeMarketShare("^RUT") },
-    { name: "Crude Oil", ...await  calculeMarketShare("CL=F")},
-    { name: "Gold", ...await  calculeMarketShare("GC=F") },
-    { name: "10-Yr Bond", ...await  calculeMarketShare("^TNX")},
-  ]
+    return Promise.all([
+        { name: "S&P 500", symbol: "^GSPC" },
+        { name: "Dow Jones", symbol: "^DJI" },
+        { name: "Nasdaq", symbol: "^IXIC" },
+        { name: "Russell 2000", symbol: "^RUT" },
+        { name: "Crude Oil", symbol: "CL=F" },
+        { name: "Gold", symbol: "GC=F" },
+        { name: "10-Yr Bond", symbol: "^TNX" }
+    ].map(async (item) => ({
+        name: item.name,
+        ...await calculeMarketShare(item.symbol)
+    })));
 } 
