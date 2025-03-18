@@ -1,5 +1,5 @@
 import { BarChart, DollarSign, Percent } from "lucide-react"
-import styles from "@/styles/analisis/sidebar/discounted-free-cash-flow/MarketOverview.module.css"
+import styles from "@/styles/analisis/ticker/sidebar/discounted-free-cash-flow/MarketOverview.module.css"
 
 const marketData = [
   { name: "S&P 500", value: "4,185.47", change: "+0.75%" },

@@ -3,7 +3,7 @@
 import { AnalysisContext } from "@/context/AnalysisContext";
 import { ValuationPerContext } from "@/context/ValuationPerContext";
 import { useContext } from "react";
-import Header from "@/components/analisis/sidebar/valuation-per/Header";
+import Header from "@/components/analisis/ticker/sidebar/valuation-per/Header";
 import FinancialDataTables from "./FinancialDataTables";
 import PriceChart from "./PriceChart";
 

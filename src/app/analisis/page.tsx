@@ -1,4 +1,4 @@
-export default async function AnalysisPage() {
+export default async function Page() {
 
     return (
       <div>

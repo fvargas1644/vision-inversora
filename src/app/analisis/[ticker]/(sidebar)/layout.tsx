@@ -1,6 +1,6 @@
-import MarcketOverView from '@/components/analisis/MarcketOverView';
-import styles from '@/styles/analisis/sidebar/page.module.css'
-import Sidebar from '@/components/analisis/sidebar/SideBar';
+import MarcketOverView from '@/components/analisis/ticker/MarcketOverView';
+import styles from '@/styles/analisis/ticker/sidebar/page.module.css'
+import Sidebar from '@/components/analisis/ticker/sidebar/SideBar';
 
 export default async function RootLayout({
     children,

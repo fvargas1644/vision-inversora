@@ -1,4 +1,4 @@
-import styles from '@/styles/analisis/sidebar/discounted-free-cash-flow/Title.module.css'
+import styles from '@/styles/analisis/ticker/sidebar/discounted-free-cash-flow/Title.module.css'
 
 export default function Title({ticker, company} : {ticker: string, company: string}){
     return(

@@ -1,4 +1,4 @@
-import SelectionBar from "@/components/analisis/SelectionBar";
+import SelectionBar from "@/components/analisis/ticker/SelectionBar";
 import AnalysisProvider from "@/context/AnalysisContext";
 import { findCompany } from "@/lib/utilsServer";
 

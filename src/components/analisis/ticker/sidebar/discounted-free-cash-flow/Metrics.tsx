@@ -1,4 +1,4 @@
-import styles from '@/styles/analisis/sidebar/discounted-free-cash-flow/Metrics.module.css'
+import styles from '@/styles/analisis/ticker/sidebar/discounted-free-cash-flow/Metrics.module.css'
 import { LineChart, ArrowUp, ArrowDown } from "lucide-react"
 import FormMetrics from './FormMetrics'
 import { formatPrice } from '@/lib/utils'

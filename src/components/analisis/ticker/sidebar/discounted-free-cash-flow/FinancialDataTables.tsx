@@ -1,4 +1,4 @@
-import styles from '@/styles/analisis/sidebar/discounted-free-cash-flow/FinancialData.module.css'
+import styles from '@/styles/analisis/ticker/sidebar/discounted-free-cash-flow/FinancialData.module.css'
 import { DiscontedFreeCashFlowFinancialData,DiscontedFreeCashFlowPredictionsData } from "@/lib/types/discountedFreeCashFlow"
 import { formatPrice } from '@/lib/utils'
 

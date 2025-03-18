@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { BarChart2, CircleChevronLeft } from "lucide-react"
-import styles from '@/styles/analisis/sidebar/SideBar.module.css'
+import styles from '@/styles/analisis/ticker/SideBar.module.css'
 
 export default function Sidebar() {
 

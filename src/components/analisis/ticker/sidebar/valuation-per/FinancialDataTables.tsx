@@ -1,4 +1,4 @@
-import styles from '@/styles/analisis/sidebar/discounted-free-cash-flow/FinancialData.module.css'
+import styles from '@/styles/analisis/ticker/sidebar/discounted-free-cash-flow/FinancialData.module.css'
 import { ValuationPerRatioFinancialData } from "@/lib/types/valuationPerRatio"
 import { formatPrice } from '@/lib/utils'
 

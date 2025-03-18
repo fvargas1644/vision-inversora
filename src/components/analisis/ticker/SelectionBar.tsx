@@ -1,7 +1,6 @@
 'use client'
 
 import usePath from '@/hooks/usePath';
-import styles from '@/styles/analisis/selectionBar.module.css'
 import { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 
@@ -26,8 +25,8 @@ export default function SelectionBar({ticker} : {ticker : string}) {
 
     
     return (
-        <section className={styles.vi_section}>
-            <div className={styles.vi_bar_container}>
+        <section>
+            <div>
                 <div>
                     <select name="analysis" 
                         id="analysis" 

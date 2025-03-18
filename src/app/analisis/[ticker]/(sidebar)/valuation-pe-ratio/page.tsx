@@ -1,6 +1,5 @@
-import PageContent from "@/components/analisis/sidebar/valuation-per/PageContent";
+import PageContent from "@/components/analisis/ticker/sidebar/valuation-per/PageContent";
 import ValuationPerProvider from "@/context/ValuationPerContext";
-import { findCompany } from "@/lib/utilsServer";
 import getDataValuationPerRatio from "@/lib/valuation-pe-ratio/getData";
 
 export default async function Page({ params }: { params: { ticker: string } }) {
