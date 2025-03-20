@@ -3,6 +3,7 @@ import stylesUtils from "@/styles/Utils.module.css"
 import styles from "@/styles/Page.module.css"
 import Tools from "@/components/Tools";
 import Stocks from "@/components/Stocks";
+import WhyChoseUs from "@/components/WhyChooseUs";
 
 export default async function Page() {
   return (
@@ -28,6 +29,9 @@ export default async function Page() {
           </p>
         </div>
         <Stocks />
+      </section>
+      <section className={styles.section}>
+        <WhyChoseUs />
       </section>
     </main>
   );
