@@ -10,7 +10,7 @@ export default function WhyChoseUs(){
           <div className={styles.whyChooseUsContainer}>
             <div className={styles.imageContainer}>
               <Image
-                src="/placeholder.svg?height=600&width=800"
+                src="/images/ImageComputer.png"
                 alt="Financial planning"
                 fill
                 className={styles.image}
