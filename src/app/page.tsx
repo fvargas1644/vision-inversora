@@ -1,7 +1,10 @@
-export default async function HomePage() {
+import Welcome from "@/components/Welcome";
+import utils from "@/styles/Utils.module.css"
+
+export default async function Page() {
   return (
-    <div>
-      <h1>Tests8</h1>
-    </div>
+    <main className={utils.main}>
+      <Welcome/>
+    </main>
   );
 }
