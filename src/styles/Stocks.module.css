@@ -1,0 +1,77 @@
+.stocksGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.stockCard {
+  text-decoration: none;
+  color: inherit;
+}
+
+.stockCardContent {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  transition: box-shadow 0.2s;
+}
+
+.stockCardContent:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.stockHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.stockSymbol {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.stockIconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #ebf5ff;
+  border-radius: 50%;
+}
+
+.stockIcon {
+  width: 20px;
+  height: 20px;
+  color: #2563eb;
+}
+
+.stockName {
+  font-size: 18px;
+  font-weight: 500;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.stockSector {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 16px;
+}
+
+.stockAction {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #2563eb;
+}
+
+.actionContainer {
+  margin-top: 40px;
+  text-align: center;
+}

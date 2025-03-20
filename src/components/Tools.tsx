@@ -1,6 +1,7 @@
-import { ArrowRight, Calculator, DollarSign, PieChart, TrendingUp } from "lucide-react"
+import { ArrowRight, Calculator, DollarSign} from "lucide-react"
 import Link from "next/link"
 import styles from "@/styles/Tools.module.css"
+import stylesUtils from "@/styles/Utils.module.css"
 
 const analysisTools = [
     {
@@ -30,7 +31,7 @@ export default function Tools() {
                         <p className={styles.toolDescription}>{tool.description}</p>
                         <div className={styles.toolAction}>
                             Pruébelo ahora
-                            <ArrowRight className={styles.smallIcon} />
+                            <ArrowRight className={stylesUtils.smallIcon} />
                         </div>
                     </div>
                 </Link>

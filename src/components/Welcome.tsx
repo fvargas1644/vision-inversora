@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import styles from "@/styles/Welcome.module.css"
+import stylesUtils from "@/styles/Utils.module.css"
 
 export default function Welcome() {
     return (
@@ -13,11 +14,11 @@ export default function Welcome() {
                     del mercado y construya una cartera más sólida.
                 </p>
                 <div className={styles.buttonContainer}>
-                    <Link href="./analisis" className={styles.primaryButton}>
+                    <Link href="./analisis" className={stylesUtils.primaryButton}>
                         Explorar Herramientas
-                        <ArrowRight className={styles.buttonIcon} />
+                        <ArrowRight className={stylesUtils.buttonIcon} />
                     </Link>
-                    <Link href="#" className={styles.secondaryButton}>
+                    <Link href="#" className={stylesUtils.secondaryButton}>
                         Sobre Mí
                     </Link>
                 </div>

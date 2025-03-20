@@ -29,41 +29,5 @@
     justify-content: center;
   }
   
-  .primaryButton {
-    display: inline-flex;
-    align-items: center;
-    padding: 12px 24px;
-    background-color: #2563eb;
-    color: #ffffff;
-    font-weight: 500;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: background-color 0.2s;
-  }
   
-  .primaryButton:hover {
-    background-color: #1d4ed8;
-  }
   
-  .secondaryButton {
-    display: inline-flex;
-    align-items: center;
-    padding: 12px 24px;
-    background-color: #ffffff;
-    color: #4b5563;
-    font-weight: 500;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: background-color 0.2s;
-  }
-  
-  .secondaryButton:hover {
-    background-color: #f9fafb;
-  }
-  
-  .buttonIcon {
-    width: 20px;
-    height: 20px;
-    margin-left: 8px;
-  }
