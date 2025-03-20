@@ -23,15 +23,16 @@ export default async function Page() {
     return (
       <main className={styles.main}>
         <div className={styles.header}>
-          <h1 className={styles.title}>Stock Catalog</h1>
+          <h1 className={styles.title}>Acciones</h1>
           <p className={styles.subtitle}>
-            Browse our comprehensive list of stocks and click on any card to view detailed analysis
+            Conozca algunas de las acciones de valores y 
+            haga clic en cualquier tarjeta para ver un análisis detallado
           </p>
         </div>
         <div className={styles.stockGrid}>
           {stocksData.map((stock) => (
             <div key={stock.symbol} className={styles.stockCard}>
-              <Link href={`/stocks/${stock.symbol}`} className={styles.cardContent}>
+              <Link href={`/analisis/${stock.symbol}`} className={styles.cardContent}>
                 <div className={styles.cardHeader}>
                   <span className={styles.symbol}>{stock.symbol}</span>
                   <div className={styles.iconContainer}>
@@ -42,11 +43,11 @@ export default async function Page() {
                 <div className={styles.sector}>{stock.sector}</div>
               </Link>
               <div className={styles.toolOptions}>
-                <Link href={`/tools/intrinsic-value?symbol=${stock.symbol}`} className={styles.toolButton}>
-                  Calculate Intrinsic Value
+                <Link href={`/analisis/${stock.symbol}/discounted-free-cash-flow`} className={styles.toolButton}>
+                  Calcular el valor intrínseco
                 </Link>
-                <Link href={`/tools/portfolio?add=${stock.symbol}`} className={styles.toolButton}>
-                  Add to Portfolio
+                <Link href={`/analisis/${stock.symbol}/valuation-pe-ratio`} className={styles.toolButton}>
+                  Valoración PER
                 </Link>
               </div>
             </div>

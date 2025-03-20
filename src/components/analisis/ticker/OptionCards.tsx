@@ -11,7 +11,7 @@ export default function OptionCards({ticker} : {ticker: string}) {
       title: "Acciones",
       description: "Explora algunas de las acciones en el meracado",
       icon: DollarSign,
-      href: "../",
+      href: "/analisis/",
     },
     {
       title: "Disconted Free Cash Flow",

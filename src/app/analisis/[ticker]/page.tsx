@@ -6,9 +6,10 @@ export default async function Page({ params }: { params: { ticker: string } }) {
     return (
     <main className={styles.main}>
         <div className={styles.header}>
-          <h1 className={styles.title}>Financial Tools</h1>
+          <h1 className={styles.title}>Herramientas Financieras</h1>
           <p className={styles.subtitle}>
-            Explore our suite of financial analysis tools to make informed investment decisions
+          Explore nuestro conjunto de herramientas de análisis 
+          financiero para tomar decisiones de inversión con conocimiento de causa.
           </p>
         </div>
         <OptionCards ticker={params.ticker} />
