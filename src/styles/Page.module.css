@@ -1,0 +1,22 @@
+/* Section Styles */
+.section {
+    padding: 60px 0;
+    border-top: 1px solid #e5e7eb;
+  }
+  
+  .sectionHeader {
+    margin-bottom: 40px;
+  }
+  
+  .sectionTitle {
+    font-size: 32px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 16px;
+  }
+  
+  .sectionDescription {
+    font-size: 16px;
+    color: #4b5563;
+  }
+  

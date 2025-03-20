@@ -1,10 +1,22 @@
 import Welcome from "@/components/Welcome";
-import utils from "@/styles/Utils.module.css"
+import stylesUtils from "@/styles/Utils.module.css"
+import styles from  "@/styles/Page.module.css"
 
 export default async function Page() {
   return (
-    <main className={utils.main}>
+    <main className={stylesUtils.main}>
       <Welcome/>
+      {/* Analysis Tools Section */}
+      <section className={styles.section}>
+            <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>Herramientas de análisis financiero</h2>
+                <p className={styles.sectionDescription}>
+                Nuestro conjunto de herramientas financieras le ayuda a analizar acciones, 
+                calcular valores intrínsecos y optimizar su cartera de inversiones.
+                </p>
+            </div>
+
+            </section>
     </main>
   );
 }
