@@ -8,13 +8,13 @@ const analysisTools = [
         title: "Calculadora del valor intrínseco",
         description: "Calcular el valor razonable de una acción utilizando el método del flujo de caja descontado",
         icon: DollarSign,
-        href: "/tools/intrinsic-value",
+        href: "/analisis",
     },
     {
         title: "Valoración PER",
         description: "Determinar el valor de las acciones mediante el método de la relación precio/beneficios",
         icon: Calculator,
-        href: "/tools/per-value",
+        href: "/analisis",
     }
 ]
 
