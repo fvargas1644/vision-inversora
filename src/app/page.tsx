@@ -1,6 +1,7 @@
 import Welcome from "@/components/Welcome";
 import stylesUtils from "@/styles/Utils.module.css"
 import styles from  "@/styles/Page.module.css"
+import Tools from "@/components/Tools";
 
 export default async function Page() {
   return (
@@ -15,8 +16,8 @@ export default async function Page() {
                 calcular valores intrínsecos y optimizar su cartera de inversiones.
                 </p>
             </div>
-
-            </section>
+            <Tools />
+        </section>
     </main>
   );
 }

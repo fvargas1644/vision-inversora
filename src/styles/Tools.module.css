@@ -1,0 +1,70 @@
+.toolsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  
+  .toolCard {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .toolCardContent {
+    height: 100%;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s;
+  }
+  
+  .toolCardContent:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .toolIconContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background-color: #ebf5ff;
+    border-radius: 50%;
+    margin-bottom: 16px;
+  }
+  
+  .toolIcon {
+    width: 24px;
+    height: 24px;
+    color: #2563eb;
+  }
+  
+  .toolTitle {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 8px;
+  }
+  
+  .toolDescription {
+    font-size: 14px;
+    color: #4b5563;
+    margin-bottom: 16px;
+    flex-grow: 1;
+  }
+  
+  .toolAction {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #2563eb;
+  }
+  
+  .smallIcon {
+    width: 16px;
+    height: 16px;
+    margin-left: 4px;
+  }
