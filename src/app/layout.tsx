@@ -16,6 +16,10 @@ export default async function RootLayout({
  
   return (
     <html lang="es">
+      <head>
+          {/* <link rel="shortcut icon" href={favicon} /> */}
+          <link rel="icon" type="image/ico"  href="/images/favicon.ico" />
+      </head>
       <body className={`${montserrat.className} antialiased`}>
         <div className="vi_content_pages">
           <Header dataCompany={fechCompany}/>
