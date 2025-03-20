@@ -29,5 +29,23 @@
     justify-content: center;
   }
   
+  @media (max-width: 768px) {
+    .heroTitle {
+      font-size: 36px;
+    }
+
+  }
+
+  @media (max-width: 640px) {
+  
+    .heroTitle {
+      font-size: 32px;
+    }
+  
+    .heroDescription {
+      font-size: 16px;
+    }
+  }
+  
   
   

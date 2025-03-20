@@ -88,3 +88,21 @@
   .learnMoreLink:hover {
     color: #1d4ed8;
   }
+
+  
+  
+  @media (max-width: 1024px) {
+  
+    .whyChooseUsContainer {
+      grid-template-columns: 1fr;
+    }
+  
+    .imageContainer {
+      order: 2;
+    }
+  
+    .whyChooseUsContent {
+      order: 1;
+    }
+  }
+  

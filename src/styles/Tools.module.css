@@ -68,3 +68,15 @@
     height: 16px;
     margin-left: 4px;
   }
+
+  @media (max-width: 1024px) {
+    .toolsGrid{
+      grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .toolsGrid {
+      grid-template-columns: 1fr;
+    }
+  }

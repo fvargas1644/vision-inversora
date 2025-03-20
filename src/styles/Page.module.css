@@ -24,5 +24,14 @@
     margin-top: 40px;
     text-align: center;
   }
+
+    
+  @media (max-width: 768px) {
+  
+    .sectionTitle {
+      font-size: 28px;
+    }
+  }
+  
   
   

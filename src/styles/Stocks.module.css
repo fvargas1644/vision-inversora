@@ -75,3 +75,15 @@
   margin-top: 40px;
   text-align: center;
 }
+
+@media (max-width: 1024px) {
+  .stocksGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .stocksGrid {
+    grid-template-columns: 1fr;
+  }
+}
