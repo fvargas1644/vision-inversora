@@ -1,6 +1,6 @@
 'use client'
 
-import { BarChart, DollarSign, Percent, Ticket } from "lucide-react"
+import { BarChart, DollarSign, Percent } from "lucide-react"
 import styles from "@/styles/analisis/ticker/sidebar/discounted-free-cash-flow/MarketOverview.module.css"
 import { useEffect, useState } from "react"
 import { marketData } from "@/lib/utilsServer";

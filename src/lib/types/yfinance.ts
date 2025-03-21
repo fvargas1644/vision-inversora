@@ -8,11 +8,6 @@ export interface YFinanceQuery {
     interval?: string
 }
 
-export interface YFinanceQueryOptions {
-    ticker: string,
-    crumb: string
-}
-
 export interface YFinanceFetch {
     cookie: string,
     url: string,
