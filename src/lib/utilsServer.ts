@@ -20,7 +20,7 @@ export async function findCompany(ticker: string) {
     return { ticker: null, company: null, cik: null }
 }
 
-const calculeMarketShare = async (ticker : string) => {
+async function calculateMarketShare(ticker : string)  {
     const query :YFinanceChartResultHistory[] = await queryYFinance({ticker , query: "HISTORY_BY_INTERVAL", interval: "1d"})
     const values = query[0].indicators.quote[0]
 
@@ -31,7 +31,6 @@ const calculeMarketShare = async (ticker : string) => {
 } 
 
 export async function marketData() {
-
     return Promise.all([
         { name: "S&P 500", symbol: "^GSPC" },
         { name: "Dow Jones", symbol: "^DJI" },
@@ -42,6 +41,6 @@ export async function marketData() {
         { name: "10-Yr Bond", symbol: "^TNX" }
     ].map(async (item) => ({
         name: item.name,
-        ...await calculeMarketShare(item.symbol)
+        ...await calculateMarketShare(item.symbol)
     })));
 } 

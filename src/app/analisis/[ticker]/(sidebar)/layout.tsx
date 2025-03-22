@@ -1,6 +1,7 @@
-import MarcketOverView from '@/components/analisis/ticker/MarcketOverView';
+import MarketOverView from '@/components/analisis/ticker/MarketOverView';
 import styles from '@/styles/analisis/ticker/sidebar/Page.module.css'
 import Sidebar from '@/components/analisis/ticker/sidebar/SideBar';
+import { Suspense } from 'react';
 
 export default async function RootLayout({
     children,
@@ -21,7 +22,7 @@ export default async function RootLayout({
                 </div>
                 <div className={styles.marketOverview}>
                     <div>
-                        <MarcketOverView />
+                            <MarketOverView />
                     </div>
                 </div>
             </div>
