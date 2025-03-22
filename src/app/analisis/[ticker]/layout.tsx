@@ -1,5 +1,6 @@
 import AnalysisProvider from "@/context/AnalysisContext";
 import { findCompany } from "@/lib/utilsServer";
+import { notFound } from "next/navigation";
 
 
 
@@ -14,11 +15,6 @@ export default async function Layout({ children, params }: Readonly<{ children: 
             </AnalysisProvider>
         )
     } else {
-        return (
-            <>
-                <h1>STOCK NO ENCONTRADO</h1>
-                {children}
-            </>
-        )
+        notFound()
     }
 }
