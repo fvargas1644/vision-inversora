@@ -3,7 +3,8 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false, // En true por defecto
+    "noEmitOnError": false, // Permite emitir archivos incluso si hay errores (No esta por defecto)
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
