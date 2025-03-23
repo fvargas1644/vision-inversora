@@ -6,12 +6,7 @@ import { RequestError } from "@/lib/Error/Error";
 
 async function fetchJson<R>({url, type} : {url: string, type: 'TICKERS_EXCHAGE' | 'COMPANY_CONCEPTS'}): Promise<R> {
     try {
-        const response = await fetch(url, {
-            headers: {
-                'User-Agent': 'vision-inversora/1.0', // SEC recomienda incluir un User-Agent personalizado
-            },
-            cache: "no-store"
-        });
+        const response = await fetch(url);
 
         if (!response.ok) {
             throw new RequestError(`Error ${response.status}: ${response.statusText}`);
