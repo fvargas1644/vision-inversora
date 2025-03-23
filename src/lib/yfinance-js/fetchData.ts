@@ -1,4 +1,4 @@
-import { RequestError } from "../Error";
+import { RequestError } from "@/lib/Error/Error";
 import { YFinanceQuoteSummaryData, YFinanceTimeSeriesData, YFinanceQuery, YFinanceFetch, YFinanceTradingDataHistory } from "@/lib/types/yfinance";
 import { userAgent, getCookie, getCrumb } from "./requestHeader";
 

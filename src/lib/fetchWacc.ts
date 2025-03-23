@@ -1,4 +1,4 @@
-import { RequestError, ValidateError } from "./Error";
+import { RequestError, ValidateError } from "@/lib/Error/Error";
 
 export async function fetchWacc(ticker: string = "AAPL") {
     try {
