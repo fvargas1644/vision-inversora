@@ -7,7 +7,7 @@ import { marketData } from "@/lib/utilsServer";
 
 export default function MarketOverview() {
 
-  const [summaryMarket, setSummaryMarket] = useState([]);
+  const [summaryMarket, setSummaryMarket] = useState<{ value: string; change: string; name: string; }[]>([]);
 
   useEffect(() => {
     const fetchMarketData = async () => {
