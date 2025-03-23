@@ -18,12 +18,12 @@ const YFINANCE_QUERY_OPTIONS = {
         return `https://query2.finance.yahoo.com/v8/finance/chart/${ticker}?period1=${start}&period2=${end}&interval=${interval}&includePrePost=False&events=div%2Csplits%2CcapitalGains`
     },
 
-    HISTORY_BY_INTERVAL: ({ ticker, interval }: any) => {
-        return `https://query2.finance.yahoo.com/v8/finance/chart/${ticker}?range=${interval}&interval=${interval}&includePrePost=False&events=div%2Csplits%2CcapitalGains`
+    HISTORY_BY_INTERVAL: ({ ticker, range, interval }: any) => {
+        return `https://query2.finance.yahoo.com/v8/finance/chart/${ticker}?range=${range}&interval=${interval}&includePrePost=False&events=div%2Csplits%2CcapitalGains`
     }
 }
 
-export async function queryYFinance({ query, ticker = 'APPL', start, end, interval }: YFinanceQuery) {
+export async function queryYFinance({ query, ticker = 'APPL', start, end, interval, range }: YFinanceQuery) {
 
     const cookie = (query === "COMPANY_INFO") ? await getCookie() : "";
     const crumb = (query === "COMPANY_INFO") ? await getCrumb(cookie) : "";
@@ -32,7 +32,7 @@ export async function queryYFinance({ query, ticker = 'APPL', start, end, interv
         if (query === "HISTORY_BY_DATE") {
             return YFINANCE_QUERY_OPTIONS["HISTORY_BY_DATE"]({ ticker, crumb, start, end, interval });
         } else if (query === "HISTORY_BY_INTERVAL") {
-            return YFINANCE_QUERY_OPTIONS["HISTORY_BY_INTERVAL"]({ ticker, crumb, interval });
+            return YFINANCE_QUERY_OPTIONS["HISTORY_BY_INTERVAL"]({ ticker, crumb, interval, range });
         } else {
             return YFINANCE_QUERY_OPTIONS[query]({ ticker, crumb });
         }
@@ -144,6 +144,7 @@ async function fetchYFinance({ cookie, url, type }: YFinanceFetch) {
         });
 
         result = await response.json();
+        console.log(url)
     } catch (err) {
         throw new RequestError(String(err))
     }

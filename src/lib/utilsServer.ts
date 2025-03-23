@@ -21,13 +21,13 @@ export async function findCompany(ticker: string) {
 }
 
 async function calculateMarketShare(ticker : string)  {
-    const query :YFinanceChartResultHistory[] = await queryYFinance({ticker , query: "HISTORY_BY_INTERVAL", interval: "1d"})
+    const query :YFinanceChartResultHistory[] = await queryYFinance({ticker , query: "HISTORY_BY_INTERVAL", interval: "1d", range: "1wk"})
     const values = query[0].indicators.quote[0]
 
-    let change : string | number = ((values.close[0]-values.open[0])/values.close[0])*100
+    let change : string | number = ((values.close.at(-1)-values.open.at(-1))/values.close.at(-1))*100
     change = (change > 0) ?  `+${formatPrice(change)}%` : `${formatPrice(change)}%`
     
-    return {value: formatPrice(values.close[0]), change}
+    return {value: formatPrice(values.close.at(-1)), change}
 } 
 
 export async function marketData() {

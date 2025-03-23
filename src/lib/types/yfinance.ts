@@ -5,7 +5,8 @@ export interface YFinanceQuery {
     ticker: string,
     start ?: number,
     end ?: number,
-    interval?: string
+    interval?: string,
+    range?: string
 }
 
 export interface YFinanceFetch {
