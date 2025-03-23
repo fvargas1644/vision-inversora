@@ -96,14 +96,8 @@ const VALIDATE_FETCH_YFINANCE = {
         }
     },
 
-    COMPANY_INFO: (data: YFinanceQuoteSummaryData) => {
-        if (data.finance) {
-            return {
-                error: data.finance.error.code,
-                data: null
-            }
-        }
-
+    COMPANY_INFO: (data: YFinanceQuoteSummaryData ) => {
+    try {
         if (data.quoteSummary.result) {
             const financialData = data.quoteSummary.result.some(item => item.hasOwnProperty('financialData'));
             const defaultKeyStatistics = data.quoteSummary.result.some(item => item.hasOwnProperty('defaultKeyStatistics'));
@@ -120,6 +114,13 @@ const VALIDATE_FETCH_YFINANCE = {
                 data: null
             }
         }
+    } catch {
+        return {
+            error: "No data found",
+            data: null
+        }
+    }
+        
 
     },
 

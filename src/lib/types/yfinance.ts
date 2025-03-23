@@ -47,12 +47,23 @@ export type YFinanceTimeSeriesData = {
     };
 };
 
+/*
+export type YFinanceQuoteSummaryDataError = {
+  finance: {
+    result: null;
+    error: { code: string; description: string } | null;
+  };
+};*/
+
 export type YFinanceQuoteSummaryData = {
-    quoteSummary: {
-        result: YFinanceAssetProfileResult[];
-        error: null | { code: string, description: string };
-    };
+  quoteSummary: {
+    result: YFinanceAssetProfileResult[];
+    error: null;
+  };
 };
+
+/*export type YFinanceQuoteSummaryData = YFinanceQuoteSummaryDataSuccess;*/
+
 
 export type YFinanceAssetProfileResult = {
     assetProfile: {
