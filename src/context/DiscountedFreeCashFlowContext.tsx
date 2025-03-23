@@ -22,7 +22,7 @@ export default function DiscontedFreeCashFlowProvider({ children, initialData, t
             const data = await getDataDiscontedFreeCashFlow({ticker, initialWacc: inversePercentage(wacc), initialGrowth: inversePercentage(growth) });
             setFinancialDataState(previousData => ({...previousData, ...data}));
             return "success"
-        } catch (error) {
+        } catch {
             return "error"
         }
         

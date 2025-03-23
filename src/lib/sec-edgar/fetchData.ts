@@ -35,13 +35,13 @@ export async function fetchSecEdgarCompanyTickers(): Promise<secEdgarCompanyTick
     return fetchJson<secEdgarCompanyTickers>({url : 'https://www.sec.gov/files/company_tickers_exchange.json', type: 'TICKERS_EXCHAGE'});
 }
 
-export async function fetchSecEdgarCompanyConcepts(cik : number): Promise<any> { // TODO: Definir el tipo de respuesta correcto
+export async function fetchSecEdgarCompanyConcepts(cik : number) { // TODO: Definir el tipo de respuesta correcto
     const url = `https://data.sec.gov/api/xbrl/companyfacts/CIK${cik.toString().padStart(10, '0')}.json`;
-    return await fetchJson<any>({url, type: 'COMPANY_CONCEPTS'});
+    return await fetchJson({url, type: 'COMPANY_CONCEPTS'});
 }
 
 const VALIDATE_FETCH_SECEDGAR = {
-    TICKERS_EXCHAGE: (companyTickersExchange : any) => {
+    TICKERS_EXCHAGE: (companyTickersExchange) => {
         const hasData = companyTickersExchange.data.length > 0
         return {
             state: hasData,

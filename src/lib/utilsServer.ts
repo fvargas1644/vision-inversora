@@ -8,7 +8,7 @@ import { formatPrice } from "@/lib/utils"
 
 export async function findCompany(ticker: string) {
     const fechCompany: secEdgarCompanyTickers = await fetchSecEdgarCompanyTickers();
-    for (let item of fechCompany.data) {
+    for (const item of fechCompany.data) {
         if (item[2] === ticker) {
             return {
                 cik: item[0],

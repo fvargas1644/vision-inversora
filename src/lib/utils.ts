@@ -1,5 +1,5 @@
 
-import { YFinanceAssetProfileResult, YFinanceFinancialData, YFinanceQuoteSummaryData } from "@/lib/types/yfinance";
+import { YFinanceAssetProfileResult, YFinanceFinancialData } from "@/lib/types/yfinance";
 
 export function formatPrice(price: number): string {
     const sign = price < 0 ? '-' : ''; // Determina el signo del número

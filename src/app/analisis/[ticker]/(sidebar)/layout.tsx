@@ -1,7 +1,6 @@
 import MarketOverView from '@/components/analisis/ticker/MarketOverView';
 import styles from '@/styles/analisis/ticker/sidebar/Page.module.css'
 import Sidebar from '@/components/analisis/ticker/sidebar/SideBar';
-import { Suspense } from 'react';
 
 export default async function RootLayout({
     children,

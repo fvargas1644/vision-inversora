@@ -1,4 +1,3 @@
-import { fetchSecEdgarCompanyConcepts } from "../sec-edgar/fetchData";
 import { extractYFinanceCompanyInfo } from "../utils";
 import { queryYFinance } from "../yfinance-js/fetchData";
 import buildFinancialDataValuationPerRatio from "./builderFinancialData";

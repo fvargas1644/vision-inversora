@@ -53,7 +53,7 @@ async function getWacc(ticker : string) {
     try{
         const wacc = await fetchWacc(ticker);
         return wacc;
-    } catch(err){
+    } catch {
         return 0.10
     }
 }

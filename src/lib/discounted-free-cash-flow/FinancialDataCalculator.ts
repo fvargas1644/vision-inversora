@@ -1,4 +1,4 @@
-import { DiscontedFreeCashFlowFinancialData, DiscontedFreeCashFlowPredictionsData } from "@/lib/types/discountedFreeCashFlow";
+import { DiscontedFreeCashFlowFinancialData, DiscontedFreeCashFlowFinancialInformation, DiscontedFreeCashFlowPredictionsData } from "@/lib/types/discountedFreeCashFlow";
 
 export class FinancialDataCalculator {
     protected wacc : number;
@@ -56,7 +56,7 @@ export class FinancialDataCalculator {
     private calculateProperty(
         property: 'margins' | 'freeCashFlowDividedNetIncome',
         div: 'annualTotalRevenue' | 'annualNetIncome',
-        calcFunction: (data: any) => number
+        calcFunction: (data: DiscontedFreeCashFlowFinancialInformation) => number
     )  {
         this.financialData.forEach(obj => {
             if (obj.data[div] !== 0) {

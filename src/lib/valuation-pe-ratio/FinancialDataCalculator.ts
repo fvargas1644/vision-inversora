@@ -1,4 +1,4 @@
-import { ValuationPerRatioFinancialData } from "../types/valuationPerRatio";
+import { ValuationPerRatioFinancialData, ValuationPerRatioFinancialMetrics } from "../types/valuationPerRatio";
 
 export class FinancialDataCalculator {
     protected stockPrice : number;
@@ -28,7 +28,7 @@ export class FinancialDataCalculator {
     private calculateProperty(
         property: 'margin' , 
         div: 'annualTotalRevenue',
-        calcFunction: (data: any) => number
+        calcFunction: (data: ValuationPerRatioFinancialMetrics) => number
     )  {
         this.financialData.forEach(obj => {
             if (obj.data[div] !== 0) {

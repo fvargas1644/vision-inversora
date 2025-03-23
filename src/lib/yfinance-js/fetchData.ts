@@ -14,11 +14,11 @@ const YFINANCE_QUERY_OPTIONS = {
         const params = ['financialData', 'defaultKeyStatistics', 'assetProfile', 'summaryDetail'].map(String).join(",");
         return `https://query2.finance.yahoo.com/v10/finance/quoteSummary/${ticker}?modules=${params}&corsDomain=finance.yahoo.com&formatted=false&symbol=${ticker}&crumb=${crumb}`
     },
-    HISTORY_BY_DATE: ({ ticker, start, end, interval }: any) => {
+    HISTORY_BY_DATE: ({ ticker, start, end, interval }: {ticker: string, start: number, end: number, interval: string}) => {
         return `https://query2.finance.yahoo.com/v8/finance/chart/${ticker}?period1=${start}&period2=${end}&interval=${interval}&includePrePost=False&events=div%2Csplits%2CcapitalGains`
     },
 
-    HISTORY_BY_INTERVAL: ({ ticker, range, interval }: any) => {
+    HISTORY_BY_INTERVAL: ({ ticker, range, interval }: {ticker: string, range: string, interval: string}) => {
         return `https://query2.finance.yahoo.com/v8/finance/chart/${ticker}?range=${range}&interval=${interval}&includePrePost=False&events=div%2Csplits%2CcapitalGains`
     }
 }
@@ -144,7 +144,6 @@ async function fetchYFinance({ cookie, url, type }: YFinanceFetch) {
         });
 
         result = await response.json();
-        console.log(url)
     } catch (err) {
         throw new RequestError(String(err))
     }

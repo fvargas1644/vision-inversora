@@ -15,7 +15,7 @@ export default function useSearch(dataCompany : secEdgarCompanyTickers){
     const fetchCompanyExchangeResults = (ticker : string) => {
         const searchResults = [];
 
-        for (let item of dataCompany.data) {
+        for (const item of dataCompany.data) {
             if (item[2].toLowerCase().includes(ticker.toLowerCase()) || item[1].toLowerCase().includes(ticker.toLowerCase())) {
                 searchResults.push(item)
             }
@@ -48,10 +48,15 @@ export default function useSearch(dataCompany : secEdgarCompanyTickers){
     const redirectToAnalysisPageBasedOnInputOrResult = () => {
         if(inputValue !== "" && inputValue !== " "){ 
             clearSearchResults();
-            if (searchResults.length > 0) setInputValue(searchResults[0][2]);
-            (searchResults.length > 0)  ? router.push(`/analisis/${searchResults[0][2]}`) : router.push(`/analisis/${inputValue}`); 
+            if (searchResults.length > 0) {
+                setInputValue(searchResults[0][2]);
+                router.push(`/analisis/${searchResults[0][2]}`);
+            } else {
+                router.push(`/analisis/${inputValue}`);
+            }
         }
     }
+    
     
     return {
         inputValue, 

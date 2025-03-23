@@ -1,13 +1,15 @@
+export type DiscontedFreeCashFlowFinancialInformation = {
+    annualNetIncome: number,
+    annualFreeCashFlow: number,
+    annualTotalRevenue: number,
+    growthRate: number,
+    margins: number,
+    freeCashFlowDividedNetIncome: number
+}
+
 export type DiscontedFreeCashFlowFinancialData = {
     year: number,
-    data: {
-        annualNetIncome: number,
-        annualFreeCashFlow: number,
-        annualTotalRevenue: number,
-        growthRate: number,
-        margins: number,
-        freeCashFlowDividedNetIncome: number
-    }
+    data: DiscontedFreeCashFlowFinancialInformation
 };
 
 export type DiscontedFreeCashFlowPredictionsData = {

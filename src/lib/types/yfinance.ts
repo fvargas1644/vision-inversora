@@ -71,7 +71,7 @@ export type YFinanceAssetProfileResult = {
         sectorDisp: string;
         longBusinessSummary: string;
         fullTimeEmployees: number;
-        companyOfficers: any[]; // Puedes tiparlo mejor si conoces su estructura
+        companyOfficers: string[]; // Puedes tiparlo mejor si conoces su estructura
         auditRisk: number;
         boardRisk: number;
         compensationRisk: number;
@@ -80,7 +80,7 @@ export type YFinanceAssetProfileResult = {
         governanceEpochDate: number;
         compensationAsOfEpochDate: number;
         irWebsite: string;
-        executiveTeam: any[];
+        executiveTeam: string[];
         maxAge: number;
     };
     summaryDetail: {

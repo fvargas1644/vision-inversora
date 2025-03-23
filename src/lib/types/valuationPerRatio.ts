@@ -1,12 +1,12 @@
 import { YFinanceChartResultHistory, YFinanceFinancialData } from "../types/yfinance";
-import { secEdgarCompanyTickers } from "../types/secEdgar";
+
 
 export interface ValuationPerRatioFinancialData {
     year: number;
     data: ValuationPerRatioFinancialMetrics;
 }
   
-interface ValuationPerRatioFinancialMetrics {
+export interface ValuationPerRatioFinancialMetrics {
     annualTotalRevenue: number;
     revenueGrowth: number;
     margin: number;
@@ -18,5 +18,5 @@ interface ValuationPerRatioFinancialMetrics {
 export interface ValuatioPerRatioExtractFinancialData { 
     yFinanceFinancialData : YFinanceFinancialData[],
     year: number,
-    stockHistory: YFinanceChartResultHistory[] | any
+    stockHistory: YFinanceChartResultHistory[]
 }

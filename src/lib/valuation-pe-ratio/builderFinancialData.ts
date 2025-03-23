@@ -1,10 +1,11 @@
 
 import { ValuationPerRatioFinancialData, ValuatioPerRatioExtractFinancialData } from "../types/valuationPerRatio";
+import { YFinanceFinancialData } from "../types/yfinance";
 
 import { GENERATE_YEARS_YFINANCE_DATA } from "../utils";
 import { queryYFinance  } from "../yfinance-js/fetchData";
 
-export default async function  buildFinancialDataValuationPerRatio({yFinanceFinancialData,ticker} : any) {
+export default async function  buildFinancialDataValuationPerRatio({yFinanceFinancialData,ticker} : {yFinanceFinancialData: YFinanceFinancialData[], ticker: string}) {
 
     const financialData : ValuationPerRatioFinancialData[]= [];
     const predictionsData : ValuationPerRatioFinancialData[] = [];

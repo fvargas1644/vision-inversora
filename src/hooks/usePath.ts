@@ -8,7 +8,7 @@ export default function usePath(){
     const params = path.split('/').slice(2);
 
     const ticker = (params[0] && params[0] !== '') ? params[0] : ''
-    let type = (params[1] && params[1] !== '') ? params[1] : 'menu_selection_bar'
+    const type = (params[1] && params[1] !== '') ? params[1] : 'menu_selection_bar'
 
     return {
         ticker,
