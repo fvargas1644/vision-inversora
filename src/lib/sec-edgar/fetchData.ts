@@ -1,7 +1,7 @@
 'use server';
 
 import { secEdgarCompanyTickers,SecEdgarFinancialData } from "@/lib/types/secEdgar";
-import { RequestError } from "../Error";
+import { RequestError } from "@/lib/Error/Error";
 
 
 async function fetchJson<R>({url, type} : {url: string, type: 'TICKERS_EXCHAGE' | 'COMPANY_CONCEPTS'}): Promise<R> {
