@@ -1,11 +1,22 @@
 'use client'
 
 import { secEdgarCompanyTickers, SecEdgarTicker } from "@/lib/types/secEdgar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 import usePath from '@/hooks/usePath';
+import { fetchSecEdgarCompanyTickers } from "@/lib/sec-edgar/fetchData";
 
-export default function useSearch(dataCompany : secEdgarCompanyTickers){
+export default function useSearch(){
+    const [dataCompany, setDataCompany] = useState<secEdgarCompanyTickers | []>([])
+
+    useEffect(() => {
+        const fetch =async () => {
+            setDataCompany(await fetchSecEdgarCompanyTickers()) 
+        }  
+
+        fetch()
+    }, [])
+    
 
     const router = useRouter();
     const path = usePath();

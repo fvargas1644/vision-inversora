@@ -3,11 +3,10 @@
 import React, { useRef } from "react"
 import styles from "@/styles/Header.module.css"
 import useSearch from "@/hooks/useSearch";
-import { secEdgarCompanyTickers } from '@/lib/types/secEdgar';
 import Navbar from "@/components/Navbar";
 import { Search } from "lucide-react"
 
-export default function Header({dataCompany} : {dataCompany: secEdgarCompanyTickers}) {
+export default function Header() {
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   const {
@@ -16,7 +15,7 @@ export default function Header({dataCompany} : {dataCompany: secEdgarCompanyTick
     redirectToAnalysisPageBasedOnInputOrResult, 
     searchResults, 
     selectSearchResultAndNavigate,
-} = useSearch(dataCompany);
+} = useSearch();
 
   return (
     <header className={styles.header}>
