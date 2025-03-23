@@ -30,9 +30,9 @@ export async function queryYFinance({ query, ticker = 'APPL', start, end, interv
 
     const url = (): string => {
         if (query === "HISTORY_BY_DATE") {
-            return YFINANCE_QUERY_OPTIONS["HISTORY_BY_DATE"]({ ticker, crumb, start, end, interval });
+            return YFINANCE_QUERY_OPTIONS["HISTORY_BY_DATE"]({ ticker, start, end, interval });
         } else if (query === "HISTORY_BY_INTERVAL") {
-            return YFINANCE_QUERY_OPTIONS["HISTORY_BY_INTERVAL"]({ ticker, crumb, interval, range });
+            return YFINANCE_QUERY_OPTIONS["HISTORY_BY_INTERVAL"]({ ticker, interval, range });
         } else {
             return YFINANCE_QUERY_OPTIONS[query]({ ticker, crumb });
         }

@@ -43,14 +43,14 @@ export interface YFinanceFinancialData {
 export type YFinanceTimeSeriesData = {
     timeseries: {
         result: YFinanceFinancialData[];
-        error: null | string;
+        error: null | { code: string, description: string };
     };
 };
 
 export type YFinanceQuoteSummaryData = {
     quoteSummary: {
         result: YFinanceAssetProfileResult[];
-        error: null | string;
+        error: null | { code: string, description: string };
     };
 };
 
@@ -208,7 +208,7 @@ export type YFinanceAssetProfileResult = {
 export interface YFinanceTradingDataHistory {
     chart: {
       result: YFinanceChartResultHistory[];
-      error: null | string;
+      error: null | { code: string, description: string };
     };
   }
   
