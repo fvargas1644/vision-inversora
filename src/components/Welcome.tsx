@@ -4,7 +4,6 @@ import styles from "@/styles/Welcome.module.css"
 import stylesUtils from "@/styles/Utils.module.css"
 
 import TestServer from "@/components/testServer";
-import TestClient from "@/components/testClient";
 
 export default function Welcome() {
     return (
