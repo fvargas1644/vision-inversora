@@ -1,18 +1,18 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import { fetchData } from "@/components/testServer"
 
 export default function TestClient() {
     const [data, setData] = useState<string>("")
 
     useEffect(() => {
-        const fetch =async () => {
-            const respose = await fetchData()
+        const fetchA =async () => {
+            let respose = await fetch("https://www.sec.gov/files/company_tickers_exchange.json")
+            respose = await respose.json()
             setData(String(respose.data[0][2])) 
         }  
 
-        fetch()
+        fetchA()
     }, [])
 
     return (
