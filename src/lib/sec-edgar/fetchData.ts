@@ -6,7 +6,7 @@ import { RequestError } from "@/lib/Error/Error";
 
 async function fetchJson<R>({url, type} : {url: string, type: 'TICKERS_EXCHAGE' | 'COMPANY_CONCEPTS'}): Promise<R> {
     try {
-        const response = await fetch(url);
+        const response = await fetch(url,{ cache: 'no-store' });
 
         if (!response.ok) {
             throw new RequestError(`Error ${response.status}: ${response.statusText}`);
