@@ -12,7 +12,6 @@ export default async function TestServer() {
 
 export async function fetchData(){
     const res = await fetch("https://www.sec.gov/files/company_tickers_exchange.json");
-    const text = await res.text();
-    const data = JSON.parse(text);
+    const data = await res.json();
     return data;
 }

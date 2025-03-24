@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import styles from "@/styles/Welcome.module.css"
 import stylesUtils from "@/styles/Utils.module.css"
-import TestClient from "./testClient";
+import TestServer from "./testServer";
 
 
 export default function Welcome() {
@@ -26,8 +26,7 @@ export default function Welcome() {
                 </div>
             </div>
             
-        {/*<TestServer />*/}
-        <TestClient />
+        <TestServer />
         </section>
     )
 }
