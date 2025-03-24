@@ -3,7 +3,6 @@ import Link from "next/link";
 import styles from "@/styles/Welcome.module.css"
 import stylesUtils from "@/styles/Utils.module.css"
 
-import TestServer from "@/components/testServer";
 
 export default function Welcome() {
     return (
