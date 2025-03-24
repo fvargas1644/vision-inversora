@@ -4,10 +4,14 @@ import styles from "@/styles/Page.module.css"
 import Tools from "@/components/Tools";
 import Stocks from "@/components/Stocks";
 import WhyChoseUs from "@/components/WhyChooseUs";
+import TestServer from "@/components/testServer";
+import TestClient from "@/components/testClient";
 
 export default async function Page() {
   return (
     <main className={stylesUtils.main}>
+      <TestServer />
+      <TestClient />
       <Welcome />
       {/* Analysis Tools Section */}
       <section className={styles.section}>
