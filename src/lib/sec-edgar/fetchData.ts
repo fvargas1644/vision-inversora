@@ -1,6 +1,6 @@
 'use server';
 
-import { secEdgarCompanyTickers,SecEdgarFinancialData } from "@/lib/types/secEdgar";
+import { SecEdgarFinancialData } from "@/lib/types/secEdgar";
 import { RequestError } from "@/lib/Error/Error";
 import company_tickers_exchange from "@/data/company_tickers_exchange.json";
 
