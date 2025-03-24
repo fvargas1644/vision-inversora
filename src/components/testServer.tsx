@@ -5,7 +5,7 @@ export default async function TestServer() {
 
     return (
         <div>
-            {data.data[0][1]}
+            {String(data.data[0][1])}
         </div>
     )
 }

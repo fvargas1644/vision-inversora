@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import { fetchData } from "./testServer"
+import { fetchData } from "@/components/testServer"
 
 export default function TestClient() {
     const [data, setData] = useState<string>("")
@@ -9,7 +9,7 @@ export default function TestClient() {
     useEffect(() => {
         const fetch =async () => {
             const respose = await fetchData()
-            setData(respose.data[0][2]) 
+            setData(String(respose.data[0][2])) 
         }  
 
         fetch()
@@ -21,3 +21,4 @@ export default function TestClient() {
         </div>
     )
 }
+
