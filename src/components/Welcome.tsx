@@ -28,7 +28,7 @@ export default function Welcome() {
             </div>
             
         <TestServer />
-        <TestClient />
+        {/*<TestClient />*/}
         </section>
     )
 }
