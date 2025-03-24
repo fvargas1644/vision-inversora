@@ -1,13 +1,12 @@
 'use server'
 
-import { secEdgarCompanyTickers } from "@/lib/types/secEdgar";
 import { fetchSecEdgarCompanyTickers } from "@/lib/sec-edgar/fetchData";
 import { queryYFinance } from "@/lib/yfinance-js/fetchData"
 import { YFinanceChartResultHistory } from "@/lib/types/yfinance"
 import { formatPrice } from "@/lib/utils"
 
 export async function findCompany(ticker: string) {
-    const fechCompany: secEdgarCompanyTickers = await fetchSecEdgarCompanyTickers();
+    const fechCompany = await fetchSecEdgarCompanyTickers();
     for (const item of fechCompany.data) {
         if (item[2] === ticker) {
             return {
