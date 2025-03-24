@@ -27,7 +27,49 @@ async function fetchJson<R>({url, type} : {url: string, type: 'TICKERS_EXCHAGE' 
 }
 
 export async function fetchSecEdgarCompanyTickers(): Promise<secEdgarCompanyTickers > {
-    return fetchJson<secEdgarCompanyTickers>({url : 'https://www.sec.gov/files/company_tickers_exchange.json', type: 'TICKERS_EXCHAGE'});
+    //return fetchJson<secEdgarCompanyTickers>({url : 'https://www.sec.gov/files/company_tickers_exchange.json', type: 'TICKERS_EXCHAGE'});
+    return {
+        "fields": [
+          "cik",
+          "name",
+          "ticker",
+          "exchange"
+        ],
+        "data": [
+          [320193, "Apple Inc.",
+            "AAPL",
+            "Nasdaq"
+          ],
+          [1045810, "NVIDIA CORP",
+            "NVDA",
+            "Nasdaq"
+          ],
+          [789019, "MICROSOFT CORP",
+            "MSFT",
+            "Nasdaq"
+          ],
+          [1018724, "AMAZON COM INC",
+            "AMZN",
+            "Nasdaq"
+          ],
+          [1652044, "Alphabet Inc.",
+            "GOOGL",
+            "Nasdaq"
+          ],
+          [1326801, "Meta Platforms, Inc.",
+            "META",
+            "Nasdaq"
+          ],
+          [1067983, "BERKSHIRE HATHAWAY INC",
+            "BRK-B",
+            "NYSE"
+          ],
+          [1730168, "Broadcom Inc.",
+            "AVGO",
+            "Nasdaq"
+          ]
+        ]
+    }
 }
 
 export async function fetchSecEdgarCompanyConcepts(cik : number) { // TODO: Definir el tipo de respuesta correcto
