@@ -1,7 +1,8 @@
 'use server';
 
-import { secEdgarCompanyTickers,SecEdgarFinancialData } from "@/lib/types/secEdgar";
+import { SecEdgarFinancialData } from "@/lib/types/secEdgar";
 import { RequestError } from "@/lib/Error/Error";
+import company_tickers_exchange from "@/data/company_tickers_exchange.json";
 
 
 async function fetchJson<R>({url, type} : {url: string, type: 'TICKERS_EXCHAGE' | 'COMPANY_CONCEPTS'}): Promise<R> {
@@ -26,8 +27,9 @@ async function fetchJson<R>({url, type} : {url: string, type: 'TICKERS_EXCHAGE' 
     }
 }
 
-export async function fetchSecEdgarCompanyTickers(): Promise<secEdgarCompanyTickers > {
-    return fetchJson<secEdgarCompanyTickers>({url : 'https://www.sec.gov/files/company_tickers_exchange.json', type: 'TICKERS_EXCHAGE'});
+export async function fetchSecEdgarCompanyTickers() {
+    //return fetchJson<secEdgarCompanyTickers>({url : 'https://www.sec.gov/files/company_tickers_exchange.json', type: 'TICKERS_EXCHAGE'});
+    return company_tickers_exchange;
 }
 
 export async function fetchSecEdgarCompanyConcepts(cik : number) { // TODO: Definir el tipo de respuesta correcto
