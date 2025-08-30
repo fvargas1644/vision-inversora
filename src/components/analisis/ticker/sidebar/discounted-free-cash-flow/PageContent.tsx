@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { DiscontedFreeCashFlowContext } from '@/context/DiscountedFreeCashFlowContext';
 import Title from './Title';
 import Metrics from './Metrics';
+import CashFlowChart from './CashFlowChart';
 import FinancialDataTables from '@/components/analisis/ticker/sidebar/discounted-free-cash-flow/FinancialDataTables';
 import { AnalysisContext } from '@/context/AnalysisContext';
 
@@ -18,6 +19,7 @@ export default function PageContent() {
             <>
                 <Title ticker={ticker} company={company} />
                 <Metrics currentPrice={financialModel.stockPrice} intrinsicValue={financialModel.intrinsicPrice} />
+                <CashFlowChart financialData={financialModel.financialData} predictionsData={financialModel.predictionsData} />
                 <FinancialDataTables financialData={financialModel.financialData} predictionsData={financialModel.predictionsData} />
             </>
         )
